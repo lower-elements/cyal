@@ -7,19 +7,17 @@ from setuptools import Extension, find_packages, setup
 
 try:
     from Cython.Distutils import build_ext
-except ImportError:
-    use_cython = False
-else:
+
     use_cython = True
+except ImportError:
+    from setuptools.command.build_ext import build_ext
+
+    use_cython = False
 
 ext = ".pyx" if use_cython else ".c"
-cmdclass = {}
 ext_modules = [
     Extension("cyal.core", ["cyal/core" + ext]),
 ]
-
-if use_cython:
-    cmdclass.update({"build_ext": build_ext})
 
 here = path.abspath(path.dirname(__file__))
 
@@ -44,7 +42,7 @@ setup(
     package_data={
         "": ["LICENSE"],
     },
-    cmdclass=cmdclass,
+    cmdclass={"build_ext": build_ext},
     ext_modules=ext_modules,
     python_requires=">=3.10",
     zip_safe=False,
