@@ -1,0 +1,3 @@
+include LICENSE README.md
+include pyproject.toml
+recursive-include cyal *.py *.pyx *.pxd

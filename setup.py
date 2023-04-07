@@ -1,14 +1,29 @@
 #!/usr/bin/env python
 
-import codecs
-from os import system, path
+from os import path
 import sys
 
-from setuptools import find_packages, setup
+from setuptools import Extension, find_packages, setup
+
+try:
+    from Cython.Distutils import build_ext
+except ImportError:
+    use_cython = False
+else:
+    use_cython = True
+
+ext = ".pyx" if use_cython else ".c"
+cmdclass = {}
+ext_modules = [
+    Extension("cyal.core", ["cyal/core" + ext]),
+]
+
+if use_cython:
+    cmdclass.update({"build_ext": build_ext})
 
 here = path.abspath(path.dirname(__file__))
 
-with codecs.open(path.join(here, "README.md"), encoding="utf-8") as f:
+with open(path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = "\n" + f.read()
 
 about = {}
@@ -29,6 +44,8 @@ setup(
     package_data={
         "": ["LICENSE"],
     },
+    cmdclass=cmdclass,
+    ext_modules=ext_modules,
     python_requires=">=3.10",
     zip_safe=False,
     setup_requires=[],
