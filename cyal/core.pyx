@@ -1,5 +1,8 @@
 from libc.stddef cimport size_t
 from libc.string cimport strlen
+
+from .exceptions import DeviceNotFoundError
+
 from . cimport al, alc
 
 cdef class Device:
@@ -8,7 +11,7 @@ cdef class Device:
     def __cinit__(self, name = None):
         self._device = alc.alcOpenDevice(<const alc.ALCchar *>name if name is not None else NULL)
         if self._device is NULL:
-            raise RuntimeError("Could not create ALCdevice")
+            raise DeviceNotFoundError(device_name=name)
     
     def __dealloc__(self):
         if self._device is not NULL:
