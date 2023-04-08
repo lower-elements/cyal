@@ -19,6 +19,18 @@ ext_modules = [
     Extension("cyal.core", ["cyal/core" + ext]),
 ]
 
+# Link to OpenAL
+match sys.platform:
+    case "linux":
+        import pkgconfig
+
+        for ex in ext_modules:
+            pkgconfig.configure_extension(ex, "openal")
+    case platform:
+        printf(
+            f"WARNING: Unimplemented platform {platform}, you'll need to link OpenAL yourself via CFLAGS and friends"
+        )
+
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, "README.md"), encoding="utf-8") as f:
