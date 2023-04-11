@@ -16,7 +16,7 @@ except ImportError:
 
 ext = ".pyx" if use_cython else ".c"
 ext_modules = [
-    Extension("cyal.core", ["cyal/core" + ext]),
+    Extension("cyal.device", ["cyal/device" + ext]),
 ]
 
 # Link to OpenAL
