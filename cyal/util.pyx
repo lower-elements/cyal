@@ -1,3 +1,5 @@
+# cython: language_level=3
+
 from libc.stddef cimport size_t
 from libc.string cimport strlen
 

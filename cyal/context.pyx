@@ -1,3 +1,5 @@
+# cython: language_level=3
+
 from contextlib import contextmanager
 
 from .device cimport Device

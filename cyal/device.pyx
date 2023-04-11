@@ -1,3 +1,5 @@
+# cython: language_level=3
+
 from .exceptions import DeviceNotFoundError
 
 from . cimport al, alc
