@@ -3,11 +3,9 @@ from libc.string cimport strlen
 
 from .exceptions import DeviceNotFoundError
 
-from . cimport al, alc
+from . cimport alc
 
 cdef class Device:
-    cdef alc.ALCdevice* _device
-    
     def __cinit__(self, name = None):
         self._device = alc.alcOpenDevice(<const alc.ALCchar *>name if name is not None else NULL)
         if self._device is NULL:
