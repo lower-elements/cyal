@@ -1,8 +1,10 @@
 cdef extern from "alc.h":
     # Opaque device handle
-    ctypedef struct ALCdevice: pass
+    ctypedef struct ALCdevice:
+        pass
     # Opaque context handle
-    ctypedef struct ALCcontext: pass
+    ctypedef struct ALCcontext:
+        pass
 
     # 8-bit boolean
     ctypedef char ALCboolean
