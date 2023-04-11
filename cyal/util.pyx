@@ -21,3 +21,9 @@ def get_device_specifiers():
 def get_supported_extensions():
     cdef const alc.ALCchar* exts = alc.alcGetString(NULL, alc.ALC_EXTENSIONS)
     return (<bytes>exts).split(b' ') if exts is not NULL else []
+
+def get_version():
+    cdef alc.ALCint major, minor
+    alc.alcGetIntegerv(NULL, alc.ALC_MAJOR_VERSION, 1, &major)
+    alc.alcGetIntegerv(NULL, alc.ALC_MINOR_VERSION, 1, &minor)
+    return (major, minor)

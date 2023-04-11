@@ -16,6 +16,13 @@ cdef class Device:
     def name(self):
         return <bytes>alc.alcGetString(self._device, alc.ALC_DEVICE_SPECIFIER)
 
+    @property
+    def version(self):
+        cdef alc.ALCint major, minor
+        alc.alcGetIntegerv(self._device, alc.ALC_MAJOR_VERSION, 1, &major)
+        alc.alcGetIntegerv(self._device, alc.ALC_MINOR_VERSION, 1, &minor)
+        return (major, minor)
+
     cpdef get_supported_extensions(self):
         return (<bytes>alc.alcGetString(self._device, alc.ALC_EXTENSIONS)).split(b' ')
 

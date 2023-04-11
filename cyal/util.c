@@ -1196,6 +1196,9 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 #endif
 
 /* CIntToPy.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_ALCint(ALCint value);
+
+/* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 /* CIntFromPy.proto */
@@ -1247,9 +1250,12 @@ static const char __pyx_k_exts[] = "exts";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_test[] = "__test__";
+static const char __pyx_k_major[] = "major";
+static const char __pyx_k_minor[] = "minor";
 static const char __pyx_k_specs[] = "specs";
 static const char __pyx_k_split[] = "split";
 static const char __pyx_k_cyal_util[] = "cyal.util";
+static const char __pyx_k_get_version[] = "get_version";
 static const char __pyx_k_cyal_util_pyx[] = "cyal/util.pyx";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_get_device_specifiers[] = "get_device_specifiers";
@@ -1261,17 +1267,23 @@ static PyObject *__pyx_kp_s_cyal_util_pyx;
 static PyObject *__pyx_n_s_exts;
 static PyObject *__pyx_n_s_get_device_specifiers;
 static PyObject *__pyx_n_s_get_supported_extensions;
+static PyObject *__pyx_n_s_get_version;
 static PyObject *__pyx_n_s_main;
+static PyObject *__pyx_n_s_major;
+static PyObject *__pyx_n_s_minor;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_specs;
 static PyObject *__pyx_n_s_split;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_pf_4cyal_4util_get_device_specifiers(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_pf_4cyal_4util_2get_supported_extensions(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
+static PyObject *__pyx_pf_4cyal_4util_4get_version(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__4;
+static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_codeobj__3;
 static PyObject *__pyx_codeobj__5;
+static PyObject *__pyx_codeobj__7;
 /* Late includes */
 
 /* "cyal/util.pyx":6
@@ -1525,6 +1537,7 @@ static PyObject *__pyx_pf_4cyal_4util_2get_supported_extensions(CYTHON_UNUSED Py
  * def get_supported_extensions():
  *     cdef const alc.ALCchar* exts = alc.alcGetString(NULL, alc.ALC_EXTENSIONS)             # <<<<<<<<<<<<<<
  *     return (<bytes>exts).split(b' ') if exts is not NULL else []
+ * 
  */
   __pyx_v_exts = alcGetString(NULL, ALC_EXTENSIONS);
 
@@ -1532,6 +1545,8 @@ static PyObject *__pyx_pf_4cyal_4util_2get_supported_extensions(CYTHON_UNUSED Py
  * def get_supported_extensions():
  *     cdef const alc.ALCchar* exts = alc.alcGetString(NULL, alc.ALC_EXTENSIONS)
  *     return (<bytes>exts).split(b' ') if exts is not NULL else []             # <<<<<<<<<<<<<<
+ * 
+ * def get_version():
  */
   __Pyx_XDECREF(__pyx_r);
   if (((__pyx_v_exts != NULL) != 0)) {
@@ -1582,6 +1597,101 @@ static PyObject *__pyx_pf_4cyal_4util_2get_supported_extensions(CYTHON_UNUSED Py
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_AddTraceback("cyal.util.get_supported_extensions", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/util.pyx":25
+ *     return (<bytes>exts).split(b' ') if exts is not NULL else []
+ * 
+ * def get_version():             # <<<<<<<<<<<<<<
+ *     cdef alc.ALCint major, minor
+ *     alc.alcGetIntegerv(NULL, alc.ALC_MAJOR_VERSION, 1, &major)
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_4util_5get_version(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyMethodDef __pyx_mdef_4cyal_4util_5get_version = {"get_version", (PyCFunction)__pyx_pw_4cyal_4util_5get_version, METH_NOARGS, 0};
+static PyObject *__pyx_pw_4cyal_4util_5get_version(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get_version (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_4util_4get_version(__pyx_self);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_4util_4get_version(CYTHON_UNUSED PyObject *__pyx_self) {
+  ALCint __pyx_v_major;
+  ALCint __pyx_v_minor;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_version", 0);
+
+  /* "cyal/util.pyx":27
+ * def get_version():
+ *     cdef alc.ALCint major, minor
+ *     alc.alcGetIntegerv(NULL, alc.ALC_MAJOR_VERSION, 1, &major)             # <<<<<<<<<<<<<<
+ *     alc.alcGetIntegerv(NULL, alc.ALC_MINOR_VERSION, 1, &minor)
+ *     return (major, minor)
+ */
+  alcGetIntegerv(NULL, ALC_MAJOR_VERSION, 1, (&__pyx_v_major));
+
+  /* "cyal/util.pyx":28
+ *     cdef alc.ALCint major, minor
+ *     alc.alcGetIntegerv(NULL, alc.ALC_MAJOR_VERSION, 1, &major)
+ *     alc.alcGetIntegerv(NULL, alc.ALC_MINOR_VERSION, 1, &minor)             # <<<<<<<<<<<<<<
+ *     return (major, minor)
+ */
+  alcGetIntegerv(NULL, ALC_MINOR_VERSION, 1, (&__pyx_v_minor));
+
+  /* "cyal/util.pyx":29
+ *     alc.alcGetIntegerv(NULL, alc.ALC_MAJOR_VERSION, 1, &major)
+ *     alc.alcGetIntegerv(NULL, alc.ALC_MINOR_VERSION, 1, &minor)
+ *     return (major, minor)             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_ALCint(__pyx_v_major); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyInt_From_ALCint(__pyx_v_minor); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
+  __pyx_t_1 = 0;
+  __pyx_t_2 = 0;
+  __pyx_r = __pyx_t_3;
+  __pyx_t_3 = 0;
+  goto __pyx_L0;
+
+  /* "cyal/util.pyx":25
+ *     return (<bytes>exts).split(b' ') if exts is not NULL else []
+ * 
+ * def get_version():             # <<<<<<<<<<<<<<
+ *     cdef alc.ALCint major, minor
+ *     alc.alcGetIntegerv(NULL, alc.ALC_MAJOR_VERSION, 1, &major)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("cyal.util.get_version", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -1642,7 +1752,10 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_exts, __pyx_k_exts, sizeof(__pyx_k_exts), 0, 0, 1, 1},
   {&__pyx_n_s_get_device_specifiers, __pyx_k_get_device_specifiers, sizeof(__pyx_k_get_device_specifiers), 0, 0, 1, 1},
   {&__pyx_n_s_get_supported_extensions, __pyx_k_get_supported_extensions, sizeof(__pyx_k_get_supported_extensions), 0, 0, 1, 1},
+  {&__pyx_n_s_get_version, __pyx_k_get_version, sizeof(__pyx_k_get_version), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
+  {&__pyx_n_s_major, __pyx_k_major, sizeof(__pyx_k_major), 0, 0, 1, 1},
+  {&__pyx_n_s_minor, __pyx_k_minor, sizeof(__pyx_k_minor), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_specs, __pyx_k_specs, sizeof(__pyx_k_specs), 0, 0, 1, 1},
   {&__pyx_n_s_split, __pyx_k_split, sizeof(__pyx_k_split), 0, 0, 1, 1},
@@ -1680,6 +1793,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
   __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cyal_util_pyx, __pyx_n_s_get_supported_extensions, 21, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 21, __pyx_L1_error)
+
+  /* "cyal/util.pyx":25
+ *     return (<bytes>exts).split(b' ') if exts is not NULL else []
+ * 
+ * def get_version():             # <<<<<<<<<<<<<<
+ *     cdef alc.ALCint major, minor
+ *     alc.alcGetIntegerv(NULL, alc.ALC_MAJOR_VERSION, 1, &major)
+ */
+  __pyx_tuple__6 = PyTuple_Pack(2, __pyx_n_s_major, __pyx_n_s_minor); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cyal_util_pyx, __pyx_n_s_get_version, 25, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1987,6 +2112,18 @@ if (!__Pyx_RefNanny) {
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cyal_4util_3get_supported_extensions, NULL, __pyx_n_s_cyal_util); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_supported_extensions, __pyx_t_1) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "cyal/util.pyx":25
+ *     return (<bytes>exts).split(b' ') if exts is not NULL else []
+ * 
+ * def get_version():             # <<<<<<<<<<<<<<
+ *     cdef alc.ALCint major, minor
+ *     alc.alcGetIntegerv(NULL, alc.ALC_MAJOR_VERSION, 1, &major)
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cyal_4util_5get_version, NULL, __pyx_n_s_cyal_util); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_version, __pyx_t_1) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "cyal/util.pyx":1
@@ -2583,6 +2720,44 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 bad:
     Py_XDECREF(py_code);
     Py_XDECREF(py_frame);
+}
+
+/* CIntToPy */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_ALCint(ALCint value) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const ALCint neg_one = (ALCint) -1, const_zero = (ALCint) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(ALCint) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(ALCint) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(ALCint) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+#endif
+        }
+    } else {
+        if (sizeof(ALCint) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(ALCint) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+#endif
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(ALCint),
+                                     little, !is_unsigned);
+    }
 }
 
 /* CIntToPy */
