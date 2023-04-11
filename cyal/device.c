@@ -744,6 +744,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include "alc.h"
 #include <stddef.h>
 #include <string.h>
+#include "al.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -976,7 +977,7 @@ struct __pyx_obj_4cyal_6device_Device {
 
 
 /* "cyal/device.pyx":8
- * from . cimport alc
+ * from . cimport al, alc
  * 
  * cdef class Device:             # <<<<<<<<<<<<<<
  *     def __cinit__(self, name = None):
@@ -1349,6 +1350,8 @@ static PyObject *__pyx_f_4cyal_6device_6Device_get_supported_extensions(struct _
 
 /* Module declarations from 'libc.string' */
 
+/* Module declarations from 'cyal.al' */
+
 /* Module declarations from 'cyal.device' */
 static PyTypeObject *__pyx_ptype_4cyal_6device_Device = 0;
 static PyObject *__pyx_f_4cyal_6device_alc_string_to_list(ALCchar const *); /*proto*/
@@ -1416,8 +1419,9 @@ static int __pyx_pf_4cyal_6device_6Device___cinit__(struct __pyx_obj_4cyal_6devi
 static void __pyx_pf_4cyal_6device_6Device_2__dealloc__(struct __pyx_obj_4cyal_6device_Device *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4cyal_6device_6Device_4name___get__(struct __pyx_obj_4cyal_6device_Device *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4cyal_6device_6Device_4get_supported_extensions(struct __pyx_obj_4cyal_6device_Device *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_6device_6Device_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_6device_Device *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_6device_6Device_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_6device_Device *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_6device_6Device_6is_extension_present(struct __pyx_obj_4cyal_6device_Device *__pyx_v_self, PyObject *__pyx_v_ext); /* proto */
+static PyObject *__pyx_pf_4cyal_6device_6Device_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_6device_Device *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_6device_6Device_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_6device_Device *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_4cyal_6device_get_device_specifiers(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_pf_4cyal_6device_2get_supported_extensions(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_tp_new_4cyal_6device_Device(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -1787,7 +1791,7 @@ static PyObject *__pyx_f_4cyal_6device_6Device_get_supported_extensions(struct _
  *     cpdef get_supported_extensions(self):
  *         return (<bytes>alc.alcGetString(self._device, alc.ALC_EXTENSIONS)).split(b' ')             # <<<<<<<<<<<<<<
  * 
- * cdef list alc_string_to_list(const alc.ALCchar* str):
+ *     def is_extension_present(self, ext):
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2 = __Pyx_PyBytes_FromString(alcGetString(__pyx_v_self->_device, ALC_EXTENSIONS)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 23, __pyx_L1_error)
@@ -1875,6 +1879,71 @@ static PyObject *__pyx_pf_4cyal_6device_6Device_4get_supported_extensions(struct
   return __pyx_r;
 }
 
+/* "cyal/device.pyx":25
+ *         return (<bytes>alc.alcGetString(self._device, alc.ALC_EXTENSIONS)).split(b' ')
+ * 
+ *     def is_extension_present(self, ext):             # <<<<<<<<<<<<<<
+ *         return alc.alcIsExtensionPresent(self._device, <const alc.ALCchar *>ext) == al.AL_TRUE
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_6device_6Device_7is_extension_present(PyObject *__pyx_v_self, PyObject *__pyx_v_ext); /*proto*/
+static PyObject *__pyx_pw_4cyal_6device_6Device_7is_extension_present(PyObject *__pyx_v_self, PyObject *__pyx_v_ext) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("is_extension_present (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_6device_6Device_6is_extension_present(((struct __pyx_obj_4cyal_6device_Device *)__pyx_v_self), ((PyObject *)__pyx_v_ext));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_6device_6Device_6is_extension_present(struct __pyx_obj_4cyal_6device_Device *__pyx_v_self, PyObject *__pyx_v_ext) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  ALCchar const *__pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("is_extension_present", 0);
+
+  /* "cyal/device.pyx":26
+ * 
+ *     def is_extension_present(self, ext):
+ *         return alc.alcIsExtensionPresent(self._device, <const alc.ALCchar *>ext) == al.AL_TRUE             # <<<<<<<<<<<<<<
+ * 
+ * cdef list alc_string_to_list(const alc.ALCchar* str):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyObject_AsString(__pyx_v_ext); if (unlikely((!__pyx_t_1) && PyErr_Occurred())) __PYX_ERR(1, 26, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyBool_FromLong((alcIsExtensionPresent(__pyx_v_self->_device, ((ALCchar const *)__pyx_t_1)) == AL_TRUE)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 26, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
+  goto __pyx_L0;
+
+  /* "cyal/device.pyx":25
+ *         return (<bytes>alc.alcGetString(self._device, alc.ALC_EXTENSIONS)).split(b' ')
+ * 
+ *     def is_extension_present(self, ext):             # <<<<<<<<<<<<<<
+ *         return alc.alcIsExtensionPresent(self._device, <const alc.ALCchar *>ext) == al.AL_TRUE
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("cyal.device.Device.is_extension_present", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
@@ -1882,19 +1951,19 @@ static PyObject *__pyx_pf_4cyal_6device_6Device_4get_supported_extensions(struct
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_6device_6Device_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4cyal_6device_6Device_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4cyal_6device_6Device_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4cyal_6device_6Device_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_6device_6Device_6__reduce_cython__(((struct __pyx_obj_4cyal_6device_Device *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4cyal_6device_6Device_8__reduce_cython__(((struct __pyx_obj_4cyal_6device_Device *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_6device_6Device_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_6device_Device *__pyx_v_self) {
+static PyObject *__pyx_pf_4cyal_6device_6Device_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_6device_Device *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1939,19 +2008,19 @@ static PyObject *__pyx_pf_4cyal_6device_6Device_6__reduce_cython__(CYTHON_UNUSED
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_6device_6Device_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_4cyal_6device_6Device_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_4cyal_6device_6Device_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4cyal_6device_6Device_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_6device_6Device_8__setstate_cython__(((struct __pyx_obj_4cyal_6device_Device *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_4cyal_6device_6Device_10__setstate_cython__(((struct __pyx_obj_4cyal_6device_Device *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_6device_6Device_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_6device_Device *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_4cyal_6device_6Device_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_6device_Device *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1988,8 +2057,8 @@ static PyObject *__pyx_pf_4cyal_6device_6Device_8__setstate_cython__(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "cyal/device.pyx":25
- *         return (<bytes>alc.alcGetString(self._device, alc.ALC_EXTENSIONS)).split(b' ')
+/* "cyal/device.pyx":28
+ *         return alc.alcIsExtensionPresent(self._device, <const alc.ALCchar *>ext) == al.AL_TRUE
  * 
  * cdef list alc_string_to_list(const alc.ALCchar* str):             # <<<<<<<<<<<<<<
  *     cdef:
@@ -2009,19 +2078,19 @@ static PyObject *__pyx_f_4cyal_6device_alc_string_to_list(ALCchar const *__pyx_v
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("alc_string_to_list", 0);
 
-  /* "cyal/device.pyx":27
+  /* "cyal/device.pyx":30
  * cdef list alc_string_to_list(const alc.ALCchar* str):
  *     cdef:
  *         list specs = []             # <<<<<<<<<<<<<<
  *         size_t length
  *     while True:
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 27, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_specs = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cyal/device.pyx":29
+  /* "cyal/device.pyx":32
  *         list specs = []
  *         size_t length
  *     while True:             # <<<<<<<<<<<<<<
@@ -2030,7 +2099,7 @@ static PyObject *__pyx_f_4cyal_6device_alc_string_to_list(ALCchar const *__pyx_v
  */
   while (1) {
 
-    /* "cyal/device.pyx":30
+    /* "cyal/device.pyx":33
  *         size_t length
  *     while True:
  *         length = strlen(str)             # <<<<<<<<<<<<<<
@@ -2039,7 +2108,7 @@ static PyObject *__pyx_f_4cyal_6device_alc_string_to_list(ALCchar const *__pyx_v
  */
     __pyx_v_length = strlen(__pyx_v_str);
 
-    /* "cyal/device.pyx":31
+    /* "cyal/device.pyx":34
  *     while True:
  *         length = strlen(str)
  *         if length == 0:             # <<<<<<<<<<<<<<
@@ -2049,7 +2118,7 @@ static PyObject *__pyx_f_4cyal_6device_alc_string_to_list(ALCchar const *__pyx_v
     __pyx_t_2 = ((__pyx_v_length == 0) != 0);
     if (__pyx_t_2) {
 
-      /* "cyal/device.pyx":32
+      /* "cyal/device.pyx":35
  *         length = strlen(str)
  *         if length == 0:
  *             return specs             # <<<<<<<<<<<<<<
@@ -2061,7 +2130,7 @@ static PyObject *__pyx_f_4cyal_6device_alc_string_to_list(ALCchar const *__pyx_v
       __pyx_r = __pyx_v_specs;
       goto __pyx_L0;
 
-      /* "cyal/device.pyx":31
+      /* "cyal/device.pyx":34
  *     while True:
  *         length = strlen(str)
  *         if length == 0:             # <<<<<<<<<<<<<<
@@ -2070,19 +2139,19 @@ static PyObject *__pyx_f_4cyal_6device_alc_string_to_list(ALCchar const *__pyx_v
  */
     }
 
-    /* "cyal/device.pyx":33
+    /* "cyal/device.pyx":36
  *         if length == 0:
  *             return specs
  *         specs.append(<bytes>str[:length])             # <<<<<<<<<<<<<<
  *         str += length + 1
  * 
  */
-    __pyx_t_1 = __Pyx_PyBytes_FromStringAndSize(__pyx_v_str + 0, __pyx_v_length - 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 33, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyBytes_FromStringAndSize(__pyx_v_str + 0, __pyx_v_length - 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 36, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyList_Append(__pyx_v_specs, __pyx_t_1); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(1, 33, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyList_Append(__pyx_v_specs, __pyx_t_1); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(1, 36, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cyal/device.pyx":34
+    /* "cyal/device.pyx":37
  *             return specs
  *         specs.append(<bytes>str[:length])
  *         str += length + 1             # <<<<<<<<<<<<<<
@@ -2092,8 +2161,8 @@ static PyObject *__pyx_f_4cyal_6device_alc_string_to_list(ALCchar const *__pyx_v
     __pyx_v_str = (__pyx_v_str + (__pyx_v_length + 1));
   }
 
-  /* "cyal/device.pyx":25
- *         return (<bytes>alc.alcGetString(self._device, alc.ALC_EXTENSIONS)).split(b' ')
+  /* "cyal/device.pyx":28
+ *         return alc.alcIsExtensionPresent(self._device, <const alc.ALCchar *>ext) == al.AL_TRUE
  * 
  * cdef list alc_string_to_list(const alc.ALCchar* str):             # <<<<<<<<<<<<<<
  *     cdef:
@@ -2114,7 +2183,7 @@ static PyObject *__pyx_f_4cyal_6device_alc_string_to_list(ALCchar const *__pyx_v
   return __pyx_r;
 }
 
-/* "cyal/device.pyx":36
+/* "cyal/device.pyx":39
  *         str += length + 1
  * 
  * def get_device_specifiers():             # <<<<<<<<<<<<<<
@@ -2147,7 +2216,7 @@ static PyObject *__pyx_pf_4cyal_6device_get_device_specifiers(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_device_specifiers", 0);
 
-  /* "cyal/device.pyx":37
+  /* "cyal/device.pyx":40
  * 
  * def get_device_specifiers():
  *     cdef const alc.ALCchar* specs = alc.alcGetString(NULL, alc.ALC_DEVICE_SPECIFIER)             # <<<<<<<<<<<<<<
@@ -2156,7 +2225,7 @@ static PyObject *__pyx_pf_4cyal_6device_get_device_specifiers(CYTHON_UNUSED PyOb
  */
   __pyx_v_specs = alcGetString(NULL, ALC_DEVICE_SPECIFIER);
 
-  /* "cyal/device.pyx":38
+  /* "cyal/device.pyx":41
  * def get_device_specifiers():
  *     cdef const alc.ALCchar* specs = alc.alcGetString(NULL, alc.ALC_DEVICE_SPECIFIER)
  *     return alc_string_to_list(specs) if specs is not NULL else []             # <<<<<<<<<<<<<<
@@ -2165,12 +2234,12 @@ static PyObject *__pyx_pf_4cyal_6device_get_device_specifiers(CYTHON_UNUSED PyOb
  */
   __Pyx_XDECREF(__pyx_r);
   if (((__pyx_v_specs != NULL) != 0)) {
-    __pyx_t_2 = __pyx_f_4cyal_6device_alc_string_to_list(__pyx_v_specs); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 38, __pyx_L1_error)
+    __pyx_t_2 = __pyx_f_4cyal_6device_alc_string_to_list(__pyx_v_specs); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 41, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_1 = __pyx_t_2;
     __pyx_t_2 = 0;
   } else {
-    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 38, __pyx_L1_error)
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 41, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_1 = __pyx_t_2;
     __pyx_t_2 = 0;
@@ -2179,7 +2248,7 @@ static PyObject *__pyx_pf_4cyal_6device_get_device_specifiers(CYTHON_UNUSED PyOb
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cyal/device.pyx":36
+  /* "cyal/device.pyx":39
  *         str += length + 1
  * 
  * def get_device_specifiers():             # <<<<<<<<<<<<<<
@@ -2199,7 +2268,7 @@ static PyObject *__pyx_pf_4cyal_6device_get_device_specifiers(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "cyal/device.pyx":40
+/* "cyal/device.pyx":43
  *     return alc_string_to_list(specs) if specs is not NULL else []
  * 
  * def get_supported_extensions():             # <<<<<<<<<<<<<<
@@ -2234,7 +2303,7 @@ static PyObject *__pyx_pf_4cyal_6device_2get_supported_extensions(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_supported_extensions", 0);
 
-  /* "cyal/device.pyx":41
+  /* "cyal/device.pyx":44
  * 
  * def get_supported_extensions():
  *     cdef const alc.ALCchar* exts = alc.alcGetString(NULL, alc.ALC_EXTENSIONS)             # <<<<<<<<<<<<<<
@@ -2242,16 +2311,16 @@ static PyObject *__pyx_pf_4cyal_6device_2get_supported_extensions(CYTHON_UNUSED 
  */
   __pyx_v_exts = alcGetString(NULL, ALC_EXTENSIONS);
 
-  /* "cyal/device.pyx":42
+  /* "cyal/device.pyx":45
  * def get_supported_extensions():
  *     cdef const alc.ALCchar* exts = alc.alcGetString(NULL, alc.ALC_EXTENSIONS)
  *     return (<bytes>exts).split(b' ') if exts is not NULL else []             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
   if (((__pyx_v_exts != NULL) != 0)) {
-    __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_exts); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 42, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_exts); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 45, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_split); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 42, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_split); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 45, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = NULL;
@@ -2266,13 +2335,13 @@ static PyObject *__pyx_pf_4cyal_6device_2get_supported_extensions(CYTHON_UNUSED 
     }
     __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_3, __pyx_kp_b_) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_kp_b_);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 42, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 45, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_1 = __pyx_t_2;
     __pyx_t_2 = 0;
   } else {
-    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 42, __pyx_L1_error)
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 45, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_1 = __pyx_t_2;
     __pyx_t_2 = 0;
@@ -2281,7 +2350,7 @@ static PyObject *__pyx_pf_4cyal_6device_2get_supported_extensions(CYTHON_UNUSED 
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cyal/device.pyx":40
+  /* "cyal/device.pyx":43
  *     return alc_string_to_list(specs) if specs is not NULL else []
  * 
  * def get_supported_extensions():             # <<<<<<<<<<<<<<
@@ -2345,8 +2414,9 @@ static PyObject *__pyx_getprop_4cyal_6device_6Device_name(PyObject *o, CYTHON_UN
 
 static PyMethodDef __pyx_methods_4cyal_6device_Device[] = {
   {"get_supported_extensions", (PyCFunction)__pyx_pw_4cyal_6device_6Device_5get_supported_extensions, METH_NOARGS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_6device_6Device_7__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_6device_6Device_9__setstate_cython__, METH_O, 0},
+  {"is_extension_present", (PyCFunction)__pyx_pw_4cyal_6device_6Device_7is_extension_present, METH_O, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_6device_6Device_9__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_6device_6Device_11__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -2532,29 +2602,29 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "cyal/device.pyx":36
+  /* "cyal/device.pyx":39
  *         str += length + 1
  * 
  * def get_device_specifiers():             # <<<<<<<<<<<<<<
  *     cdef const alc.ALCchar* specs = alc.alcGetString(NULL, alc.ALC_DEVICE_SPECIFIER)
  *     return alc_string_to_list(specs) if specs is not NULL else []
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_s_specs); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(1, 36, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_s_specs); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(1, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cyal_device_pyx, __pyx_n_s_get_device_specifiers, 36, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(1, 36, __pyx_L1_error)
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cyal_device_pyx, __pyx_n_s_get_device_specifiers, 39, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(1, 39, __pyx_L1_error)
 
-  /* "cyal/device.pyx":40
+  /* "cyal/device.pyx":43
  *     return alc_string_to_list(specs) if specs is not NULL else []
  * 
  * def get_supported_extensions():             # <<<<<<<<<<<<<<
  *     cdef const alc.ALCchar* exts = alc.alcGetString(NULL, alc.ALC_EXTENSIONS)
  *     return (<bytes>exts).split(b' ') if exts is not NULL else []
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_s_exts); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(1, 40, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_s_exts); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(1, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cyal_device_pyx, __pyx_n_s_get_supported_extensions, 40, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(1, 40, __pyx_L1_error)
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cyal_device_pyx, __pyx_n_s_get_supported_extensions, 43, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(1, 43, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -2865,7 +2935,7 @@ if (!__Pyx_RefNanny) {
  * 
  * from .exceptions import DeviceNotFoundError             # <<<<<<<<<<<<<<
  * 
- * from . cimport alc
+ * from . cimport al, alc
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2881,28 +2951,28 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cyal/device.pyx":36
+  /* "cyal/device.pyx":39
  *         str += length + 1
  * 
  * def get_device_specifiers():             # <<<<<<<<<<<<<<
  *     cdef const alc.ALCchar* specs = alc.alcGetString(NULL, alc.ALC_DEVICE_SPECIFIER)
  *     return alc_string_to_list(specs) if specs is not NULL else []
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_4cyal_6device_1get_device_specifiers, NULL, __pyx_n_s_cyal_device); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 36, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_4cyal_6device_1get_device_specifiers, NULL, __pyx_n_s_cyal_device); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_device_specifiers, __pyx_t_2) < 0) __PYX_ERR(1, 36, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_device_specifiers, __pyx_t_2) < 0) __PYX_ERR(1, 39, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cyal/device.pyx":40
+  /* "cyal/device.pyx":43
  *     return alc_string_to_list(specs) if specs is not NULL else []
  * 
  * def get_supported_extensions():             # <<<<<<<<<<<<<<
  *     cdef const alc.ALCchar* exts = alc.alcGetString(NULL, alc.ALC_EXTENSIONS)
  *     return (<bytes>exts).split(b' ') if exts is not NULL else []
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_4cyal_6device_3get_supported_extensions, NULL, __pyx_n_s_cyal_device); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 40, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_4cyal_6device_3get_supported_extensions, NULL, __pyx_n_s_cyal_device); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_supported_extensions, __pyx_t_2) < 0) __PYX_ERR(1, 40, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_supported_extensions, __pyx_t_2) < 0) __PYX_ERR(1, 43, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "cyal/device.pyx":1

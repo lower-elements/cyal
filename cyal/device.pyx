@@ -3,7 +3,7 @@ from libc.string cimport strlen
 
 from .exceptions import DeviceNotFoundError
 
-from . cimport alc
+from . cimport al, alc
 
 cdef class Device:
     def __cinit__(self, name = None):
@@ -21,6 +21,9 @@ cdef class Device:
 
     cpdef get_supported_extensions(self):
         return (<bytes>alc.alcGetString(self._device, alc.ALC_EXTENSIONS)).split(b' ')
+
+    def is_extension_present(self, ext):
+        return alc.alcIsExtensionPresent(self._device, <const alc.ALCchar *>ext) == al.AL_TRUE
 
 cdef list alc_string_to_list(const alc.ALCchar* str):
     cdef:
