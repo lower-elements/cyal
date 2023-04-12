@@ -3,6 +3,7 @@
 from contextlib import contextmanager
 
 from .device cimport Device
+from .exceptions cimport raise_alc_error
 from . cimport alc
 
 cdef class Context:
@@ -13,7 +14,7 @@ cdef class Context:
         self.device = dev
         self._ctx  =alc.alcCreateContext(dev._device, NULL)
         if self._ctx is NULL:
-            raise RuntimeError("Context creation failed")
+            raise_alc_error(dev._device)
 
     def __dealloc__(self):
         if self._ctx:
