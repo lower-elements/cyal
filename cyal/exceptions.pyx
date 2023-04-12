@@ -1,13 +1,14 @@
-class CyalError(Exception):
+cdef class CyalError(Exception):
     pass
 
+cdef class DeviceNotFoundError(CyalError):
+    cdef readonly bytes device_name
 
-class DeviceNotFoundError(CyalError):
-    __slots__ = ["device_name"]
+    def __cinit__(self, *args, **kwargs):
+        self.device_name = kwargs.get("device_name", None)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args)
-        self.device_name = kwargs.get("device_name", None)
 
     def __str__(self):
         if self.device_name is None:
