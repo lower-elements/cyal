@@ -961,6 +961,7 @@ struct __pyx_obj_4cyal_6device_Device;
 struct __pyx_obj_4cyal_7context_Context;
 struct __pyx_obj_4cyal_7context___pyx_scope_struct__as_current;
 struct __pyx_obj_4cyal_7context___pyx_scope_struct_1_as_processing;
+struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended;
 
 /* "device.pxd":5
  * from . cimport alc
@@ -1011,6 +1012,19 @@ struct __pyx_obj_4cyal_7context___pyx_scope_struct__as_current {
  *         try:
  */
 struct __pyx_obj_4cyal_7context___pyx_scope_struct_1_as_processing {
+  PyObject_HEAD
+  struct __pyx_obj_4cyal_7context_Context *__pyx_v_self;
+};
+
+
+/* "cyal/context.pyx":54
+ * 
+ *     @contextmanager
+ *     def as_suspended(self):             # <<<<<<<<<<<<<<
+ *         alc.alcSuspendContext(self._ctx)
+ *         try:
+ */
+struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended {
   PyObject_HEAD
   struct __pyx_obj_4cyal_7context_Context *__pyx_v_self;
 };
@@ -1515,6 +1529,7 @@ static PyTypeObject *__pyx_ptype_4cyal_6device_Device = 0;
 static PyTypeObject *__pyx_ptype_4cyal_7context_Context = 0;
 static PyTypeObject *__pyx_ptype_4cyal_7context___pyx_scope_struct__as_current = 0;
 static PyTypeObject *__pyx_ptype_4cyal_7context___pyx_scope_struct_1_as_processing = 0;
+static PyTypeObject *__pyx_ptype_4cyal_7context___pyx_scope_struct_2_as_suspended = 0;
 #define __Pyx_MODULE_NAME "cyal.context"
 extern int __pyx_module_is_main_cyal__context;
 int __pyx_module_is_main_cyal__context = 0;
@@ -1541,6 +1556,7 @@ static const char __pyx_k_as_current[] = "as_current";
 static const char __pyx_k_contextlib[] = "contextlib";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_RuntimeError[] = "RuntimeError";
+static const char __pyx_k_as_suspended[] = "as_suspended";
 static const char __pyx_k_cyal_context[] = "cyal.context";
 static const char __pyx_k_as_processing[] = "as_processing";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
@@ -1548,18 +1564,21 @@ static const char __pyx_k_contextmanager[] = "contextmanager";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_Context_as_current[] = "Context.as_current";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
+static const char __pyx_k_Context_as_suspended[] = "Context.as_suspended";
 static const char __pyx_k_Context_as_processing[] = "Context.as_processing";
 static const char __pyx_k_Context_creation_failed[] = "Context creation failed";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
 static PyObject *__pyx_n_s_Context;
 static PyObject *__pyx_n_s_Context_as_current;
 static PyObject *__pyx_n_s_Context_as_processing;
+static PyObject *__pyx_n_s_Context_as_suspended;
 static PyObject *__pyx_kp_u_Context_creation_failed;
 static PyObject *__pyx_n_s_RuntimeError;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_args;
 static PyObject *__pyx_n_s_as_current;
 static PyObject *__pyx_n_s_as_processing;
+static PyObject *__pyx_n_s_as_suspended;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_close;
 static PyObject *__pyx_n_s_contextlib;
@@ -1588,12 +1607,14 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_6as_current(struct __pyx_obj_4
 static PyObject *__pyx_pf_4cyal_7context_7Context_9process(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4cyal_7context_7Context_11suspend(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4cyal_7context_7Context_13as_processing(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_7context_7Context_16as_suspended(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4cyal_7context_7Context_6device___get__(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_7context_7Context_16__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_7context_7Context_18__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_7context_7Context_19__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_7context_7Context_21__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_4cyal_7context_Context(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_4cyal_7context___pyx_scope_struct__as_current(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_4cyal_7context___pyx_scope_struct_1_as_processing(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_4cyal_7context___pyx_scope_struct_2_as_suspended(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
@@ -2374,6 +2395,8 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_15generator1(__pyx_CoroutineOb
  *             yield self
  *         finally:
  *             alc.alcSuspendContext(self._ctx)             # <<<<<<<<<<<<<<
+ * 
+ *     @contextmanager
  */
   /*finally:*/ {
     /*normal exit:*/{
@@ -2437,6 +2460,197 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_15generator1(__pyx_CoroutineOb
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
+static PyObject *__pyx_gb_4cyal_7context_7Context_18generator2(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
+
+/* "cyal/context.pyx":54
+ * 
+ *     @contextmanager
+ *     def as_suspended(self):             # <<<<<<<<<<<<<<
+ *         alc.alcSuspendContext(self._ctx)
+ *         try:
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_7context_7Context_17as_suspended(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4cyal_7context_7Context_17as_suspended(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("as_suspended (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_7context_7Context_16as_suspended(((struct __pyx_obj_4cyal_7context_Context *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_7context_7Context_16as_suspended(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self) {
+  struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended *__pyx_cur_scope;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("as_suspended", 0);
+  __pyx_cur_scope = (struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended *)__pyx_tp_new_4cyal_7context___pyx_scope_struct_2_as_suspended(__pyx_ptype_4cyal_7context___pyx_scope_struct_2_as_suspended, __pyx_empty_tuple, NULL);
+  if (unlikely(!__pyx_cur_scope)) {
+    __pyx_cur_scope = ((struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended *)Py_None);
+    __Pyx_INCREF(Py_None);
+    __PYX_ERR(0, 54, __pyx_L1_error)
+  } else {
+    __Pyx_GOTREF(__pyx_cur_scope);
+  }
+  __pyx_cur_scope->__pyx_v_self = __pyx_v_self;
+  __Pyx_INCREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
+  __Pyx_GIVEREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
+  {
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_4cyal_7context_7Context_18generator2, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_as_suspended, __pyx_n_s_Context_as_suspended, __pyx_n_s_cyal_context); if (unlikely(!gen)) __PYX_ERR(0, 54, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_cur_scope);
+    __Pyx_RefNannyFinishContext();
+    return (PyObject *) gen;
+  }
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("cyal.context.Context.as_suspended", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_DECREF(((PyObject *)__pyx_cur_scope));
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_gb_4cyal_7context_7Context_18generator2(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value) /* generator body */
+{
+  struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended *__pyx_cur_scope = ((struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended *)__pyx_generator->closure);
+  PyObject *__pyx_r = NULL;
+  int __pyx_t_1;
+  int __pyx_t_2;
+  char const *__pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  PyObject *__pyx_t_9 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("as_suspended", 0);
+  switch (__pyx_generator->resume_label) {
+    case 0: goto __pyx_L3_first_run;
+    case 1: goto __pyx_L7_resume_from_yield;
+    default: /* CPython raises the right error here */
+    __Pyx_RefNannyFinishContext();
+    return NULL;
+  }
+  __pyx_L3_first_run:;
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 54, __pyx_L1_error)
+
+  /* "cyal/context.pyx":55
+ *     @contextmanager
+ *     def as_suspended(self):
+ *         alc.alcSuspendContext(self._ctx)             # <<<<<<<<<<<<<<
+ *         try:
+ *             yield self
+ */
+  alcSuspendContext(__pyx_cur_scope->__pyx_v_self->_ctx);
+
+  /* "cyal/context.pyx":56
+ *     def as_suspended(self):
+ *         alc.alcSuspendContext(self._ctx)
+ *         try:             # <<<<<<<<<<<<<<
+ *             yield self
+ *         finally:
+ */
+  /*try:*/ {
+
+    /* "cyal/context.pyx":57
+ *         alc.alcSuspendContext(self._ctx)
+ *         try:
+ *             yield self             # <<<<<<<<<<<<<<
+ *         finally:
+ *             alc.alcProcessContext(self._ctx)
+ */
+    __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_v_self));
+    __pyx_r = ((PyObject *)__pyx_cur_scope->__pyx_v_self);
+    __Pyx_XGIVEREF(__pyx_r);
+    __Pyx_RefNannyFinishContext();
+    __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
+    /* return from generator, yielding value */
+    __pyx_generator->resume_label = 1;
+    return __pyx_r;
+    __pyx_L7_resume_from_yield:;
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 57, __pyx_L5_error)
+  }
+
+  /* "cyal/context.pyx":59
+ *             yield self
+ *         finally:
+ *             alc.alcProcessContext(self._ctx)             # <<<<<<<<<<<<<<
+ */
+  /*finally:*/ {
+    /*normal exit:*/{
+      alcProcessContext(__pyx_cur_scope->__pyx_v_self->_ctx);
+      goto __pyx_L6;
+    }
+    __pyx_L5_error:;
+    /*exception exit:*/{
+      __Pyx_PyThreadState_assign
+      __pyx_t_4 = 0; __pyx_t_5 = 0; __pyx_t_6 = 0; __pyx_t_7 = 0; __pyx_t_8 = 0; __pyx_t_9 = 0;
+      if (PY_MAJOR_VERSION >= 3) __Pyx_ExceptionSwap(&__pyx_t_7, &__pyx_t_8, &__pyx_t_9);
+      if ((PY_MAJOR_VERSION < 3) || unlikely(__Pyx_GetException(&__pyx_t_4, &__pyx_t_5, &__pyx_t_6) < 0)) __Pyx_ErrFetch(&__pyx_t_4, &__pyx_t_5, &__pyx_t_6);
+      __Pyx_XGOTREF(__pyx_t_4);
+      __Pyx_XGOTREF(__pyx_t_5);
+      __Pyx_XGOTREF(__pyx_t_6);
+      __Pyx_XGOTREF(__pyx_t_7);
+      __Pyx_XGOTREF(__pyx_t_8);
+      __Pyx_XGOTREF(__pyx_t_9);
+      __pyx_t_1 = __pyx_lineno; __pyx_t_2 = __pyx_clineno; __pyx_t_3 = __pyx_filename;
+      {
+        alcProcessContext(__pyx_cur_scope->__pyx_v_self->_ctx);
+      }
+      if (PY_MAJOR_VERSION >= 3) {
+        __Pyx_XGIVEREF(__pyx_t_7);
+        __Pyx_XGIVEREF(__pyx_t_8);
+        __Pyx_XGIVEREF(__pyx_t_9);
+        __Pyx_ExceptionReset(__pyx_t_7, __pyx_t_8, __pyx_t_9);
+      }
+      __Pyx_XGIVEREF(__pyx_t_4);
+      __Pyx_XGIVEREF(__pyx_t_5);
+      __Pyx_XGIVEREF(__pyx_t_6);
+      __Pyx_ErrRestore(__pyx_t_4, __pyx_t_5, __pyx_t_6);
+      __pyx_t_4 = 0; __pyx_t_5 = 0; __pyx_t_6 = 0; __pyx_t_7 = 0; __pyx_t_8 = 0; __pyx_t_9 = 0;
+      __pyx_lineno = __pyx_t_1; __pyx_clineno = __pyx_t_2; __pyx_filename = __pyx_t_3;
+      goto __pyx_L1_error;
+    }
+    __pyx_L6:;
+  }
+  CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
+
+  /* "cyal/context.pyx":54
+ * 
+ *     @contextmanager
+ *     def as_suspended(self):             # <<<<<<<<<<<<<<
+ *         alc.alcSuspendContext(self._ctx)
+ *         try:
+ */
+
+  /* function exit code */
+  PyErr_SetNone(PyExc_StopIteration);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("as_suspended", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_r); __pyx_r = 0;
+  #if !CYTHON_USE_EXC_INFO_STACK
+  __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
+  #endif
+  __pyx_generator->resume_label = -1;
+  __Pyx_Coroutine_clear((PyObject*)__pyx_generator);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
 
 /* "cyal/context.pyx":10
  * cdef class Context:
@@ -2482,19 +2696,19 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_6device___get__(struct __pyx_o
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_7context_7Context_17__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4cyal_7context_7Context_17__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4cyal_7context_7Context_20__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4cyal_7context_7Context_20__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_7context_7Context_16__reduce_cython__(((struct __pyx_obj_4cyal_7context_Context *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4cyal_7context_7Context_19__reduce_cython__(((struct __pyx_obj_4cyal_7context_Context *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_7context_7Context_16__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self) {
+static PyObject *__pyx_pf_4cyal_7context_7Context_19__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2539,19 +2753,19 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_16__reduce_cython__(CYTHON_UNU
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_7context_7Context_19__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_4cyal_7context_7Context_19__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_4cyal_7context_7Context_22__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4cyal_7context_7Context_22__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_7context_7Context_18__setstate_cython__(((struct __pyx_obj_4cyal_7context_Context *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_4cyal_7context_7Context_21__setstate_cython__(((struct __pyx_obj_4cyal_7context_Context *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_7context_7Context_18__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_4cyal_7context_7Context_21__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2658,8 +2872,9 @@ static PyMethodDef __pyx_methods_4cyal_7context_Context[] = {
   {"process", (PyCFunction)__pyx_pw_4cyal_7context_7Context_10process, METH_NOARGS, 0},
   {"suspend", (PyCFunction)__pyx_pw_4cyal_7context_7Context_12suspend, METH_NOARGS, 0},
   {"as_processing", (PyCFunction)__pyx_pw_4cyal_7context_7Context_14as_processing, METH_NOARGS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_7context_7Context_17__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_7context_7Context_19__setstate_cython__, METH_O, 0},
+  {"as_suspended", (PyCFunction)__pyx_pw_4cyal_7context_7Context_17as_suspended, METH_NOARGS, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_7context_7Context_20__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_7context_7Context_22__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -2959,6 +3174,115 @@ static PyTypeObject __pyx_type_4cyal_7context___pyx_scope_struct_1_as_processing
   #endif
 };
 
+static struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended *__pyx_freelist_4cyal_7context___pyx_scope_struct_2_as_suspended[8];
+static int __pyx_freecount_4cyal_7context___pyx_scope_struct_2_as_suspended = 0;
+
+static PyObject *__pyx_tp_new_4cyal_7context___pyx_scope_struct_2_as_suspended(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  PyObject *o;
+  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_4cyal_7context___pyx_scope_struct_2_as_suspended > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended)))) {
+    o = (PyObject*)__pyx_freelist_4cyal_7context___pyx_scope_struct_2_as_suspended[--__pyx_freecount_4cyal_7context___pyx_scope_struct_2_as_suspended];
+    memset(o, 0, sizeof(struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended));
+    (void) PyObject_INIT(o, t);
+    PyObject_GC_Track(o);
+  } else {
+    o = (*t->tp_alloc)(t, 0);
+    if (unlikely(!o)) return 0;
+  }
+  return o;
+}
+
+static void __pyx_tp_dealloc_4cyal_7context___pyx_scope_struct_2_as_suspended(PyObject *o) {
+  struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended *p = (struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended *)o;
+  PyObject_GC_UnTrack(o);
+  Py_CLEAR(p->__pyx_v_self);
+  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_4cyal_7context___pyx_scope_struct_2_as_suspended < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended)))) {
+    __pyx_freelist_4cyal_7context___pyx_scope_struct_2_as_suspended[__pyx_freecount_4cyal_7context___pyx_scope_struct_2_as_suspended++] = ((struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended *)o);
+  } else {
+    (*Py_TYPE(o)->tp_free)(o);
+  }
+}
+
+static int __pyx_tp_traverse_4cyal_7context___pyx_scope_struct_2_as_suspended(PyObject *o, visitproc v, void *a) {
+  int e;
+  struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended *p = (struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended *)o;
+  if (p->__pyx_v_self) {
+    e = (*v)(((PyObject *)p->__pyx_v_self), a); if (e) return e;
+  }
+  return 0;
+}
+
+static PyTypeObject __pyx_type_4cyal_7context___pyx_scope_struct_2_as_suspended = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "cyal.context.__pyx_scope_struct_2_as_suspended", /*tp_name*/
+  sizeof(struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_4cyal_7context___pyx_scope_struct_2_as_suspended, /*tp_dealloc*/
+  #if PY_VERSION_HEX < 0x030800b4
+  0, /*tp_print*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4
+  0, /*tp_vectorcall_offset*/
+  #endif
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  0, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
+  0, /*tp_doc*/
+  __pyx_tp_traverse_4cyal_7context___pyx_scope_struct_2_as_suspended, /*tp_traverse*/
+  0, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  0, /*tp_methods*/
+  0, /*tp_members*/
+  0, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_4cyal_7context___pyx_scope_struct_2_as_suspended, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b1 && (!CYTHON_COMPILING_IN_PYPY || PYPY_VERSION_NUM >= 0x07030800)
+  0, /*tp_vectorcall*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4 && PY_VERSION_HEX < 0x03090000
+  0, /*tp_print*/
+  #endif
+  #if CYTHON_COMPILING_IN_PYPY && PY_VERSION_HEX >= 0x03090000
+  0, /*tp_pypy_flags*/
+  #endif
+};
+
 static PyMethodDef __pyx_methods[] = {
   {0, 0, 0, 0}
 };
@@ -3008,12 +3332,14 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Context, __pyx_k_Context, sizeof(__pyx_k_Context), 0, 0, 1, 1},
   {&__pyx_n_s_Context_as_current, __pyx_k_Context_as_current, sizeof(__pyx_k_Context_as_current), 0, 0, 1, 1},
   {&__pyx_n_s_Context_as_processing, __pyx_k_Context_as_processing, sizeof(__pyx_k_Context_as_processing), 0, 0, 1, 1},
+  {&__pyx_n_s_Context_as_suspended, __pyx_k_Context_as_suspended, sizeof(__pyx_k_Context_as_suspended), 0, 0, 1, 1},
   {&__pyx_kp_u_Context_creation_failed, __pyx_k_Context_creation_failed, sizeof(__pyx_k_Context_creation_failed), 0, 1, 0, 0},
   {&__pyx_n_s_RuntimeError, __pyx_k_RuntimeError, sizeof(__pyx_k_RuntimeError), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_args, __pyx_k_args, sizeof(__pyx_k_args), 0, 0, 1, 1},
   {&__pyx_n_s_as_current, __pyx_k_as_current, sizeof(__pyx_k_as_current), 0, 0, 1, 1},
   {&__pyx_n_s_as_processing, __pyx_k_as_processing, sizeof(__pyx_k_as_processing), 0, 0, 1, 1},
+  {&__pyx_n_s_as_suspended, __pyx_k_as_suspended, sizeof(__pyx_k_as_suspended), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_close, __pyx_k_close, sizeof(__pyx_k_close), 0, 0, 1, 1},
   {&__pyx_n_s_contextlib, __pyx_k_contextlib, sizeof(__pyx_k_contextlib), 0, 0, 1, 1},
@@ -3156,6 +3482,14 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_type_4cyal_7context___pyx_scope_struct_1_as_processing.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_4cyal_7context___pyx_scope_struct_1_as_processing = &__pyx_type_4cyal_7context___pyx_scope_struct_1_as_processing;
+  if (PyType_Ready(&__pyx_type_4cyal_7context___pyx_scope_struct_2_as_suspended) < 0) __PYX_ERR(0, 54, __pyx_L1_error)
+  #if PY_VERSION_HEX < 0x030800B1
+  __pyx_type_4cyal_7context___pyx_scope_struct_2_as_suspended.tp_print = 0;
+  #endif
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_7context___pyx_scope_struct_2_as_suspended.tp_dictoffset && __pyx_type_4cyal_7context___pyx_scope_struct_2_as_suspended.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_4cyal_7context___pyx_scope_struct_2_as_suspended.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
+  }
+  __pyx_ptype_4cyal_7context___pyx_scope_struct_2_as_suspended = &__pyx_type_4cyal_7context___pyx_scope_struct_2_as_suspended;
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -3501,6 +3835,45 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_Context->tp_dict, __pyx_n_s_as_processing, __pyx_t_2) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  PyType_Modified(__pyx_ptype_4cyal_7context_Context);
+
+  /* "cyal/context.pyx":53
+ *             alc.alcSuspendContext(self._ctx)
+ * 
+ *     @contextmanager             # <<<<<<<<<<<<<<
+ *     def as_suspended(self):
+ *         alc.alcSuspendContext(self._ctx)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_contextmanager); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+
+  /* "cyal/context.pyx":54
+ * 
+ *     @contextmanager
+ *     def as_suspended(self):             # <<<<<<<<<<<<<<
+ *         alc.alcSuspendContext(self._ctx)
+ *         try:
+ */
+  __Pyx_GetNameInClass(__pyx_t_3, (PyObject *)__pyx_ptype_4cyal_7context_Context, __pyx_n_s_as_suspended); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_4);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+    }
+  }
+  __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_4, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_Context->tp_dict, __pyx_n_s_as_suspended, __pyx_t_2) < 0) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_4cyal_7context_Context);
 

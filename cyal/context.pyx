@@ -49,3 +49,11 @@ cdef class Context:
             yield self
         finally:
             alc.alcSuspendContext(self._ctx)
+
+    @contextmanager
+    def as_suspended(self):
+        alc.alcSuspendContext(self._ctx)
+        try:
+            yield self
+        finally:
+            alc.alcProcessContext(self._ctx)
