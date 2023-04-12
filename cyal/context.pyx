@@ -31,11 +31,12 @@ cdef class Context:
 
     @contextmanager
     def as_current(self):
+        cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
         alc.alcMakeContextCurrent(self._ctx)
         try:
             yield self
         finally:
-            alc.alcMakeContextCurrent(NULL)
+            alc.alcMakeContextCurrent(prev_ctx)
 
     def process(self):
         alc.alcProcessContext(self._ctx)
