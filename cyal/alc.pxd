@@ -160,6 +160,12 @@ cdef extern from "alc.h":
     # Query for the presence of an extension on the device. Pass a NULL device to
     # query a device-inspecific extension.
     ALCboolean alcIsExtensionPresent(ALCdevice *device, const ALCchar *extname)
+    # Retrieve the address of a function. Given a non-NULL device, the returned
+    # function may be device-specific.
+    ALCvoid*   alcGetProcAddress(ALCdevice *device, const ALCchar *funcname)
+    # Retrieve the value of an enum. Given a non-NULL device, the returned value
+    # may be device-specific.
+    ALCenum    alcGetEnumValue(ALCdevice *device, const ALCchar *enumname)
 
     # Query functions.
 

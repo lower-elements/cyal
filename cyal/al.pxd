@@ -394,6 +394,11 @@ cdef extern from "al.h":
 
     #  Query for the presence of an extension on the AL context.
     ALboolean alIsExtensionPresent(const ALchar *extname)
+    # Retrieve the address of a function. The returned function may be context-
+    # specific.
+    void* alGetProcAddress(const ALchar *fname)
+    # Retrieve the value of an enum. The returned value may be context-specific.
+    ALenum alGetEnumValue(const ALchar *ename)
 
 
     #  Set listener parameters.
