@@ -25,6 +25,9 @@ cdef class Context:
                 alc.alcMakeContextCurrent(NULL)
             alc.alcDestroyContext(self._ctx)
 
+    def get_attrs(self):
+        return ContextAttrs.from_device(self.device)
+
     def make_current(self):
         alc.alcMakeContextCurrent(self._ctx)
 
@@ -67,9 +70,11 @@ cdef array.array attrs_template = array.array('i')
 
 cdef class ContextAttrs:
     cdef alc.ALCint[:] _attrs
+    cdef Device _dev
 
-    def __cinit__(self, array.array attrs):
+    def __cinit__(self, Device dev, array.array attrs):
         self._attrs = attrs
+        self._dev = dev
 
     @staticmethod
     def from_kwargs(Device dev, **kwargs):
@@ -89,4 +94,25 @@ cdef class ContextAttrs:
             attrs[idx+1] = <alc.ALCint>v
             idx += 2
         attrs[idx] = 0
-        return ContextAttrs(attrs_array)
+        return ContextAttrs(dev, attrs_array)
+
+    @staticmethod
+    def from_device(Device dev):
+        cdef alc.ALCint length
+        alc.alcGetIntegerv(dev._device, alc.ALC_ATTRIBUTES_SIZE, 1, &length)
+        cdef array.array attrs = array.clone(attrs_template, length + 1, zero=False)
+        alc.alcGetIntegerv(dev._device, alc.ALC_ALL_ATTRIBUTES, length, <alc.ALCint *>attrs.data.as_voidptr)
+        attrs[length] = 0
+        return ContextAttrs(dev, attrs)
+
+    def __getattr__(self, attr):
+        cdef:
+            bytes enum_name = b"ALC_" + attr.upper().encode("utf-8")
+            alc.ALCenum enum_val = alc.alcGetEnumValue(self._dev._device, <const alc.ALCchar *>enum_name)
+        if enum_val == al.AL_NONE:
+            raise AttributeError(f"ContextAttrs object has no attribute '{attr}'")
+        for i in range(0, self._attrs.size, 2):
+            if self._attrs[i] == enum_val:
+                return self._attrs[i+1]
+        # Not found
+        raise AttributeError(f"ContextAttrs object has no attribute '{attr}'")
