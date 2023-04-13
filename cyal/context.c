@@ -741,11 +741,11 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__cyal__context
 #define __PYX_HAVE_API__cyal__context
 /* Early includes */
+#include "al.h"
 #include "alc.h"
 #include <string.h>
 #include <stdio.h>
 #include "pythread.h"
-#include "al.h"
 #include <stdlib.h>
 #include "pystate.h"
 #ifdef _OPENMP
@@ -1095,16 +1095,17 @@ struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
 
 /* "device.pxd":5
- * from . cimport alc
+ * from . cimport al, alc
  * 
  * cdef class Device:             # <<<<<<<<<<<<<<
  *     cdef alc.ALCdevice* _device
- * 
+ *     cdef al.ALvoid* (*get_al_proc_address)(const al.ALchar*)
  */
 struct __pyx_obj_4cyal_6device_Device {
   PyObject_HEAD
   struct __pyx_vtabstruct_4cyal_6device_Device *__pyx_vtab;
   ALCdevice *_device;
+  ALvoid *(*get_al_proc_address)(ALchar const *);
 };
 
 
@@ -1341,19 +1342,19 @@ struct __pyx_memoryviewslice_obj {
 
 
 /* "device.pxd":5
- * from . cimport alc
+ * from . cimport al, alc
  * 
  * cdef class Device:             # <<<<<<<<<<<<<<
  *     cdef alc.ALCdevice* _device
- * 
+ *     cdef al.ALvoid* (*get_al_proc_address)(const al.ALchar*)
  */
 
 struct __pyx_vtabstruct_4cyal_6device_Device {
-  ALCvoid *(*get_proc_address)(struct __pyx_obj_4cyal_6device_Device *, ALCchar const *);
+  ALCvoid *(*get_alc_proc_address)(struct __pyx_obj_4cyal_6device_Device *, ALCchar const *);
   PyObject *(*get_supported_extensions)(struct __pyx_obj_4cyal_6device_Device *, int __pyx_skip_dispatch);
 };
 static struct __pyx_vtabstruct_4cyal_6device_Device *__pyx_vtabptr_4cyal_6device_Device;
-static CYTHON_INLINE ALCvoid *__pyx_f_4cyal_6device_6Device_get_proc_address(struct __pyx_obj_4cyal_6device_Device *, ALCchar const *);
+static CYTHON_INLINE ALCvoid *__pyx_f_4cyal_6device_6Device_get_alc_proc_address(struct __pyx_obj_4cyal_6device_Device *, ALCchar const *);
 
 
 /* "View.MemoryView":106
@@ -2342,7 +2343,7 @@ static int __Pyx_ImportFunction(PyObject *module, const char *funcname, void (**
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
-static CYTHON_INLINE ALCvoid *__pyx_f_4cyal_6device_6Device_get_proc_address(struct __pyx_obj_4cyal_6device_Device *__pyx_v_self, ALCchar const *__pyx_v_funcname); /* proto*/
+static CYTHON_INLINE ALCvoid *__pyx_f_4cyal_6device_6Device_get_alc_proc_address(struct __pyx_obj_4cyal_6device_Device *__pyx_v_self, ALCchar const *__pyx_v_funcname); /* proto*/
 static PyObject *__pyx_array_get_memview(struct __pyx_array_obj *__pyx_v_self); /* proto*/
 static char *__pyx_memoryview_get_item_pointer(struct __pyx_memoryview_obj *__pyx_v_self, PyObject *__pyx_v_index); /* proto*/
 static PyObject *__pyx_memoryview_is_slice(struct __pyx_memoryview_obj *__pyx_v_self, PyObject *__pyx_v_obj); /* proto*/
@@ -2355,6 +2356,8 @@ static PyObject *__pyx_memoryviewslice_convert_item_to_object(struct __pyx_memor
 static PyObject *__pyx_memoryviewslice_assign_item_from_object(struct __pyx_memoryviewslice_obj *__pyx_v_self, char *__pyx_v_itemp, PyObject *__pyx_v_value); /* proto*/
 
 /* Module declarations from 'cyal' */
+
+/* Module declarations from 'cyal.al' */
 
 /* Module declarations from 'cyal.alc' */
 
@@ -2460,8 +2463,6 @@ static PyTypeObject *__pyx_ptype_4cyal_10exceptions_InvalidEnumError = 0;
 static PyTypeObject *__pyx_ptype_4cyal_10exceptions_InvalidValueError = 0;
 static PyTypeObject *__pyx_ptype_4cyal_10exceptions_UnknownContextError = 0;
 static PyObject *(*__pyx_f_4cyal_10exceptions_raise_alc_error)(ALCdevice *); /*proto*/
-
-/* Module declarations from 'cyal.al' */
 
 /* Module declarations from 'cyal.context' */
 static PyTypeObject *__pyx_ptype_4cyal_7context_Context = 0;
@@ -5403,22 +5404,22 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_10__setstate_cython__(CY
   return __pyx_r;
 }
 
-/* "device.pxd":8
- *     cdef alc.ALCdevice* _device
+/* "device.pxd":9
+ *     cdef al.ALvoid* (*get_al_proc_address)(const al.ALchar*)
  * 
- *     cdef inline alc.ALCvoid* get_proc_address(self, const alc.ALCchar *funcname):             # <<<<<<<<<<<<<<
+ *     cdef inline alc.ALCvoid* get_alc_proc_address(self, const alc.ALCchar *funcname):             # <<<<<<<<<<<<<<
  *         return alc.alcGetProcAddress(self._device, funcname)
  * 
  */
 
-static CYTHON_INLINE ALCvoid *__pyx_f_4cyal_6device_6Device_get_proc_address(struct __pyx_obj_4cyal_6device_Device *__pyx_v_self, ALCchar const *__pyx_v_funcname) {
+static CYTHON_INLINE ALCvoid *__pyx_f_4cyal_6device_6Device_get_alc_proc_address(struct __pyx_obj_4cyal_6device_Device *__pyx_v_self, ALCchar const *__pyx_v_funcname) {
   ALCvoid *__pyx_r;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("get_proc_address", 0);
+  __Pyx_RefNannySetupContext("get_alc_proc_address", 0);
 
-  /* "device.pxd":9
+  /* "device.pxd":10
  * 
- *     cdef inline alc.ALCvoid* get_proc_address(self, const alc.ALCchar *funcname):
+ *     cdef inline alc.ALCvoid* get_alc_proc_address(self, const alc.ALCchar *funcname):
  *         return alc.alcGetProcAddress(self._device, funcname)             # <<<<<<<<<<<<<<
  * 
  *     cpdef list get_supported_extensions(self)
@@ -5426,10 +5427,10 @@ static CYTHON_INLINE ALCvoid *__pyx_f_4cyal_6device_6Device_get_proc_address(str
   __pyx_r = alcGetProcAddress(__pyx_v_self->_device, __pyx_v_funcname);
   goto __pyx_L0;
 
-  /* "device.pxd":8
- *     cdef alc.ALCdevice* _device
+  /* "device.pxd":9
+ *     cdef al.ALvoid* (*get_al_proc_address)(const al.ALchar*)
  * 
- *     cdef inline alc.ALCvoid* get_proc_address(self, const alc.ALCchar *funcname):             # <<<<<<<<<<<<<<
+ *     cdef inline alc.ALCvoid* get_alc_proc_address(self, const alc.ALCchar *funcname):             # <<<<<<<<<<<<<<
  *         return alc.alcGetProcAddress(self._device, funcname)
  * 
  */

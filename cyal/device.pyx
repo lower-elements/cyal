@@ -9,6 +9,7 @@ cdef class Device:
         self._device = alc.alcOpenDevice(<const alc.ALCchar *>name if name is not None else NULL)
         if self._device is NULL:
             raise DeviceNotFoundError(device_name=name)
+        self.get_al_proc_address = <al.ALvoid*(*)(const al.ALchar*)>self.get_alc_proc_address("alGetProcAddress")
     
     def __dealloc__(self):
         if self._device is not NULL:
@@ -25,7 +26,7 @@ cdef class Device:
         alc.alcGetIntegerv(self._device, alc.ALC_MINOR_VERSION, 1, &minor)
         return (major, minor)
 
-    cpdef get_supported_extensions(self):
+    cpdef list get_supported_extensions(self):
         return (<bytes>alc.alcGetString(self._device, alc.ALC_EXTENSIONS)).split(b' ')
 
     def is_extension_present(self, ext):
