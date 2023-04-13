@@ -9,9 +9,6 @@ from .exceptions cimport raise_alc_error
 from . cimport al, alc
 
 cdef class Context:
-    cdef alc.ALCcontext* _ctx
-    cdef readonly Device device
-
     def __cinit__(self, Device dev not None, **kwargs):
         self.device = dev
         cdef ContextAttrs attrs = ContextAttrs.from_kwargs(dev, **kwargs)
@@ -69,9 +66,6 @@ cdef class Context:
 cdef array.array attrs_template = array.array('i')
 
 cdef class ContextAttrs:
-    cdef alc.ALCint[:] _attrs
-    cdef Device _dev
-
     def __cinit__(self, Device dev, array.array attrs):
         self._attrs = attrs
         self._dev = dev
