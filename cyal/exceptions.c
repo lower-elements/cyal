@@ -741,6 +741,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__cyal__exceptions
 #define __PYX_HAVE_API__cyal__exceptions
 /* Early includes */
+#include "al.h"
 #include "alc.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -962,12 +963,18 @@ struct __pyx_obj_4cyal_10exceptions_AlcError;
 struct __pyx_obj_4cyal_10exceptions_DeviceNotFoundError;
 struct __pyx_obj_4cyal_10exceptions_InvalidDeviceError;
 struct __pyx_obj_4cyal_10exceptions_InvalidContextError;
-struct __pyx_obj_4cyal_10exceptions_InvalidEnumError;
-struct __pyx_obj_4cyal_10exceptions_InvalidValueError;
-struct __pyx_obj_4cyal_10exceptions_UnknownContextError;
+struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError;
+struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError;
+struct __pyx_obj_4cyal_10exceptions_UnknownAlcError;
+struct __pyx_obj_4cyal_10exceptions_AlError;
+struct __pyx_obj_4cyal_10exceptions_InvalidNameError;
+struct __pyx_obj_4cyal_10exceptions_InvalidOperationError;
+struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError;
+struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError;
+struct __pyx_obj_4cyal_10exceptions_UnknownAlError;
 
 /* "cyal/exceptions.pxd":5
- * from . cimport alc
+ * from . cimport al, alc
  * 
  * cdef class CyalError(Exception):             # <<<<<<<<<<<<<<
  *     pass
@@ -978,8 +985,8 @@ struct __pyx_obj_4cyal_10exceptions_CyalError {
 };
 
 
-/* "cyal/exceptions.pxd":8
- *     pass
+/* "cyal/exceptions.pxd":10
+ * # ALC_* errors
  * 
  * cdef class AlcError(CyalError):             # <<<<<<<<<<<<<<
  *     pass
@@ -990,7 +997,7 @@ struct __pyx_obj_4cyal_10exceptions_AlcError {
 };
 
 
-/* "cyal/exceptions.pxd":11
+/* "cyal/exceptions.pxd":13
  *     pass
  * 
  * cdef class DeviceNotFoundError(AlcError):             # <<<<<<<<<<<<<<
@@ -1003,7 +1010,7 @@ struct __pyx_obj_4cyal_10exceptions_DeviceNotFoundError {
 };
 
 
-/* "cyal/exceptions.pxd":14
+/* "cyal/exceptions.pxd":16
  *     cdef readonly bytes device_name
  * 
  * cdef class InvalidDeviceError(AlcError):             # <<<<<<<<<<<<<<
@@ -1015,7 +1022,7 @@ struct __pyx_obj_4cyal_10exceptions_InvalidDeviceError {
 };
 
 
-/* "cyal/exceptions.pxd":17
+/* "cyal/exceptions.pxd":19
  *     pass
  * 
  * cdef class InvalidContextError(AlcError):             # <<<<<<<<<<<<<<
@@ -1027,40 +1034,113 @@ struct __pyx_obj_4cyal_10exceptions_InvalidContextError {
 };
 
 
-/* "cyal/exceptions.pxd":20
+/* "cyal/exceptions.pxd":22
  *     pass
  * 
- * cdef class InvalidEnumError(AlcError):             # <<<<<<<<<<<<<<
+ * cdef class InvalidAlcEnumError(AlcError):             # <<<<<<<<<<<<<<
  *     pass
  * 
  */
-struct __pyx_obj_4cyal_10exceptions_InvalidEnumError {
+struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError {
   struct __pyx_obj_4cyal_10exceptions_AlcError __pyx_base;
 };
 
 
-/* "cyal/exceptions.pxd":23
+/* "cyal/exceptions.pxd":25
  *     pass
  * 
- * cdef class InvalidValueError(AlcError):             # <<<<<<<<<<<<<<
+ * cdef class InvalidAlcValueError(AlcError):             # <<<<<<<<<<<<<<
  *     pass
  * 
  */
-struct __pyx_obj_4cyal_10exceptions_InvalidValueError {
+struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError {
   struct __pyx_obj_4cyal_10exceptions_AlcError __pyx_base;
 };
 
 
-/* "cyal/exceptions.pxd":26
+/* "cyal/exceptions.pxd":28
  *     pass
  * 
- * cdef class UnknownContextError(AlcError):             # <<<<<<<<<<<<<<
+ * cdef class UnknownAlcError(AlcError):             # <<<<<<<<<<<<<<
  *     cdef readonly alc.ALCenum errcode
  * 
  */
-struct __pyx_obj_4cyal_10exceptions_UnknownContextError {
+struct __pyx_obj_4cyal_10exceptions_UnknownAlcError {
   struct __pyx_obj_4cyal_10exceptions_AlcError __pyx_base;
   ALCenum errcode;
+};
+
+
+/* "cyal/exceptions.pxd":35
+ * # AL_* errors
+ * 
+ * cdef class AlError(CyalError):             # <<<<<<<<<<<<<<
+ *     pass
+ * 
+ */
+struct __pyx_obj_4cyal_10exceptions_AlError {
+  struct __pyx_obj_4cyal_10exceptions_CyalError __pyx_base;
+};
+
+
+/* "cyal/exceptions.pxd":38
+ *     pass
+ * 
+ * cdef class InvalidNameError(AlError):             # <<<<<<<<<<<<<<
+ *     pass
+ * 
+ */
+struct __pyx_obj_4cyal_10exceptions_InvalidNameError {
+  struct __pyx_obj_4cyal_10exceptions_AlError __pyx_base;
+};
+
+
+/* "cyal/exceptions.pxd":41
+ *     pass
+ * 
+ * cdef class InvalidOperationError(AlError):             # <<<<<<<<<<<<<<
+ *     pass
+ * 
+ */
+struct __pyx_obj_4cyal_10exceptions_InvalidOperationError {
+  struct __pyx_obj_4cyal_10exceptions_AlError __pyx_base;
+};
+
+
+/* "cyal/exceptions.pxd":44
+ *     pass
+ * 
+ * cdef class InvalidAlEnumError(AlError):             # <<<<<<<<<<<<<<
+ *     pass
+ * 
+ */
+struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError {
+  struct __pyx_obj_4cyal_10exceptions_AlError __pyx_base;
+};
+
+
+/* "cyal/exceptions.pxd":47
+ *     pass
+ * 
+ * cdef class InvalidAlValueError(AlError):             # <<<<<<<<<<<<<<
+ *     pass
+ * 
+ */
+struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError {
+  struct __pyx_obj_4cyal_10exceptions_AlError __pyx_base;
+};
+
+
+/* "cyal/exceptions.pxd":50
+ *     pass
+ * 
+ * cdef class UnknownAlError(AlError):             # <<<<<<<<<<<<<<
+ *     cdef readonly al.ALenum errcode
+ * 
+ */
+struct __pyx_obj_4cyal_10exceptions_UnknownAlError {
+  struct __pyx_obj_4cyal_10exceptions_AlError __pyx_base;
+  ALenum errcode;
 };
 
 
@@ -1483,6 +1563,12 @@ static CYTHON_INLINE ALCenum __Pyx_PyInt_As_ALCenum(PyObject *);
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_ALCenum(ALCenum value);
 
+/* CIntFromPy.proto */
+static CYTHON_INLINE ALenum __Pyx_PyInt_As_ALenum(PyObject *);
+
+/* CIntToPy.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_ALenum(ALenum value);
+
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
@@ -1514,6 +1600,8 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from 'cyal' */
 
+/* Module declarations from 'cyal.al' */
+
 /* Module declarations from 'cyal.alc' */
 
 /* Module declarations from 'cyal.exceptions' */
@@ -1522,15 +1610,26 @@ static PyTypeObject *__pyx_ptype_4cyal_10exceptions_AlcError = 0;
 static PyTypeObject *__pyx_ptype_4cyal_10exceptions_DeviceNotFoundError = 0;
 static PyTypeObject *__pyx_ptype_4cyal_10exceptions_InvalidDeviceError = 0;
 static PyTypeObject *__pyx_ptype_4cyal_10exceptions_InvalidContextError = 0;
-static PyTypeObject *__pyx_ptype_4cyal_10exceptions_InvalidEnumError = 0;
-static PyTypeObject *__pyx_ptype_4cyal_10exceptions_InvalidValueError = 0;
-static PyTypeObject *__pyx_ptype_4cyal_10exceptions_UnknownContextError = 0;
+static PyTypeObject *__pyx_ptype_4cyal_10exceptions_InvalidAlcEnumError = 0;
+static PyTypeObject *__pyx_ptype_4cyal_10exceptions_InvalidAlcValueError = 0;
+static PyTypeObject *__pyx_ptype_4cyal_10exceptions_UnknownAlcError = 0;
+static PyTypeObject *__pyx_ptype_4cyal_10exceptions_AlError = 0;
+static PyTypeObject *__pyx_ptype_4cyal_10exceptions_InvalidNameError = 0;
+static PyTypeObject *__pyx_ptype_4cyal_10exceptions_InvalidOperationError = 0;
+static PyTypeObject *__pyx_ptype_4cyal_10exceptions_InvalidAlEnumError = 0;
+static PyTypeObject *__pyx_ptype_4cyal_10exceptions_InvalidAlValueError = 0;
+static PyTypeObject *__pyx_ptype_4cyal_10exceptions_UnknownAlError = 0;
 static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_CyalError__set_state(struct __pyx_obj_4cyal_10exceptions_CyalError *, PyObject *); /*proto*/
 static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_AlcError__set_state(struct __pyx_obj_4cyal_10exceptions_AlcError *, PyObject *); /*proto*/
 static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidDeviceError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidDeviceError *, PyObject *); /*proto*/
 static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidContextError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidContextError *, PyObject *); /*proto*/
-static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidEnumError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *, PyObject *); /*proto*/
-static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidValueError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidValueError *, PyObject *); /*proto*/
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlcEnumError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *, PyObject *); /*proto*/
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlcValueError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *, PyObject *); /*proto*/
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_AlError__set_state(struct __pyx_obj_4cyal_10exceptions_AlError *, PyObject *); /*proto*/
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidNameError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidNameError *, PyObject *); /*proto*/
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidOperationError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *, PyObject *); /*proto*/
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlEnumError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *, PyObject *); /*proto*/
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlValueError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *, PyObject *); /*proto*/
 #define __Pyx_MODULE_NAME "cyal.exceptions"
 extern int __pyx_module_is_main_cyal__exceptions;
 int __pyx_module_is_main_cyal__exceptions = 0;
@@ -1553,6 +1652,7 @@ static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_pickle[] = "pickle";
 static const char __pyx_k_reduce[] = "__reduce__";
 static const char __pyx_k_update[] = "update";
+static const char __pyx_k_AlError[] = "AlError";
 static const char __pyx_k_AlcError[] = "AlcError";
 static const char __pyx_k_getstate[] = "__getstate__";
 static const char __pyx_k_pyx_type[] = "__pyx_type";
@@ -1562,6 +1662,7 @@ static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_not_found[] = " not found";
 static const char __pyx_k_pyx_state[] = "__pyx_state";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
+static const char __pyx_k_al_errcode[] = "al_errcode";
 static const char __pyx_k_pyx_result[] = "__pyx_result";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_PickleError[] = "PickleError";
@@ -1571,51 +1672,78 @@ static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
 static const char __pyx_k_stringsource[] = "stringsource";
 static const char __pyx_k_OpenAL_device[] = "OpenAL device ";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
+static const char __pyx_k_UnknownAlError[] = "UnknownAlError";
+static const char __pyx_k_UnknownAlcError[] = "UnknownAlcError";
 static const char __pyx_k_cyal_exceptions[] = "cyal.exceptions";
 static const char __pyx_k_pyx_PickleError[] = "__pyx_PickleError";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
-static const char __pyx_k_InvalidEnumError[] = "InvalidEnumError";
-static const char __pyx_k_InvalidValueError[] = "InvalidValueError";
+static const char __pyx_k_InvalidNameError[] = "InvalidNameError";
+static const char __pyx_k_InvalidAlEnumError[] = "InvalidAlEnumError";
 static const char __pyx_k_InvalidDeviceError[] = "InvalidDeviceError";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_DeviceNotFoundError[] = "DeviceNotFoundError";
+static const char __pyx_k_InvalidAlValueError[] = "InvalidAlValueError";
+static const char __pyx_k_InvalidAlcEnumError[] = "InvalidAlcEnumError";
 static const char __pyx_k_InvalidContextError[] = "InvalidContextError";
-static const char __pyx_k_UnknownContextError[] = "UnknownContextError";
+static const char __pyx_k_InvalidAlcValueError[] = "InvalidAlcValueError";
+static const char __pyx_k_pyx_unpickle_AlError[] = "__pyx_unpickle_AlError";
+static const char __pyx_k_InvalidOperationError[] = "InvalidOperationError";
 static const char __pyx_k_Invalid_OpenAL_device[] = "Invalid OpenAL device";
 static const char __pyx_k_pyx_unpickle_AlcError[] = "__pyx_unpickle_AlcError";
 static const char __pyx_k_Invalid_OpenAL_context[] = "Invalid OpenAL context";
 static const char __pyx_k_pyx_unpickle_CyalError[] = "__pyx_unpickle_CyalError";
 static const char __pyx_k_No_OpenAL_devices_found[] = "No OpenAL devices found";
+static const char __pyx_k_Invalid_OpenAL_operation[] = "Invalid OpenAL operation";
 static const char __pyx_k_Invalid_OpenAL_enum_value[] = "Invalid OpenAL enum value";
-static const char __pyx_k_pyx_unpickle_InvalidEnumError[] = "__pyx_unpickle_InvalidEnumError";
+static const char __pyx_k_Unknown_OpenAL_error_code[] = "Unknown OpenAL error (code ";
+static const char __pyx_k_Invalid_OpenAL_object_name[] = "Invalid OpenAL object name";
+static const char __pyx_k_pyx_unpickle_InvalidNameError[] = "__pyx_unpickle_InvalidNameError";
 static const char __pyx_k_Invalid_OpenAL_parameter_value[] = "Invalid OpenAL parameter value";
+static const char __pyx_k_pyx_unpickle_InvalidAlEnumErro[] = "__pyx_unpickle_InvalidAlEnumError";
+static const char __pyx_k_pyx_unpickle_InvalidAlValueErr[] = "__pyx_unpickle_InvalidAlValueError";
+static const char __pyx_k_pyx_unpickle_InvalidAlcEnumErr[] = "__pyx_unpickle_InvalidAlcEnumError";
+static const char __pyx_k_pyx_unpickle_InvalidAlcValueEr[] = "__pyx_unpickle_InvalidAlcValueError";
 static const char __pyx_k_pyx_unpickle_InvalidContextErr[] = "__pyx_unpickle_InvalidContextError";
 static const char __pyx_k_pyx_unpickle_InvalidDeviceErro[] = "__pyx_unpickle_InvalidDeviceError";
-static const char __pyx_k_pyx_unpickle_InvalidValueError[] = "__pyx_unpickle_InvalidValueError";
+static const char __pyx_k_pyx_unpickle_InvalidOperationE[] = "__pyx_unpickle_InvalidOperationError";
 static const char __pyx_k_Incompatible_checksums_0x_x_vs_0[] = "Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())";
+static const char __pyx_k_Invalid_OpenAL_context_enum_valu[] = "Invalid OpenAL context enum value";
+static const char __pyx_k_Invalid_OpenAL_context_parameter[] = "Invalid OpenAL context parameter value";
 static const char __pyx_k_Unknown_OpenAL_context_error_cod[] = "Unknown OpenAL context error (code ";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
+static PyObject *__pyx_n_s_AlError;
 static PyObject *__pyx_n_s_AlcError;
 static PyObject *__pyx_n_s_CyalError;
 static PyObject *__pyx_n_s_DeviceNotFoundError;
 static PyObject *__pyx_kp_s_Incompatible_checksums_0x_x_vs_0;
+static PyObject *__pyx_n_s_InvalidAlEnumError;
+static PyObject *__pyx_n_s_InvalidAlValueError;
+static PyObject *__pyx_n_s_InvalidAlcEnumError;
+static PyObject *__pyx_n_s_InvalidAlcValueError;
 static PyObject *__pyx_n_s_InvalidContextError;
 static PyObject *__pyx_n_s_InvalidDeviceError;
-static PyObject *__pyx_n_s_InvalidEnumError;
-static PyObject *__pyx_n_s_InvalidValueError;
+static PyObject *__pyx_n_s_InvalidNameError;
+static PyObject *__pyx_n_s_InvalidOperationError;
 static PyObject *__pyx_kp_u_Invalid_OpenAL_context;
+static PyObject *__pyx_kp_u_Invalid_OpenAL_context_enum_valu;
+static PyObject *__pyx_kp_u_Invalid_OpenAL_context_parameter;
 static PyObject *__pyx_kp_u_Invalid_OpenAL_device;
 static PyObject *__pyx_kp_u_Invalid_OpenAL_enum_value;
+static PyObject *__pyx_kp_u_Invalid_OpenAL_object_name;
+static PyObject *__pyx_kp_u_Invalid_OpenAL_operation;
 static PyObject *__pyx_kp_u_Invalid_OpenAL_parameter_value;
 static PyObject *__pyx_n_s_MemoryError;
 static PyObject *__pyx_kp_u_No_OpenAL_devices_found;
 static PyObject *__pyx_kp_u_OpenAL_device;
 static PyObject *__pyx_n_s_PickleError;
 static PyObject *__pyx_n_s_TypeError;
-static PyObject *__pyx_n_s_UnknownContextError;
+static PyObject *__pyx_n_s_UnknownAlError;
+static PyObject *__pyx_n_s_UnknownAlcError;
 static PyObject *__pyx_kp_u_Unknown_OpenAL_context_error_cod;
+static PyObject *__pyx_kp_u_Unknown_OpenAL_error_code;
 static PyObject *__pyx_n_u_X;
 static PyObject *__pyx_kp_u__3;
+static PyObject *__pyx_n_s_al_errcode;
 static PyObject *__pyx_n_s_alc_errcode;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_cyal_exceptions;
@@ -1636,12 +1764,17 @@ static PyObject *__pyx_n_s_pyx_checksum;
 static PyObject *__pyx_n_s_pyx_result;
 static PyObject *__pyx_n_s_pyx_state;
 static PyObject *__pyx_n_s_pyx_type;
+static PyObject *__pyx_n_s_pyx_unpickle_AlError;
 static PyObject *__pyx_n_s_pyx_unpickle_AlcError;
 static PyObject *__pyx_n_s_pyx_unpickle_CyalError;
+static PyObject *__pyx_n_s_pyx_unpickle_InvalidAlEnumErro;
+static PyObject *__pyx_n_s_pyx_unpickle_InvalidAlValueErr;
+static PyObject *__pyx_n_s_pyx_unpickle_InvalidAlcEnumErr;
+static PyObject *__pyx_n_s_pyx_unpickle_InvalidAlcValueEr;
 static PyObject *__pyx_n_s_pyx_unpickle_InvalidContextErr;
 static PyObject *__pyx_n_s_pyx_unpickle_InvalidDeviceErro;
-static PyObject *__pyx_n_s_pyx_unpickle_InvalidEnumError;
-static PyObject *__pyx_n_s_pyx_unpickle_InvalidValueError;
+static PyObject *__pyx_n_s_pyx_unpickle_InvalidNameError;
+static PyObject *__pyx_n_s_pyx_unpickle_InvalidOperationE;
 static PyObject *__pyx_n_s_reduce;
 static PyObject *__pyx_n_s_reduce_cython;
 static PyObject *__pyx_n_s_reduce_ex;
@@ -1669,34 +1802,69 @@ static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidContextError_7errcode___ge
 static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidContextError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidContextError *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidContextError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidContextError *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidContextError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidContextError *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidValueError *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidValueError *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidValueError *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidValueError *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
-static int __pyx_pf_4cyal_10exceptions_19UnknownContextError___cinit__(struct __pyx_obj_4cyal_10exceptions_UnknownContextError *__pyx_v_self, PyObject *__pyx_v_alc_errcode, CYTHON_UNUSED PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs); /* proto */
-static int __pyx_pf_4cyal_10exceptions_19UnknownContextError_2__init__(struct __pyx_obj_4cyal_10exceptions_UnknownContextError *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_alc_errcode, PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_4__str__(struct __pyx_obj_4cyal_10exceptions_UnknownContextError *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_7errcode___get__(struct __pyx_obj_4cyal_10exceptions_UnknownContextError *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_UnknownContextError *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_UnknownContextError *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlcEnumError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlcEnumError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlcEnumError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlcEnumError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_20InvalidAlcValueError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_20InvalidAlcValueError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_20InvalidAlcValueError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_20InvalidAlcValueError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static int __pyx_pf_4cyal_10exceptions_15UnknownAlcError___cinit__(struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *__pyx_v_self, PyObject *__pyx_v_alc_errcode, CYTHON_UNUSED PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs); /* proto */
+static int __pyx_pf_4cyal_10exceptions_15UnknownAlcError_2__init__(struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_alc_errcode, PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_15UnknownAlcError_4__str__(struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_15UnknownAlcError_7errcode___get__(struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_15UnknownAlcError_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_15UnknownAlcError_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_7AlError___reduce_cython__(struct __pyx_obj_4cyal_10exceptions_AlError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_7AlError_2__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_AlError *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidNameError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidNameError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidNameError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidNameError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidNameError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidNameError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidNameError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidNameError *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_21InvalidOperationError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_21InvalidOperationError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_21InvalidOperationError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_21InvalidOperationError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_18InvalidAlEnumError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_18InvalidAlEnumError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_18InvalidAlEnumError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_18InvalidAlEnumError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlValueError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlValueError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlValueError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlValueError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static int __pyx_pf_4cyal_10exceptions_14UnknownAlError___cinit__(struct __pyx_obj_4cyal_10exceptions_UnknownAlError *__pyx_v_self, PyObject *__pyx_v_al_errcode, CYTHON_UNUSED PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs); /* proto */
+static int __pyx_pf_4cyal_10exceptions_14UnknownAlError_2__init__(struct __pyx_obj_4cyal_10exceptions_UnknownAlError *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_alc_errcode, PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_14UnknownAlError_4__str__(struct __pyx_obj_4cyal_10exceptions_UnknownAlError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_14UnknownAlError_7errcode___get__(struct __pyx_obj_4cyal_10exceptions_UnknownAlError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_14UnknownAlError_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_UnknownAlError *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_14UnknownAlError_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_UnknownAlError *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_4cyal_10exceptions___pyx_unpickle_CyalError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_4cyal_10exceptions_2__pyx_unpickle_AlcError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_4cyal_10exceptions_4__pyx_unpickle_InvalidDeviceError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_4cyal_10exceptions_6__pyx_unpickle_InvalidContextError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidEnumError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidValueError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidAlcEnumError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidAlcValueError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_12__pyx_unpickle_AlError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_14__pyx_unpickle_InvalidNameError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_16__pyx_unpickle_InvalidOperationError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_18__pyx_unpickle_InvalidAlEnumError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_10exceptions_20__pyx_unpickle_InvalidAlValueError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_4cyal_10exceptions_CyalError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_4cyal_10exceptions_AlcError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_4cyal_10exceptions_DeviceNotFoundError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidDeviceError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidContextError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidEnumError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidValueError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_tp_new_4cyal_10exceptions_UnknownContextError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidAlcEnumError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidAlcValueError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_4cyal_10exceptions_UnknownAlcError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_4cyal_10exceptions_AlError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidNameError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidOperationError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidAlEnumError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidAlValueError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_4cyal_10exceptions_UnknownAlError(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_get = {0, &__pyx_n_s_get, 0, 0, 0};
 static PyObject *__pyx_int_222419149;
 static PyObject *__pyx_int_228825662;
@@ -1707,17 +1875,29 @@ static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__5;
 static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_tuple__7;
+static PyObject *__pyx_tuple__8;
 static PyObject *__pyx_tuple__9;
 static PyObject *__pyx_tuple__11;
 static PyObject *__pyx_tuple__13;
 static PyObject *__pyx_tuple__15;
 static PyObject *__pyx_tuple__17;
-static PyObject *__pyx_codeobj__8;
+static PyObject *__pyx_tuple__19;
+static PyObject *__pyx_tuple__21;
+static PyObject *__pyx_tuple__23;
+static PyObject *__pyx_tuple__25;
+static PyObject *__pyx_tuple__27;
+static PyObject *__pyx_tuple__29;
 static PyObject *__pyx_codeobj__10;
 static PyObject *__pyx_codeobj__12;
 static PyObject *__pyx_codeobj__14;
 static PyObject *__pyx_codeobj__16;
 static PyObject *__pyx_codeobj__18;
+static PyObject *__pyx_codeobj__20;
+static PyObject *__pyx_codeobj__22;
+static PyObject *__pyx_codeobj__24;
+static PyObject *__pyx_codeobj__26;
+static PyObject *__pyx_codeobj__28;
+static PyObject *__pyx_codeobj__30;
 /* Late includes */
 
 /* "(tree fragment)":1
@@ -2577,7 +2757,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_19DeviceNotFoundError_4__str__(stru
   return __pyx_r;
 }
 
-/* "cyal/exceptions.pxd":12
+/* "cyal/exceptions.pxd":14
  * 
  * cdef class DeviceNotFoundError(AlcError):
  *     cdef readonly bytes device_name             # <<<<<<<<<<<<<<
@@ -3224,7 +3404,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidContextError___str__(CYTHO
  *     def __str__(self):
  *         return "Invalid OpenAL context"             # <<<<<<<<<<<<<<
  * 
- * cdef class InvalidEnumError(AlcError):
+ * cdef class InvalidAlcEnumError(AlcError):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_kp_u_Invalid_OpenAL_context);
@@ -3534,7 +3714,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidContextError_4__setstate_c
 }
 
 /* "cyal/exceptions.pyx":42
- * cdef class InvalidEnumError(AlcError):
+ * cdef class InvalidAlcEnumError(AlcError):
  *     @property
  *     def errcode(self):             # <<<<<<<<<<<<<<
  *         return alc.ALC_INVALID_ENUM
@@ -3542,19 +3722,19 @@ static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidContextError_4__setstate_c
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidEnumError_7errcode_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidEnumError_7errcode_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlcEnumError_7errcode_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlcEnumError_7errcode_1__get__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_10exceptions_16InvalidEnumError_7errcode___get__(((struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4cyal_10exceptions_19InvalidAlcEnumError_7errcode___get__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *__pyx_v_self) {
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlcEnumError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3578,7 +3758,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_7errcode___get__
   goto __pyx_L0;
 
   /* "cyal/exceptions.pyx":42
- * cdef class InvalidEnumError(AlcError):
+ * cdef class InvalidAlcEnumError(AlcError):
  *     @property
  *     def errcode(self):             # <<<<<<<<<<<<<<
  *         return alc.ALC_INVALID_ENUM
@@ -3588,7 +3768,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_7errcode___get__
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cyal.exceptions.InvalidEnumError.errcode.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlcEnumError.errcode.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -3600,24 +3780,24 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_7errcode___get__
  *         return alc.ALC_INVALID_ENUM
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
- *         return "Invalid OpenAL enum value"
+ *         return "Invalid OpenAL context enum value"
  * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidEnumError_1__str__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidEnumError_1__str__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlcEnumError_1__str__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlcEnumError_1__str__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__str__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_10exceptions_16InvalidEnumError___str__(((struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4cyal_10exceptions_19InvalidAlcEnumError___str__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *__pyx_v_self) {
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlcEnumError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__str__", 0);
@@ -3625,20 +3805,20 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError___str__(CYTHON_U
   /* "cyal/exceptions.pyx":46
  * 
  *     def __str__(self):
- *         return "Invalid OpenAL enum value"             # <<<<<<<<<<<<<<
+ *         return "Invalid OpenAL context enum value"             # <<<<<<<<<<<<<<
  * 
- * cdef class InvalidValueError(AlcError):
+ * cdef class InvalidAlcValueError(AlcError):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_INCREF(__pyx_kp_u_Invalid_OpenAL_enum_value);
-  __pyx_r = __pyx_kp_u_Invalid_OpenAL_enum_value;
+  __Pyx_INCREF(__pyx_kp_u_Invalid_OpenAL_context_enum_valu);
+  __pyx_r = __pyx_kp_u_Invalid_OpenAL_context_enum_valu;
   goto __pyx_L0;
 
   /* "cyal/exceptions.pyx":45
  *         return alc.ALC_INVALID_ENUM
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
- *         return "Invalid OpenAL enum value"
+ *         return "Invalid OpenAL context enum value"
  * 
  */
 
@@ -3656,19 +3836,19 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError___str__(CYTHON_U
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidEnumError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidEnumError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlcEnumError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlcEnumError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_10exceptions_16InvalidEnumError_2__reduce_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4cyal_10exceptions_19InvalidAlcEnumError_2__reduce_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *__pyx_v_self) {
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlcEnumError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *__pyx_v_self) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v__dict = 0;
   int __pyx_v_use_setstate;
@@ -3759,7 +3939,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_2__reduce_cython
  *     else:
  *         use_setstate = False             # <<<<<<<<<<<<<<
  *     if use_setstate:
- *         return __pyx_unpickle_InvalidEnumError, (type(self), 0xd41d8cd, None), state
+ *         return __pyx_unpickle_InvalidAlcEnumError, (type(self), 0xd41d8cd, None), state
  */
   /*else*/ {
     __pyx_v_use_setstate = 0;
@@ -3770,7 +3950,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_2__reduce_cython
  *     else:
  *         use_setstate = False
  *     if use_setstate:             # <<<<<<<<<<<<<<
- *         return __pyx_unpickle_InvalidEnumError, (type(self), 0xd41d8cd, None), state
+ *         return __pyx_unpickle_InvalidAlcEnumError, (type(self), 0xd41d8cd, None), state
  *     else:
  */
   __pyx_t_3 = (__pyx_v_use_setstate != 0);
@@ -3779,12 +3959,12 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_2__reduce_cython
     /* "(tree fragment)":13
  *         use_setstate = False
  *     if use_setstate:
- *         return __pyx_unpickle_InvalidEnumError, (type(self), 0xd41d8cd, None), state             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_InvalidAlcEnumError, (type(self), 0xd41d8cd, None), state             # <<<<<<<<<<<<<<
  *     else:
- *         return __pyx_unpickle_InvalidEnumError, (type(self), 0xd41d8cd, state)
+ *         return __pyx_unpickle_InvalidAlcEnumError, (type(self), 0xd41d8cd, state)
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pyx_unpickle_InvalidEnumError); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pyx_unpickle_InvalidAlcEnumErr); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 13, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 13, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -3816,21 +3996,21 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_2__reduce_cython
  *     else:
  *         use_setstate = False
  *     if use_setstate:             # <<<<<<<<<<<<<<
- *         return __pyx_unpickle_InvalidEnumError, (type(self), 0xd41d8cd, None), state
+ *         return __pyx_unpickle_InvalidAlcEnumError, (type(self), 0xd41d8cd, None), state
  *     else:
  */
   }
 
   /* "(tree fragment)":15
- *         return __pyx_unpickle_InvalidEnumError, (type(self), 0xd41d8cd, None), state
+ *         return __pyx_unpickle_InvalidAlcEnumError, (type(self), 0xd41d8cd, None), state
  *     else:
- *         return __pyx_unpickle_InvalidEnumError, (type(self), 0xd41d8cd, state)             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_InvalidAlcEnumError, (type(self), 0xd41d8cd, state)             # <<<<<<<<<<<<<<
  * def __setstate_cython__(self, __pyx_state):
- *     __pyx_unpickle_InvalidEnumError__set_state(self, __pyx_state)
+ *     __pyx_unpickle_InvalidAlcEnumError__set_state(self, __pyx_state)
  */
   /*else*/ {
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pyx_unpickle_InvalidEnumError); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pyx_unpickle_InvalidAlcEnumErr); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 15, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -3867,7 +4047,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_2__reduce_cython
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("cyal.exceptions.InvalidEnumError.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlcEnumError.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_state);
@@ -3879,25 +4059,25 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_2__reduce_cython
 
 /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_InvalidEnumError, (type(self), 0xd41d8cd, state)
+ *         return __pyx_unpickle_InvalidAlcEnumError, (type(self), 0xd41d8cd, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
- *     __pyx_unpickle_InvalidEnumError__set_state(self, __pyx_state)
+ *     __pyx_unpickle_InvalidAlcEnumError__set_state(self, __pyx_state)
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidEnumError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidEnumError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlcEnumError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlcEnumError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_10exceptions_16InvalidEnumError_4__setstate_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_4cyal_10exceptions_19InvalidAlcEnumError_4__setstate_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlcEnumError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3907,20 +4087,20 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_4__setstate_cyth
   __Pyx_RefNannySetupContext("__setstate_cython__", 0);
 
   /* "(tree fragment)":17
- *         return __pyx_unpickle_InvalidEnumError, (type(self), 0xd41d8cd, state)
+ *         return __pyx_unpickle_InvalidAlcEnumError, (type(self), 0xd41d8cd, state)
  * def __setstate_cython__(self, __pyx_state):
- *     __pyx_unpickle_InvalidEnumError__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
+ *     __pyx_unpickle_InvalidAlcEnumError__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
  */
   if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 17, __pyx_L1_error)
-  __pyx_t_1 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidEnumError__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 17, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlcEnumError__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_InvalidEnumError, (type(self), 0xd41d8cd, state)
+ *         return __pyx_unpickle_InvalidAlcEnumError, (type(self), 0xd41d8cd, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
- *     __pyx_unpickle_InvalidEnumError__set_state(self, __pyx_state)
+ *     __pyx_unpickle_InvalidAlcEnumError__set_state(self, __pyx_state)
  */
 
   /* function exit code */
@@ -3928,7 +4108,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_4__setstate_cyth
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cyal.exceptions.InvalidEnumError.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlcEnumError.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -3937,7 +4117,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_4__setstate_cyth
 }
 
 /* "cyal/exceptions.pyx":50
- * cdef class InvalidValueError(AlcError):
+ * cdef class InvalidAlcValueError(AlcError):
  *     @property
  *     def errcode(self):             # <<<<<<<<<<<<<<
  *         return alc.ALC_INVALID_VALUE
@@ -3945,19 +4125,19 @@ static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidEnumError_4__setstate_cyth
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_17InvalidValueError_7errcode_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_4cyal_10exceptions_17InvalidValueError_7errcode_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_4cyal_10exceptions_20InvalidAlcValueError_7errcode_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_20InvalidAlcValueError_7errcode_1__get__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_10exceptions_17InvalidValueError_7errcode___get__(((struct __pyx_obj_4cyal_10exceptions_InvalidValueError *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4cyal_10exceptions_20InvalidAlcValueError_7errcode___get__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidValueError *__pyx_v_self) {
+static PyObject *__pyx_pf_4cyal_10exceptions_20InvalidAlcValueError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3981,7 +4161,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_7errcode___get_
   goto __pyx_L0;
 
   /* "cyal/exceptions.pyx":50
- * cdef class InvalidValueError(AlcError):
+ * cdef class InvalidAlcValueError(AlcError):
  *     @property
  *     def errcode(self):             # <<<<<<<<<<<<<<
  *         return alc.ALC_INVALID_VALUE
@@ -3991,7 +4171,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_7errcode___get_
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cyal.exceptions.InvalidValueError.errcode.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlcValueError.errcode.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4003,24 +4183,24 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_7errcode___get_
  *         return alc.ALC_INVALID_VALUE
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
- *         return "Invalid OpenAL parameter value"
+ *         return "Invalid OpenAL context parameter value"
  * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_17InvalidValueError_1__str__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_4cyal_10exceptions_17InvalidValueError_1__str__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_4cyal_10exceptions_20InvalidAlcValueError_1__str__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_20InvalidAlcValueError_1__str__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__str__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_10exceptions_17InvalidValueError___str__(((struct __pyx_obj_4cyal_10exceptions_InvalidValueError *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4cyal_10exceptions_20InvalidAlcValueError___str__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidValueError *__pyx_v_self) {
+static PyObject *__pyx_pf_4cyal_10exceptions_20InvalidAlcValueError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__str__", 0);
@@ -4028,20 +4208,20 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError___str__(CYTHON_
   /* "cyal/exceptions.pyx":54
  * 
  *     def __str__(self):
- *         return "Invalid OpenAL parameter value"             # <<<<<<<<<<<<<<
+ *         return "Invalid OpenAL context parameter value"             # <<<<<<<<<<<<<<
  * 
- * cdef class UnknownContextError(AlcError):
+ * cdef class UnknownAlcError(AlcError):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_INCREF(__pyx_kp_u_Invalid_OpenAL_parameter_value);
-  __pyx_r = __pyx_kp_u_Invalid_OpenAL_parameter_value;
+  __Pyx_INCREF(__pyx_kp_u_Invalid_OpenAL_context_parameter);
+  __pyx_r = __pyx_kp_u_Invalid_OpenAL_context_parameter;
   goto __pyx_L0;
 
   /* "cyal/exceptions.pyx":53
  *         return alc.ALC_INVALID_VALUE
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
- *         return "Invalid OpenAL parameter value"
+ *         return "Invalid OpenAL context parameter value"
  * 
  */
 
@@ -4059,19 +4239,19 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError___str__(CYTHON_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_17InvalidValueError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4cyal_10exceptions_17InvalidValueError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4cyal_10exceptions_20InvalidAlcValueError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_20InvalidAlcValueError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_10exceptions_17InvalidValueError_2__reduce_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidValueError *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4cyal_10exceptions_20InvalidAlcValueError_2__reduce_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidValueError *__pyx_v_self) {
+static PyObject *__pyx_pf_4cyal_10exceptions_20InvalidAlcValueError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *__pyx_v_self) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v__dict = 0;
   int __pyx_v_use_setstate;
@@ -4162,7 +4342,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_2__reduce_cytho
  *     else:
  *         use_setstate = False             # <<<<<<<<<<<<<<
  *     if use_setstate:
- *         return __pyx_unpickle_InvalidValueError, (type(self), 0xd41d8cd, None), state
+ *         return __pyx_unpickle_InvalidAlcValueError, (type(self), 0xd41d8cd, None), state
  */
   /*else*/ {
     __pyx_v_use_setstate = 0;
@@ -4173,7 +4353,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_2__reduce_cytho
  *     else:
  *         use_setstate = False
  *     if use_setstate:             # <<<<<<<<<<<<<<
- *         return __pyx_unpickle_InvalidValueError, (type(self), 0xd41d8cd, None), state
+ *         return __pyx_unpickle_InvalidAlcValueError, (type(self), 0xd41d8cd, None), state
  *     else:
  */
   __pyx_t_3 = (__pyx_v_use_setstate != 0);
@@ -4182,12 +4362,12 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_2__reduce_cytho
     /* "(tree fragment)":13
  *         use_setstate = False
  *     if use_setstate:
- *         return __pyx_unpickle_InvalidValueError, (type(self), 0xd41d8cd, None), state             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_InvalidAlcValueError, (type(self), 0xd41d8cd, None), state             # <<<<<<<<<<<<<<
  *     else:
- *         return __pyx_unpickle_InvalidValueError, (type(self), 0xd41d8cd, state)
+ *         return __pyx_unpickle_InvalidAlcValueError, (type(self), 0xd41d8cd, state)
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pyx_unpickle_InvalidValueError); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pyx_unpickle_InvalidAlcValueEr); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 13, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 13, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -4219,21 +4399,21 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_2__reduce_cytho
  *     else:
  *         use_setstate = False
  *     if use_setstate:             # <<<<<<<<<<<<<<
- *         return __pyx_unpickle_InvalidValueError, (type(self), 0xd41d8cd, None), state
+ *         return __pyx_unpickle_InvalidAlcValueError, (type(self), 0xd41d8cd, None), state
  *     else:
  */
   }
 
   /* "(tree fragment)":15
- *         return __pyx_unpickle_InvalidValueError, (type(self), 0xd41d8cd, None), state
+ *         return __pyx_unpickle_InvalidAlcValueError, (type(self), 0xd41d8cd, None), state
  *     else:
- *         return __pyx_unpickle_InvalidValueError, (type(self), 0xd41d8cd, state)             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_InvalidAlcValueError, (type(self), 0xd41d8cd, state)             # <<<<<<<<<<<<<<
  * def __setstate_cython__(self, __pyx_state):
- *     __pyx_unpickle_InvalidValueError__set_state(self, __pyx_state)
+ *     __pyx_unpickle_InvalidAlcValueError__set_state(self, __pyx_state)
  */
   /*else*/ {
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pyx_unpickle_InvalidValueError); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pyx_unpickle_InvalidAlcValueEr); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 15, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -4270,7 +4450,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_2__reduce_cytho
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("cyal.exceptions.InvalidValueError.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlcValueError.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_state);
@@ -4282,25 +4462,25 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_2__reduce_cytho
 
 /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_InvalidValueError, (type(self), 0xd41d8cd, state)
+ *         return __pyx_unpickle_InvalidAlcValueError, (type(self), 0xd41d8cd, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
- *     __pyx_unpickle_InvalidValueError__set_state(self, __pyx_state)
+ *     __pyx_unpickle_InvalidAlcValueError__set_state(self, __pyx_state)
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_17InvalidValueError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_4cyal_10exceptions_17InvalidValueError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_4cyal_10exceptions_20InvalidAlcValueError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_20InvalidAlcValueError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_10exceptions_17InvalidValueError_4__setstate_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidValueError *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_4cyal_10exceptions_20InvalidAlcValueError_4__setstate_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidValueError *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_4cyal_10exceptions_20InvalidAlcValueError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4310,20 +4490,20 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_4__setstate_cyt
   __Pyx_RefNannySetupContext("__setstate_cython__", 0);
 
   /* "(tree fragment)":17
- *         return __pyx_unpickle_InvalidValueError, (type(self), 0xd41d8cd, state)
+ *         return __pyx_unpickle_InvalidAlcValueError, (type(self), 0xd41d8cd, state)
  * def __setstate_cython__(self, __pyx_state):
- *     __pyx_unpickle_InvalidValueError__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
+ *     __pyx_unpickle_InvalidAlcValueError__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
  */
   if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 17, __pyx_L1_error)
-  __pyx_t_1 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidValueError__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 17, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlcValueError__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_InvalidValueError, (type(self), 0xd41d8cd, state)
+ *         return __pyx_unpickle_InvalidAlcValueError, (type(self), 0xd41d8cd, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
- *     __pyx_unpickle_InvalidValueError__set_state(self, __pyx_state)
+ *     __pyx_unpickle_InvalidAlcValueError__set_state(self, __pyx_state)
  */
 
   /* function exit code */
@@ -4331,7 +4511,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_4__setstate_cyt
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cyal.exceptions.InvalidValueError.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlcValueError.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4341,15 +4521,15 @@ static PyObject *__pyx_pf_4cyal_10exceptions_17InvalidValueError_4__setstate_cyt
 
 /* "cyal/exceptions.pyx":57
  * 
- * cdef class UnknownContextError(AlcError):
+ * cdef class UnknownAlcError(AlcError):
  *     def __cinit__(self, *args, alc_errcode, **kwargs):             # <<<<<<<<<<<<<<
  *         self.errcode = alc_errcode
  * 
  */
 
 /* Python wrapper */
-static int __pyx_pw_4cyal_10exceptions_19UnknownContextError_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_4cyal_10exceptions_19UnknownContextError_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static int __pyx_pw_4cyal_10exceptions_15UnknownAlcError_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_4cyal_10exceptions_15UnknownAlcError_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_alc_errcode = 0;
   CYTHON_UNUSED PyObject *__pyx_v_args = 0;
   CYTHON_UNUSED PyObject *__pyx_v_kwargs = 0;
@@ -4403,11 +4583,11 @@ static int __pyx_pw_4cyal_10exceptions_19UnknownContextError_1__cinit__(PyObject
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
-  __Pyx_AddTraceback("cyal.exceptions.UnknownContextError.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlcError.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_4cyal_10exceptions_19UnknownContextError___cinit__(((struct __pyx_obj_4cyal_10exceptions_UnknownContextError *)__pyx_v_self), __pyx_v_alc_errcode, __pyx_v_args, __pyx_v_kwargs);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_15UnknownAlcError___cinit__(((struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *)__pyx_v_self), __pyx_v_alc_errcode, __pyx_v_args, __pyx_v_kwargs);
 
   /* function exit code */
   __Pyx_XDECREF(__pyx_v_args);
@@ -4416,7 +4596,7 @@ static int __pyx_pw_4cyal_10exceptions_19UnknownContextError_1__cinit__(PyObject
   return __pyx_r;
 }
 
-static int __pyx_pf_4cyal_10exceptions_19UnknownContextError___cinit__(struct __pyx_obj_4cyal_10exceptions_UnknownContextError *__pyx_v_self, PyObject *__pyx_v_alc_errcode, CYTHON_UNUSED PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs) {
+static int __pyx_pf_4cyal_10exceptions_15UnknownAlcError___cinit__(struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *__pyx_v_self, PyObject *__pyx_v_alc_errcode, CYTHON_UNUSED PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   ALCenum __pyx_t_1;
@@ -4426,7 +4606,7 @@ static int __pyx_pf_4cyal_10exceptions_19UnknownContextError___cinit__(struct __
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
   /* "cyal/exceptions.pyx":58
- * cdef class UnknownContextError(AlcError):
+ * cdef class UnknownAlcError(AlcError):
  *     def __cinit__(self, *args, alc_errcode, **kwargs):
  *         self.errcode = alc_errcode             # <<<<<<<<<<<<<<
  * 
@@ -4437,7 +4617,7 @@ static int __pyx_pf_4cyal_10exceptions_19UnknownContextError___cinit__(struct __
 
   /* "cyal/exceptions.pyx":57
  * 
- * cdef class UnknownContextError(AlcError):
+ * cdef class UnknownAlcError(AlcError):
  *     def __cinit__(self, *args, alc_errcode, **kwargs):             # <<<<<<<<<<<<<<
  *         self.errcode = alc_errcode
  * 
@@ -4447,7 +4627,7 @@ static int __pyx_pf_4cyal_10exceptions_19UnknownContextError___cinit__(struct __
   __pyx_r = 0;
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("cyal.exceptions.UnknownContextError.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlcError.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -4463,8 +4643,8 @@ static int __pyx_pf_4cyal_10exceptions_19UnknownContextError___cinit__(struct __
  */
 
 /* Python wrapper */
-static int __pyx_pw_4cyal_10exceptions_19UnknownContextError_3__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_4cyal_10exceptions_19UnknownContextError_3__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static int __pyx_pw_4cyal_10exceptions_15UnknownAlcError_3__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_4cyal_10exceptions_15UnknownAlcError_3__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   CYTHON_UNUSED PyObject *__pyx_v_alc_errcode = 0;
   PyObject *__pyx_v_args = 0;
   CYTHON_UNUSED PyObject *__pyx_v_kwargs = 0;
@@ -4518,11 +4698,11 @@ static int __pyx_pw_4cyal_10exceptions_19UnknownContextError_3__init__(PyObject 
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
-  __Pyx_AddTraceback("cyal.exceptions.UnknownContextError.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlcError.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_4cyal_10exceptions_19UnknownContextError_2__init__(((struct __pyx_obj_4cyal_10exceptions_UnknownContextError *)__pyx_v_self), __pyx_v_alc_errcode, __pyx_v_args, __pyx_v_kwargs);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_15UnknownAlcError_2__init__(((struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *)__pyx_v_self), __pyx_v_alc_errcode, __pyx_v_args, __pyx_v_kwargs);
 
   /* function exit code */
   __Pyx_XDECREF(__pyx_v_args);
@@ -4531,7 +4711,7 @@ static int __pyx_pw_4cyal_10exceptions_19UnknownContextError_3__init__(PyObject 
   return __pyx_r;
 }
 
-static int __pyx_pf_4cyal_10exceptions_19UnknownContextError_2__init__(struct __pyx_obj_4cyal_10exceptions_UnknownContextError *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_alc_errcode, PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs) {
+static int __pyx_pf_4cyal_10exceptions_15UnknownAlcError_2__init__(struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_alc_errcode, PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4550,9 +4730,9 @@ static int __pyx_pf_4cyal_10exceptions_19UnknownContextError_2__init__(struct __
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(((PyObject *)__pyx_ptype_4cyal_10exceptions_UnknownContextError));
-  __Pyx_GIVEREF(((PyObject *)__pyx_ptype_4cyal_10exceptions_UnknownContextError));
-  PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_ptype_4cyal_10exceptions_UnknownContextError));
+  __Pyx_INCREF(((PyObject *)__pyx_ptype_4cyal_10exceptions_UnknownAlcError));
+  __Pyx_GIVEREF(((PyObject *)__pyx_ptype_4cyal_10exceptions_UnknownAlcError));
+  PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_ptype_4cyal_10exceptions_UnknownAlcError));
   __Pyx_INCREF(((PyObject *)__pyx_v_self));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_self));
   PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject *)__pyx_v_self));
@@ -4581,7 +4761,7 @@ static int __pyx_pf_4cyal_10exceptions_19UnknownContextError_2__init__(struct __
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_AddTraceback("cyal.exceptions.UnknownContextError.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlcError.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -4597,19 +4777,19 @@ static int __pyx_pf_4cyal_10exceptions_19UnknownContextError_2__init__(struct __
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_19UnknownContextError_5__str__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_4cyal_10exceptions_19UnknownContextError_5__str__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_4cyal_10exceptions_15UnknownAlcError_5__str__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_15UnknownAlcError_5__str__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__str__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_10exceptions_19UnknownContextError_4__str__(((struct __pyx_obj_4cyal_10exceptions_UnknownContextError *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4cyal_10exceptions_15UnknownAlcError_4__str__(((struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_4__str__(struct __pyx_obj_4cyal_10exceptions_UnknownContextError *__pyx_v_self) {
+static PyObject *__pyx_pf_4cyal_10exceptions_15UnknownAlcError_4__str__(struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4672,7 +4852,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_4__str__(stru
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("cyal.exceptions.UnknownContextError.__str__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlcError.__str__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4680,28 +4860,28 @@ static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_4__str__(stru
   return __pyx_r;
 }
 
-/* "cyal/exceptions.pxd":27
+/* "cyal/exceptions.pxd":29
  * 
- * cdef class UnknownContextError(AlcError):
+ * cdef class UnknownAlcError(AlcError):
  *     cdef readonly alc.ALCenum errcode             # <<<<<<<<<<<<<<
  * 
  * cdef check_alc_error(alc.ALCdevice* dev)
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_19UnknownContextError_7errcode_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_4cyal_10exceptions_19UnknownContextError_7errcode_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_4cyal_10exceptions_15UnknownAlcError_7errcode_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_15UnknownAlcError_7errcode_1__get__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_10exceptions_19UnknownContextError_7errcode___get__(((struct __pyx_obj_4cyal_10exceptions_UnknownContextError *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4cyal_10exceptions_15UnknownAlcError_7errcode___get__(((struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_7errcode___get__(struct __pyx_obj_4cyal_10exceptions_UnknownContextError *__pyx_v_self) {
+static PyObject *__pyx_pf_4cyal_10exceptions_15UnknownAlcError_7errcode___get__(struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4710,7 +4890,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_7errcode___ge
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ALCenum(__pyx_v_self->errcode); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 27, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ALCenum(__pyx_v_self->errcode); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4719,7 +4899,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_7errcode___ge
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cyal.exceptions.UnknownContextError.errcode.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlcError.errcode.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4734,19 +4914,19 @@ static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_7errcode___ge
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_19UnknownContextError_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4cyal_10exceptions_19UnknownContextError_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4cyal_10exceptions_15UnknownAlcError_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_15UnknownAlcError_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_10exceptions_19UnknownContextError_6__reduce_cython__(((struct __pyx_obj_4cyal_10exceptions_UnknownContextError *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4cyal_10exceptions_15UnknownAlcError_6__reduce_cython__(((struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_UnknownContextError *__pyx_v_self) {
+static PyObject *__pyx_pf_4cyal_10exceptions_15UnknownAlcError_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4776,7 +4956,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_6__reduce_cyt
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cyal.exceptions.UnknownContextError.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlcError.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -4791,19 +4971,19 @@ static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_6__reduce_cyt
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_19UnknownContextError_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_4cyal_10exceptions_19UnknownContextError_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_4cyal_10exceptions_15UnknownAlcError_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_15UnknownAlcError_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_10exceptions_19UnknownContextError_8__setstate_cython__(((struct __pyx_obj_4cyal_10exceptions_UnknownContextError *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_4cyal_10exceptions_15UnknownAlcError_8__setstate_cython__(((struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_UnknownContextError *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_4cyal_10exceptions_15UnknownAlcError_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_UnknownAlcError *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4833,7 +5013,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_19UnknownContextError_8__setstate_c
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cyal.exceptions.UnknownContextError.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlcError.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -4927,7 +5107,7 @@ static PyObject *__pyx_f_4cyal_10exceptions_check_alc_error(ALCdevice *__pyx_v_d
  *     elif errcode == alc.ALC_INVALID_CONTEXT:
  *         raise InvalidContextError()             # <<<<<<<<<<<<<<
  *     elif errcode == alc.ALC_INVALID_ENUM:
- *         raise InvalidEnumError()
+ *         raise InvalidAlcEnumError()
  */
     __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidContextError)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -4948,11 +5128,11 @@ static PyObject *__pyx_f_4cyal_10exceptions_check_alc_error(ALCdevice *__pyx_v_d
     /* "cyal/exceptions.pyx":75
  *         raise InvalidContextError()
  *     elif errcode == alc.ALC_INVALID_ENUM:
- *         raise InvalidEnumError()             # <<<<<<<<<<<<<<
+ *         raise InvalidAlcEnumError()             # <<<<<<<<<<<<<<
  *     elif errcode == alc.ALC_INVALID_VALUE:
- *         raise InvalidValueError()
+ *         raise InvalidAlcValueError()
  */
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidEnumError)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidAlcEnumError)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4962,20 +5142,20 @@ static PyObject *__pyx_f_4cyal_10exceptions_check_alc_error(ALCdevice *__pyx_v_d
  *     elif errcode == alc.ALC_INVALID_CONTEXT:
  *         raise InvalidContextError()
  *     elif errcode == alc.ALC_INVALID_ENUM:             # <<<<<<<<<<<<<<
- *         raise InvalidEnumError()
+ *         raise InvalidAlcEnumError()
  *     elif errcode == alc.ALC_INVALID_VALUE:
  */
     break;
     case ALC_INVALID_VALUE:
 
     /* "cyal/exceptions.pyx":77
- *         raise InvalidEnumError()
+ *         raise InvalidAlcEnumError()
  *     elif errcode == alc.ALC_INVALID_VALUE:
- *         raise InvalidValueError()             # <<<<<<<<<<<<<<
+ *         raise InvalidAlcValueError()             # <<<<<<<<<<<<<<
  *     elif errcode == alc.ALC_OUT_OF_MEMORY:
  *         raise MemoryError()
  */
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidValueError)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidAlcValueError)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4983,26 +5163,26 @@ static PyObject *__pyx_f_4cyal_10exceptions_check_alc_error(ALCdevice *__pyx_v_d
 
     /* "cyal/exceptions.pyx":76
  *     elif errcode == alc.ALC_INVALID_ENUM:
- *         raise InvalidEnumError()
+ *         raise InvalidAlcEnumError()
  *     elif errcode == alc.ALC_INVALID_VALUE:             # <<<<<<<<<<<<<<
- *         raise InvalidValueError()
+ *         raise InvalidAlcValueError()
  *     elif errcode == alc.ALC_OUT_OF_MEMORY:
  */
     break;
     case ALC_OUT_OF_MEMORY:
 
     /* "cyal/exceptions.pyx":79
- *         raise InvalidValueError()
+ *         raise InvalidAlcValueError()
  *     elif errcode == alc.ALC_OUT_OF_MEMORY:
  *         raise MemoryError()             # <<<<<<<<<<<<<<
  *     else:
- *         raise UnknownContextError(alc_errcode=errcode)
+ *         raise UnknownAlcError(alc_errcode=errcode)
  */
     PyErr_NoMemory(); __PYX_ERR(0, 79, __pyx_L1_error)
 
     /* "cyal/exceptions.pyx":78
  *     elif errcode == alc.ALC_INVALID_VALUE:
- *         raise InvalidValueError()
+ *         raise InvalidAlcValueError()
  *     elif errcode == alc.ALC_OUT_OF_MEMORY:             # <<<<<<<<<<<<<<
  *         raise MemoryError()
  *     else:
@@ -5013,7 +5193,9 @@ static PyObject *__pyx_f_4cyal_10exceptions_check_alc_error(ALCdevice *__pyx_v_d
     /* "cyal/exceptions.pyx":81
  *         raise MemoryError()
  *     else:
- *         raise UnknownContextError(alc_errcode=errcode)             # <<<<<<<<<<<<<<
+ *         raise UnknownAlcError(alc_errcode=errcode)             # <<<<<<<<<<<<<<
+ * 
+ * cdef class AlError(CyalError):
  */
     __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -5021,7 +5203,7 @@ static PyObject *__pyx_f_4cyal_10exceptions_check_alc_error(ALCdevice *__pyx_v_d
     __Pyx_GOTREF(__pyx_t_2);
     if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_alc_errcode, __pyx_t_2) < 0) __PYX_ERR(0, 81, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4cyal_10exceptions_UnknownContextError), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4cyal_10exceptions_UnknownAlcError), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
@@ -5043,6 +5225,2753 @@ static PyObject *__pyx_f_4cyal_10exceptions_check_alc_error(ALCdevice *__pyx_v_d
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("cyal.exceptions.check_alc_error", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     cdef tuple state
+ *     cdef object _dict
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_7AlError_1__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_7AlError_1__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_7AlError___reduce_cython__(((struct __pyx_obj_4cyal_10exceptions_AlError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_7AlError___reduce_cython__(struct __pyx_obj_4cyal_10exceptions_AlError *__pyx_v_self) {
+  PyObject *__pyx_v_state = 0;
+  PyObject *__pyx_v__dict = 0;
+  int __pyx_v_use_setstate;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__reduce_cython__", 0);
+
+  /* "(tree fragment)":5
+ *     cdef object _dict
+ *     cdef bint use_setstate
+ *     state = ()             # <<<<<<<<<<<<<<
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:
+ */
+  __Pyx_INCREF(__pyx_empty_tuple);
+  __pyx_v_state = __pyx_empty_tuple;
+
+  /* "(tree fragment)":6
+ *     cdef bint use_setstate
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)             # <<<<<<<<<<<<<<
+ *     if _dict is not None:
+ *         state += (_dict,)
+ */
+  __pyx_t_1 = __Pyx_GetAttr3(((PyObject *)__pyx_v_self), __pyx_n_s_dict, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v__dict = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "(tree fragment)":7
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:             # <<<<<<<<<<<<<<
+ *         state += (_dict,)
+ *         use_setstate = True
+ */
+  __pyx_t_2 = (__pyx_v__dict != Py_None);
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":8
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:
+ *         state += (_dict,)             # <<<<<<<<<<<<<<
+ *         use_setstate = True
+ *     else:
+ */
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 8, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_v__dict);
+    __Pyx_GIVEREF(__pyx_v__dict);
+    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v__dict);
+    __pyx_t_4 = PyNumber_InPlaceAdd(__pyx_v_state, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 8, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF_SET(__pyx_v_state, ((PyObject*)__pyx_t_4));
+    __pyx_t_4 = 0;
+
+    /* "(tree fragment)":9
+ *     if _dict is not None:
+ *         state += (_dict,)
+ *         use_setstate = True             # <<<<<<<<<<<<<<
+ *     else:
+ *         use_setstate = False
+ */
+    __pyx_v_use_setstate = 1;
+
+    /* "(tree fragment)":7
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:             # <<<<<<<<<<<<<<
+ *         state += (_dict,)
+ *         use_setstate = True
+ */
+    goto __pyx_L3;
+  }
+
+  /* "(tree fragment)":11
+ *         use_setstate = True
+ *     else:
+ *         use_setstate = False             # <<<<<<<<<<<<<<
+ *     if use_setstate:
+ *         return __pyx_unpickle_AlError, (type(self), 0xd41d8cd, None), state
+ */
+  /*else*/ {
+    __pyx_v_use_setstate = 0;
+  }
+  __pyx_L3:;
+
+  /* "(tree fragment)":12
+ *     else:
+ *         use_setstate = False
+ *     if use_setstate:             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_AlError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ */
+  __pyx_t_3 = (__pyx_v_use_setstate != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":13
+ *         use_setstate = False
+ *     if use_setstate:
+ *         return __pyx_unpickle_AlError, (type(self), 0xd41d8cd, None), state             # <<<<<<<<<<<<<<
+ *     else:
+ *         return __pyx_unpickle_AlError, (type(self), 0xd41d8cd, state)
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pyx_unpickle_AlError); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_INCREF(__pyx_int_222419149);
+    __Pyx_GIVEREF(__pyx_int_222419149);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_int_222419149);
+    __Pyx_INCREF(Py_None);
+    __Pyx_GIVEREF(Py_None);
+    PyTuple_SET_ITEM(__pyx_t_1, 2, Py_None);
+    __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_1);
+    __Pyx_INCREF(__pyx_v_state);
+    __Pyx_GIVEREF(__pyx_v_state);
+    PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_v_state);
+    __pyx_t_4 = 0;
+    __pyx_t_1 = 0;
+    __pyx_r = __pyx_t_5;
+    __pyx_t_5 = 0;
+    goto __pyx_L0;
+
+    /* "(tree fragment)":12
+ *     else:
+ *         use_setstate = False
+ *     if use_setstate:             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_AlError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ */
+  }
+
+  /* "(tree fragment)":15
+ *         return __pyx_unpickle_AlError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ *         return __pyx_unpickle_AlError, (type(self), 0xd41d8cd, state)             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     __pyx_unpickle_AlError__set_state(self, __pyx_state)
+ */
+  /*else*/ {
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pyx_unpickle_AlError); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_INCREF(__pyx_int_222419149);
+    __Pyx_GIVEREF(__pyx_int_222419149);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_int_222419149);
+    __Pyx_INCREF(__pyx_v_state);
+    __Pyx_GIVEREF(__pyx_v_state);
+    PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_v_state);
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_5);
+    PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
+    __Pyx_GIVEREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
+    __pyx_t_5 = 0;
+    __pyx_t_1 = 0;
+    __pyx_r = __pyx_t_4;
+    __pyx_t_4 = 0;
+    goto __pyx_L0;
+  }
+
+  /* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     cdef tuple state
+ *     cdef object _dict
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_AddTraceback("cyal.exceptions.AlError.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_state);
+  __Pyx_XDECREF(__pyx_v__dict);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":16
+ *     else:
+ *         return __pyx_unpickle_AlError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     __pyx_unpickle_AlError__set_state(self, __pyx_state)
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_7AlError_3__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_7AlError_3__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_7AlError_2__setstate_cython__(((struct __pyx_obj_4cyal_10exceptions_AlError *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_7AlError_2__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_AlError *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__setstate_cython__", 0);
+
+  /* "(tree fragment)":17
+ *         return __pyx_unpickle_AlError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):
+ *     __pyx_unpickle_AlError__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
+ */
+  if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 17, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions___pyx_unpickle_AlError__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "(tree fragment)":16
+ *     else:
+ *         return __pyx_unpickle_AlError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     __pyx_unpickle_AlError__set_state(self, __pyx_state)
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cyal.exceptions.AlError.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/exceptions.pyx":88
+ * cdef class InvalidNameError(AlError):
+ *     @property
+ *     def errcode(self):             # <<<<<<<<<<<<<<
+ *         return al.AL_INVALID_NAME
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidNameError_7errcode_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidNameError_7errcode_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_16InvalidNameError_7errcode___get__(((struct __pyx_obj_4cyal_10exceptions_InvalidNameError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidNameError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidNameError *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "cyal/exceptions.pyx":89
+ *     @property
+ *     def errcode(self):
+ *         return al.AL_INVALID_NAME             # <<<<<<<<<<<<<<
+ * 
+ *     def __str__(self):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(AL_INVALID_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "cyal/exceptions.pyx":88
+ * cdef class InvalidNameError(AlError):
+ *     @property
+ *     def errcode(self):             # <<<<<<<<<<<<<<
+ *         return al.AL_INVALID_NAME
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidNameError.errcode.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/exceptions.pyx":91
+ *         return al.AL_INVALID_NAME
+ * 
+ *     def __str__(self):             # <<<<<<<<<<<<<<
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_NAME)
+ *         return string if string is not NULL else "Invalid OpenAL object name"
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidNameError_1__str__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidNameError_1__str__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__str__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_16InvalidNameError___str__(((struct __pyx_obj_4cyal_10exceptions_InvalidNameError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidNameError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidNameError *__pyx_v_self) {
+  ALchar const *__pyx_v_string;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__str__", 0);
+
+  /* "cyal/exceptions.pyx":92
+ * 
+ *     def __str__(self):
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_NAME)             # <<<<<<<<<<<<<<
+ *         return string if string is not NULL else "Invalid OpenAL object name"
+ * 
+ */
+  __pyx_v_string = alGetString(AL_INVALID_NAME);
+
+  /* "cyal/exceptions.pyx":93
+ *     def __str__(self):
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_NAME)
+ *         return string if string is not NULL else "Invalid OpenAL object name"             # <<<<<<<<<<<<<<
+ * 
+ * cdef class InvalidOperationError(AlError):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  if (((__pyx_v_string != NULL) != 0)) {
+    __pyx_t_2 = __Pyx_PyBytes_FromString(__pyx_v_string); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __pyx_t_2;
+    __pyx_t_2 = 0;
+  } else {
+    __Pyx_INCREF(__pyx_kp_u_Invalid_OpenAL_object_name);
+    __pyx_t_1 = __pyx_kp_u_Invalid_OpenAL_object_name;
+  }
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "cyal/exceptions.pyx":91
+ *         return al.AL_INVALID_NAME
+ * 
+ *     def __str__(self):             # <<<<<<<<<<<<<<
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_NAME)
+ *         return string if string is not NULL else "Invalid OpenAL object name"
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidNameError.__str__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     cdef tuple state
+ *     cdef object _dict
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidNameError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidNameError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_16InvalidNameError_2__reduce_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidNameError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidNameError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidNameError *__pyx_v_self) {
+  PyObject *__pyx_v_state = 0;
+  PyObject *__pyx_v__dict = 0;
+  int __pyx_v_use_setstate;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__reduce_cython__", 0);
+
+  /* "(tree fragment)":5
+ *     cdef object _dict
+ *     cdef bint use_setstate
+ *     state = ()             # <<<<<<<<<<<<<<
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:
+ */
+  __Pyx_INCREF(__pyx_empty_tuple);
+  __pyx_v_state = __pyx_empty_tuple;
+
+  /* "(tree fragment)":6
+ *     cdef bint use_setstate
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)             # <<<<<<<<<<<<<<
+ *     if _dict is not None:
+ *         state += (_dict,)
+ */
+  __pyx_t_1 = __Pyx_GetAttr3(((PyObject *)__pyx_v_self), __pyx_n_s_dict, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v__dict = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "(tree fragment)":7
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:             # <<<<<<<<<<<<<<
+ *         state += (_dict,)
+ *         use_setstate = True
+ */
+  __pyx_t_2 = (__pyx_v__dict != Py_None);
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":8
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:
+ *         state += (_dict,)             # <<<<<<<<<<<<<<
+ *         use_setstate = True
+ *     else:
+ */
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 8, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_v__dict);
+    __Pyx_GIVEREF(__pyx_v__dict);
+    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v__dict);
+    __pyx_t_4 = PyNumber_InPlaceAdd(__pyx_v_state, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 8, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF_SET(__pyx_v_state, ((PyObject*)__pyx_t_4));
+    __pyx_t_4 = 0;
+
+    /* "(tree fragment)":9
+ *     if _dict is not None:
+ *         state += (_dict,)
+ *         use_setstate = True             # <<<<<<<<<<<<<<
+ *     else:
+ *         use_setstate = False
+ */
+    __pyx_v_use_setstate = 1;
+
+    /* "(tree fragment)":7
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:             # <<<<<<<<<<<<<<
+ *         state += (_dict,)
+ *         use_setstate = True
+ */
+    goto __pyx_L3;
+  }
+
+  /* "(tree fragment)":11
+ *         use_setstate = True
+ *     else:
+ *         use_setstate = False             # <<<<<<<<<<<<<<
+ *     if use_setstate:
+ *         return __pyx_unpickle_InvalidNameError, (type(self), 0xd41d8cd, None), state
+ */
+  /*else*/ {
+    __pyx_v_use_setstate = 0;
+  }
+  __pyx_L3:;
+
+  /* "(tree fragment)":12
+ *     else:
+ *         use_setstate = False
+ *     if use_setstate:             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_InvalidNameError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ */
+  __pyx_t_3 = (__pyx_v_use_setstate != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":13
+ *         use_setstate = False
+ *     if use_setstate:
+ *         return __pyx_unpickle_InvalidNameError, (type(self), 0xd41d8cd, None), state             # <<<<<<<<<<<<<<
+ *     else:
+ *         return __pyx_unpickle_InvalidNameError, (type(self), 0xd41d8cd, state)
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pyx_unpickle_InvalidNameError); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_INCREF(__pyx_int_222419149);
+    __Pyx_GIVEREF(__pyx_int_222419149);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_int_222419149);
+    __Pyx_INCREF(Py_None);
+    __Pyx_GIVEREF(Py_None);
+    PyTuple_SET_ITEM(__pyx_t_1, 2, Py_None);
+    __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_1);
+    __Pyx_INCREF(__pyx_v_state);
+    __Pyx_GIVEREF(__pyx_v_state);
+    PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_v_state);
+    __pyx_t_4 = 0;
+    __pyx_t_1 = 0;
+    __pyx_r = __pyx_t_5;
+    __pyx_t_5 = 0;
+    goto __pyx_L0;
+
+    /* "(tree fragment)":12
+ *     else:
+ *         use_setstate = False
+ *     if use_setstate:             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_InvalidNameError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ */
+  }
+
+  /* "(tree fragment)":15
+ *         return __pyx_unpickle_InvalidNameError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ *         return __pyx_unpickle_InvalidNameError, (type(self), 0xd41d8cd, state)             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     __pyx_unpickle_InvalidNameError__set_state(self, __pyx_state)
+ */
+  /*else*/ {
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pyx_unpickle_InvalidNameError); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_INCREF(__pyx_int_222419149);
+    __Pyx_GIVEREF(__pyx_int_222419149);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_int_222419149);
+    __Pyx_INCREF(__pyx_v_state);
+    __Pyx_GIVEREF(__pyx_v_state);
+    PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_v_state);
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_5);
+    PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
+    __Pyx_GIVEREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
+    __pyx_t_5 = 0;
+    __pyx_t_1 = 0;
+    __pyx_r = __pyx_t_4;
+    __pyx_t_4 = 0;
+    goto __pyx_L0;
+  }
+
+  /* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     cdef tuple state
+ *     cdef object _dict
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidNameError.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_state);
+  __Pyx_XDECREF(__pyx_v__dict);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":16
+ *     else:
+ *         return __pyx_unpickle_InvalidNameError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     __pyx_unpickle_InvalidNameError__set_state(self, __pyx_state)
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidNameError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_16InvalidNameError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_16InvalidNameError_4__setstate_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidNameError *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_16InvalidNameError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidNameError *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__setstate_cython__", 0);
+
+  /* "(tree fragment)":17
+ *         return __pyx_unpickle_InvalidNameError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):
+ *     __pyx_unpickle_InvalidNameError__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
+ */
+  if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 17, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidNameError__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "(tree fragment)":16
+ *     else:
+ *         return __pyx_unpickle_InvalidNameError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     __pyx_unpickle_InvalidNameError__set_state(self, __pyx_state)
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidNameError.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/exceptions.pyx":97
+ * cdef class InvalidOperationError(AlError):
+ *     @property
+ *     def errcode(self):             # <<<<<<<<<<<<<<
+ *         return al.AL_INVALID_OPERATION
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_21InvalidOperationError_7errcode_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_21InvalidOperationError_7errcode_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_21InvalidOperationError_7errcode___get__(((struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_21InvalidOperationError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "cyal/exceptions.pyx":98
+ *     @property
+ *     def errcode(self):
+ *         return al.AL_INVALID_OPERATION             # <<<<<<<<<<<<<<
+ * 
+ *     def __str__(self):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(AL_INVALID_OPERATION); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "cyal/exceptions.pyx":97
+ * cdef class InvalidOperationError(AlError):
+ *     @property
+ *     def errcode(self):             # <<<<<<<<<<<<<<
+ *         return al.AL_INVALID_OPERATION
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidOperationError.errcode.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/exceptions.pyx":100
+ *         return al.AL_INVALID_OPERATION
+ * 
+ *     def __str__(self):             # <<<<<<<<<<<<<<
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_OPERATION)
+ *         return string if string is not NULL else "Invalid OpenAL operation"
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_21InvalidOperationError_1__str__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_21InvalidOperationError_1__str__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__str__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_21InvalidOperationError___str__(((struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_21InvalidOperationError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *__pyx_v_self) {
+  ALchar const *__pyx_v_string;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__str__", 0);
+
+  /* "cyal/exceptions.pyx":101
+ * 
+ *     def __str__(self):
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_OPERATION)             # <<<<<<<<<<<<<<
+ *         return string if string is not NULL else "Invalid OpenAL operation"
+ * 
+ */
+  __pyx_v_string = alGetString(AL_INVALID_OPERATION);
+
+  /* "cyal/exceptions.pyx":102
+ *     def __str__(self):
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_OPERATION)
+ *         return string if string is not NULL else "Invalid OpenAL operation"             # <<<<<<<<<<<<<<
+ * 
+ * cdef class InvalidAlEnumError(AlError):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  if (((__pyx_v_string != NULL) != 0)) {
+    __pyx_t_2 = __Pyx_PyBytes_FromString(__pyx_v_string); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __pyx_t_2;
+    __pyx_t_2 = 0;
+  } else {
+    __Pyx_INCREF(__pyx_kp_u_Invalid_OpenAL_operation);
+    __pyx_t_1 = __pyx_kp_u_Invalid_OpenAL_operation;
+  }
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "cyal/exceptions.pyx":100
+ *         return al.AL_INVALID_OPERATION
+ * 
+ *     def __str__(self):             # <<<<<<<<<<<<<<
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_OPERATION)
+ *         return string if string is not NULL else "Invalid OpenAL operation"
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidOperationError.__str__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     cdef tuple state
+ *     cdef object _dict
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_21InvalidOperationError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_21InvalidOperationError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_21InvalidOperationError_2__reduce_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_21InvalidOperationError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *__pyx_v_self) {
+  PyObject *__pyx_v_state = 0;
+  PyObject *__pyx_v__dict = 0;
+  int __pyx_v_use_setstate;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__reduce_cython__", 0);
+
+  /* "(tree fragment)":5
+ *     cdef object _dict
+ *     cdef bint use_setstate
+ *     state = ()             # <<<<<<<<<<<<<<
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:
+ */
+  __Pyx_INCREF(__pyx_empty_tuple);
+  __pyx_v_state = __pyx_empty_tuple;
+
+  /* "(tree fragment)":6
+ *     cdef bint use_setstate
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)             # <<<<<<<<<<<<<<
+ *     if _dict is not None:
+ *         state += (_dict,)
+ */
+  __pyx_t_1 = __Pyx_GetAttr3(((PyObject *)__pyx_v_self), __pyx_n_s_dict, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v__dict = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "(tree fragment)":7
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:             # <<<<<<<<<<<<<<
+ *         state += (_dict,)
+ *         use_setstate = True
+ */
+  __pyx_t_2 = (__pyx_v__dict != Py_None);
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":8
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:
+ *         state += (_dict,)             # <<<<<<<<<<<<<<
+ *         use_setstate = True
+ *     else:
+ */
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 8, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_v__dict);
+    __Pyx_GIVEREF(__pyx_v__dict);
+    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v__dict);
+    __pyx_t_4 = PyNumber_InPlaceAdd(__pyx_v_state, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 8, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF_SET(__pyx_v_state, ((PyObject*)__pyx_t_4));
+    __pyx_t_4 = 0;
+
+    /* "(tree fragment)":9
+ *     if _dict is not None:
+ *         state += (_dict,)
+ *         use_setstate = True             # <<<<<<<<<<<<<<
+ *     else:
+ *         use_setstate = False
+ */
+    __pyx_v_use_setstate = 1;
+
+    /* "(tree fragment)":7
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:             # <<<<<<<<<<<<<<
+ *         state += (_dict,)
+ *         use_setstate = True
+ */
+    goto __pyx_L3;
+  }
+
+  /* "(tree fragment)":11
+ *         use_setstate = True
+ *     else:
+ *         use_setstate = False             # <<<<<<<<<<<<<<
+ *     if use_setstate:
+ *         return __pyx_unpickle_InvalidOperationError, (type(self), 0xd41d8cd, None), state
+ */
+  /*else*/ {
+    __pyx_v_use_setstate = 0;
+  }
+  __pyx_L3:;
+
+  /* "(tree fragment)":12
+ *     else:
+ *         use_setstate = False
+ *     if use_setstate:             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_InvalidOperationError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ */
+  __pyx_t_3 = (__pyx_v_use_setstate != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":13
+ *         use_setstate = False
+ *     if use_setstate:
+ *         return __pyx_unpickle_InvalidOperationError, (type(self), 0xd41d8cd, None), state             # <<<<<<<<<<<<<<
+ *     else:
+ *         return __pyx_unpickle_InvalidOperationError, (type(self), 0xd41d8cd, state)
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pyx_unpickle_InvalidOperationE); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_INCREF(__pyx_int_222419149);
+    __Pyx_GIVEREF(__pyx_int_222419149);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_int_222419149);
+    __Pyx_INCREF(Py_None);
+    __Pyx_GIVEREF(Py_None);
+    PyTuple_SET_ITEM(__pyx_t_1, 2, Py_None);
+    __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_1);
+    __Pyx_INCREF(__pyx_v_state);
+    __Pyx_GIVEREF(__pyx_v_state);
+    PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_v_state);
+    __pyx_t_4 = 0;
+    __pyx_t_1 = 0;
+    __pyx_r = __pyx_t_5;
+    __pyx_t_5 = 0;
+    goto __pyx_L0;
+
+    /* "(tree fragment)":12
+ *     else:
+ *         use_setstate = False
+ *     if use_setstate:             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_InvalidOperationError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ */
+  }
+
+  /* "(tree fragment)":15
+ *         return __pyx_unpickle_InvalidOperationError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ *         return __pyx_unpickle_InvalidOperationError, (type(self), 0xd41d8cd, state)             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     __pyx_unpickle_InvalidOperationError__set_state(self, __pyx_state)
+ */
+  /*else*/ {
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pyx_unpickle_InvalidOperationE); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_INCREF(__pyx_int_222419149);
+    __Pyx_GIVEREF(__pyx_int_222419149);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_int_222419149);
+    __Pyx_INCREF(__pyx_v_state);
+    __Pyx_GIVEREF(__pyx_v_state);
+    PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_v_state);
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_5);
+    PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
+    __Pyx_GIVEREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
+    __pyx_t_5 = 0;
+    __pyx_t_1 = 0;
+    __pyx_r = __pyx_t_4;
+    __pyx_t_4 = 0;
+    goto __pyx_L0;
+  }
+
+  /* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     cdef tuple state
+ *     cdef object _dict
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidOperationError.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_state);
+  __Pyx_XDECREF(__pyx_v__dict);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":16
+ *     else:
+ *         return __pyx_unpickle_InvalidOperationError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     __pyx_unpickle_InvalidOperationError__set_state(self, __pyx_state)
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_21InvalidOperationError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_21InvalidOperationError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_21InvalidOperationError_4__setstate_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_21InvalidOperationError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__setstate_cython__", 0);
+
+  /* "(tree fragment)":17
+ *         return __pyx_unpickle_InvalidOperationError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):
+ *     __pyx_unpickle_InvalidOperationError__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
+ */
+  if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 17, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidOperationError__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "(tree fragment)":16
+ *     else:
+ *         return __pyx_unpickle_InvalidOperationError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     __pyx_unpickle_InvalidOperationError__set_state(self, __pyx_state)
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidOperationError.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/exceptions.pyx":106
+ * cdef class InvalidAlEnumError(AlError):
+ *     @property
+ *     def errcode(self):             # <<<<<<<<<<<<<<
+ *         return al.AL_INVALID_ENUM
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_18InvalidAlEnumError_7errcode_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_18InvalidAlEnumError_7errcode_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_18InvalidAlEnumError_7errcode___get__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_18InvalidAlEnumError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "cyal/exceptions.pyx":107
+ *     @property
+ *     def errcode(self):
+ *         return al.AL_INVALID_ENUM             # <<<<<<<<<<<<<<
+ * 
+ *     def __str__(self):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(AL_INVALID_ENUM); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "cyal/exceptions.pyx":106
+ * cdef class InvalidAlEnumError(AlError):
+ *     @property
+ *     def errcode(self):             # <<<<<<<<<<<<<<
+ *         return al.AL_INVALID_ENUM
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlEnumError.errcode.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/exceptions.pyx":109
+ *         return al.AL_INVALID_ENUM
+ * 
+ *     def __str__(self):             # <<<<<<<<<<<<<<
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_ENUM)
+ *         return string if string is not NULL else "Invalid OpenAL enum value"
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_18InvalidAlEnumError_1__str__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_18InvalidAlEnumError_1__str__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__str__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_18InvalidAlEnumError___str__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_18InvalidAlEnumError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *__pyx_v_self) {
+  ALchar const *__pyx_v_string;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__str__", 0);
+
+  /* "cyal/exceptions.pyx":110
+ * 
+ *     def __str__(self):
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_ENUM)             # <<<<<<<<<<<<<<
+ *         return string if string is not NULL else "Invalid OpenAL enum value"
+ * 
+ */
+  __pyx_v_string = alGetString(AL_INVALID_ENUM);
+
+  /* "cyal/exceptions.pyx":111
+ *     def __str__(self):
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_ENUM)
+ *         return string if string is not NULL else "Invalid OpenAL enum value"             # <<<<<<<<<<<<<<
+ * 
+ * cdef class InvalidAlValueError(AlError):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  if (((__pyx_v_string != NULL) != 0)) {
+    __pyx_t_2 = __Pyx_PyBytes_FromString(__pyx_v_string); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 111, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __pyx_t_2;
+    __pyx_t_2 = 0;
+  } else {
+    __Pyx_INCREF(__pyx_kp_u_Invalid_OpenAL_enum_value);
+    __pyx_t_1 = __pyx_kp_u_Invalid_OpenAL_enum_value;
+  }
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "cyal/exceptions.pyx":109
+ *         return al.AL_INVALID_ENUM
+ * 
+ *     def __str__(self):             # <<<<<<<<<<<<<<
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_ENUM)
+ *         return string if string is not NULL else "Invalid OpenAL enum value"
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlEnumError.__str__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     cdef tuple state
+ *     cdef object _dict
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_18InvalidAlEnumError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_18InvalidAlEnumError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_18InvalidAlEnumError_2__reduce_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_18InvalidAlEnumError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *__pyx_v_self) {
+  PyObject *__pyx_v_state = 0;
+  PyObject *__pyx_v__dict = 0;
+  int __pyx_v_use_setstate;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__reduce_cython__", 0);
+
+  /* "(tree fragment)":5
+ *     cdef object _dict
+ *     cdef bint use_setstate
+ *     state = ()             # <<<<<<<<<<<<<<
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:
+ */
+  __Pyx_INCREF(__pyx_empty_tuple);
+  __pyx_v_state = __pyx_empty_tuple;
+
+  /* "(tree fragment)":6
+ *     cdef bint use_setstate
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)             # <<<<<<<<<<<<<<
+ *     if _dict is not None:
+ *         state += (_dict,)
+ */
+  __pyx_t_1 = __Pyx_GetAttr3(((PyObject *)__pyx_v_self), __pyx_n_s_dict, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v__dict = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "(tree fragment)":7
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:             # <<<<<<<<<<<<<<
+ *         state += (_dict,)
+ *         use_setstate = True
+ */
+  __pyx_t_2 = (__pyx_v__dict != Py_None);
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":8
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:
+ *         state += (_dict,)             # <<<<<<<<<<<<<<
+ *         use_setstate = True
+ *     else:
+ */
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 8, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_v__dict);
+    __Pyx_GIVEREF(__pyx_v__dict);
+    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v__dict);
+    __pyx_t_4 = PyNumber_InPlaceAdd(__pyx_v_state, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 8, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF_SET(__pyx_v_state, ((PyObject*)__pyx_t_4));
+    __pyx_t_4 = 0;
+
+    /* "(tree fragment)":9
+ *     if _dict is not None:
+ *         state += (_dict,)
+ *         use_setstate = True             # <<<<<<<<<<<<<<
+ *     else:
+ *         use_setstate = False
+ */
+    __pyx_v_use_setstate = 1;
+
+    /* "(tree fragment)":7
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:             # <<<<<<<<<<<<<<
+ *         state += (_dict,)
+ *         use_setstate = True
+ */
+    goto __pyx_L3;
+  }
+
+  /* "(tree fragment)":11
+ *         use_setstate = True
+ *     else:
+ *         use_setstate = False             # <<<<<<<<<<<<<<
+ *     if use_setstate:
+ *         return __pyx_unpickle_InvalidAlEnumError, (type(self), 0xd41d8cd, None), state
+ */
+  /*else*/ {
+    __pyx_v_use_setstate = 0;
+  }
+  __pyx_L3:;
+
+  /* "(tree fragment)":12
+ *     else:
+ *         use_setstate = False
+ *     if use_setstate:             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_InvalidAlEnumError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ */
+  __pyx_t_3 = (__pyx_v_use_setstate != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":13
+ *         use_setstate = False
+ *     if use_setstate:
+ *         return __pyx_unpickle_InvalidAlEnumError, (type(self), 0xd41d8cd, None), state             # <<<<<<<<<<<<<<
+ *     else:
+ *         return __pyx_unpickle_InvalidAlEnumError, (type(self), 0xd41d8cd, state)
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pyx_unpickle_InvalidAlEnumErro); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_INCREF(__pyx_int_222419149);
+    __Pyx_GIVEREF(__pyx_int_222419149);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_int_222419149);
+    __Pyx_INCREF(Py_None);
+    __Pyx_GIVEREF(Py_None);
+    PyTuple_SET_ITEM(__pyx_t_1, 2, Py_None);
+    __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_1);
+    __Pyx_INCREF(__pyx_v_state);
+    __Pyx_GIVEREF(__pyx_v_state);
+    PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_v_state);
+    __pyx_t_4 = 0;
+    __pyx_t_1 = 0;
+    __pyx_r = __pyx_t_5;
+    __pyx_t_5 = 0;
+    goto __pyx_L0;
+
+    /* "(tree fragment)":12
+ *     else:
+ *         use_setstate = False
+ *     if use_setstate:             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_InvalidAlEnumError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ */
+  }
+
+  /* "(tree fragment)":15
+ *         return __pyx_unpickle_InvalidAlEnumError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ *         return __pyx_unpickle_InvalidAlEnumError, (type(self), 0xd41d8cd, state)             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     __pyx_unpickle_InvalidAlEnumError__set_state(self, __pyx_state)
+ */
+  /*else*/ {
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pyx_unpickle_InvalidAlEnumErro); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_INCREF(__pyx_int_222419149);
+    __Pyx_GIVEREF(__pyx_int_222419149);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_int_222419149);
+    __Pyx_INCREF(__pyx_v_state);
+    __Pyx_GIVEREF(__pyx_v_state);
+    PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_v_state);
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_5);
+    PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
+    __Pyx_GIVEREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
+    __pyx_t_5 = 0;
+    __pyx_t_1 = 0;
+    __pyx_r = __pyx_t_4;
+    __pyx_t_4 = 0;
+    goto __pyx_L0;
+  }
+
+  /* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     cdef tuple state
+ *     cdef object _dict
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlEnumError.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_state);
+  __Pyx_XDECREF(__pyx_v__dict);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":16
+ *     else:
+ *         return __pyx_unpickle_InvalidAlEnumError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     __pyx_unpickle_InvalidAlEnumError__set_state(self, __pyx_state)
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_18InvalidAlEnumError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_18InvalidAlEnumError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_18InvalidAlEnumError_4__setstate_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_18InvalidAlEnumError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__setstate_cython__", 0);
+
+  /* "(tree fragment)":17
+ *         return __pyx_unpickle_InvalidAlEnumError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):
+ *     __pyx_unpickle_InvalidAlEnumError__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
+ */
+  if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 17, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlEnumError__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "(tree fragment)":16
+ *     else:
+ *         return __pyx_unpickle_InvalidAlEnumError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     __pyx_unpickle_InvalidAlEnumError__set_state(self, __pyx_state)
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlEnumError.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/exceptions.pyx":115
+ * cdef class InvalidAlValueError(AlError):
+ *     @property
+ *     def errcode(self):             # <<<<<<<<<<<<<<
+ *         return al.AL_INVALID_VALUE
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlValueError_7errcode_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlValueError_7errcode_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_19InvalidAlValueError_7errcode___get__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlValueError_7errcode___get__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "cyal/exceptions.pyx":116
+ *     @property
+ *     def errcode(self):
+ *         return al.AL_INVALID_VALUE             # <<<<<<<<<<<<<<
+ * 
+ *     def __str__(self):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(AL_INVALID_VALUE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "cyal/exceptions.pyx":115
+ * cdef class InvalidAlValueError(AlError):
+ *     @property
+ *     def errcode(self):             # <<<<<<<<<<<<<<
+ *         return al.AL_INVALID_VALUE
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlValueError.errcode.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/exceptions.pyx":118
+ *         return al.AL_INVALID_VALUE
+ * 
+ *     def __str__(self):             # <<<<<<<<<<<<<<
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_VALUE)
+ *         return string if string is not NULL else "Invalid OpenAL parameter value"
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlValueError_1__str__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlValueError_1__str__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__str__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_19InvalidAlValueError___str__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlValueError___str__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *__pyx_v_self) {
+  ALchar const *__pyx_v_string;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__str__", 0);
+
+  /* "cyal/exceptions.pyx":119
+ * 
+ *     def __str__(self):
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_VALUE)             # <<<<<<<<<<<<<<
+ *         return string if string is not NULL else "Invalid OpenAL parameter value"
+ * 
+ */
+  __pyx_v_string = alGetString(AL_INVALID_VALUE);
+
+  /* "cyal/exceptions.pyx":120
+ *     def __str__(self):
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_VALUE)
+ *         return string if string is not NULL else "Invalid OpenAL parameter value"             # <<<<<<<<<<<<<<
+ * 
+ * cdef class UnknownAlError(AlError):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  if (((__pyx_v_string != NULL) != 0)) {
+    __pyx_t_2 = __Pyx_PyBytes_FromString(__pyx_v_string); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __pyx_t_2;
+    __pyx_t_2 = 0;
+  } else {
+    __Pyx_INCREF(__pyx_kp_u_Invalid_OpenAL_parameter_value);
+    __pyx_t_1 = __pyx_kp_u_Invalid_OpenAL_parameter_value;
+  }
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "cyal/exceptions.pyx":118
+ *         return al.AL_INVALID_VALUE
+ * 
+ *     def __str__(self):             # <<<<<<<<<<<<<<
+ *         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_VALUE)
+ *         return string if string is not NULL else "Invalid OpenAL parameter value"
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlValueError.__str__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     cdef tuple state
+ *     cdef object _dict
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlValueError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlValueError_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_19InvalidAlValueError_2__reduce_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlValueError_2__reduce_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *__pyx_v_self) {
+  PyObject *__pyx_v_state = 0;
+  PyObject *__pyx_v__dict = 0;
+  int __pyx_v_use_setstate;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__reduce_cython__", 0);
+
+  /* "(tree fragment)":5
+ *     cdef object _dict
+ *     cdef bint use_setstate
+ *     state = ()             # <<<<<<<<<<<<<<
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:
+ */
+  __Pyx_INCREF(__pyx_empty_tuple);
+  __pyx_v_state = __pyx_empty_tuple;
+
+  /* "(tree fragment)":6
+ *     cdef bint use_setstate
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)             # <<<<<<<<<<<<<<
+ *     if _dict is not None:
+ *         state += (_dict,)
+ */
+  __pyx_t_1 = __Pyx_GetAttr3(((PyObject *)__pyx_v_self), __pyx_n_s_dict, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v__dict = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "(tree fragment)":7
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:             # <<<<<<<<<<<<<<
+ *         state += (_dict,)
+ *         use_setstate = True
+ */
+  __pyx_t_2 = (__pyx_v__dict != Py_None);
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":8
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:
+ *         state += (_dict,)             # <<<<<<<<<<<<<<
+ *         use_setstate = True
+ *     else:
+ */
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 8, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_v__dict);
+    __Pyx_GIVEREF(__pyx_v__dict);
+    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v__dict);
+    __pyx_t_4 = PyNumber_InPlaceAdd(__pyx_v_state, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 8, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF_SET(__pyx_v_state, ((PyObject*)__pyx_t_4));
+    __pyx_t_4 = 0;
+
+    /* "(tree fragment)":9
+ *     if _dict is not None:
+ *         state += (_dict,)
+ *         use_setstate = True             # <<<<<<<<<<<<<<
+ *     else:
+ *         use_setstate = False
+ */
+    __pyx_v_use_setstate = 1;
+
+    /* "(tree fragment)":7
+ *     state = ()
+ *     _dict = getattr(self, '__dict__', None)
+ *     if _dict is not None:             # <<<<<<<<<<<<<<
+ *         state += (_dict,)
+ *         use_setstate = True
+ */
+    goto __pyx_L3;
+  }
+
+  /* "(tree fragment)":11
+ *         use_setstate = True
+ *     else:
+ *         use_setstate = False             # <<<<<<<<<<<<<<
+ *     if use_setstate:
+ *         return __pyx_unpickle_InvalidAlValueError, (type(self), 0xd41d8cd, None), state
+ */
+  /*else*/ {
+    __pyx_v_use_setstate = 0;
+  }
+  __pyx_L3:;
+
+  /* "(tree fragment)":12
+ *     else:
+ *         use_setstate = False
+ *     if use_setstate:             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_InvalidAlValueError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ */
+  __pyx_t_3 = (__pyx_v_use_setstate != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":13
+ *         use_setstate = False
+ *     if use_setstate:
+ *         return __pyx_unpickle_InvalidAlValueError, (type(self), 0xd41d8cd, None), state             # <<<<<<<<<<<<<<
+ *     else:
+ *         return __pyx_unpickle_InvalidAlValueError, (type(self), 0xd41d8cd, state)
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pyx_unpickle_InvalidAlValueErr); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_INCREF(__pyx_int_222419149);
+    __Pyx_GIVEREF(__pyx_int_222419149);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_int_222419149);
+    __Pyx_INCREF(Py_None);
+    __Pyx_GIVEREF(Py_None);
+    PyTuple_SET_ITEM(__pyx_t_1, 2, Py_None);
+    __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_1);
+    __Pyx_INCREF(__pyx_v_state);
+    __Pyx_GIVEREF(__pyx_v_state);
+    PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_v_state);
+    __pyx_t_4 = 0;
+    __pyx_t_1 = 0;
+    __pyx_r = __pyx_t_5;
+    __pyx_t_5 = 0;
+    goto __pyx_L0;
+
+    /* "(tree fragment)":12
+ *     else:
+ *         use_setstate = False
+ *     if use_setstate:             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_InvalidAlValueError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ */
+  }
+
+  /* "(tree fragment)":15
+ *         return __pyx_unpickle_InvalidAlValueError, (type(self), 0xd41d8cd, None), state
+ *     else:
+ *         return __pyx_unpickle_InvalidAlValueError, (type(self), 0xd41d8cd, state)             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     __pyx_unpickle_InvalidAlValueError__set_state(self, __pyx_state)
+ */
+  /*else*/ {
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pyx_unpickle_InvalidAlValueErr); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
+    __Pyx_INCREF(__pyx_int_222419149);
+    __Pyx_GIVEREF(__pyx_int_222419149);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_int_222419149);
+    __Pyx_INCREF(__pyx_v_state);
+    __Pyx_GIVEREF(__pyx_v_state);
+    PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_v_state);
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 15, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_5);
+    PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
+    __Pyx_GIVEREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
+    __pyx_t_5 = 0;
+    __pyx_t_1 = 0;
+    __pyx_r = __pyx_t_4;
+    __pyx_t_4 = 0;
+    goto __pyx_L0;
+  }
+
+  /* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     cdef tuple state
+ *     cdef object _dict
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlValueError.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_state);
+  __Pyx_XDECREF(__pyx_v__dict);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":16
+ *     else:
+ *         return __pyx_unpickle_InvalidAlValueError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     __pyx_unpickle_InvalidAlValueError__set_state(self, __pyx_state)
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlValueError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_19InvalidAlValueError_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_19InvalidAlValueError_4__setstate_cython__(((struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_19InvalidAlValueError_4__setstate_cython__(struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__setstate_cython__", 0);
+
+  /* "(tree fragment)":17
+ *         return __pyx_unpickle_InvalidAlValueError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):
+ *     __pyx_unpickle_InvalidAlValueError__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
+ */
+  if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 17, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlValueError__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "(tree fragment)":16
+ *     else:
+ *         return __pyx_unpickle_InvalidAlValueError, (type(self), 0xd41d8cd, state)
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     __pyx_unpickle_InvalidAlValueError__set_state(self, __pyx_state)
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cyal.exceptions.InvalidAlValueError.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/exceptions.pyx":123
+ * 
+ * cdef class UnknownAlError(AlError):
+ *     def __cinit__(self, *args, al_errcode, **kwargs):             # <<<<<<<<<<<<<<
+ *         self.errcode = al_errcode
+ * 
+ */
+
+/* Python wrapper */
+static int __pyx_pw_4cyal_10exceptions_14UnknownAlError_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_4cyal_10exceptions_14UnknownAlError_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_al_errcode = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_args = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_kwargs = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__cinit__ (wrapper)", 0);
+  __pyx_v_kwargs = PyDict_New(); if (unlikely(!__pyx_v_kwargs)) return -1;
+  __Pyx_GOTREF(__pyx_v_kwargs);
+  if (PyTuple_GET_SIZE(__pyx_args) > 0) {
+    __pyx_v_args = PyTuple_GetSlice(__pyx_args, 0, PyTuple_GET_SIZE(__pyx_args));
+    if (unlikely(!__pyx_v_args)) {
+      __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
+      __Pyx_RefNannyFinishContext();
+      return -1;
+    }
+    __Pyx_GOTREF(__pyx_v_args);
+  } else {
+    __pyx_v_args = __pyx_empty_tuple; __Pyx_INCREF(__pyx_empty_tuple);
+  }
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_al_errcode,0};
+    PyObject* values[1] = {0};
+    if (likely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        default:
+        case  0: break;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_al_errcode)) != 0)) kw_args--;
+      else {
+        __Pyx_RaiseKeywordRequired("__cinit__", __pyx_n_s_al_errcode); __PYX_ERR(0, 123, __pyx_L3_error)
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, 0, "__cinit__") < 0)) __PYX_ERR(0, 123, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) < 0) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      __Pyx_RaiseKeywordRequired("__cinit__", __pyx_n_s_al_errcode); __PYX_ERR(0, 123, __pyx_L3_error)
+    }
+    __pyx_v_al_errcode = values[0];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 0, 0, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 123, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
+  __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlError.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return -1;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_4cyal_10exceptions_14UnknownAlError___cinit__(((struct __pyx_obj_4cyal_10exceptions_UnknownAlError *)__pyx_v_self), __pyx_v_al_errcode, __pyx_v_args, __pyx_v_kwargs);
+
+  /* function exit code */
+  __Pyx_XDECREF(__pyx_v_args);
+  __Pyx_XDECREF(__pyx_v_kwargs);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_4cyal_10exceptions_14UnknownAlError___cinit__(struct __pyx_obj_4cyal_10exceptions_UnknownAlError *__pyx_v_self, PyObject *__pyx_v_al_errcode, CYTHON_UNUSED PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  ALenum __pyx_t_1;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__cinit__", 0);
+
+  /* "cyal/exceptions.pyx":124
+ * cdef class UnknownAlError(AlError):
+ *     def __cinit__(self, *args, al_errcode, **kwargs):
+ *         self.errcode = al_errcode             # <<<<<<<<<<<<<<
+ * 
+ *     def __init__(self, *args, alc_errcode, **kwargs):
+ */
+  __pyx_t_1 = __Pyx_PyInt_As_ALenum(__pyx_v_al_errcode); if (unlikely((__pyx_t_1 == ((ALenum)-1)) && PyErr_Occurred())) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_v_self->errcode = __pyx_t_1;
+
+  /* "cyal/exceptions.pyx":123
+ * 
+ * cdef class UnknownAlError(AlError):
+ *     def __cinit__(self, *args, al_errcode, **kwargs):             # <<<<<<<<<<<<<<
+ *         self.errcode = al_errcode
+ * 
+ */
+
+  /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlError.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/exceptions.pyx":126
+ *         self.errcode = al_errcode
+ * 
+ *     def __init__(self, *args, alc_errcode, **kwargs):             # <<<<<<<<<<<<<<
+ *         super().__init__(*args)
+ * 
+ */
+
+/* Python wrapper */
+static int __pyx_pw_4cyal_10exceptions_14UnknownAlError_3__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_4cyal_10exceptions_14UnknownAlError_3__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  CYTHON_UNUSED PyObject *__pyx_v_alc_errcode = 0;
+  PyObject *__pyx_v_args = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_kwargs = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__init__ (wrapper)", 0);
+  __pyx_v_kwargs = PyDict_New(); if (unlikely(!__pyx_v_kwargs)) return -1;
+  __Pyx_GOTREF(__pyx_v_kwargs);
+  if (PyTuple_GET_SIZE(__pyx_args) > 0) {
+    __pyx_v_args = PyTuple_GetSlice(__pyx_args, 0, PyTuple_GET_SIZE(__pyx_args));
+    if (unlikely(!__pyx_v_args)) {
+      __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
+      __Pyx_RefNannyFinishContext();
+      return -1;
+    }
+    __Pyx_GOTREF(__pyx_v_args);
+  } else {
+    __pyx_v_args = __pyx_empty_tuple; __Pyx_INCREF(__pyx_empty_tuple);
+  }
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_alc_errcode,0};
+    PyObject* values[1] = {0};
+    if (likely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        default:
+        case  0: break;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_alc_errcode)) != 0)) kw_args--;
+      else {
+        __Pyx_RaiseKeywordRequired("__init__", __pyx_n_s_alc_errcode); __PYX_ERR(0, 126, __pyx_L3_error)
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, 0, "__init__") < 0)) __PYX_ERR(0, 126, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) < 0) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      __Pyx_RaiseKeywordRequired("__init__", __pyx_n_s_alc_errcode); __PYX_ERR(0, 126, __pyx_L3_error)
+    }
+    __pyx_v_alc_errcode = values[0];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 0, 0, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 126, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
+  __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlError.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return -1;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_4cyal_10exceptions_14UnknownAlError_2__init__(((struct __pyx_obj_4cyal_10exceptions_UnknownAlError *)__pyx_v_self), __pyx_v_alc_errcode, __pyx_v_args, __pyx_v_kwargs);
+
+  /* function exit code */
+  __Pyx_XDECREF(__pyx_v_args);
+  __Pyx_XDECREF(__pyx_v_kwargs);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_4cyal_10exceptions_14UnknownAlError_2__init__(struct __pyx_obj_4cyal_10exceptions_UnknownAlError *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_alc_errcode, PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__init__", 0);
+
+  /* "cyal/exceptions.pyx":127
+ * 
+ *     def __init__(self, *args, alc_errcode, **kwargs):
+ *         super().__init__(*args)             # <<<<<<<<<<<<<<
+ * 
+ *     def __str__(self):
+ */
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(((PyObject *)__pyx_ptype_4cyal_10exceptions_UnknownAlError));
+  __Pyx_GIVEREF(((PyObject *)__pyx_ptype_4cyal_10exceptions_UnknownAlError));
+  PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_ptype_4cyal_10exceptions_UnknownAlError));
+  __Pyx_INCREF(((PyObject *)__pyx_v_self));
+  __Pyx_GIVEREF(((PyObject *)__pyx_v_self));
+  PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject *)__pyx_v_self));
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_init); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_v_args, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "cyal/exceptions.pyx":126
+ *         self.errcode = al_errcode
+ * 
+ *     def __init__(self, *args, alc_errcode, **kwargs):             # <<<<<<<<<<<<<<
+ *         super().__init__(*args)
+ * 
+ */
+
+  /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlError.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/exceptions.pyx":129
+ *         super().__init__(*args)
+ * 
+ *     def __str__(self):             # <<<<<<<<<<<<<<
+ *         cdef const al.ALchar* string = al.alGetString(self.errcode)
+ *         return string if string is not NULL else f"Unknown OpenAL error (code {self.errcode:X})"
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_14UnknownAlError_5__str__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_14UnknownAlError_5__str__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__str__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_14UnknownAlError_4__str__(((struct __pyx_obj_4cyal_10exceptions_UnknownAlError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_14UnknownAlError_4__str__(struct __pyx_obj_4cyal_10exceptions_UnknownAlError *__pyx_v_self) {
+  ALchar const *__pyx_v_string;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  Py_ssize_t __pyx_t_3;
+  Py_UCS4 __pyx_t_4;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__str__", 0);
+
+  /* "cyal/exceptions.pyx":130
+ * 
+ *     def __str__(self):
+ *         cdef const al.ALchar* string = al.alGetString(self.errcode)             # <<<<<<<<<<<<<<
+ *         return string if string is not NULL else f"Unknown OpenAL error (code {self.errcode:X})"
+ * 
+ */
+  __pyx_v_string = alGetString(__pyx_v_self->errcode);
+
+  /* "cyal/exceptions.pyx":131
+ *     def __str__(self):
+ *         cdef const al.ALchar* string = al.alGetString(self.errcode)
+ *         return string if string is not NULL else f"Unknown OpenAL error (code {self.errcode:X})"             # <<<<<<<<<<<<<<
+ * 
+ * cdef check_al_error():
+ */
+  __Pyx_XDECREF(__pyx_r);
+  if (((__pyx_v_string != NULL) != 0)) {
+    __pyx_t_2 = __Pyx_PyBytes_FromString(__pyx_v_string); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __pyx_t_2;
+    __pyx_t_2 = 0;
+  } else {
+    __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = 0;
+    __pyx_t_4 = 127;
+    __Pyx_INCREF(__pyx_kp_u_Unknown_OpenAL_error_code);
+    __pyx_t_3 += 27;
+    __Pyx_GIVEREF(__pyx_kp_u_Unknown_OpenAL_error_code);
+    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_kp_u_Unknown_OpenAL_error_code);
+    __pyx_t_5 = __Pyx_PyInt_From_ALenum(__pyx_v_self->errcode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_6 = __Pyx_PyObject_Format(__pyx_t_5, __pyx_n_u_X); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_4 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) > __pyx_t_4) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6) : __pyx_t_4;
+    __pyx_t_3 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_6);
+    __Pyx_GIVEREF(__pyx_t_6);
+    PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_6);
+    __pyx_t_6 = 0;
+    __Pyx_INCREF(__pyx_kp_u__3);
+    __pyx_t_3 += 1;
+    __Pyx_GIVEREF(__pyx_kp_u__3);
+    PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_kp_u__3);
+    __pyx_t_6 = __Pyx_PyUnicode_Join(__pyx_t_2, 3, __pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_1 = __pyx_t_6;
+    __pyx_t_6 = 0;
+  }
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "cyal/exceptions.pyx":129
+ *         super().__init__(*args)
+ * 
+ *     def __str__(self):             # <<<<<<<<<<<<<<
+ *         cdef const al.ALchar* string = al.alGetString(self.errcode)
+ *         return string if string is not NULL else f"Unknown OpenAL error (code {self.errcode:X})"
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlError.__str__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/exceptions.pxd":51
+ * 
+ * cdef class UnknownAlError(AlError):
+ *     cdef readonly al.ALenum errcode             # <<<<<<<<<<<<<<
+ * 
+ * cdef check_al_error()
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_14UnknownAlError_7errcode_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_14UnknownAlError_7errcode_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_14UnknownAlError_7errcode___get__(((struct __pyx_obj_4cyal_10exceptions_UnknownAlError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_14UnknownAlError_7errcode___get__(struct __pyx_obj_4cyal_10exceptions_UnknownAlError *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__get__", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_ALenum(__pyx_v_self->errcode); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 51, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlError.errcode.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_14UnknownAlError_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_14UnknownAlError_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_14UnknownAlError_6__reduce_cython__(((struct __pyx_obj_4cyal_10exceptions_UnknownAlError *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_14UnknownAlError_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_UnknownAlError *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__reduce_cython__", 0);
+
+  /* "(tree fragment)":2
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __PYX_ERR(1, 2, __pyx_L1_error)
+
+  /* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlError.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":3
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_14UnknownAlError_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4cyal_10exceptions_14UnknownAlError_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_14UnknownAlError_8__setstate_cython__(((struct __pyx_obj_4cyal_10exceptions_UnknownAlError *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_14UnknownAlError_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_10exceptions_UnknownAlError *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__setstate_cython__", 0);
+
+  /* "(tree fragment)":4
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __PYX_ERR(1, 4, __pyx_L1_error)
+
+  /* "(tree fragment)":3
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cyal.exceptions.UnknownAlError.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/exceptions.pyx":133
+ *         return string if string is not NULL else f"Unknown OpenAL error (code {self.errcode:X})"
+ * 
+ * cdef check_al_error():             # <<<<<<<<<<<<<<
+ *     cdef al.ALenum errcode = al.alGetError()
+ *     if errcode == al.AL_NO_ERROR:
+ */
+
+static PyObject *__pyx_f_4cyal_10exceptions_check_al_error(void) {
+  ALenum __pyx_v_errcode;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("check_al_error", 0);
+
+  /* "cyal/exceptions.pyx":134
+ * 
+ * cdef check_al_error():
+ *     cdef al.ALenum errcode = al.alGetError()             # <<<<<<<<<<<<<<
+ *     if errcode == al.AL_NO_ERROR:
+ *         return # Fast path
+ */
+  __pyx_v_errcode = alGetError();
+
+  /* "cyal/exceptions.pyx":135
+ * cdef check_al_error():
+ *     cdef al.ALenum errcode = al.alGetError()
+ *     if errcode == al.AL_NO_ERROR:             # <<<<<<<<<<<<<<
+ *         return # Fast path
+ *     elif errcode == al.AL_INVALID_NAME:
+ */
+  switch (__pyx_v_errcode) {
+    case AL_NO_ERROR:
+
+    /* "cyal/exceptions.pyx":136
+ *     cdef al.ALenum errcode = al.alGetError()
+ *     if errcode == al.AL_NO_ERROR:
+ *         return # Fast path             # <<<<<<<<<<<<<<
+ *     elif errcode == al.AL_INVALID_NAME:
+ *         raise InvalidNameError()
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+    goto __pyx_L0;
+
+    /* "cyal/exceptions.pyx":135
+ * cdef check_al_error():
+ *     cdef al.ALenum errcode = al.alGetError()
+ *     if errcode == al.AL_NO_ERROR:             # <<<<<<<<<<<<<<
+ *         return # Fast path
+ *     elif errcode == al.AL_INVALID_NAME:
+ */
+    break;
+    case AL_INVALID_NAME:
+
+    /* "cyal/exceptions.pyx":138
+ *         return # Fast path
+ *     elif errcode == al.AL_INVALID_NAME:
+ *         raise InvalidNameError()             # <<<<<<<<<<<<<<
+ *     elif errcode == al.AL_INVALID_ENUM:
+ *         raise InvalidAlEnumError()
+ */
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidNameError)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __PYX_ERR(0, 138, __pyx_L1_error)
+
+    /* "cyal/exceptions.pyx":137
+ *     if errcode == al.AL_NO_ERROR:
+ *         return # Fast path
+ *     elif errcode == al.AL_INVALID_NAME:             # <<<<<<<<<<<<<<
+ *         raise InvalidNameError()
+ *     elif errcode == al.AL_INVALID_ENUM:
+ */
+    break;
+    case AL_INVALID_ENUM:
+
+    /* "cyal/exceptions.pyx":140
+ *         raise InvalidNameError()
+ *     elif errcode == al.AL_INVALID_ENUM:
+ *         raise InvalidAlEnumError()             # <<<<<<<<<<<<<<
+ *     elif errcode == al.AL_INVALID_VALUE:
+ *         raise InvalidAlValueError()
+ */
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidAlEnumError)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __PYX_ERR(0, 140, __pyx_L1_error)
+
+    /* "cyal/exceptions.pyx":139
+ *     elif errcode == al.AL_INVALID_NAME:
+ *         raise InvalidNameError()
+ *     elif errcode == al.AL_INVALID_ENUM:             # <<<<<<<<<<<<<<
+ *         raise InvalidAlEnumError()
+ *     elif errcode == al.AL_INVALID_VALUE:
+ */
+    break;
+    case AL_INVALID_VALUE:
+
+    /* "cyal/exceptions.pyx":142
+ *         raise InvalidAlEnumError()
+ *     elif errcode == al.AL_INVALID_VALUE:
+ *         raise InvalidAlValueError()             # <<<<<<<<<<<<<<
+ *     elif errcode == al.AL_INVALID_OPERATION:
+ *         raise InvalidOperationError()
+ */
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidAlValueError)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __PYX_ERR(0, 142, __pyx_L1_error)
+
+    /* "cyal/exceptions.pyx":141
+ *     elif errcode == al.AL_INVALID_ENUM:
+ *         raise InvalidAlEnumError()
+ *     elif errcode == al.AL_INVALID_VALUE:             # <<<<<<<<<<<<<<
+ *         raise InvalidAlValueError()
+ *     elif errcode == al.AL_INVALID_OPERATION:
+ */
+    break;
+    case AL_INVALID_OPERATION:
+
+    /* "cyal/exceptions.pyx":144
+ *         raise InvalidAlValueError()
+ *     elif errcode == al.AL_INVALID_OPERATION:
+ *         raise InvalidOperationError()             # <<<<<<<<<<<<<<
+ *     elif errcode == al.AL_OUT_OF_MEMORY:
+ *         raise MemoryError()
+ */
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidOperationError)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __PYX_ERR(0, 144, __pyx_L1_error)
+
+    /* "cyal/exceptions.pyx":143
+ *     elif errcode == al.AL_INVALID_VALUE:
+ *         raise InvalidAlValueError()
+ *     elif errcode == al.AL_INVALID_OPERATION:             # <<<<<<<<<<<<<<
+ *         raise InvalidOperationError()
+ *     elif errcode == al.AL_OUT_OF_MEMORY:
+ */
+    break;
+    case AL_OUT_OF_MEMORY:
+
+    /* "cyal/exceptions.pyx":146
+ *         raise InvalidOperationError()
+ *     elif errcode == al.AL_OUT_OF_MEMORY:
+ *         raise MemoryError()             # <<<<<<<<<<<<<<
+ *     else:
+ *         raise UnknownAlError(al_errcode=errcode)
+ */
+    PyErr_NoMemory(); __PYX_ERR(0, 146, __pyx_L1_error)
+
+    /* "cyal/exceptions.pyx":145
+ *     elif errcode == al.AL_INVALID_OPERATION:
+ *         raise InvalidOperationError()
+ *     elif errcode == al.AL_OUT_OF_MEMORY:             # <<<<<<<<<<<<<<
+ *         raise MemoryError()
+ *     else:
+ */
+    break;
+    default:
+
+    /* "cyal/exceptions.pyx":148
+ *         raise MemoryError()
+ *     else:
+ *         raise UnknownAlError(al_errcode=errcode)             # <<<<<<<<<<<<<<
+ */
+    __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_2 = __Pyx_PyInt_From_ALenum(__pyx_v_errcode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_al_errcode, __pyx_t_2) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4cyal_10exceptions_UnknownAlError), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __PYX_ERR(0, 148, __pyx_L1_error)
+    break;
+  }
+
+  /* "cyal/exceptions.pyx":133
+ *         return string if string is not NULL else f"Unknown OpenAL error (code {self.errcode:X})"
+ * 
+ * cdef check_al_error():             # <<<<<<<<<<<<<<
+ *     cdef al.ALenum errcode = al.alGetError()
+ *     if errcode == al.AL_NO_ERROR:
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("cyal.exceptions.check_al_error", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -5157,7 +8086,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions___pyx_unpickle_CyalError(CYTHON_UNU
  */
   __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__6, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__8, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
@@ -5539,7 +8468,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_2__pyx_unpickle_AlcError(CYTHON_UNU
  */
   __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__6, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__8, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
@@ -5921,7 +8850,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_4__pyx_unpickle_InvalidDeviceError(
  */
   __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__6, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__8, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
@@ -6303,7 +9232,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_6__pyx_unpickle_InvalidContextError
  */
   __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__6, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__8, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
@@ -6579,15 +9508,15 @@ static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidContextError__
 }
 
 /* "(tree fragment)":1
- * def __pyx_unpickle_InvalidEnumError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ * def __pyx_unpickle_InvalidAlcEnumError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_9__pyx_unpickle_InvalidEnumError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_4cyal_10exceptions_9__pyx_unpickle_InvalidEnumError = {"__pyx_unpickle_InvalidEnumError", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_10exceptions_9__pyx_unpickle_InvalidEnumError, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_4cyal_10exceptions_9__pyx_unpickle_InvalidEnumError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_4cyal_10exceptions_9__pyx_unpickle_InvalidAlcEnumError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_4cyal_10exceptions_9__pyx_unpickle_InvalidAlcEnumError = {"__pyx_unpickle_InvalidAlcEnumError", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_10exceptions_9__pyx_unpickle_InvalidAlcEnumError, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4cyal_10exceptions_9__pyx_unpickle_InvalidAlcEnumError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v___pyx_type = 0;
   long __pyx_v___pyx_checksum;
   PyObject *__pyx_v___pyx_state = 0;
@@ -6596,7 +9525,7 @@ static PyObject *__pyx_pw_4cyal_10exceptions_9__pyx_unpickle_InvalidEnumError(Py
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidEnumError (wrapper)", 0);
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidAlcEnumError (wrapper)", 0);
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_pyx_type,&__pyx_n_s_pyx_checksum,&__pyx_n_s_pyx_state,0};
     PyObject* values[3] = {0,0,0};
@@ -6622,17 +9551,17 @@ static PyObject *__pyx_pw_4cyal_10exceptions_9__pyx_unpickle_InvalidEnumError(Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_checksum)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidEnumError", 1, 3, 3, 1); __PYX_ERR(1, 1, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidAlcEnumError", 1, 3, 3, 1); __PYX_ERR(1, 1, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_state)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidEnumError", 1, 3, 3, 2); __PYX_ERR(1, 1, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidAlcEnumError", 1, 3, 3, 2); __PYX_ERR(1, 1, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__pyx_unpickle_InvalidEnumError") < 0)) __PYX_ERR(1, 1, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__pyx_unpickle_InvalidAlcEnumError") < 0)) __PYX_ERR(1, 1, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -6647,20 +9576,20 @@ static PyObject *__pyx_pw_4cyal_10exceptions_9__pyx_unpickle_InvalidEnumError(Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidEnumError", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 1, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidAlcEnumError", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 1, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidEnumError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidAlcEnumError", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidEnumError(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidAlcEnumError(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidEnumError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidAlcEnumError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_v___pyx_PickleError = 0;
   PyObject *__pyx_v___pyx_result = 0;
   PyObject *__pyx_r = NULL;
@@ -6674,7 +9603,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidEnumError(CY
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidEnumError", 0);
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidAlcEnumError", 0);
 
   /* "(tree fragment)":4
  *     cdef object __pyx_PickleError
@@ -6685,7 +9614,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidEnumError(CY
  */
   __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__6, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__8, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
@@ -6695,7 +9624,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidEnumError(CY
  *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
  *         from pickle import PickleError as __pyx_PickleError             # <<<<<<<<<<<<<<
  *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
- *     __pyx_result = InvalidEnumError.__new__(__pyx_type)
+ *     __pyx_result = InvalidAlcEnumError.__new__(__pyx_type)
  */
     __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -6716,7 +9645,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidEnumError(CY
  *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
  *         from pickle import PickleError as __pyx_PickleError
  *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)             # <<<<<<<<<<<<<<
- *     __pyx_result = InvalidEnumError.__new__(__pyx_type)
+ *     __pyx_result = InvalidAlcEnumError.__new__(__pyx_type)
  *     if __pyx_state is not None:
  */
     __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
@@ -6757,11 +9686,11 @@ static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidEnumError(CY
   /* "(tree fragment)":7
  *         from pickle import PickleError as __pyx_PickleError
  *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
- *     __pyx_result = InvalidEnumError.__new__(__pyx_type)             # <<<<<<<<<<<<<<
+ *     __pyx_result = InvalidAlcEnumError.__new__(__pyx_type)             # <<<<<<<<<<<<<<
  *     if __pyx_state is not None:
- *         __pyx_unpickle_InvalidEnumError__set_state(<InvalidEnumError> __pyx_result, __pyx_state)
+ *         __pyx_unpickle_InvalidAlcEnumError__set_state(<InvalidAlcEnumError> __pyx_result, __pyx_state)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidEnumError), __pyx_n_s_new); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 7, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidAlcEnumError), __pyx_n_s_new); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -6783,9 +9712,9 @@ static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidEnumError(CY
 
   /* "(tree fragment)":8
  *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
- *     __pyx_result = InvalidEnumError.__new__(__pyx_type)
+ *     __pyx_result = InvalidAlcEnumError.__new__(__pyx_type)
  *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
- *         __pyx_unpickle_InvalidEnumError__set_state(<InvalidEnumError> __pyx_result, __pyx_state)
+ *         __pyx_unpickle_InvalidAlcEnumError__set_state(<InvalidAlcEnumError> __pyx_result, __pyx_state)
  *     return __pyx_result
  */
   __pyx_t_3 = (__pyx_v___pyx_state != Py_None);
@@ -6793,31 +9722,31 @@ static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidEnumError(CY
   if (__pyx_t_2) {
 
     /* "(tree fragment)":9
- *     __pyx_result = InvalidEnumError.__new__(__pyx_type)
+ *     __pyx_result = InvalidAlcEnumError.__new__(__pyx_type)
  *     if __pyx_state is not None:
- *         __pyx_unpickle_InvalidEnumError__set_state(<InvalidEnumError> __pyx_result, __pyx_state)             # <<<<<<<<<<<<<<
+ *         __pyx_unpickle_InvalidAlcEnumError__set_state(<InvalidAlcEnumError> __pyx_result, __pyx_state)             # <<<<<<<<<<<<<<
  *     return __pyx_result
- * cdef __pyx_unpickle_InvalidEnumError__set_state(InvalidEnumError __pyx_result, tuple __pyx_state):
+ * cdef __pyx_unpickle_InvalidAlcEnumError__set_state(InvalidAlcEnumError __pyx_result, tuple __pyx_state):
  */
     if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 9, __pyx_L1_error)
-    __pyx_t_4 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidEnumError__set_state(((struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 9, __pyx_L1_error)
+    __pyx_t_4 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlcEnumError__set_state(((struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 9, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
     /* "(tree fragment)":8
  *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
- *     __pyx_result = InvalidEnumError.__new__(__pyx_type)
+ *     __pyx_result = InvalidAlcEnumError.__new__(__pyx_type)
  *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
- *         __pyx_unpickle_InvalidEnumError__set_state(<InvalidEnumError> __pyx_result, __pyx_state)
+ *         __pyx_unpickle_InvalidAlcEnumError__set_state(<InvalidAlcEnumError> __pyx_result, __pyx_state)
  *     return __pyx_result
  */
   }
 
   /* "(tree fragment)":10
  *     if __pyx_state is not None:
- *         __pyx_unpickle_InvalidEnumError__set_state(<InvalidEnumError> __pyx_result, __pyx_state)
+ *         __pyx_unpickle_InvalidAlcEnumError__set_state(<InvalidAlcEnumError> __pyx_result, __pyx_state)
  *     return __pyx_result             # <<<<<<<<<<<<<<
- * cdef __pyx_unpickle_InvalidEnumError__set_state(InvalidEnumError __pyx_result, tuple __pyx_state):
+ * cdef __pyx_unpickle_InvalidAlcEnumError__set_state(InvalidAlcEnumError __pyx_result, tuple __pyx_state):
  *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -6826,7 +9755,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidEnumError(CY
   goto __pyx_L0;
 
   /* "(tree fragment)":1
- * def __pyx_unpickle_InvalidEnumError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ * def __pyx_unpickle_InvalidAlcEnumError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
  */
@@ -6837,7 +9766,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidEnumError(CY
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidEnumError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidAlcEnumError", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v___pyx_PickleError);
@@ -6848,14 +9777,14 @@ static PyObject *__pyx_pf_4cyal_10exceptions_8__pyx_unpickle_InvalidEnumError(CY
 }
 
 /* "(tree fragment)":11
- *         __pyx_unpickle_InvalidEnumError__set_state(<InvalidEnumError> __pyx_result, __pyx_state)
+ *         __pyx_unpickle_InvalidAlcEnumError__set_state(<InvalidAlcEnumError> __pyx_result, __pyx_state)
  *     return __pyx_result
- * cdef __pyx_unpickle_InvalidEnumError__set_state(InvalidEnumError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ * cdef __pyx_unpickle_InvalidAlcEnumError__set_state(InvalidAlcEnumError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
  *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
  *         __pyx_result.__dict__.update(__pyx_state[0])
  */
 
-static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidEnumError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidEnumError *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlcEnumError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -6869,11 +9798,11 @@ static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidEnumError__set
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidEnumError__set_state", 0);
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidAlcEnumError__set_state", 0);
 
   /* "(tree fragment)":12
  *     return __pyx_result
- * cdef __pyx_unpickle_InvalidEnumError__set_state(InvalidEnumError __pyx_result, tuple __pyx_state):
+ * cdef __pyx_unpickle_InvalidAlcEnumError__set_state(InvalidAlcEnumError __pyx_result, tuple __pyx_state):
  *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
  *         __pyx_result.__dict__.update(__pyx_state[0])
  */
@@ -6895,7 +9824,7 @@ static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidEnumError__set
   if (__pyx_t_1) {
 
     /* "(tree fragment)":13
- * cdef __pyx_unpickle_InvalidEnumError__set_state(InvalidEnumError __pyx_result, tuple __pyx_state):
+ * cdef __pyx_unpickle_InvalidAlcEnumError__set_state(InvalidAlcEnumError __pyx_result, tuple __pyx_state):
  *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
  *         __pyx_result.__dict__.update(__pyx_state[0])             # <<<<<<<<<<<<<<
  */
@@ -6930,16 +9859,16 @@ static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidEnumError__set
 
     /* "(tree fragment)":12
  *     return __pyx_result
- * cdef __pyx_unpickle_InvalidEnumError__set_state(InvalidEnumError __pyx_result, tuple __pyx_state):
+ * cdef __pyx_unpickle_InvalidAlcEnumError__set_state(InvalidAlcEnumError __pyx_result, tuple __pyx_state):
  *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
  *         __pyx_result.__dict__.update(__pyx_state[0])
  */
   }
 
   /* "(tree fragment)":11
- *         __pyx_unpickle_InvalidEnumError__set_state(<InvalidEnumError> __pyx_result, __pyx_state)
+ *         __pyx_unpickle_InvalidAlcEnumError__set_state(<InvalidAlcEnumError> __pyx_result, __pyx_state)
  *     return __pyx_result
- * cdef __pyx_unpickle_InvalidEnumError__set_state(InvalidEnumError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ * cdef __pyx_unpickle_InvalidAlcEnumError__set_state(InvalidAlcEnumError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
  *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
  *         __pyx_result.__dict__.update(__pyx_state[0])
  */
@@ -6952,7 +9881,7 @@ static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidEnumError__set
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidEnumError__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidAlcEnumError__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -6961,15 +9890,15 @@ static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidEnumError__set
 }
 
 /* "(tree fragment)":1
- * def __pyx_unpickle_InvalidValueError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ * def __pyx_unpickle_InvalidAlcValueError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_10exceptions_11__pyx_unpickle_InvalidValueError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_4cyal_10exceptions_11__pyx_unpickle_InvalidValueError = {"__pyx_unpickle_InvalidValueError", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_10exceptions_11__pyx_unpickle_InvalidValueError, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_4cyal_10exceptions_11__pyx_unpickle_InvalidValueError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_4cyal_10exceptions_11__pyx_unpickle_InvalidAlcValueError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_4cyal_10exceptions_11__pyx_unpickle_InvalidAlcValueError = {"__pyx_unpickle_InvalidAlcValueError", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_10exceptions_11__pyx_unpickle_InvalidAlcValueError, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4cyal_10exceptions_11__pyx_unpickle_InvalidAlcValueError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v___pyx_type = 0;
   long __pyx_v___pyx_checksum;
   PyObject *__pyx_v___pyx_state = 0;
@@ -6978,7 +9907,7 @@ static PyObject *__pyx_pw_4cyal_10exceptions_11__pyx_unpickle_InvalidValueError(
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidValueError (wrapper)", 0);
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidAlcValueError (wrapper)", 0);
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_pyx_type,&__pyx_n_s_pyx_checksum,&__pyx_n_s_pyx_state,0};
     PyObject* values[3] = {0,0,0};
@@ -7004,17 +9933,17 @@ static PyObject *__pyx_pw_4cyal_10exceptions_11__pyx_unpickle_InvalidValueError(
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_checksum)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidValueError", 1, 3, 3, 1); __PYX_ERR(1, 1, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidAlcValueError", 1, 3, 3, 1); __PYX_ERR(1, 1, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_state)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidValueError", 1, 3, 3, 2); __PYX_ERR(1, 1, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidAlcValueError", 1, 3, 3, 2); __PYX_ERR(1, 1, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__pyx_unpickle_InvalidValueError") < 0)) __PYX_ERR(1, 1, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__pyx_unpickle_InvalidAlcValueError") < 0)) __PYX_ERR(1, 1, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -7029,20 +9958,20 @@ static PyObject *__pyx_pw_4cyal_10exceptions_11__pyx_unpickle_InvalidValueError(
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidValueError", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 1, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidAlcValueError", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 1, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidValueError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidAlcValueError", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidValueError(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
+  __pyx_r = __pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidAlcValueError(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidValueError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidAlcValueError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_v___pyx_PickleError = 0;
   PyObject *__pyx_v___pyx_result = 0;
   PyObject *__pyx_r = NULL;
@@ -7056,7 +9985,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidValueError(
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidValueError", 0);
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidAlcValueError", 0);
 
   /* "(tree fragment)":4
  *     cdef object __pyx_PickleError
@@ -7067,7 +9996,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidValueError(
  */
   __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__6, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__8, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
@@ -7077,7 +10006,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidValueError(
  *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
  *         from pickle import PickleError as __pyx_PickleError             # <<<<<<<<<<<<<<
  *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
- *     __pyx_result = InvalidValueError.__new__(__pyx_type)
+ *     __pyx_result = InvalidAlcValueError.__new__(__pyx_type)
  */
     __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -7098,7 +10027,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidValueError(
  *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
  *         from pickle import PickleError as __pyx_PickleError
  *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)             # <<<<<<<<<<<<<<
- *     __pyx_result = InvalidValueError.__new__(__pyx_type)
+ *     __pyx_result = InvalidAlcValueError.__new__(__pyx_type)
  *     if __pyx_state is not None:
  */
     __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
@@ -7139,11 +10068,11 @@ static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidValueError(
   /* "(tree fragment)":7
  *         from pickle import PickleError as __pyx_PickleError
  *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
- *     __pyx_result = InvalidValueError.__new__(__pyx_type)             # <<<<<<<<<<<<<<
+ *     __pyx_result = InvalidAlcValueError.__new__(__pyx_type)             # <<<<<<<<<<<<<<
  *     if __pyx_state is not None:
- *         __pyx_unpickle_InvalidValueError__set_state(<InvalidValueError> __pyx_result, __pyx_state)
+ *         __pyx_unpickle_InvalidAlcValueError__set_state(<InvalidAlcValueError> __pyx_result, __pyx_state)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidValueError), __pyx_n_s_new); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 7, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidAlcValueError), __pyx_n_s_new); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -7165,9 +10094,9 @@ static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidValueError(
 
   /* "(tree fragment)":8
  *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
- *     __pyx_result = InvalidValueError.__new__(__pyx_type)
+ *     __pyx_result = InvalidAlcValueError.__new__(__pyx_type)
  *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
- *         __pyx_unpickle_InvalidValueError__set_state(<InvalidValueError> __pyx_result, __pyx_state)
+ *         __pyx_unpickle_InvalidAlcValueError__set_state(<InvalidAlcValueError> __pyx_result, __pyx_state)
  *     return __pyx_result
  */
   __pyx_t_3 = (__pyx_v___pyx_state != Py_None);
@@ -7175,31 +10104,31 @@ static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidValueError(
   if (__pyx_t_2) {
 
     /* "(tree fragment)":9
- *     __pyx_result = InvalidValueError.__new__(__pyx_type)
+ *     __pyx_result = InvalidAlcValueError.__new__(__pyx_type)
  *     if __pyx_state is not None:
- *         __pyx_unpickle_InvalidValueError__set_state(<InvalidValueError> __pyx_result, __pyx_state)             # <<<<<<<<<<<<<<
+ *         __pyx_unpickle_InvalidAlcValueError__set_state(<InvalidAlcValueError> __pyx_result, __pyx_state)             # <<<<<<<<<<<<<<
  *     return __pyx_result
- * cdef __pyx_unpickle_InvalidValueError__set_state(InvalidValueError __pyx_result, tuple __pyx_state):
+ * cdef __pyx_unpickle_InvalidAlcValueError__set_state(InvalidAlcValueError __pyx_result, tuple __pyx_state):
  */
     if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 9, __pyx_L1_error)
-    __pyx_t_4 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidValueError__set_state(((struct __pyx_obj_4cyal_10exceptions_InvalidValueError *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 9, __pyx_L1_error)
+    __pyx_t_4 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlcValueError__set_state(((struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 9, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
     /* "(tree fragment)":8
  *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
- *     __pyx_result = InvalidValueError.__new__(__pyx_type)
+ *     __pyx_result = InvalidAlcValueError.__new__(__pyx_type)
  *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
- *         __pyx_unpickle_InvalidValueError__set_state(<InvalidValueError> __pyx_result, __pyx_state)
+ *         __pyx_unpickle_InvalidAlcValueError__set_state(<InvalidAlcValueError> __pyx_result, __pyx_state)
  *     return __pyx_result
  */
   }
 
   /* "(tree fragment)":10
  *     if __pyx_state is not None:
- *         __pyx_unpickle_InvalidValueError__set_state(<InvalidValueError> __pyx_result, __pyx_state)
+ *         __pyx_unpickle_InvalidAlcValueError__set_state(<InvalidAlcValueError> __pyx_result, __pyx_state)
  *     return __pyx_result             # <<<<<<<<<<<<<<
- * cdef __pyx_unpickle_InvalidValueError__set_state(InvalidValueError __pyx_result, tuple __pyx_state):
+ * cdef __pyx_unpickle_InvalidAlcValueError__set_state(InvalidAlcValueError __pyx_result, tuple __pyx_state):
  *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -7208,7 +10137,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidValueError(
   goto __pyx_L0;
 
   /* "(tree fragment)":1
- * def __pyx_unpickle_InvalidValueError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ * def __pyx_unpickle_InvalidAlcValueError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
  */
@@ -7219,7 +10148,7 @@ static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidValueError(
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidValueError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidAlcValueError", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v___pyx_PickleError);
@@ -7230,14 +10159,14 @@ static PyObject *__pyx_pf_4cyal_10exceptions_10__pyx_unpickle_InvalidValueError(
 }
 
 /* "(tree fragment)":11
- *         __pyx_unpickle_InvalidValueError__set_state(<InvalidValueError> __pyx_result, __pyx_state)
+ *         __pyx_unpickle_InvalidAlcValueError__set_state(<InvalidAlcValueError> __pyx_result, __pyx_state)
  *     return __pyx_result
- * cdef __pyx_unpickle_InvalidValueError__set_state(InvalidValueError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ * cdef __pyx_unpickle_InvalidAlcValueError__set_state(InvalidAlcValueError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
  *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
  *         __pyx_result.__dict__.update(__pyx_state[0])
  */
 
-static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidValueError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidValueError *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlcValueError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -7251,11 +10180,11 @@ static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidValueError__se
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidValueError__set_state", 0);
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidAlcValueError__set_state", 0);
 
   /* "(tree fragment)":12
  *     return __pyx_result
- * cdef __pyx_unpickle_InvalidValueError__set_state(InvalidValueError __pyx_result, tuple __pyx_state):
+ * cdef __pyx_unpickle_InvalidAlcValueError__set_state(InvalidAlcValueError __pyx_result, tuple __pyx_state):
  *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
  *         __pyx_result.__dict__.update(__pyx_state[0])
  */
@@ -7277,7 +10206,7 @@ static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidValueError__se
   if (__pyx_t_1) {
 
     /* "(tree fragment)":13
- * cdef __pyx_unpickle_InvalidValueError__set_state(InvalidValueError __pyx_result, tuple __pyx_state):
+ * cdef __pyx_unpickle_InvalidAlcValueError__set_state(InvalidAlcValueError __pyx_result, tuple __pyx_state):
  *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
  *         __pyx_result.__dict__.update(__pyx_state[0])             # <<<<<<<<<<<<<<
  */
@@ -7312,16 +10241,16 @@ static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidValueError__se
 
     /* "(tree fragment)":12
  *     return __pyx_result
- * cdef __pyx_unpickle_InvalidValueError__set_state(InvalidValueError __pyx_result, tuple __pyx_state):
+ * cdef __pyx_unpickle_InvalidAlcValueError__set_state(InvalidAlcValueError __pyx_result, tuple __pyx_state):
  *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
  *         __pyx_result.__dict__.update(__pyx_state[0])
  */
   }
 
   /* "(tree fragment)":11
- *         __pyx_unpickle_InvalidValueError__set_state(<InvalidValueError> __pyx_result, __pyx_state)
+ *         __pyx_unpickle_InvalidAlcValueError__set_state(<InvalidAlcValueError> __pyx_result, __pyx_state)
  *     return __pyx_result
- * cdef __pyx_unpickle_InvalidValueError__set_state(InvalidValueError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ * cdef __pyx_unpickle_InvalidAlcValueError__set_state(InvalidAlcValueError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
  *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
  *         __pyx_result.__dict__.update(__pyx_state[0])
  */
@@ -7334,7 +10263,1917 @@ static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidValueError__se
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidValueError__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidAlcValueError__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __pyx_unpickle_AlError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_13__pyx_unpickle_AlError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_4cyal_10exceptions_13__pyx_unpickle_AlError = {"__pyx_unpickle_AlError", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_10exceptions_13__pyx_unpickle_AlError, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4cyal_10exceptions_13__pyx_unpickle_AlError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v___pyx_type = 0;
+  long __pyx_v___pyx_checksum;
+  PyObject *__pyx_v___pyx_state = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__pyx_unpickle_AlError (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_pyx_type,&__pyx_n_s_pyx_checksum,&__pyx_n_s_pyx_state,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_type)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_checksum)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_AlError", 1, 3, 3, 1); __PYX_ERR(1, 1, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_state)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_AlError", 1, 3, 3, 2); __PYX_ERR(1, 1, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__pyx_unpickle_AlError") < 0)) __PYX_ERR(1, 1, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v___pyx_type = values[0];
+    __pyx_v___pyx_checksum = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v___pyx_checksum == (long)-1) && PyErr_Occurred())) __PYX_ERR(1, 1, __pyx_L3_error)
+    __pyx_v___pyx_state = values[2];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_AlError", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 1, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_AlError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_4cyal_10exceptions_12__pyx_unpickle_AlError(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_12__pyx_unpickle_AlError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_v___pyx_PickleError = 0;
+  PyObject *__pyx_v___pyx_result = 0;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__pyx_unpickle_AlError", 0);
+
+  /* "(tree fragment)":4
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):             # <<<<<<<<<<<<<<
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ */
+  __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__8, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":5
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
+ *         from pickle import PickleError as __pyx_PickleError             # <<<<<<<<<<<<<<
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = AlError.__new__(__pyx_type)
+ */
+    __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_n_s_PickleError);
+    __Pyx_GIVEREF(__pyx_n_s_PickleError);
+    PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_PickleError);
+    __pyx_t_4 = __Pyx_Import(__pyx_n_s_pickle, __pyx_t_1, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_4, __pyx_n_s_PickleError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_t_1);
+    __pyx_v___pyx_PickleError = __pyx_t_1;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "(tree fragment)":6
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)             # <<<<<<<<<<<<<<
+ *     __pyx_result = AlError.__new__(__pyx_type)
+ *     if __pyx_state is not None:
+ */
+    __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_Incompatible_checksums_0x_x_vs_0, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_INCREF(__pyx_v___pyx_PickleError);
+    __pyx_t_1 = __pyx_v___pyx_PickleError; __pyx_t_6 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
+      __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_1);
+      if (likely(__pyx_t_6)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+        __Pyx_INCREF(__pyx_t_6);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_1, function);
+      }
+    }
+    __pyx_t_4 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_6, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_Raise(__pyx_t_4, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __PYX_ERR(1, 6, __pyx_L1_error)
+
+    /* "(tree fragment)":4
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):             # <<<<<<<<<<<<<<
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ */
+  }
+
+  /* "(tree fragment)":7
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = AlError.__new__(__pyx_type)             # <<<<<<<<<<<<<<
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_AlError__set_state(<AlError> __pyx_result, __pyx_state)
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_4cyal_10exceptions_AlError), __pyx_n_s_new); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+    }
+  }
+  __pyx_t_4 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_5, __pyx_v___pyx_type) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v___pyx_type);
+  __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v___pyx_result = __pyx_t_4;
+  __pyx_t_4 = 0;
+
+  /* "(tree fragment)":8
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = AlError.__new__(__pyx_type)
+ *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
+ *         __pyx_unpickle_AlError__set_state(<AlError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ */
+  __pyx_t_3 = (__pyx_v___pyx_state != Py_None);
+  __pyx_t_2 = (__pyx_t_3 != 0);
+  if (__pyx_t_2) {
+
+    /* "(tree fragment)":9
+ *     __pyx_result = AlError.__new__(__pyx_type)
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_AlError__set_state(<AlError> __pyx_result, __pyx_state)             # <<<<<<<<<<<<<<
+ *     return __pyx_result
+ * cdef __pyx_unpickle_AlError__set_state(AlError __pyx_result, tuple __pyx_state):
+ */
+    if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 9, __pyx_L1_error)
+    __pyx_t_4 = __pyx_f_4cyal_10exceptions___pyx_unpickle_AlError__set_state(((struct __pyx_obj_4cyal_10exceptions_AlError *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 9, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "(tree fragment)":8
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = AlError.__new__(__pyx_type)
+ *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
+ *         __pyx_unpickle_AlError__set_state(<AlError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ */
+  }
+
+  /* "(tree fragment)":10
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_AlError__set_state(<AlError> __pyx_result, __pyx_state)
+ *     return __pyx_result             # <<<<<<<<<<<<<<
+ * cdef __pyx_unpickle_AlError__set_state(AlError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v___pyx_result);
+  __pyx_r = __pyx_v___pyx_result;
+  goto __pyx_L0;
+
+  /* "(tree fragment)":1
+ * def __pyx_unpickle_AlError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_AlError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v___pyx_PickleError);
+  __Pyx_XDECREF(__pyx_v___pyx_result);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":11
+ *         __pyx_unpickle_AlError__set_state(<AlError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ * cdef __pyx_unpickle_AlError__set_state(AlError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_AlError__set_state(struct __pyx_obj_4cyal_10exceptions_AlError *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  Py_ssize_t __pyx_t_2;
+  int __pyx_t_3;
+  int __pyx_t_4;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__pyx_unpickle_AlError__set_state", 0);
+
+  /* "(tree fragment)":12
+ *     return __pyx_result
+ * cdef __pyx_unpickle_AlError__set_state(AlError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+  if (unlikely(__pyx_v___pyx_state == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
+    __PYX_ERR(1, 12, __pyx_L1_error)
+  }
+  __pyx_t_2 = PyTuple_GET_SIZE(__pyx_v___pyx_state); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_3 = ((__pyx_t_2 > 0) != 0);
+  if (__pyx_t_3) {
+  } else {
+    __pyx_t_1 = __pyx_t_3;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = __Pyx_HasAttr(((PyObject *)__pyx_v___pyx_result), __pyx_n_s_dict); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_4 = (__pyx_t_3 != 0);
+  __pyx_t_1 = __pyx_t_4;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "(tree fragment)":13
+ * cdef __pyx_unpickle_AlError__set_state(AlError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])             # <<<<<<<<<<<<<<
+ */
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v___pyx_result), __pyx_n_s_dict); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_update); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(__pyx_v___pyx_state == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      __PYX_ERR(1, 13, __pyx_L1_error)
+    }
+    __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_8 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
+      __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_7);
+      if (likely(__pyx_t_8)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
+        __Pyx_INCREF(__pyx_t_8);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_7, function);
+      }
+    }
+    __pyx_t_5 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_8, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+    /* "(tree fragment)":12
+ *     return __pyx_result
+ * cdef __pyx_unpickle_AlError__set_state(AlError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+  }
+
+  /* "(tree fragment)":11
+ *         __pyx_unpickle_AlError__set_state(<AlError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ * cdef __pyx_unpickle_AlError__set_state(AlError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_AlError__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __pyx_unpickle_InvalidNameError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_15__pyx_unpickle_InvalidNameError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_4cyal_10exceptions_15__pyx_unpickle_InvalidNameError = {"__pyx_unpickle_InvalidNameError", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_10exceptions_15__pyx_unpickle_InvalidNameError, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4cyal_10exceptions_15__pyx_unpickle_InvalidNameError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v___pyx_type = 0;
+  long __pyx_v___pyx_checksum;
+  PyObject *__pyx_v___pyx_state = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidNameError (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_pyx_type,&__pyx_n_s_pyx_checksum,&__pyx_n_s_pyx_state,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_type)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_checksum)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidNameError", 1, 3, 3, 1); __PYX_ERR(1, 1, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_state)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidNameError", 1, 3, 3, 2); __PYX_ERR(1, 1, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__pyx_unpickle_InvalidNameError") < 0)) __PYX_ERR(1, 1, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v___pyx_type = values[0];
+    __pyx_v___pyx_checksum = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v___pyx_checksum == (long)-1) && PyErr_Occurred())) __PYX_ERR(1, 1, __pyx_L3_error)
+    __pyx_v___pyx_state = values[2];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidNameError", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 1, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidNameError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_4cyal_10exceptions_14__pyx_unpickle_InvalidNameError(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_14__pyx_unpickle_InvalidNameError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_v___pyx_PickleError = 0;
+  PyObject *__pyx_v___pyx_result = 0;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidNameError", 0);
+
+  /* "(tree fragment)":4
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):             # <<<<<<<<<<<<<<
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ */
+  __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__8, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":5
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
+ *         from pickle import PickleError as __pyx_PickleError             # <<<<<<<<<<<<<<
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidNameError.__new__(__pyx_type)
+ */
+    __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_n_s_PickleError);
+    __Pyx_GIVEREF(__pyx_n_s_PickleError);
+    PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_PickleError);
+    __pyx_t_4 = __Pyx_Import(__pyx_n_s_pickle, __pyx_t_1, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_4, __pyx_n_s_PickleError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_t_1);
+    __pyx_v___pyx_PickleError = __pyx_t_1;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "(tree fragment)":6
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)             # <<<<<<<<<<<<<<
+ *     __pyx_result = InvalidNameError.__new__(__pyx_type)
+ *     if __pyx_state is not None:
+ */
+    __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_Incompatible_checksums_0x_x_vs_0, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_INCREF(__pyx_v___pyx_PickleError);
+    __pyx_t_1 = __pyx_v___pyx_PickleError; __pyx_t_6 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
+      __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_1);
+      if (likely(__pyx_t_6)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+        __Pyx_INCREF(__pyx_t_6);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_1, function);
+      }
+    }
+    __pyx_t_4 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_6, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_Raise(__pyx_t_4, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __PYX_ERR(1, 6, __pyx_L1_error)
+
+    /* "(tree fragment)":4
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):             # <<<<<<<<<<<<<<
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ */
+  }
+
+  /* "(tree fragment)":7
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidNameError.__new__(__pyx_type)             # <<<<<<<<<<<<<<
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_InvalidNameError__set_state(<InvalidNameError> __pyx_result, __pyx_state)
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidNameError), __pyx_n_s_new); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+    }
+  }
+  __pyx_t_4 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_5, __pyx_v___pyx_type) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v___pyx_type);
+  __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v___pyx_result = __pyx_t_4;
+  __pyx_t_4 = 0;
+
+  /* "(tree fragment)":8
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidNameError.__new__(__pyx_type)
+ *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
+ *         __pyx_unpickle_InvalidNameError__set_state(<InvalidNameError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ */
+  __pyx_t_3 = (__pyx_v___pyx_state != Py_None);
+  __pyx_t_2 = (__pyx_t_3 != 0);
+  if (__pyx_t_2) {
+
+    /* "(tree fragment)":9
+ *     __pyx_result = InvalidNameError.__new__(__pyx_type)
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_InvalidNameError__set_state(<InvalidNameError> __pyx_result, __pyx_state)             # <<<<<<<<<<<<<<
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidNameError__set_state(InvalidNameError __pyx_result, tuple __pyx_state):
+ */
+    if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 9, __pyx_L1_error)
+    __pyx_t_4 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidNameError__set_state(((struct __pyx_obj_4cyal_10exceptions_InvalidNameError *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 9, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "(tree fragment)":8
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidNameError.__new__(__pyx_type)
+ *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
+ *         __pyx_unpickle_InvalidNameError__set_state(<InvalidNameError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ */
+  }
+
+  /* "(tree fragment)":10
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_InvalidNameError__set_state(<InvalidNameError> __pyx_result, __pyx_state)
+ *     return __pyx_result             # <<<<<<<<<<<<<<
+ * cdef __pyx_unpickle_InvalidNameError__set_state(InvalidNameError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v___pyx_result);
+  __pyx_r = __pyx_v___pyx_result;
+  goto __pyx_L0;
+
+  /* "(tree fragment)":1
+ * def __pyx_unpickle_InvalidNameError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidNameError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v___pyx_PickleError);
+  __Pyx_XDECREF(__pyx_v___pyx_result);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":11
+ *         __pyx_unpickle_InvalidNameError__set_state(<InvalidNameError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidNameError__set_state(InvalidNameError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidNameError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidNameError *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  Py_ssize_t __pyx_t_2;
+  int __pyx_t_3;
+  int __pyx_t_4;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidNameError__set_state", 0);
+
+  /* "(tree fragment)":12
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidNameError__set_state(InvalidNameError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+  if (unlikely(__pyx_v___pyx_state == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
+    __PYX_ERR(1, 12, __pyx_L1_error)
+  }
+  __pyx_t_2 = PyTuple_GET_SIZE(__pyx_v___pyx_state); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_3 = ((__pyx_t_2 > 0) != 0);
+  if (__pyx_t_3) {
+  } else {
+    __pyx_t_1 = __pyx_t_3;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = __Pyx_HasAttr(((PyObject *)__pyx_v___pyx_result), __pyx_n_s_dict); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_4 = (__pyx_t_3 != 0);
+  __pyx_t_1 = __pyx_t_4;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "(tree fragment)":13
+ * cdef __pyx_unpickle_InvalidNameError__set_state(InvalidNameError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])             # <<<<<<<<<<<<<<
+ */
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v___pyx_result), __pyx_n_s_dict); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_update); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(__pyx_v___pyx_state == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      __PYX_ERR(1, 13, __pyx_L1_error)
+    }
+    __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_8 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
+      __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_7);
+      if (likely(__pyx_t_8)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
+        __Pyx_INCREF(__pyx_t_8);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_7, function);
+      }
+    }
+    __pyx_t_5 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_8, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+    /* "(tree fragment)":12
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidNameError__set_state(InvalidNameError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+  }
+
+  /* "(tree fragment)":11
+ *         __pyx_unpickle_InvalidNameError__set_state(<InvalidNameError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidNameError__set_state(InvalidNameError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidNameError__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __pyx_unpickle_InvalidOperationError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_17__pyx_unpickle_InvalidOperationError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_4cyal_10exceptions_17__pyx_unpickle_InvalidOperationError = {"__pyx_unpickle_InvalidOperationError", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_10exceptions_17__pyx_unpickle_InvalidOperationError, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4cyal_10exceptions_17__pyx_unpickle_InvalidOperationError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v___pyx_type = 0;
+  long __pyx_v___pyx_checksum;
+  PyObject *__pyx_v___pyx_state = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidOperationError (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_pyx_type,&__pyx_n_s_pyx_checksum,&__pyx_n_s_pyx_state,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_type)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_checksum)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidOperationError", 1, 3, 3, 1); __PYX_ERR(1, 1, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_state)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidOperationError", 1, 3, 3, 2); __PYX_ERR(1, 1, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__pyx_unpickle_InvalidOperationError") < 0)) __PYX_ERR(1, 1, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v___pyx_type = values[0];
+    __pyx_v___pyx_checksum = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v___pyx_checksum == (long)-1) && PyErr_Occurred())) __PYX_ERR(1, 1, __pyx_L3_error)
+    __pyx_v___pyx_state = values[2];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidOperationError", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 1, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidOperationError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_4cyal_10exceptions_16__pyx_unpickle_InvalidOperationError(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_16__pyx_unpickle_InvalidOperationError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_v___pyx_PickleError = 0;
+  PyObject *__pyx_v___pyx_result = 0;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidOperationError", 0);
+
+  /* "(tree fragment)":4
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):             # <<<<<<<<<<<<<<
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ */
+  __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__8, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":5
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
+ *         from pickle import PickleError as __pyx_PickleError             # <<<<<<<<<<<<<<
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidOperationError.__new__(__pyx_type)
+ */
+    __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_n_s_PickleError);
+    __Pyx_GIVEREF(__pyx_n_s_PickleError);
+    PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_PickleError);
+    __pyx_t_4 = __Pyx_Import(__pyx_n_s_pickle, __pyx_t_1, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_4, __pyx_n_s_PickleError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_t_1);
+    __pyx_v___pyx_PickleError = __pyx_t_1;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "(tree fragment)":6
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)             # <<<<<<<<<<<<<<
+ *     __pyx_result = InvalidOperationError.__new__(__pyx_type)
+ *     if __pyx_state is not None:
+ */
+    __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_Incompatible_checksums_0x_x_vs_0, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_INCREF(__pyx_v___pyx_PickleError);
+    __pyx_t_1 = __pyx_v___pyx_PickleError; __pyx_t_6 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
+      __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_1);
+      if (likely(__pyx_t_6)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+        __Pyx_INCREF(__pyx_t_6);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_1, function);
+      }
+    }
+    __pyx_t_4 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_6, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_Raise(__pyx_t_4, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __PYX_ERR(1, 6, __pyx_L1_error)
+
+    /* "(tree fragment)":4
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):             # <<<<<<<<<<<<<<
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ */
+  }
+
+  /* "(tree fragment)":7
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidOperationError.__new__(__pyx_type)             # <<<<<<<<<<<<<<
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_InvalidOperationError__set_state(<InvalidOperationError> __pyx_result, __pyx_state)
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidOperationError), __pyx_n_s_new); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+    }
+  }
+  __pyx_t_4 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_5, __pyx_v___pyx_type) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v___pyx_type);
+  __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v___pyx_result = __pyx_t_4;
+  __pyx_t_4 = 0;
+
+  /* "(tree fragment)":8
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidOperationError.__new__(__pyx_type)
+ *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
+ *         __pyx_unpickle_InvalidOperationError__set_state(<InvalidOperationError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ */
+  __pyx_t_3 = (__pyx_v___pyx_state != Py_None);
+  __pyx_t_2 = (__pyx_t_3 != 0);
+  if (__pyx_t_2) {
+
+    /* "(tree fragment)":9
+ *     __pyx_result = InvalidOperationError.__new__(__pyx_type)
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_InvalidOperationError__set_state(<InvalidOperationError> __pyx_result, __pyx_state)             # <<<<<<<<<<<<<<
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidOperationError__set_state(InvalidOperationError __pyx_result, tuple __pyx_state):
+ */
+    if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 9, __pyx_L1_error)
+    __pyx_t_4 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidOperationError__set_state(((struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 9, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "(tree fragment)":8
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidOperationError.__new__(__pyx_type)
+ *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
+ *         __pyx_unpickle_InvalidOperationError__set_state(<InvalidOperationError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ */
+  }
+
+  /* "(tree fragment)":10
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_InvalidOperationError__set_state(<InvalidOperationError> __pyx_result, __pyx_state)
+ *     return __pyx_result             # <<<<<<<<<<<<<<
+ * cdef __pyx_unpickle_InvalidOperationError__set_state(InvalidOperationError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v___pyx_result);
+  __pyx_r = __pyx_v___pyx_result;
+  goto __pyx_L0;
+
+  /* "(tree fragment)":1
+ * def __pyx_unpickle_InvalidOperationError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidOperationError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v___pyx_PickleError);
+  __Pyx_XDECREF(__pyx_v___pyx_result);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":11
+ *         __pyx_unpickle_InvalidOperationError__set_state(<InvalidOperationError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidOperationError__set_state(InvalidOperationError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidOperationError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidOperationError *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  Py_ssize_t __pyx_t_2;
+  int __pyx_t_3;
+  int __pyx_t_4;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidOperationError__set_state", 0);
+
+  /* "(tree fragment)":12
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidOperationError__set_state(InvalidOperationError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+  if (unlikely(__pyx_v___pyx_state == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
+    __PYX_ERR(1, 12, __pyx_L1_error)
+  }
+  __pyx_t_2 = PyTuple_GET_SIZE(__pyx_v___pyx_state); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_3 = ((__pyx_t_2 > 0) != 0);
+  if (__pyx_t_3) {
+  } else {
+    __pyx_t_1 = __pyx_t_3;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = __Pyx_HasAttr(((PyObject *)__pyx_v___pyx_result), __pyx_n_s_dict); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_4 = (__pyx_t_3 != 0);
+  __pyx_t_1 = __pyx_t_4;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "(tree fragment)":13
+ * cdef __pyx_unpickle_InvalidOperationError__set_state(InvalidOperationError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])             # <<<<<<<<<<<<<<
+ */
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v___pyx_result), __pyx_n_s_dict); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_update); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(__pyx_v___pyx_state == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      __PYX_ERR(1, 13, __pyx_L1_error)
+    }
+    __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_8 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
+      __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_7);
+      if (likely(__pyx_t_8)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
+        __Pyx_INCREF(__pyx_t_8);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_7, function);
+      }
+    }
+    __pyx_t_5 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_8, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+    /* "(tree fragment)":12
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidOperationError__set_state(InvalidOperationError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+  }
+
+  /* "(tree fragment)":11
+ *         __pyx_unpickle_InvalidOperationError__set_state(<InvalidOperationError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidOperationError__set_state(InvalidOperationError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidOperationError__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __pyx_unpickle_InvalidAlEnumError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_19__pyx_unpickle_InvalidAlEnumError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_4cyal_10exceptions_19__pyx_unpickle_InvalidAlEnumError = {"__pyx_unpickle_InvalidAlEnumError", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_10exceptions_19__pyx_unpickle_InvalidAlEnumError, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4cyal_10exceptions_19__pyx_unpickle_InvalidAlEnumError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v___pyx_type = 0;
+  long __pyx_v___pyx_checksum;
+  PyObject *__pyx_v___pyx_state = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidAlEnumError (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_pyx_type,&__pyx_n_s_pyx_checksum,&__pyx_n_s_pyx_state,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_type)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_checksum)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidAlEnumError", 1, 3, 3, 1); __PYX_ERR(1, 1, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_state)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidAlEnumError", 1, 3, 3, 2); __PYX_ERR(1, 1, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__pyx_unpickle_InvalidAlEnumError") < 0)) __PYX_ERR(1, 1, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v___pyx_type = values[0];
+    __pyx_v___pyx_checksum = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v___pyx_checksum == (long)-1) && PyErr_Occurred())) __PYX_ERR(1, 1, __pyx_L3_error)
+    __pyx_v___pyx_state = values[2];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidAlEnumError", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 1, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidAlEnumError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_4cyal_10exceptions_18__pyx_unpickle_InvalidAlEnumError(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_18__pyx_unpickle_InvalidAlEnumError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_v___pyx_PickleError = 0;
+  PyObject *__pyx_v___pyx_result = 0;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidAlEnumError", 0);
+
+  /* "(tree fragment)":4
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):             # <<<<<<<<<<<<<<
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ */
+  __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__8, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":5
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
+ *         from pickle import PickleError as __pyx_PickleError             # <<<<<<<<<<<<<<
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidAlEnumError.__new__(__pyx_type)
+ */
+    __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_n_s_PickleError);
+    __Pyx_GIVEREF(__pyx_n_s_PickleError);
+    PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_PickleError);
+    __pyx_t_4 = __Pyx_Import(__pyx_n_s_pickle, __pyx_t_1, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_4, __pyx_n_s_PickleError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_t_1);
+    __pyx_v___pyx_PickleError = __pyx_t_1;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "(tree fragment)":6
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)             # <<<<<<<<<<<<<<
+ *     __pyx_result = InvalidAlEnumError.__new__(__pyx_type)
+ *     if __pyx_state is not None:
+ */
+    __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_Incompatible_checksums_0x_x_vs_0, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_INCREF(__pyx_v___pyx_PickleError);
+    __pyx_t_1 = __pyx_v___pyx_PickleError; __pyx_t_6 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
+      __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_1);
+      if (likely(__pyx_t_6)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+        __Pyx_INCREF(__pyx_t_6);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_1, function);
+      }
+    }
+    __pyx_t_4 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_6, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_Raise(__pyx_t_4, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __PYX_ERR(1, 6, __pyx_L1_error)
+
+    /* "(tree fragment)":4
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):             # <<<<<<<<<<<<<<
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ */
+  }
+
+  /* "(tree fragment)":7
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidAlEnumError.__new__(__pyx_type)             # <<<<<<<<<<<<<<
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_InvalidAlEnumError__set_state(<InvalidAlEnumError> __pyx_result, __pyx_state)
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidAlEnumError), __pyx_n_s_new); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+    }
+  }
+  __pyx_t_4 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_5, __pyx_v___pyx_type) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v___pyx_type);
+  __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v___pyx_result = __pyx_t_4;
+  __pyx_t_4 = 0;
+
+  /* "(tree fragment)":8
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidAlEnumError.__new__(__pyx_type)
+ *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
+ *         __pyx_unpickle_InvalidAlEnumError__set_state(<InvalidAlEnumError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ */
+  __pyx_t_3 = (__pyx_v___pyx_state != Py_None);
+  __pyx_t_2 = (__pyx_t_3 != 0);
+  if (__pyx_t_2) {
+
+    /* "(tree fragment)":9
+ *     __pyx_result = InvalidAlEnumError.__new__(__pyx_type)
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_InvalidAlEnumError__set_state(<InvalidAlEnumError> __pyx_result, __pyx_state)             # <<<<<<<<<<<<<<
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidAlEnumError__set_state(InvalidAlEnumError __pyx_result, tuple __pyx_state):
+ */
+    if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 9, __pyx_L1_error)
+    __pyx_t_4 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlEnumError__set_state(((struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 9, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "(tree fragment)":8
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidAlEnumError.__new__(__pyx_type)
+ *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
+ *         __pyx_unpickle_InvalidAlEnumError__set_state(<InvalidAlEnumError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ */
+  }
+
+  /* "(tree fragment)":10
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_InvalidAlEnumError__set_state(<InvalidAlEnumError> __pyx_result, __pyx_state)
+ *     return __pyx_result             # <<<<<<<<<<<<<<
+ * cdef __pyx_unpickle_InvalidAlEnumError__set_state(InvalidAlEnumError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v___pyx_result);
+  __pyx_r = __pyx_v___pyx_result;
+  goto __pyx_L0;
+
+  /* "(tree fragment)":1
+ * def __pyx_unpickle_InvalidAlEnumError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidAlEnumError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v___pyx_PickleError);
+  __Pyx_XDECREF(__pyx_v___pyx_result);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":11
+ *         __pyx_unpickle_InvalidAlEnumError__set_state(<InvalidAlEnumError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidAlEnumError__set_state(InvalidAlEnumError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlEnumError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  Py_ssize_t __pyx_t_2;
+  int __pyx_t_3;
+  int __pyx_t_4;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidAlEnumError__set_state", 0);
+
+  /* "(tree fragment)":12
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidAlEnumError__set_state(InvalidAlEnumError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+  if (unlikely(__pyx_v___pyx_state == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
+    __PYX_ERR(1, 12, __pyx_L1_error)
+  }
+  __pyx_t_2 = PyTuple_GET_SIZE(__pyx_v___pyx_state); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_3 = ((__pyx_t_2 > 0) != 0);
+  if (__pyx_t_3) {
+  } else {
+    __pyx_t_1 = __pyx_t_3;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = __Pyx_HasAttr(((PyObject *)__pyx_v___pyx_result), __pyx_n_s_dict); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_4 = (__pyx_t_3 != 0);
+  __pyx_t_1 = __pyx_t_4;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "(tree fragment)":13
+ * cdef __pyx_unpickle_InvalidAlEnumError__set_state(InvalidAlEnumError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])             # <<<<<<<<<<<<<<
+ */
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v___pyx_result), __pyx_n_s_dict); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_update); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(__pyx_v___pyx_state == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      __PYX_ERR(1, 13, __pyx_L1_error)
+    }
+    __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_8 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
+      __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_7);
+      if (likely(__pyx_t_8)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
+        __Pyx_INCREF(__pyx_t_8);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_7, function);
+      }
+    }
+    __pyx_t_5 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_8, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+    /* "(tree fragment)":12
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidAlEnumError__set_state(InvalidAlEnumError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+  }
+
+  /* "(tree fragment)":11
+ *         __pyx_unpickle_InvalidAlEnumError__set_state(<InvalidAlEnumError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidAlEnumError__set_state(InvalidAlEnumError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidAlEnumError__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __pyx_unpickle_InvalidAlValueError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_10exceptions_21__pyx_unpickle_InvalidAlValueError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_4cyal_10exceptions_21__pyx_unpickle_InvalidAlValueError = {"__pyx_unpickle_InvalidAlValueError", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_10exceptions_21__pyx_unpickle_InvalidAlValueError, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4cyal_10exceptions_21__pyx_unpickle_InvalidAlValueError(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v___pyx_type = 0;
+  long __pyx_v___pyx_checksum;
+  PyObject *__pyx_v___pyx_state = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidAlValueError (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_pyx_type,&__pyx_n_s_pyx_checksum,&__pyx_n_s_pyx_state,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_type)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_checksum)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidAlValueError", 1, 3, 3, 1); __PYX_ERR(1, 1, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pyx_state)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidAlValueError", 1, 3, 3, 2); __PYX_ERR(1, 1, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__pyx_unpickle_InvalidAlValueError") < 0)) __PYX_ERR(1, 1, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v___pyx_type = values[0];
+    __pyx_v___pyx_checksum = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v___pyx_checksum == (long)-1) && PyErr_Occurred())) __PYX_ERR(1, 1, __pyx_L3_error)
+    __pyx_v___pyx_state = values[2];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_InvalidAlValueError", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 1, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidAlValueError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_4cyal_10exceptions_20__pyx_unpickle_InvalidAlValueError(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_10exceptions_20__pyx_unpickle_InvalidAlValueError(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_v___pyx_PickleError = 0;
+  PyObject *__pyx_v___pyx_result = 0;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidAlValueError", 0);
+
+  /* "(tree fragment)":4
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):             # <<<<<<<<<<<<<<
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ */
+  __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__8, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "(tree fragment)":5
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
+ *         from pickle import PickleError as __pyx_PickleError             # <<<<<<<<<<<<<<
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidAlValueError.__new__(__pyx_type)
+ */
+    __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_n_s_PickleError);
+    __Pyx_GIVEREF(__pyx_n_s_PickleError);
+    PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_PickleError);
+    __pyx_t_4 = __Pyx_Import(__pyx_n_s_pickle, __pyx_t_1, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_4, __pyx_n_s_PickleError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_t_1);
+    __pyx_v___pyx_PickleError = __pyx_t_1;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "(tree fragment)":6
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)             # <<<<<<<<<<<<<<
+ *     __pyx_result = InvalidAlValueError.__new__(__pyx_type)
+ *     if __pyx_state is not None:
+ */
+    __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_Incompatible_checksums_0x_x_vs_0, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_INCREF(__pyx_v___pyx_PickleError);
+    __pyx_t_1 = __pyx_v___pyx_PickleError; __pyx_t_6 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
+      __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_1);
+      if (likely(__pyx_t_6)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+        __Pyx_INCREF(__pyx_t_6);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_1, function);
+      }
+    }
+    __pyx_t_4 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_6, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 6, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_Raise(__pyx_t_4, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __PYX_ERR(1, 6, __pyx_L1_error)
+
+    /* "(tree fragment)":4
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ *     if __pyx_checksum not in (0xd41d8cd, 0xe3b0c44, 0xda39a3e):             # <<<<<<<<<<<<<<
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ */
+  }
+
+  /* "(tree fragment)":7
+ *         from pickle import PickleError as __pyx_PickleError
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidAlValueError.__new__(__pyx_type)             # <<<<<<<<<<<<<<
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_InvalidAlValueError__set_state(<InvalidAlValueError> __pyx_result, __pyx_state)
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_4cyal_10exceptions_InvalidAlValueError), __pyx_n_s_new); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+    }
+  }
+  __pyx_t_4 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_5, __pyx_v___pyx_type) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v___pyx_type);
+  __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v___pyx_result = __pyx_t_4;
+  __pyx_t_4 = 0;
+
+  /* "(tree fragment)":8
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidAlValueError.__new__(__pyx_type)
+ *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
+ *         __pyx_unpickle_InvalidAlValueError__set_state(<InvalidAlValueError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ */
+  __pyx_t_3 = (__pyx_v___pyx_state != Py_None);
+  __pyx_t_2 = (__pyx_t_3 != 0);
+  if (__pyx_t_2) {
+
+    /* "(tree fragment)":9
+ *     __pyx_result = InvalidAlValueError.__new__(__pyx_type)
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_InvalidAlValueError__set_state(<InvalidAlValueError> __pyx_result, __pyx_state)             # <<<<<<<<<<<<<<
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidAlValueError__set_state(InvalidAlValueError __pyx_result, tuple __pyx_state):
+ */
+    if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 9, __pyx_L1_error)
+    __pyx_t_4 = __pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlValueError__set_state(((struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 9, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "(tree fragment)":8
+ *         raise __pyx_PickleError("Incompatible checksums (0x%x vs (0xd41d8cd, 0xe3b0c44, 0xda39a3e) = ())" % __pyx_checksum)
+ *     __pyx_result = InvalidAlValueError.__new__(__pyx_type)
+ *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
+ *         __pyx_unpickle_InvalidAlValueError__set_state(<InvalidAlValueError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ */
+  }
+
+  /* "(tree fragment)":10
+ *     if __pyx_state is not None:
+ *         __pyx_unpickle_InvalidAlValueError__set_state(<InvalidAlValueError> __pyx_result, __pyx_state)
+ *     return __pyx_result             # <<<<<<<<<<<<<<
+ * cdef __pyx_unpickle_InvalidAlValueError__set_state(InvalidAlValueError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v___pyx_result);
+  __pyx_r = __pyx_v___pyx_result;
+  goto __pyx_L0;
+
+  /* "(tree fragment)":1
+ * def __pyx_unpickle_InvalidAlValueError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidAlValueError", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v___pyx_PickleError);
+  __Pyx_XDECREF(__pyx_v___pyx_result);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":11
+ *         __pyx_unpickle_InvalidAlValueError__set_state(<InvalidAlValueError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidAlValueError__set_state(InvalidAlValueError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+
+static PyObject *__pyx_f_4cyal_10exceptions___pyx_unpickle_InvalidAlValueError__set_state(struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  Py_ssize_t __pyx_t_2;
+  int __pyx_t_3;
+  int __pyx_t_4;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__pyx_unpickle_InvalidAlValueError__set_state", 0);
+
+  /* "(tree fragment)":12
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidAlValueError__set_state(InvalidAlValueError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+  if (unlikely(__pyx_v___pyx_state == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
+    __PYX_ERR(1, 12, __pyx_L1_error)
+  }
+  __pyx_t_2 = PyTuple_GET_SIZE(__pyx_v___pyx_state); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_3 = ((__pyx_t_2 > 0) != 0);
+  if (__pyx_t_3) {
+  } else {
+    __pyx_t_1 = __pyx_t_3;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = __Pyx_HasAttr(((PyObject *)__pyx_v___pyx_result), __pyx_n_s_dict); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_4 = (__pyx_t_3 != 0);
+  __pyx_t_1 = __pyx_t_4;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "(tree fragment)":13
+ * cdef __pyx_unpickle_InvalidAlValueError__set_state(InvalidAlValueError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])             # <<<<<<<<<<<<<<
+ */
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v___pyx_result), __pyx_n_s_dict); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_update); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(__pyx_v___pyx_state == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      __PYX_ERR(1, 13, __pyx_L1_error)
+    }
+    __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_8 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
+      __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_7);
+      if (likely(__pyx_t_8)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
+        __Pyx_INCREF(__pyx_t_8);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_7, function);
+      }
+    }
+    __pyx_t_5 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_8, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 13, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+    /* "(tree fragment)":12
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidAlValueError__set_state(InvalidAlValueError __pyx_result, tuple __pyx_state):
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+  }
+
+  /* "(tree fragment)":11
+ *         __pyx_unpickle_InvalidAlValueError__set_state(<InvalidAlValueError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidAlValueError__set_state(InvalidAlValueError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_AddTraceback("cyal.exceptions.__pyx_unpickle_InvalidAlValueError__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -7831,31 +12670,31 @@ static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidContextError = {
   #endif
 };
 
-static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidEnumError(PyTypeObject *t, PyObject *a, PyObject *k) {
+static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidAlcEnumError(PyTypeObject *t, PyObject *a, PyObject *k) {
   PyObject *o = __pyx_tp_new_4cyal_10exceptions_AlcError(t, a, k);
   if (unlikely(!o)) return 0;
   return o;
 }
 
-static PyObject *__pyx_getprop_4cyal_10exceptions_16InvalidEnumError_errcode(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_4cyal_10exceptions_16InvalidEnumError_7errcode_1__get__(o);
+static PyObject *__pyx_getprop_4cyal_10exceptions_19InvalidAlcEnumError_errcode(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_4cyal_10exceptions_19InvalidAlcEnumError_7errcode_1__get__(o);
 }
 
-static PyMethodDef __pyx_methods_4cyal_10exceptions_InvalidEnumError[] = {
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_16InvalidEnumError_3__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_16InvalidEnumError_5__setstate_cython__, METH_O, 0},
+static PyMethodDef __pyx_methods_4cyal_10exceptions_InvalidAlcEnumError[] = {
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_19InvalidAlcEnumError_3__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_19InvalidAlcEnumError_5__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
-static struct PyGetSetDef __pyx_getsets_4cyal_10exceptions_InvalidEnumError[] = {
-  {(char *)"errcode", __pyx_getprop_4cyal_10exceptions_16InvalidEnumError_errcode, 0, (char *)0, 0},
+static struct PyGetSetDef __pyx_getsets_4cyal_10exceptions_InvalidAlcEnumError[] = {
+  {(char *)"errcode", __pyx_getprop_4cyal_10exceptions_19InvalidAlcEnumError_errcode, 0, (char *)0, 0},
   {0, 0, 0, 0, 0}
 };
 
-static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidEnumError = {
+static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidAlcEnumError = {
   PyVarObject_HEAD_INIT(0, 0)
-  "cyal.exceptions.InvalidEnumError", /*tp_name*/
-  sizeof(struct __pyx_obj_4cyal_10exceptions_InvalidEnumError), /*tp_basicsize*/
+  "cyal.exceptions.InvalidAlcEnumError", /*tp_name*/
+  sizeof(struct __pyx_obj_4cyal_10exceptions_InvalidAlcEnumError), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_4cyal_10exceptions_CyalError, /*tp_dealloc*/
   #if PY_VERSION_HEX < 0x030800b4
@@ -7878,7 +12717,7 @@ static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidEnumError = {
   0, /*tp_as_mapping*/
   0, /*tp_hash*/
   0, /*tp_call*/
-  __pyx_pw_4cyal_10exceptions_16InvalidEnumError_1__str__, /*tp_str*/
+  __pyx_pw_4cyal_10exceptions_19InvalidAlcEnumError_1__str__, /*tp_str*/
   0, /*tp_getattro*/
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
@@ -7890,9 +12729,9 @@ static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidEnumError = {
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_4cyal_10exceptions_InvalidEnumError, /*tp_methods*/
+  __pyx_methods_4cyal_10exceptions_InvalidAlcEnumError, /*tp_methods*/
   0, /*tp_members*/
-  __pyx_getsets_4cyal_10exceptions_InvalidEnumError, /*tp_getset*/
+  __pyx_getsets_4cyal_10exceptions_InvalidAlcEnumError, /*tp_getset*/
   0, /*tp_base*/
   0, /*tp_dict*/
   0, /*tp_descr_get*/
@@ -7900,7 +12739,7 @@ static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidEnumError = {
   0, /*tp_dictoffset*/
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_4cyal_10exceptions_InvalidEnumError, /*tp_new*/
+  __pyx_tp_new_4cyal_10exceptions_InvalidAlcEnumError, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -7924,31 +12763,31 @@ static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidEnumError = {
   #endif
 };
 
-static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidValueError(PyTypeObject *t, PyObject *a, PyObject *k) {
+static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidAlcValueError(PyTypeObject *t, PyObject *a, PyObject *k) {
   PyObject *o = __pyx_tp_new_4cyal_10exceptions_AlcError(t, a, k);
   if (unlikely(!o)) return 0;
   return o;
 }
 
-static PyObject *__pyx_getprop_4cyal_10exceptions_17InvalidValueError_errcode(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_4cyal_10exceptions_17InvalidValueError_7errcode_1__get__(o);
+static PyObject *__pyx_getprop_4cyal_10exceptions_20InvalidAlcValueError_errcode(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_4cyal_10exceptions_20InvalidAlcValueError_7errcode_1__get__(o);
 }
 
-static PyMethodDef __pyx_methods_4cyal_10exceptions_InvalidValueError[] = {
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_17InvalidValueError_3__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_17InvalidValueError_5__setstate_cython__, METH_O, 0},
+static PyMethodDef __pyx_methods_4cyal_10exceptions_InvalidAlcValueError[] = {
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_20InvalidAlcValueError_3__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_20InvalidAlcValueError_5__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
-static struct PyGetSetDef __pyx_getsets_4cyal_10exceptions_InvalidValueError[] = {
-  {(char *)"errcode", __pyx_getprop_4cyal_10exceptions_17InvalidValueError_errcode, 0, (char *)0, 0},
+static struct PyGetSetDef __pyx_getsets_4cyal_10exceptions_InvalidAlcValueError[] = {
+  {(char *)"errcode", __pyx_getprop_4cyal_10exceptions_20InvalidAlcValueError_errcode, 0, (char *)0, 0},
   {0, 0, 0, 0, 0}
 };
 
-static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidValueError = {
+static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidAlcValueError = {
   PyVarObject_HEAD_INIT(0, 0)
-  "cyal.exceptions.InvalidValueError", /*tp_name*/
-  sizeof(struct __pyx_obj_4cyal_10exceptions_InvalidValueError), /*tp_basicsize*/
+  "cyal.exceptions.InvalidAlcValueError", /*tp_name*/
+  sizeof(struct __pyx_obj_4cyal_10exceptions_InvalidAlcValueError), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_4cyal_10exceptions_CyalError, /*tp_dealloc*/
   #if PY_VERSION_HEX < 0x030800b4
@@ -7971,7 +12810,7 @@ static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidValueError = {
   0, /*tp_as_mapping*/
   0, /*tp_hash*/
   0, /*tp_call*/
-  __pyx_pw_4cyal_10exceptions_17InvalidValueError_1__str__, /*tp_str*/
+  __pyx_pw_4cyal_10exceptions_20InvalidAlcValueError_1__str__, /*tp_str*/
   0, /*tp_getattro*/
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
@@ -7983,9 +12822,9 @@ static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidValueError = {
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_4cyal_10exceptions_InvalidValueError, /*tp_methods*/
+  __pyx_methods_4cyal_10exceptions_InvalidAlcValueError, /*tp_methods*/
   0, /*tp_members*/
-  __pyx_getsets_4cyal_10exceptions_InvalidValueError, /*tp_getset*/
+  __pyx_getsets_4cyal_10exceptions_InvalidAlcValueError, /*tp_getset*/
   0, /*tp_base*/
   0, /*tp_dict*/
   0, /*tp_descr_get*/
@@ -7993,7 +12832,7 @@ static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidValueError = {
   0, /*tp_dictoffset*/
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_4cyal_10exceptions_InvalidValueError, /*tp_new*/
+  __pyx_tp_new_4cyal_10exceptions_InvalidAlcValueError, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -8017,35 +12856,35 @@ static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidValueError = {
   #endif
 };
 
-static PyObject *__pyx_tp_new_4cyal_10exceptions_UnknownContextError(PyTypeObject *t, PyObject *a, PyObject *k) {
+static PyObject *__pyx_tp_new_4cyal_10exceptions_UnknownAlcError(PyTypeObject *t, PyObject *a, PyObject *k) {
   PyObject *o = __pyx_tp_new_4cyal_10exceptions_AlcError(t, a, k);
   if (unlikely(!o)) return 0;
-  if (unlikely(__pyx_pw_4cyal_10exceptions_19UnknownContextError_1__cinit__(o, a, k) < 0)) goto bad;
+  if (unlikely(__pyx_pw_4cyal_10exceptions_15UnknownAlcError_1__cinit__(o, a, k) < 0)) goto bad;
   return o;
   bad:
   Py_DECREF(o); o = 0;
   return NULL;
 }
 
-static PyObject *__pyx_getprop_4cyal_10exceptions_19UnknownContextError_errcode(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_4cyal_10exceptions_19UnknownContextError_7errcode_1__get__(o);
+static PyObject *__pyx_getprop_4cyal_10exceptions_15UnknownAlcError_errcode(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_4cyal_10exceptions_15UnknownAlcError_7errcode_1__get__(o);
 }
 
-static PyMethodDef __pyx_methods_4cyal_10exceptions_UnknownContextError[] = {
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_19UnknownContextError_7__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_19UnknownContextError_9__setstate_cython__, METH_O, 0},
+static PyMethodDef __pyx_methods_4cyal_10exceptions_UnknownAlcError[] = {
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_15UnknownAlcError_7__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_15UnknownAlcError_9__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
-static struct PyGetSetDef __pyx_getsets_4cyal_10exceptions_UnknownContextError[] = {
-  {(char *)"errcode", __pyx_getprop_4cyal_10exceptions_19UnknownContextError_errcode, 0, (char *)0, 0},
+static struct PyGetSetDef __pyx_getsets_4cyal_10exceptions_UnknownAlcError[] = {
+  {(char *)"errcode", __pyx_getprop_4cyal_10exceptions_15UnknownAlcError_errcode, 0, (char *)0, 0},
   {0, 0, 0, 0, 0}
 };
 
-static PyTypeObject __pyx_type_4cyal_10exceptions_UnknownContextError = {
+static PyTypeObject __pyx_type_4cyal_10exceptions_UnknownAlcError = {
   PyVarObject_HEAD_INIT(0, 0)
-  "cyal.exceptions.UnknownContextError", /*tp_name*/
-  sizeof(struct __pyx_obj_4cyal_10exceptions_UnknownContextError), /*tp_basicsize*/
+  "cyal.exceptions.UnknownAlcError", /*tp_name*/
+  sizeof(struct __pyx_obj_4cyal_10exceptions_UnknownAlcError), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_4cyal_10exceptions_CyalError, /*tp_dealloc*/
   #if PY_VERSION_HEX < 0x030800b4
@@ -8068,7 +12907,7 @@ static PyTypeObject __pyx_type_4cyal_10exceptions_UnknownContextError = {
   0, /*tp_as_mapping*/
   0, /*tp_hash*/
   0, /*tp_call*/
-  __pyx_pw_4cyal_10exceptions_19UnknownContextError_5__str__, /*tp_str*/
+  __pyx_pw_4cyal_10exceptions_15UnknownAlcError_5__str__, /*tp_str*/
   0, /*tp_getattro*/
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
@@ -8080,17 +12919,570 @@ static PyTypeObject __pyx_type_4cyal_10exceptions_UnknownContextError = {
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_4cyal_10exceptions_UnknownContextError, /*tp_methods*/
+  __pyx_methods_4cyal_10exceptions_UnknownAlcError, /*tp_methods*/
   0, /*tp_members*/
-  __pyx_getsets_4cyal_10exceptions_UnknownContextError, /*tp_getset*/
+  __pyx_getsets_4cyal_10exceptions_UnknownAlcError, /*tp_getset*/
   0, /*tp_base*/
   0, /*tp_dict*/
   0, /*tp_descr_get*/
   0, /*tp_descr_set*/
   0, /*tp_dictoffset*/
-  __pyx_pw_4cyal_10exceptions_19UnknownContextError_3__init__, /*tp_init*/
+  __pyx_pw_4cyal_10exceptions_15UnknownAlcError_3__init__, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_4cyal_10exceptions_UnknownContextError, /*tp_new*/
+  __pyx_tp_new_4cyal_10exceptions_UnknownAlcError, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b1 && (!CYTHON_COMPILING_IN_PYPY || PYPY_VERSION_NUM >= 0x07030800)
+  0, /*tp_vectorcall*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4 && PY_VERSION_HEX < 0x03090000
+  0, /*tp_print*/
+  #endif
+  #if CYTHON_COMPILING_IN_PYPY && PY_VERSION_HEX >= 0x03090000
+  0, /*tp_pypy_flags*/
+  #endif
+};
+
+static PyObject *__pyx_tp_new_4cyal_10exceptions_AlError(PyTypeObject *t, PyObject *a, PyObject *k) {
+  PyObject *o = __pyx_tp_new_4cyal_10exceptions_CyalError(t, a, k);
+  if (unlikely(!o)) return 0;
+  return o;
+}
+
+static PyMethodDef __pyx_methods_4cyal_10exceptions_AlError[] = {
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_7AlError_1__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_7AlError_3__setstate_cython__, METH_O, 0},
+  {0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_4cyal_10exceptions_AlError = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "cyal.exceptions.AlError", /*tp_name*/
+  sizeof(struct __pyx_obj_4cyal_10exceptions_AlError), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_4cyal_10exceptions_CyalError, /*tp_dealloc*/
+  #if PY_VERSION_HEX < 0x030800b4
+  0, /*tp_print*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4
+  0, /*tp_vectorcall_offset*/
+  #endif
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  0, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
+  0, /*tp_doc*/
+  __pyx_tp_traverse_4cyal_10exceptions_CyalError, /*tp_traverse*/
+  __pyx_tp_clear_4cyal_10exceptions_CyalError, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_4cyal_10exceptions_AlError, /*tp_methods*/
+  0, /*tp_members*/
+  0, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_4cyal_10exceptions_AlError, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b1 && (!CYTHON_COMPILING_IN_PYPY || PYPY_VERSION_NUM >= 0x07030800)
+  0, /*tp_vectorcall*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4 && PY_VERSION_HEX < 0x03090000
+  0, /*tp_print*/
+  #endif
+  #if CYTHON_COMPILING_IN_PYPY && PY_VERSION_HEX >= 0x03090000
+  0, /*tp_pypy_flags*/
+  #endif
+};
+
+static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidNameError(PyTypeObject *t, PyObject *a, PyObject *k) {
+  PyObject *o = __pyx_tp_new_4cyal_10exceptions_AlError(t, a, k);
+  if (unlikely(!o)) return 0;
+  return o;
+}
+
+static PyObject *__pyx_getprop_4cyal_10exceptions_16InvalidNameError_errcode(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_4cyal_10exceptions_16InvalidNameError_7errcode_1__get__(o);
+}
+
+static PyMethodDef __pyx_methods_4cyal_10exceptions_InvalidNameError[] = {
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_16InvalidNameError_3__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_16InvalidNameError_5__setstate_cython__, METH_O, 0},
+  {0, 0, 0, 0}
+};
+
+static struct PyGetSetDef __pyx_getsets_4cyal_10exceptions_InvalidNameError[] = {
+  {(char *)"errcode", __pyx_getprop_4cyal_10exceptions_16InvalidNameError_errcode, 0, (char *)0, 0},
+  {0, 0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidNameError = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "cyal.exceptions.InvalidNameError", /*tp_name*/
+  sizeof(struct __pyx_obj_4cyal_10exceptions_InvalidNameError), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_4cyal_10exceptions_CyalError, /*tp_dealloc*/
+  #if PY_VERSION_HEX < 0x030800b4
+  0, /*tp_print*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4
+  0, /*tp_vectorcall_offset*/
+  #endif
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  __pyx_pw_4cyal_10exceptions_16InvalidNameError_1__str__, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
+  0, /*tp_doc*/
+  __pyx_tp_traverse_4cyal_10exceptions_CyalError, /*tp_traverse*/
+  __pyx_tp_clear_4cyal_10exceptions_CyalError, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_4cyal_10exceptions_InvalidNameError, /*tp_methods*/
+  0, /*tp_members*/
+  __pyx_getsets_4cyal_10exceptions_InvalidNameError, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_4cyal_10exceptions_InvalidNameError, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b1 && (!CYTHON_COMPILING_IN_PYPY || PYPY_VERSION_NUM >= 0x07030800)
+  0, /*tp_vectorcall*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4 && PY_VERSION_HEX < 0x03090000
+  0, /*tp_print*/
+  #endif
+  #if CYTHON_COMPILING_IN_PYPY && PY_VERSION_HEX >= 0x03090000
+  0, /*tp_pypy_flags*/
+  #endif
+};
+
+static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidOperationError(PyTypeObject *t, PyObject *a, PyObject *k) {
+  PyObject *o = __pyx_tp_new_4cyal_10exceptions_AlError(t, a, k);
+  if (unlikely(!o)) return 0;
+  return o;
+}
+
+static PyObject *__pyx_getprop_4cyal_10exceptions_21InvalidOperationError_errcode(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_4cyal_10exceptions_21InvalidOperationError_7errcode_1__get__(o);
+}
+
+static PyMethodDef __pyx_methods_4cyal_10exceptions_InvalidOperationError[] = {
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_21InvalidOperationError_3__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_21InvalidOperationError_5__setstate_cython__, METH_O, 0},
+  {0, 0, 0, 0}
+};
+
+static struct PyGetSetDef __pyx_getsets_4cyal_10exceptions_InvalidOperationError[] = {
+  {(char *)"errcode", __pyx_getprop_4cyal_10exceptions_21InvalidOperationError_errcode, 0, (char *)0, 0},
+  {0, 0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidOperationError = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "cyal.exceptions.InvalidOperationError", /*tp_name*/
+  sizeof(struct __pyx_obj_4cyal_10exceptions_InvalidOperationError), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_4cyal_10exceptions_CyalError, /*tp_dealloc*/
+  #if PY_VERSION_HEX < 0x030800b4
+  0, /*tp_print*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4
+  0, /*tp_vectorcall_offset*/
+  #endif
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  __pyx_pw_4cyal_10exceptions_21InvalidOperationError_1__str__, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
+  0, /*tp_doc*/
+  __pyx_tp_traverse_4cyal_10exceptions_CyalError, /*tp_traverse*/
+  __pyx_tp_clear_4cyal_10exceptions_CyalError, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_4cyal_10exceptions_InvalidOperationError, /*tp_methods*/
+  0, /*tp_members*/
+  __pyx_getsets_4cyal_10exceptions_InvalidOperationError, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_4cyal_10exceptions_InvalidOperationError, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b1 && (!CYTHON_COMPILING_IN_PYPY || PYPY_VERSION_NUM >= 0x07030800)
+  0, /*tp_vectorcall*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4 && PY_VERSION_HEX < 0x03090000
+  0, /*tp_print*/
+  #endif
+  #if CYTHON_COMPILING_IN_PYPY && PY_VERSION_HEX >= 0x03090000
+  0, /*tp_pypy_flags*/
+  #endif
+};
+
+static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidAlEnumError(PyTypeObject *t, PyObject *a, PyObject *k) {
+  PyObject *o = __pyx_tp_new_4cyal_10exceptions_AlError(t, a, k);
+  if (unlikely(!o)) return 0;
+  return o;
+}
+
+static PyObject *__pyx_getprop_4cyal_10exceptions_18InvalidAlEnumError_errcode(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_4cyal_10exceptions_18InvalidAlEnumError_7errcode_1__get__(o);
+}
+
+static PyMethodDef __pyx_methods_4cyal_10exceptions_InvalidAlEnumError[] = {
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_18InvalidAlEnumError_3__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_18InvalidAlEnumError_5__setstate_cython__, METH_O, 0},
+  {0, 0, 0, 0}
+};
+
+static struct PyGetSetDef __pyx_getsets_4cyal_10exceptions_InvalidAlEnumError[] = {
+  {(char *)"errcode", __pyx_getprop_4cyal_10exceptions_18InvalidAlEnumError_errcode, 0, (char *)0, 0},
+  {0, 0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidAlEnumError = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "cyal.exceptions.InvalidAlEnumError", /*tp_name*/
+  sizeof(struct __pyx_obj_4cyal_10exceptions_InvalidAlEnumError), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_4cyal_10exceptions_CyalError, /*tp_dealloc*/
+  #if PY_VERSION_HEX < 0x030800b4
+  0, /*tp_print*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4
+  0, /*tp_vectorcall_offset*/
+  #endif
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  __pyx_pw_4cyal_10exceptions_18InvalidAlEnumError_1__str__, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
+  0, /*tp_doc*/
+  __pyx_tp_traverse_4cyal_10exceptions_CyalError, /*tp_traverse*/
+  __pyx_tp_clear_4cyal_10exceptions_CyalError, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_4cyal_10exceptions_InvalidAlEnumError, /*tp_methods*/
+  0, /*tp_members*/
+  __pyx_getsets_4cyal_10exceptions_InvalidAlEnumError, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_4cyal_10exceptions_InvalidAlEnumError, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b1 && (!CYTHON_COMPILING_IN_PYPY || PYPY_VERSION_NUM >= 0x07030800)
+  0, /*tp_vectorcall*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4 && PY_VERSION_HEX < 0x03090000
+  0, /*tp_print*/
+  #endif
+  #if CYTHON_COMPILING_IN_PYPY && PY_VERSION_HEX >= 0x03090000
+  0, /*tp_pypy_flags*/
+  #endif
+};
+
+static PyObject *__pyx_tp_new_4cyal_10exceptions_InvalidAlValueError(PyTypeObject *t, PyObject *a, PyObject *k) {
+  PyObject *o = __pyx_tp_new_4cyal_10exceptions_AlError(t, a, k);
+  if (unlikely(!o)) return 0;
+  return o;
+}
+
+static PyObject *__pyx_getprop_4cyal_10exceptions_19InvalidAlValueError_errcode(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_4cyal_10exceptions_19InvalidAlValueError_7errcode_1__get__(o);
+}
+
+static PyMethodDef __pyx_methods_4cyal_10exceptions_InvalidAlValueError[] = {
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_19InvalidAlValueError_3__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_19InvalidAlValueError_5__setstate_cython__, METH_O, 0},
+  {0, 0, 0, 0}
+};
+
+static struct PyGetSetDef __pyx_getsets_4cyal_10exceptions_InvalidAlValueError[] = {
+  {(char *)"errcode", __pyx_getprop_4cyal_10exceptions_19InvalidAlValueError_errcode, 0, (char *)0, 0},
+  {0, 0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_4cyal_10exceptions_InvalidAlValueError = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "cyal.exceptions.InvalidAlValueError", /*tp_name*/
+  sizeof(struct __pyx_obj_4cyal_10exceptions_InvalidAlValueError), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_4cyal_10exceptions_CyalError, /*tp_dealloc*/
+  #if PY_VERSION_HEX < 0x030800b4
+  0, /*tp_print*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4
+  0, /*tp_vectorcall_offset*/
+  #endif
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  __pyx_pw_4cyal_10exceptions_19InvalidAlValueError_1__str__, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
+  0, /*tp_doc*/
+  __pyx_tp_traverse_4cyal_10exceptions_CyalError, /*tp_traverse*/
+  __pyx_tp_clear_4cyal_10exceptions_CyalError, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_4cyal_10exceptions_InvalidAlValueError, /*tp_methods*/
+  0, /*tp_members*/
+  __pyx_getsets_4cyal_10exceptions_InvalidAlValueError, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_4cyal_10exceptions_InvalidAlValueError, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b1 && (!CYTHON_COMPILING_IN_PYPY || PYPY_VERSION_NUM >= 0x07030800)
+  0, /*tp_vectorcall*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4 && PY_VERSION_HEX < 0x03090000
+  0, /*tp_print*/
+  #endif
+  #if CYTHON_COMPILING_IN_PYPY && PY_VERSION_HEX >= 0x03090000
+  0, /*tp_pypy_flags*/
+  #endif
+};
+
+static PyObject *__pyx_tp_new_4cyal_10exceptions_UnknownAlError(PyTypeObject *t, PyObject *a, PyObject *k) {
+  PyObject *o = __pyx_tp_new_4cyal_10exceptions_AlError(t, a, k);
+  if (unlikely(!o)) return 0;
+  if (unlikely(__pyx_pw_4cyal_10exceptions_14UnknownAlError_1__cinit__(o, a, k) < 0)) goto bad;
+  return o;
+  bad:
+  Py_DECREF(o); o = 0;
+  return NULL;
+}
+
+static PyObject *__pyx_getprop_4cyal_10exceptions_14UnknownAlError_errcode(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_4cyal_10exceptions_14UnknownAlError_7errcode_1__get__(o);
+}
+
+static PyMethodDef __pyx_methods_4cyal_10exceptions_UnknownAlError[] = {
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_14UnknownAlError_7__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_10exceptions_14UnknownAlError_9__setstate_cython__, METH_O, 0},
+  {0, 0, 0, 0}
+};
+
+static struct PyGetSetDef __pyx_getsets_4cyal_10exceptions_UnknownAlError[] = {
+  {(char *)"errcode", __pyx_getprop_4cyal_10exceptions_14UnknownAlError_errcode, 0, (char *)0, 0},
+  {0, 0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_4cyal_10exceptions_UnknownAlError = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "cyal.exceptions.UnknownAlError", /*tp_name*/
+  sizeof(struct __pyx_obj_4cyal_10exceptions_UnknownAlError), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_4cyal_10exceptions_CyalError, /*tp_dealloc*/
+  #if PY_VERSION_HEX < 0x030800b4
+  0, /*tp_print*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4
+  0, /*tp_vectorcall_offset*/
+  #endif
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  __pyx_pw_4cyal_10exceptions_14UnknownAlError_5__str__, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
+  0, /*tp_doc*/
+  __pyx_tp_traverse_4cyal_10exceptions_CyalError, /*tp_traverse*/
+  __pyx_tp_clear_4cyal_10exceptions_CyalError, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_4cyal_10exceptions_UnknownAlError, /*tp_methods*/
+  0, /*tp_members*/
+  __pyx_getsets_4cyal_10exceptions_UnknownAlError, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  __pyx_pw_4cyal_10exceptions_14UnknownAlError_3__init__, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_4cyal_10exceptions_UnknownAlError, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -8160,27 +13552,39 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_n_s_AlError, __pyx_k_AlError, sizeof(__pyx_k_AlError), 0, 0, 1, 1},
   {&__pyx_n_s_AlcError, __pyx_k_AlcError, sizeof(__pyx_k_AlcError), 0, 0, 1, 1},
   {&__pyx_n_s_CyalError, __pyx_k_CyalError, sizeof(__pyx_k_CyalError), 0, 0, 1, 1},
   {&__pyx_n_s_DeviceNotFoundError, __pyx_k_DeviceNotFoundError, sizeof(__pyx_k_DeviceNotFoundError), 0, 0, 1, 1},
   {&__pyx_kp_s_Incompatible_checksums_0x_x_vs_0, __pyx_k_Incompatible_checksums_0x_x_vs_0, sizeof(__pyx_k_Incompatible_checksums_0x_x_vs_0), 0, 0, 1, 0},
+  {&__pyx_n_s_InvalidAlEnumError, __pyx_k_InvalidAlEnumError, sizeof(__pyx_k_InvalidAlEnumError), 0, 0, 1, 1},
+  {&__pyx_n_s_InvalidAlValueError, __pyx_k_InvalidAlValueError, sizeof(__pyx_k_InvalidAlValueError), 0, 0, 1, 1},
+  {&__pyx_n_s_InvalidAlcEnumError, __pyx_k_InvalidAlcEnumError, sizeof(__pyx_k_InvalidAlcEnumError), 0, 0, 1, 1},
+  {&__pyx_n_s_InvalidAlcValueError, __pyx_k_InvalidAlcValueError, sizeof(__pyx_k_InvalidAlcValueError), 0, 0, 1, 1},
   {&__pyx_n_s_InvalidContextError, __pyx_k_InvalidContextError, sizeof(__pyx_k_InvalidContextError), 0, 0, 1, 1},
   {&__pyx_n_s_InvalidDeviceError, __pyx_k_InvalidDeviceError, sizeof(__pyx_k_InvalidDeviceError), 0, 0, 1, 1},
-  {&__pyx_n_s_InvalidEnumError, __pyx_k_InvalidEnumError, sizeof(__pyx_k_InvalidEnumError), 0, 0, 1, 1},
-  {&__pyx_n_s_InvalidValueError, __pyx_k_InvalidValueError, sizeof(__pyx_k_InvalidValueError), 0, 0, 1, 1},
+  {&__pyx_n_s_InvalidNameError, __pyx_k_InvalidNameError, sizeof(__pyx_k_InvalidNameError), 0, 0, 1, 1},
+  {&__pyx_n_s_InvalidOperationError, __pyx_k_InvalidOperationError, sizeof(__pyx_k_InvalidOperationError), 0, 0, 1, 1},
   {&__pyx_kp_u_Invalid_OpenAL_context, __pyx_k_Invalid_OpenAL_context, sizeof(__pyx_k_Invalid_OpenAL_context), 0, 1, 0, 0},
+  {&__pyx_kp_u_Invalid_OpenAL_context_enum_valu, __pyx_k_Invalid_OpenAL_context_enum_valu, sizeof(__pyx_k_Invalid_OpenAL_context_enum_valu), 0, 1, 0, 0},
+  {&__pyx_kp_u_Invalid_OpenAL_context_parameter, __pyx_k_Invalid_OpenAL_context_parameter, sizeof(__pyx_k_Invalid_OpenAL_context_parameter), 0, 1, 0, 0},
   {&__pyx_kp_u_Invalid_OpenAL_device, __pyx_k_Invalid_OpenAL_device, sizeof(__pyx_k_Invalid_OpenAL_device), 0, 1, 0, 0},
   {&__pyx_kp_u_Invalid_OpenAL_enum_value, __pyx_k_Invalid_OpenAL_enum_value, sizeof(__pyx_k_Invalid_OpenAL_enum_value), 0, 1, 0, 0},
+  {&__pyx_kp_u_Invalid_OpenAL_object_name, __pyx_k_Invalid_OpenAL_object_name, sizeof(__pyx_k_Invalid_OpenAL_object_name), 0, 1, 0, 0},
+  {&__pyx_kp_u_Invalid_OpenAL_operation, __pyx_k_Invalid_OpenAL_operation, sizeof(__pyx_k_Invalid_OpenAL_operation), 0, 1, 0, 0},
   {&__pyx_kp_u_Invalid_OpenAL_parameter_value, __pyx_k_Invalid_OpenAL_parameter_value, sizeof(__pyx_k_Invalid_OpenAL_parameter_value), 0, 1, 0, 0},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
   {&__pyx_kp_u_No_OpenAL_devices_found, __pyx_k_No_OpenAL_devices_found, sizeof(__pyx_k_No_OpenAL_devices_found), 0, 1, 0, 0},
   {&__pyx_kp_u_OpenAL_device, __pyx_k_OpenAL_device, sizeof(__pyx_k_OpenAL_device), 0, 1, 0, 0},
   {&__pyx_n_s_PickleError, __pyx_k_PickleError, sizeof(__pyx_k_PickleError), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
-  {&__pyx_n_s_UnknownContextError, __pyx_k_UnknownContextError, sizeof(__pyx_k_UnknownContextError), 0, 0, 1, 1},
+  {&__pyx_n_s_UnknownAlError, __pyx_k_UnknownAlError, sizeof(__pyx_k_UnknownAlError), 0, 0, 1, 1},
+  {&__pyx_n_s_UnknownAlcError, __pyx_k_UnknownAlcError, sizeof(__pyx_k_UnknownAlcError), 0, 0, 1, 1},
   {&__pyx_kp_u_Unknown_OpenAL_context_error_cod, __pyx_k_Unknown_OpenAL_context_error_cod, sizeof(__pyx_k_Unknown_OpenAL_context_error_cod), 0, 1, 0, 0},
+  {&__pyx_kp_u_Unknown_OpenAL_error_code, __pyx_k_Unknown_OpenAL_error_code, sizeof(__pyx_k_Unknown_OpenAL_error_code), 0, 1, 0, 0},
   {&__pyx_n_u_X, __pyx_k_X, sizeof(__pyx_k_X), 0, 1, 0, 1},
   {&__pyx_kp_u__3, __pyx_k__3, sizeof(__pyx_k__3), 0, 1, 0, 0},
+  {&__pyx_n_s_al_errcode, __pyx_k_al_errcode, sizeof(__pyx_k_al_errcode), 0, 0, 1, 1},
   {&__pyx_n_s_alc_errcode, __pyx_k_alc_errcode, sizeof(__pyx_k_alc_errcode), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_cyal_exceptions, __pyx_k_cyal_exceptions, sizeof(__pyx_k_cyal_exceptions), 0, 0, 1, 1},
@@ -8201,12 +13605,17 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_pyx_result, __pyx_k_pyx_result, sizeof(__pyx_k_pyx_result), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_state, __pyx_k_pyx_state, sizeof(__pyx_k_pyx_state), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_type, __pyx_k_pyx_type, sizeof(__pyx_k_pyx_type), 0, 0, 1, 1},
+  {&__pyx_n_s_pyx_unpickle_AlError, __pyx_k_pyx_unpickle_AlError, sizeof(__pyx_k_pyx_unpickle_AlError), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_unpickle_AlcError, __pyx_k_pyx_unpickle_AlcError, sizeof(__pyx_k_pyx_unpickle_AlcError), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_unpickle_CyalError, __pyx_k_pyx_unpickle_CyalError, sizeof(__pyx_k_pyx_unpickle_CyalError), 0, 0, 1, 1},
+  {&__pyx_n_s_pyx_unpickle_InvalidAlEnumErro, __pyx_k_pyx_unpickle_InvalidAlEnumErro, sizeof(__pyx_k_pyx_unpickle_InvalidAlEnumErro), 0, 0, 1, 1},
+  {&__pyx_n_s_pyx_unpickle_InvalidAlValueErr, __pyx_k_pyx_unpickle_InvalidAlValueErr, sizeof(__pyx_k_pyx_unpickle_InvalidAlValueErr), 0, 0, 1, 1},
+  {&__pyx_n_s_pyx_unpickle_InvalidAlcEnumErr, __pyx_k_pyx_unpickle_InvalidAlcEnumErr, sizeof(__pyx_k_pyx_unpickle_InvalidAlcEnumErr), 0, 0, 1, 1},
+  {&__pyx_n_s_pyx_unpickle_InvalidAlcValueEr, __pyx_k_pyx_unpickle_InvalidAlcValueEr, sizeof(__pyx_k_pyx_unpickle_InvalidAlcValueEr), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_unpickle_InvalidContextErr, __pyx_k_pyx_unpickle_InvalidContextErr, sizeof(__pyx_k_pyx_unpickle_InvalidContextErr), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_unpickle_InvalidDeviceErro, __pyx_k_pyx_unpickle_InvalidDeviceErro, sizeof(__pyx_k_pyx_unpickle_InvalidDeviceErro), 0, 0, 1, 1},
-  {&__pyx_n_s_pyx_unpickle_InvalidEnumError, __pyx_k_pyx_unpickle_InvalidEnumError, sizeof(__pyx_k_pyx_unpickle_InvalidEnumError), 0, 0, 1, 1},
-  {&__pyx_n_s_pyx_unpickle_InvalidValueError, __pyx_k_pyx_unpickle_InvalidValueError, sizeof(__pyx_k_pyx_unpickle_InvalidValueError), 0, 0, 1, 1},
+  {&__pyx_n_s_pyx_unpickle_InvalidNameError, __pyx_k_pyx_unpickle_InvalidNameError, sizeof(__pyx_k_pyx_unpickle_InvalidNameError), 0, 0, 1, 1},
+  {&__pyx_n_s_pyx_unpickle_InvalidOperationE, __pyx_k_pyx_unpickle_InvalidOperationE, sizeof(__pyx_k_pyx_unpickle_InvalidOperationE), 0, 0, 1, 1},
   {&__pyx_n_s_reduce, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_cython, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
@@ -8268,39 +13677,78 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
-  __pyx_tuple__6 = PyTuple_Pack(3, __pyx_int_222419149, __pyx_int_238750788, __pyx_int_228825662); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(1, 4, __pyx_L1_error)
+
+  /* "(tree fragment)":2
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
+
+  /* "(tree fragment)":4
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ */
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__7);
+  __Pyx_GIVEREF(__pyx_tuple__7);
+  __pyx_tuple__8 = PyTuple_Pack(3, __pyx_int_222419149, __pyx_int_238750788, __pyx_int_228825662); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__8);
+  __Pyx_GIVEREF(__pyx_tuple__8);
 
   /* "(tree fragment)":1
  * def __pyx_unpickle_CyalError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
  */
-  __pyx_tuple__7 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_CyalError, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(1, 1, __pyx_L1_error)
   __pyx_tuple__9 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_AlcError, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_CyalError, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(1, 1, __pyx_L1_error)
   __pyx_tuple__11 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_InvalidDeviceErro, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_AlcError, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(1, 1, __pyx_L1_error)
   __pyx_tuple__13 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_InvalidContextErr, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_InvalidDeviceErro, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(1, 1, __pyx_L1_error)
   __pyx_tuple__15 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_InvalidEnumError, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_InvalidContextErr, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(1, 1, __pyx_L1_error)
   __pyx_tuple__17 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
-  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_InvalidValueError, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_InvalidAlcEnumErr, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__19);
+  __Pyx_GIVEREF(__pyx_tuple__19);
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_InvalidAlcValueEr, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__21);
+  __Pyx_GIVEREF(__pyx_tuple__21);
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_AlError, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__23);
+  __Pyx_GIVEREF(__pyx_tuple__23);
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_InvalidNameError, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_tuple__25 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__25);
+  __Pyx_GIVEREF(__pyx_tuple__25);
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_InvalidOperationE, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_tuple__27 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__27);
+  __Pyx_GIVEREF(__pyx_tuple__27);
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_InvalidAlEnumErro, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_tuple__29 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__29);
+  __Pyx_GIVEREF(__pyx_tuple__29);
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_InvalidAlValueErr, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -8351,6 +13799,7 @@ static int __Pyx_modinit_function_export_code(void) {
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
   if (__Pyx_ExportFunction("check_alc_error", (void (*)(void))__pyx_f_4cyal_10exceptions_check_alc_error, "PyObject *(ALCdevice *)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ExportFunction("check_al_error", (void (*)(void))__pyx_f_4cyal_10exceptions_check_al_error, "PyObject *(void)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -8420,39 +13869,105 @@ static int __Pyx_modinit_type_init_code(void) {
   if (PyObject_SetAttr(__pyx_m, __pyx_n_s_InvalidContextError, (PyObject *)&__pyx_type_4cyal_10exceptions_InvalidContextError) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
   if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_10exceptions_InvalidContextError) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
   __pyx_ptype_4cyal_10exceptions_InvalidContextError = &__pyx_type_4cyal_10exceptions_InvalidContextError;
-  __pyx_type_4cyal_10exceptions_InvalidEnumError.tp_base = __pyx_ptype_4cyal_10exceptions_AlcError;
-  if (PyType_Ready(&__pyx_type_4cyal_10exceptions_InvalidEnumError) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_type_4cyal_10exceptions_InvalidAlcEnumError.tp_base = __pyx_ptype_4cyal_10exceptions_AlcError;
+  if (PyType_Ready(&__pyx_type_4cyal_10exceptions_InvalidAlcEnumError) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
-  __pyx_type_4cyal_10exceptions_InvalidEnumError.tp_print = 0;
+  __pyx_type_4cyal_10exceptions_InvalidAlcEnumError.tp_print = 0;
   #endif
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_10exceptions_InvalidEnumError.tp_dictoffset && __pyx_type_4cyal_10exceptions_InvalidEnumError.tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_type_4cyal_10exceptions_InvalidEnumError.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_10exceptions_InvalidAlcEnumError.tp_dictoffset && __pyx_type_4cyal_10exceptions_InvalidAlcEnumError.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_4cyal_10exceptions_InvalidAlcEnumError.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_InvalidEnumError, (PyObject *)&__pyx_type_4cyal_10exceptions_InvalidEnumError) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_10exceptions_InvalidEnumError) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
-  __pyx_ptype_4cyal_10exceptions_InvalidEnumError = &__pyx_type_4cyal_10exceptions_InvalidEnumError;
-  __pyx_type_4cyal_10exceptions_InvalidValueError.tp_base = __pyx_ptype_4cyal_10exceptions_AlcError;
-  if (PyType_Ready(&__pyx_type_4cyal_10exceptions_InvalidValueError) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_InvalidAlcEnumError, (PyObject *)&__pyx_type_4cyal_10exceptions_InvalidAlcEnumError) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_10exceptions_InvalidAlcEnumError) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_ptype_4cyal_10exceptions_InvalidAlcEnumError = &__pyx_type_4cyal_10exceptions_InvalidAlcEnumError;
+  __pyx_type_4cyal_10exceptions_InvalidAlcValueError.tp_base = __pyx_ptype_4cyal_10exceptions_AlcError;
+  if (PyType_Ready(&__pyx_type_4cyal_10exceptions_InvalidAlcValueError) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
-  __pyx_type_4cyal_10exceptions_InvalidValueError.tp_print = 0;
+  __pyx_type_4cyal_10exceptions_InvalidAlcValueError.tp_print = 0;
   #endif
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_10exceptions_InvalidValueError.tp_dictoffset && __pyx_type_4cyal_10exceptions_InvalidValueError.tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_type_4cyal_10exceptions_InvalidValueError.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_10exceptions_InvalidAlcValueError.tp_dictoffset && __pyx_type_4cyal_10exceptions_InvalidAlcValueError.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_4cyal_10exceptions_InvalidAlcValueError.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_InvalidValueError, (PyObject *)&__pyx_type_4cyal_10exceptions_InvalidValueError) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_10exceptions_InvalidValueError) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
-  __pyx_ptype_4cyal_10exceptions_InvalidValueError = &__pyx_type_4cyal_10exceptions_InvalidValueError;
-  __pyx_type_4cyal_10exceptions_UnknownContextError.tp_base = __pyx_ptype_4cyal_10exceptions_AlcError;
-  if (PyType_Ready(&__pyx_type_4cyal_10exceptions_UnknownContextError) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_InvalidAlcValueError, (PyObject *)&__pyx_type_4cyal_10exceptions_InvalidAlcValueError) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_10exceptions_InvalidAlcValueError) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_ptype_4cyal_10exceptions_InvalidAlcValueError = &__pyx_type_4cyal_10exceptions_InvalidAlcValueError;
+  __pyx_type_4cyal_10exceptions_UnknownAlcError.tp_base = __pyx_ptype_4cyal_10exceptions_AlcError;
+  if (PyType_Ready(&__pyx_type_4cyal_10exceptions_UnknownAlcError) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
-  __pyx_type_4cyal_10exceptions_UnknownContextError.tp_print = 0;
+  __pyx_type_4cyal_10exceptions_UnknownAlcError.tp_print = 0;
   #endif
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_10exceptions_UnknownContextError.tp_dictoffset && __pyx_type_4cyal_10exceptions_UnknownContextError.tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_type_4cyal_10exceptions_UnknownContextError.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_10exceptions_UnknownAlcError.tp_dictoffset && __pyx_type_4cyal_10exceptions_UnknownAlcError.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_4cyal_10exceptions_UnknownAlcError.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_UnknownContextError, (PyObject *)&__pyx_type_4cyal_10exceptions_UnknownContextError) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_10exceptions_UnknownContextError) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
-  __pyx_ptype_4cyal_10exceptions_UnknownContextError = &__pyx_type_4cyal_10exceptions_UnknownContextError;
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_UnknownAlcError, (PyObject *)&__pyx_type_4cyal_10exceptions_UnknownAlcError) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_10exceptions_UnknownAlcError) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_ptype_4cyal_10exceptions_UnknownAlcError = &__pyx_type_4cyal_10exceptions_UnknownAlcError;
+  __pyx_type_4cyal_10exceptions_AlError.tp_base = __pyx_ptype_4cyal_10exceptions_CyalError;
+  if (PyType_Ready(&__pyx_type_4cyal_10exceptions_AlError) < 0) __PYX_ERR(0, 83, __pyx_L1_error)
+  #if PY_VERSION_HEX < 0x030800B1
+  __pyx_type_4cyal_10exceptions_AlError.tp_print = 0;
+  #endif
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_10exceptions_AlError.tp_dictoffset && __pyx_type_4cyal_10exceptions_AlError.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_4cyal_10exceptions_AlError.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  }
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_AlError, (PyObject *)&__pyx_type_4cyal_10exceptions_AlError) < 0) __PYX_ERR(0, 83, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_10exceptions_AlError) < 0) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_ptype_4cyal_10exceptions_AlError = &__pyx_type_4cyal_10exceptions_AlError;
+  __pyx_type_4cyal_10exceptions_InvalidNameError.tp_base = __pyx_ptype_4cyal_10exceptions_AlError;
+  if (PyType_Ready(&__pyx_type_4cyal_10exceptions_InvalidNameError) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
+  #if PY_VERSION_HEX < 0x030800B1
+  __pyx_type_4cyal_10exceptions_InvalidNameError.tp_print = 0;
+  #endif
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_10exceptions_InvalidNameError.tp_dictoffset && __pyx_type_4cyal_10exceptions_InvalidNameError.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_4cyal_10exceptions_InvalidNameError.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  }
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_InvalidNameError, (PyObject *)&__pyx_type_4cyal_10exceptions_InvalidNameError) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_10exceptions_InvalidNameError) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_ptype_4cyal_10exceptions_InvalidNameError = &__pyx_type_4cyal_10exceptions_InvalidNameError;
+  __pyx_type_4cyal_10exceptions_InvalidOperationError.tp_base = __pyx_ptype_4cyal_10exceptions_AlError;
+  if (PyType_Ready(&__pyx_type_4cyal_10exceptions_InvalidOperationError) < 0) __PYX_ERR(0, 95, __pyx_L1_error)
+  #if PY_VERSION_HEX < 0x030800B1
+  __pyx_type_4cyal_10exceptions_InvalidOperationError.tp_print = 0;
+  #endif
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_10exceptions_InvalidOperationError.tp_dictoffset && __pyx_type_4cyal_10exceptions_InvalidOperationError.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_4cyal_10exceptions_InvalidOperationError.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  }
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_InvalidOperationError, (PyObject *)&__pyx_type_4cyal_10exceptions_InvalidOperationError) < 0) __PYX_ERR(0, 95, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_10exceptions_InvalidOperationError) < 0) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_ptype_4cyal_10exceptions_InvalidOperationError = &__pyx_type_4cyal_10exceptions_InvalidOperationError;
+  __pyx_type_4cyal_10exceptions_InvalidAlEnumError.tp_base = __pyx_ptype_4cyal_10exceptions_AlError;
+  if (PyType_Ready(&__pyx_type_4cyal_10exceptions_InvalidAlEnumError) < 0) __PYX_ERR(0, 104, __pyx_L1_error)
+  #if PY_VERSION_HEX < 0x030800B1
+  __pyx_type_4cyal_10exceptions_InvalidAlEnumError.tp_print = 0;
+  #endif
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_10exceptions_InvalidAlEnumError.tp_dictoffset && __pyx_type_4cyal_10exceptions_InvalidAlEnumError.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_4cyal_10exceptions_InvalidAlEnumError.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  }
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_InvalidAlEnumError, (PyObject *)&__pyx_type_4cyal_10exceptions_InvalidAlEnumError) < 0) __PYX_ERR(0, 104, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_10exceptions_InvalidAlEnumError) < 0) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_ptype_4cyal_10exceptions_InvalidAlEnumError = &__pyx_type_4cyal_10exceptions_InvalidAlEnumError;
+  __pyx_type_4cyal_10exceptions_InvalidAlValueError.tp_base = __pyx_ptype_4cyal_10exceptions_AlError;
+  if (PyType_Ready(&__pyx_type_4cyal_10exceptions_InvalidAlValueError) < 0) __PYX_ERR(0, 113, __pyx_L1_error)
+  #if PY_VERSION_HEX < 0x030800B1
+  __pyx_type_4cyal_10exceptions_InvalidAlValueError.tp_print = 0;
+  #endif
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_10exceptions_InvalidAlValueError.tp_dictoffset && __pyx_type_4cyal_10exceptions_InvalidAlValueError.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_4cyal_10exceptions_InvalidAlValueError.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  }
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_InvalidAlValueError, (PyObject *)&__pyx_type_4cyal_10exceptions_InvalidAlValueError) < 0) __PYX_ERR(0, 113, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_10exceptions_InvalidAlValueError) < 0) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_ptype_4cyal_10exceptions_InvalidAlValueError = &__pyx_type_4cyal_10exceptions_InvalidAlValueError;
+  __pyx_type_4cyal_10exceptions_UnknownAlError.tp_base = __pyx_ptype_4cyal_10exceptions_AlError;
+  if (PyType_Ready(&__pyx_type_4cyal_10exceptions_UnknownAlError) < 0) __PYX_ERR(0, 122, __pyx_L1_error)
+  #if PY_VERSION_HEX < 0x030800B1
+  __pyx_type_4cyal_10exceptions_UnknownAlError.tp_print = 0;
+  #endif
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_10exceptions_UnknownAlError.tp_dictoffset && __pyx_type_4cyal_10exceptions_UnknownAlError.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_4cyal_10exceptions_UnknownAlError.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  }
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_UnknownAlError, (PyObject *)&__pyx_type_4cyal_10exceptions_UnknownAlError) < 0) __PYX_ERR(0, 122, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_10exceptions_UnknownAlError) < 0) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_ptype_4cyal_10exceptions_UnknownAlError = &__pyx_type_4cyal_10exceptions_UnknownAlError;
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -8729,31 +14244,85 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "(tree fragment)":1
- * def __pyx_unpickle_InvalidEnumError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ * def __pyx_unpickle_InvalidAlcEnumError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cyal_10exceptions_9__pyx_unpickle_InvalidEnumError, NULL, __pyx_n_s_cyal_exceptions); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cyal_10exceptions_9__pyx_unpickle_InvalidAlcEnumError, NULL, __pyx_n_s_cyal_exceptions); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_InvalidEnumError, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_InvalidAlcEnumErr, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "(tree fragment)":11
- *         __pyx_unpickle_InvalidEnumError__set_state(<InvalidEnumError> __pyx_result, __pyx_state)
+ *         __pyx_unpickle_InvalidAlcEnumError__set_state(<InvalidAlcEnumError> __pyx_result, __pyx_state)
  *     return __pyx_result
- * cdef __pyx_unpickle_InvalidEnumError__set_state(InvalidEnumError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ * cdef __pyx_unpickle_InvalidAlcEnumError__set_state(InvalidAlcEnumError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
  *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
  *         __pyx_result.__dict__.update(__pyx_state[0])
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cyal_10exceptions_11__pyx_unpickle_InvalidValueError, NULL, __pyx_n_s_cyal_exceptions); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cyal_10exceptions_11__pyx_unpickle_InvalidAlcValueError, NULL, __pyx_n_s_cyal_exceptions); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_InvalidValueError, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_InvalidAlcValueEr, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "(tree fragment)":1
+ * def __pyx_unpickle_AlError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cyal_10exceptions_13__pyx_unpickle_AlError, NULL, __pyx_n_s_cyal_exceptions); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_AlError, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "(tree fragment)":11
+ *         __pyx_unpickle_AlError__set_state(<AlError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ * cdef __pyx_unpickle_AlError__set_state(AlError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cyal_10exceptions_15__pyx_unpickle_InvalidNameError, NULL, __pyx_n_s_cyal_exceptions); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_InvalidNameError, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "(tree fragment)":1
+ * def __pyx_unpickle_InvalidOperationError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cyal_10exceptions_17__pyx_unpickle_InvalidOperationError, NULL, __pyx_n_s_cyal_exceptions); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_InvalidOperationE, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "(tree fragment)":11
+ *         __pyx_unpickle_InvalidOperationError__set_state(<InvalidOperationError> __pyx_result, __pyx_state)
+ *     return __pyx_result
+ * cdef __pyx_unpickle_InvalidOperationError__set_state(InvalidOperationError __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
+ *     if len(__pyx_state) > 0 and hasattr(__pyx_result, '__dict__'):
+ *         __pyx_result.__dict__.update(__pyx_state[0])
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cyal_10exceptions_19__pyx_unpickle_InvalidAlEnumError, NULL, __pyx_n_s_cyal_exceptions); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_InvalidAlEnumErro, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "(tree fragment)":1
+ * def __pyx_unpickle_InvalidAlValueError(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
+ *     cdef object __pyx_PickleError
+ *     cdef object __pyx_result
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cyal_10exceptions_21__pyx_unpickle_InvalidAlValueError, NULL, __pyx_n_s_cyal_exceptions); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_InvalidAlValueErr, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "cyal/exceptions.pyx":1
  * # cython: language_level=3             # <<<<<<<<<<<<<<
  * 
- * from . cimport alc
+ * from . cimport al, alc
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -10924,6 +16493,240 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_ALCenum(ALCenum value) {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
         return _PyLong_FromByteArray(bytes, sizeof(ALCenum),
+                                     little, !is_unsigned);
+    }
+}
+
+/* CIntFromPy */
+static CYTHON_INLINE ALenum __Pyx_PyInt_As_ALenum(PyObject *x) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const ALenum neg_one = (ALenum) -1, const_zero = (ALenum) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+#if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_Check(x))) {
+        if (sizeof(ALenum) < sizeof(long)) {
+            __PYX_VERIFY_RETURN_INT(ALenum, long, PyInt_AS_LONG(x))
+        } else {
+            long val = PyInt_AS_LONG(x);
+            if (is_unsigned && unlikely(val < 0)) {
+                goto raise_neg_overflow;
+            }
+            return (ALenum) val;
+        }
+    } else
+#endif
+    if (likely(PyLong_Check(x))) {
+        if (is_unsigned) {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (ALenum) 0;
+                case  1: __PYX_VERIFY_RETURN_INT(ALenum, digit, digits[0])
+                case 2:
+                    if (8 * sizeof(ALenum) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALenum, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALenum) >= 2 * PyLong_SHIFT) {
+                            return (ALenum) (((((ALenum)digits[1]) << PyLong_SHIFT) | (ALenum)digits[0]));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(ALenum) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALenum, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALenum) >= 3 * PyLong_SHIFT) {
+                            return (ALenum) (((((((ALenum)digits[2]) << PyLong_SHIFT) | (ALenum)digits[1]) << PyLong_SHIFT) | (ALenum)digits[0]));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(ALenum) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALenum, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALenum) >= 4 * PyLong_SHIFT) {
+                            return (ALenum) (((((((((ALenum)digits[3]) << PyLong_SHIFT) | (ALenum)digits[2]) << PyLong_SHIFT) | (ALenum)digits[1]) << PyLong_SHIFT) | (ALenum)digits[0]));
+                        }
+                    }
+                    break;
+            }
+#endif
+#if CYTHON_COMPILING_IN_CPYTHON
+            if (unlikely(Py_SIZE(x) < 0)) {
+                goto raise_neg_overflow;
+            }
+#else
+            {
+                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
+                if (unlikely(result < 0))
+                    return (ALenum) -1;
+                if (unlikely(result == 1))
+                    goto raise_neg_overflow;
+            }
+#endif
+            if (sizeof(ALenum) <= sizeof(unsigned long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(ALenum, unsigned long, PyLong_AsUnsignedLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(ALenum) <= sizeof(unsigned PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(ALenum, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
+#endif
+            }
+        } else {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (ALenum) 0;
+                case -1: __PYX_VERIFY_RETURN_INT(ALenum, sdigit, (sdigit) (-(sdigit)digits[0]))
+                case  1: __PYX_VERIFY_RETURN_INT(ALenum,  digit, +digits[0])
+                case -2:
+                    if (8 * sizeof(ALenum) - 1 > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALenum, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALenum) - 1 > 2 * PyLong_SHIFT) {
+                            return (ALenum) (((ALenum)-1)*(((((ALenum)digits[1]) << PyLong_SHIFT) | (ALenum)digits[0])));
+                        }
+                    }
+                    break;
+                case 2:
+                    if (8 * sizeof(ALenum) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALenum, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALenum) - 1 > 2 * PyLong_SHIFT) {
+                            return (ALenum) ((((((ALenum)digits[1]) << PyLong_SHIFT) | (ALenum)digits[0])));
+                        }
+                    }
+                    break;
+                case -3:
+                    if (8 * sizeof(ALenum) - 1 > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALenum, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALenum) - 1 > 3 * PyLong_SHIFT) {
+                            return (ALenum) (((ALenum)-1)*(((((((ALenum)digits[2]) << PyLong_SHIFT) | (ALenum)digits[1]) << PyLong_SHIFT) | (ALenum)digits[0])));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(ALenum) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALenum, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALenum) - 1 > 3 * PyLong_SHIFT) {
+                            return (ALenum) ((((((((ALenum)digits[2]) << PyLong_SHIFT) | (ALenum)digits[1]) << PyLong_SHIFT) | (ALenum)digits[0])));
+                        }
+                    }
+                    break;
+                case -4:
+                    if (8 * sizeof(ALenum) - 1 > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALenum, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALenum) - 1 > 4 * PyLong_SHIFT) {
+                            return (ALenum) (((ALenum)-1)*(((((((((ALenum)digits[3]) << PyLong_SHIFT) | (ALenum)digits[2]) << PyLong_SHIFT) | (ALenum)digits[1]) << PyLong_SHIFT) | (ALenum)digits[0])));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(ALenum) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALenum, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALenum) - 1 > 4 * PyLong_SHIFT) {
+                            return (ALenum) ((((((((((ALenum)digits[3]) << PyLong_SHIFT) | (ALenum)digits[2]) << PyLong_SHIFT) | (ALenum)digits[1]) << PyLong_SHIFT) | (ALenum)digits[0])));
+                        }
+                    }
+                    break;
+            }
+#endif
+            if (sizeof(ALenum) <= sizeof(long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(ALenum, long, PyLong_AsLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(ALenum) <= sizeof(PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(ALenum, PY_LONG_LONG, PyLong_AsLongLong(x))
+#endif
+            }
+        }
+        {
+#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
+            PyErr_SetString(PyExc_RuntimeError,
+                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
+#else
+            ALenum val;
+            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
+ #if PY_MAJOR_VERSION < 3
+            if (likely(v) && !PyLong_Check(v)) {
+                PyObject *tmp = v;
+                v = PyNumber_Long(tmp);
+                Py_DECREF(tmp);
+            }
+ #endif
+            if (likely(v)) {
+                int one = 1; int is_little = (int)*(unsigned char *)&one;
+                unsigned char *bytes = (unsigned char *)&val;
+                int ret = _PyLong_AsByteArray((PyLongObject *)v,
+                                              bytes, sizeof(val),
+                                              is_little, !is_unsigned);
+                Py_DECREF(v);
+                if (likely(!ret))
+                    return val;
+            }
+#endif
+            return (ALenum) -1;
+        }
+    } else {
+        ALenum val;
+        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
+        if (!tmp) return (ALenum) -1;
+        val = __Pyx_PyInt_As_ALenum(tmp);
+        Py_DECREF(tmp);
+        return val;
+    }
+raise_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "value too large to convert to ALenum");
+    return (ALenum) -1;
+raise_neg_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "can't convert negative value to ALenum");
+    return (ALenum) -1;
+}
+
+/* CIntToPy */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_ALenum(ALenum value) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const ALenum neg_one = (ALenum) -1, const_zero = (ALenum) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(ALenum) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(ALenum) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(ALenum) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+#endif
+        }
+    } else {
+        if (sizeof(ALenum) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(ALenum) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+#endif
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(ALenum),
                                      little, !is_unsigned);
     }
 }

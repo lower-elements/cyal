@@ -1,9 +1,11 @@
 # cython: language_level=3
 
-from . cimport alc
+from . cimport al, alc
 
 cdef class CyalError(Exception):
     pass
+
+# ALC_* errors
 
 cdef class AlcError(CyalError):
     pass
@@ -17,13 +19,35 @@ cdef class InvalidDeviceError(AlcError):
 cdef class InvalidContextError(AlcError):
     pass
 
-cdef class InvalidEnumError(AlcError):
+cdef class InvalidAlcEnumError(AlcError):
     pass
 
-cdef class InvalidValueError(AlcError):
+cdef class InvalidAlcValueError(AlcError):
     pass
 
-cdef class UnknownContextError(AlcError):
+cdef class UnknownAlcError(AlcError):
     cdef readonly alc.ALCenum errcode
 
 cdef check_alc_error(alc.ALCdevice* dev)
+
+# AL_* errors
+
+cdef class AlError(CyalError):
+    pass
+
+cdef class InvalidNameError(AlError):
+    pass
+
+cdef class InvalidOperationError(AlError):
+    pass
+
+cdef class InvalidAlEnumError(AlError):
+    pass
+
+cdef class InvalidAlValueError(AlError):
+    pass
+
+cdef class UnknownAlError(AlError):
+    cdef readonly al.ALenum errcode
+
+cdef check_al_error()
