@@ -5,22 +5,25 @@ from . cimport alc
 cdef class CyalError(Exception):
     pass
 
-cdef class DeviceNotFoundError(CyalError):
+cdef class AlcError(CyalError):
+    pass
+
+cdef class DeviceNotFoundError(AlcError):
     cdef readonly bytes device_name
 
-cdef class InvalidDeviceError(CyalError):
+cdef class InvalidDeviceError(AlcError):
     pass
 
-cdef class InvalidContextError(CyalError):
+cdef class InvalidContextError(AlcError):
     pass
 
-cdef class InvalidEnumError(CyalError):
+cdef class InvalidEnumError(AlcError):
     pass
 
-cdef class InvalidValueError(CyalError):
+cdef class InvalidValueError(AlcError):
     pass
 
-cdef class UnknownContextError(CyalError):
+cdef class UnknownContextError(AlcError):
     cdef readonly alc.ALCenum errcode
 
-cdef raise_alc_error(alc.ALCdevice* dev)
+cdef check_alc_error(alc.ALCdevice* dev)

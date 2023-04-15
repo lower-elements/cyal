@@ -5,7 +5,10 @@ from . cimport alc
 cdef class CyalError(Exception):
     pass
 
-cdef class DeviceNotFoundError(CyalError):
+cdef class AlcError(CyalError):
+    pass
+
+cdef class DeviceNotFoundError(AlcError):
     def __cinit__(self, *args, **kwargs):
         self.device_name = kwargs.get("device_name", None)
 
@@ -18,7 +21,7 @@ cdef class DeviceNotFoundError(CyalError):
         else:
             return f"OpenAL device {self.device_name} not found"
 
-cdef class InvalidDeviceError(CyalError):
+cdef class InvalidDeviceError(AlcError):
     @property
     def errcode(self):
         return alc.ALC_INVALID_DEVICE
@@ -26,7 +29,7 @@ cdef class InvalidDeviceError(CyalError):
     def __str__(self):
         return "Invalid OpenAL device"
 
-cdef class InvalidContextError(CyalError):
+cdef class InvalidContextError(AlcError):
     @property
     def errcode(self):
         return alc.ALC_INVALID_CONTEXT
@@ -34,7 +37,7 @@ cdef class InvalidContextError(CyalError):
     def __str__(self):
         return "Invalid OpenAL context"
 
-cdef class InvalidEnumError(CyalError):
+cdef class InvalidEnumError(AlcError):
     @property
     def errcode(self):
         return alc.ALC_INVALID_ENUM
@@ -42,7 +45,7 @@ cdef class InvalidEnumError(CyalError):
     def __str__(self):
         return "Invalid OpenAL enum value"
 
-cdef class InvalidValueError(CyalError):
+cdef class InvalidValueError(AlcError):
     @property
     def errcode(self):
         return alc.ALC_INVALID_VALUE
@@ -50,7 +53,7 @@ cdef class InvalidValueError(CyalError):
     def __str__(self):
         return "Invalid OpenAL parameter value"
 
-cdef class UnknownContextError(CyalError):
+cdef class UnknownContextError(AlcError):
     def __cinit__(self, *args, alc_errcode, **kwargs):
         self.errcode = alc_errcode
 
@@ -60,7 +63,7 @@ cdef class UnknownContextError(CyalError):
     def __str__(self):
         return f"Unknown OpenAL context error (code {self.errcode:X})"
 
-cdef raise_alc_error(alc.ALCdevice *dev):
+cdef check_alc_error(alc.ALCdevice *dev):
     cdef alc.ALCenum errcode = alc.alcGetError(dev)
     if errcode == alc.ALC_NO_ERROR:
         return # Fast path

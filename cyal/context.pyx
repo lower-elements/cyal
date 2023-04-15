@@ -5,8 +5,9 @@ import array
 from contextlib import contextmanager
 
 from .device cimport Device
-from .exceptions cimport raise_alc_error
+from .exceptions cimport check_alc_error
 from .listener cimport Listener
+from .source cimport Source
 from . cimport al, alc
 
 cdef class Context:
@@ -15,7 +16,7 @@ cdef class Context:
         cdef ContextAttrs attrs = ContextAttrs.from_kwargs(dev, **kwargs)
         self._ctx  =alc.alcCreateContext(dev._device, &attrs._attrs[0])
         if self._ctx is NULL:
-            raise_alc_error(dev._device)
+            check_alc_error(dev._device)
         self.listener = Listener(self)
         self.al_gen_sources = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alGenSources")
 
