@@ -2,6 +2,7 @@
 
 from libc.stddef cimport size_t
 from libc.string cimport strlen
+from libc cimport math
 
 from . cimport alc
 
@@ -29,3 +30,50 @@ def get_version():
     alc.alcGetIntegerv(NULL, alc.ALC_MAJOR_VERSION, 1, &major)
     alc.alcGetIntegerv(NULL, alc.ALC_MINOR_VERSION, 1, &minor)
     return (major, minor)
+
+cdef class V3f:
+    def __cinit__(self, x, y, z):
+        self.data[0] = x
+        self.data[1] = y
+        self.data[2] = z
+
+    def __repr__(self):
+        return f"({self.data[0]}, {self.data[1]}, {self.data[2]})"
+
+    def __getitem__(self, idx):
+        if idx > 2:
+            raise IndexError("vector index out of range")
+        return self.data[idx]
+
+    def __setitem__(self, idx, val):
+        if idx > 2:
+            raise IndexError("vector assignment index out of range")
+        self.data[idx] = val
+
+    @property
+    def length(self):
+        return math.hypot(math.hypot(self.data[0], self.data[1]), self.data[2])
+
+    @property
+    def x(self):
+        return self.data[0]
+
+    @x.setter
+    def x(self, val):
+        self.data[0] = val
+
+    @property
+    def y(self):
+        return self.data[1]
+
+    @y.setter
+    def y(self, val):
+        self.data[1] = val
+
+    @property
+    def z(self):
+        return self.data[2]
+
+    @z.setter
+    def z(self, val):
+        self.data[2] = val
