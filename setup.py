@@ -19,6 +19,7 @@ ext_modules = [
     Extension("cyal.context", ["cyal/context" + ext]),
     Extension("cyal.device", ["cyal/device" + ext]),
     Extension("cyal.exceptions", ["cyal/exceptions" + ext]),
+    Extension("cyal.listener", ["cyal/listener" + ext]),
     Extension("cyal.util", ["cyal/util" + ext]),
 ]
 

@@ -6,6 +6,7 @@ from contextlib import contextmanager
 
 from .device cimport Device
 from .exceptions cimport raise_alc_error
+from .listener cimport Listener
 from . cimport al, alc
 
 cdef class Context:
@@ -15,6 +16,8 @@ cdef class Context:
         self._ctx  =alc.alcCreateContext(dev._device, &attrs._attrs[0])
         if self._ctx is NULL:
             raise_alc_error(dev._device)
+        self.listener = Listener(self)
+        self.al_gen_sources = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alGenSources")
 
     def __dealloc__(self):
         if self._ctx:
@@ -105,6 +108,7 @@ cdef class ContextAttrs:
             alc.ALCenum enum_val = alc.alcGetEnumValue(self._dev._device, <const alc.ALCchar *>enum_name)
         if enum_val == al.AL_NONE:
             raise AttributeError(f"ContextAttrs object has no attribute '{attr}'")
+        cdef Py_ssize_t i
         for i in range(0, self._attrs.size, 2):
             if self._attrs[i] == enum_val:
                 return self._attrs[i+1]

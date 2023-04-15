@@ -1,11 +1,14 @@
 # cython: language_level=3
 
 from .device cimport Device
-from . cimport alc
+from .listener cimport Listener
+from . cimport al, alc
 
 cdef class Context:
     cdef alc.ALCcontext* _ctx
     cdef readonly Device device
+    cdef readonly Listener listener
+    cdef void (*al_gen_sources)(al.ALsizei, al.ALuint*)
 
 cdef class ContextAttrs:
     cdef alc.ALCint[:] _attrs
