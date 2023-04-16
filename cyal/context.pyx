@@ -5,10 +5,12 @@ import array
 from contextlib import contextmanager
 
 from .device cimport Device
-from .exceptions cimport check_alc_error
+from .exceptions cimport check_al_error, check_alc_error
 from .listener cimport Listener
 from .source cimport Source
 from . cimport al, alc
+
+cdef array.array ids_template = array.array('I')
 
 cdef class Context:
     def __cinit__(self, Device dev not None, **kwargs):
@@ -19,6 +21,7 @@ cdef class Context:
             check_alc_error(dev._device)
         self.listener = Listener(self)
         self.al_gen_sources = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alGenSources")
+        self.al_delete_sources = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alDeleteSources")
 
     def __dealloc__(self):
         if self._ctx:
@@ -66,6 +69,18 @@ cdef class Context:
             yield self
         finally:
             alc.alcProcessContext(self._ctx)
+
+    def gen_source(self):
+        cdef al.ALuint id
+        self.al_gen_sources(1, &id)
+        check_al_error()
+        return Source.from_id(self, id)
+
+    def gen_sources(self, n):
+        cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
+        self.al_gen_sources(n, &ids[0])
+        check_al_error()
+        return [Source.from_id(self, id) for id in ids]
 
 cdef array.array attrs_template = array.array('i')
 
