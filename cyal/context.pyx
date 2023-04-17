@@ -20,8 +20,21 @@ cdef class Context:
         if self._ctx is NULL:
             check_alc_error(dev._device)
         self.listener = Listener(self)
+
         self.al_gen_sources = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alGenSources")
         self.al_delete_sources = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alDeleteSources")
+        self.set_source_f = <void (*)(al.ALuint, al.ALenum, al.ALfloat)>dev.get_al_proc_address("alSourcef")
+        self.set_source_3f = <void (*)(al.ALuint, al.ALenum, al.ALfloat, al.ALfloat, al.ALfloat)>dev.get_al_proc_address("alSource3f")
+        self.set_source_fv = <void (*)(al.ALuint, al.ALenum, const al.ALfloat*)>dev.get_al_proc_address("alSourcefv")
+        self.set_source_i = <void (*)(al.ALuint, al.ALenum, al.ALint)>dev.get_al_proc_address("alSourcei")
+        self.set_source_3i = <void (*)(al.ALuint, al.ALenum, al.ALint, al.ALint, al.ALint)>dev.get_al_proc_address("alSource3i")
+        self.set_source_iv = <void (*)(al.ALuint, al.ALenum, const al.ALint*)>dev.get_al_proc_address("alSourceiv")
+        self.get_source_f = <void (*)(al.ALuint, al.ALenum, al.ALfloat*)>dev.get_al_proc_address("alGetSourcef")
+        self.get_source_3f = <void (*)(al.ALuint, al.ALenum, al.ALfloat*, al.ALfloat*, al.ALfloat*)>dev.get_al_proc_address("alGetSource3f")
+        self.get_source_fv = <void (*)(al.ALuint, al.ALenum, al.ALfloat*)>dev.get_al_proc_address("alGetSourcefv")
+        self.get_source_i = <void (*)(al.ALuint, al.ALenum, al.ALint*)>dev.get_al_proc_address("alGetSourcei")
+        self.get_source_3i = <void (*)(al.ALuint, al.ALenum, al.ALint*, al.ALint*, al.ALint*)>dev.get_al_proc_address("alGetSource3i")
+        self.get_source_iv = <void (*)(al.ALuint, al.ALenum, al.ALint*)>dev.get_al_proc_address("alGetSourceiv")
 
     def __dealloc__(self):
         if self._ctx:
