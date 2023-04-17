@@ -35,6 +35,10 @@ cdef class Context:
         self.get_source_i = <void (*)(al.ALuint, al.ALenum, al.ALint*)>dev.get_al_proc_address("alGetSourcei")
         self.get_source_3i = <void (*)(al.ALuint, al.ALenum, al.ALint*, al.ALint*, al.ALint*)>dev.get_al_proc_address("alGetSource3i")
         self.get_source_iv = <void (*)(al.ALuint, al.ALenum, al.ALint*)>dev.get_al_proc_address("alGetSourceiv")
+        self.source_play = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourcePlay")
+        self.source_stop = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourceStop")
+        self.source_rewind = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourceRewind")
+        self.source_pause = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourcePause")
 
     def __dealloc__(self):
         if self._ctx:

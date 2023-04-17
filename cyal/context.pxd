@@ -25,6 +25,11 @@ cdef class Context:
     cdef void (*get_source_i)(al.ALuint id, al.ALenum param, al.ALint *value)
     cdef void (*get_source_3i)(al.ALuint id, al.ALenum param, al.ALint *value1, al.ALint* value2, al.ALint* value3)
     cdef void (*get_source_iv)(al.ALuint id, al.ALenum param, al.ALint *values)
+    # Source operations
+    cdef void (*source_play)(al.ALuint)
+    cdef void (*source_stop)(al.ALuint)
+    cdef void (*source_rewind)(al.ALuint)
+    cdef void (*source_pause)(al.ALuint)
 
 cdef class ContextAttrs:
     cdef alc.ALCint[:] _attrs

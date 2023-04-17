@@ -1,8 +1,7 @@
 # cython: language_level=3
 
-from enum import Enum
-
 from .context cimport Context
+from .exceptions cimport check_al_error
 from .util cimport V3f
 from . cimport al, alc
 
@@ -25,6 +24,22 @@ cdef class Source:
         alc.alcMakeContextCurrent(self.context._ctx)
         self.context.al_delete_sources(1, &self.id)
         alc.alcMakeContextCurrent(prev_ctx)
+
+    def play(self):
+        self.context.source_play(self.id)
+        check_al_error()
+
+    def stop(self):
+        self.context.source_stop(self.id)
+        check_al_error()
+
+    def rewind(self):
+        self.context.source_rewind(self.id)
+        check_al_error()
+
+    def pause(self):
+        self.context.source_pause(self.id)
+        check_al_error()
 
     @property
     def relative(self):
