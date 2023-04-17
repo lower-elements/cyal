@@ -83,17 +83,22 @@ cdef class Context:
         finally:
             alc.alcProcessContext(self._ctx)
 
-    def gen_source(self):
+    def gen_source(self, **kwargs):
         cdef al.ALuint id
         self.al_gen_sources(1, &id)
         check_al_error()
-        return Source.from_id(self, id)
+        cdef Source src = Source.from_id(self, id)
+        for k, v in kwargs.items(): setattr(src, k, v)
+        return src
 
-    def gen_sources(self, n):
+    def gen_sources(self, n, **kwargs):
         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
         self.al_gen_sources(n, &ids[0])
         check_al_error()
-        return [Source.from_id(self, id) for id in ids]
+        cdef list srcs = [Source.from_id(self, id) for id in ids]
+        for src in srcs:
+            for k, v in kwargs.items(): setattr(src, k, v)
+        return srcs
 
 cdef array.array attrs_template = array.array('i')
 
