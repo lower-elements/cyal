@@ -35,9 +35,9 @@ setup(
     install_requires=[],
     extras_require={},
     include_package_data=True,
-    license="GPL-3.0-only",
+    license="MIT",
     classifiers=[
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "License :: OSI Approved :: MIT License",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.10",
