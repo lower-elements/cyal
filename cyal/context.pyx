@@ -4,6 +4,7 @@ from cpython cimport array
 import array
 from contextlib import contextmanager
 
+from .buffer cimport Buffer
 from .device cimport Device
 from .exceptions cimport check_al_error, check_alc_error
 from .listener cimport Listener
@@ -21,6 +22,13 @@ cdef class Context:
             check_alc_error(dev._device)
         self.listener = Listener(self)
 
+        # Buffer functions
+        self.al_gen_buffers = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alGenBuffers")
+        self.al_delete_buffers = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alDeleteBuffers")
+        self.al_buffer_data = <void (*)(al.ALuint, al.ALenum, al.ALvoid*, al.ALsizei, al.ALsizei)>dev.get_al_proc_address("alBufferData")
+        self.get_buffer_i = <void (*)(al.ALuint, al.ALenum, al.ALint*)>dev.get_al_proc_address("alGetBufferi")
+
+        # Source functions
         self.al_gen_sources = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alGenSources")
         self.al_delete_sources = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alDeleteSources")
         self.set_source_f = <void (*)(al.ALuint, al.ALenum, al.ALfloat)>dev.get_al_proc_address("alSourcef")
@@ -86,6 +94,18 @@ cdef class Context:
             yield self
         finally:
             alc.alcProcessContext(self._ctx)
+
+    def gen_buffer(self):
+        cdef al.ALuint id
+        self.al_gen_buffers(1, &id)
+        check_al_error()
+        return Buffer.from_id(self, id)
+
+    def gen_buffers(self, n):
+        cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
+        self.al_gen_buffers(n, &ids[0])
+        check_al_error()
+        return [Buffer.from_id(self, id) for id in ids]
 
     def gen_source(self, **kwargs):
         cdef al.ALuint id

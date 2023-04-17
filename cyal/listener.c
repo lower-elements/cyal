@@ -1106,6 +1106,10 @@ struct __pyx_obj_4cyal_7context_Context {
   ALCcontext *_ctx;
   struct __pyx_obj_4cyal_6device_Device *device;
   struct __pyx_obj_4cyal_8listener_Listener *listener;
+  void (*al_gen_buffers)(ALsizei, ALuint *);
+  void (*al_delete_buffers)(ALsizei, ALuint *);
+  void (*al_buffer_data)(ALuint, ALenum, ALvoid *, ALsizei, ALsizei);
+  void (*get_buffer_i)(ALuint, ALenum, ALint *);
   void (*al_gen_sources)(ALsizei, ALuint *);
   void (*al_delete_sources)(ALsizei, ALuint *);
   void (*set_source_f)(ALuint, ALenum, ALfloat);
@@ -1127,7 +1131,7 @@ struct __pyx_obj_4cyal_7context_Context {
 };
 
 
-/* "context.pxd":34
+/* "context.pxd":41
  *     cdef void (*source_pause)(al.ALuint)
  * 
  * cdef class ContextAttrs:             # <<<<<<<<<<<<<<
@@ -18079,7 +18083,7 @@ static int __Pyx_modinit_type_import_code(void) {
    if (!__pyx_ptype_4cyal_7context_Context) __PYX_ERR(3, 7, __pyx_L1_error)
   __pyx_ptype_4cyal_7context_ContextAttrs = __Pyx_ImportType(__pyx_t_1, "cyal.context", "ContextAttrs", sizeof(struct __pyx_obj_4cyal_7context_ContextAttrs), __PYX_GET_STRUCT_ALIGNMENT(struct __pyx_obj_4cyal_7context_ContextAttrs),
   __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_4cyal_7context_ContextAttrs) __PYX_ERR(3, 34, __pyx_L1_error)
+   if (!__pyx_ptype_4cyal_7context_ContextAttrs) __PYX_ERR(3, 41, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyImport_ImportModule("cyal.util"); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);

@@ -8,6 +8,13 @@ cdef class Context:
     cdef alc.ALCcontext* _ctx
     cdef readonly Device device
     cdef readonly Listener listener
+
+    # Buffer function
+    cdef void (*al_gen_buffers)(al.ALsizei, al.ALuint*)
+    cdef void (*al_delete_buffers)(al.ALsizei, al.ALuint*)
+    cdef void (*al_buffer_data)(al.ALuint, al.ALenum, al.ALvoid*, al.ALsizei, al.ALsizei)
+    cdef void (*get_buffer_i)(al.ALuint, al.ALenum, al.ALint*)
+
     # Source functions
     cdef void (*al_gen_sources)(al.ALsizei, al.ALuint*)
     cdef void (*al_delete_sources)(al.ALsizei, al.ALuint*)

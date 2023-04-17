@@ -42,6 +42,22 @@ cdef class Source:
         check_al_error()
 
     @property
+    def buffer(self):
+        return self._buf
+
+    @buffer.setter
+    def buffer(self, buf):
+        self.context.set_source_i(self.id, al.AL_BUFFER, <al.ALint>buf.id)
+        check_al_error()
+        self._buf = buf
+
+
+    @buffer.deleter
+    def buffer(self):
+        self.context.set_source_i(self.id, al.AL_BUFFER, al.AL_NONE)
+        self._buf = None
+
+    @property
     def relative(self):
         cdef al.ALint flag
         self.context.get_source_i(self.id, al.AL_SOURCE_RELATIVE, &flag)
