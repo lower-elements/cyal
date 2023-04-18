@@ -7,6 +7,7 @@ from . cimport al
 cdef class Source:
     cdef readonly Context context
     cdef Buffer _buf
+    cdef dict _queued_bufs
     cdef readonly al.ALuint id
 
     @staticmethod

@@ -1,9 +1,14 @@
 # cython: language_level=3
 
+from libc.limits cimport INT_MAX
+from cpython cimport array
+import array
 from .context cimport Context
 from .exceptions cimport check_al_error
 from .util cimport V3f
 from . cimport al, alc
+
+cdef array.array ids_template = array.array('I')
 
 cdef class Source:
     def __cinit__(self):
@@ -16,6 +21,7 @@ cdef class Source:
     cdef Source from_id(Context ctx, al.ALuint id):
         cdef Source src = Source.__new__(Source)
         src.context = ctx
+        src._queued_bufs = {}
         src.id = id
         return src
 
@@ -40,6 +46,26 @@ cdef class Source:
     def pause(self):
         self.context.source_pause(self.id)
         check_al_error()
+
+    def queue_buffers(self, *bufs):
+        cdef al.ALuint[:] ids = array.clone(ids_template, len(bufs), zero=False)
+        cdef Py_ssize_t i
+        for i, b in enumerate(bufs): ids[i] = b.id
+        self.context.source_queue_buffers(self.id, ids.size, &ids[0])
+        check_al_error()
+        for b in bufs: self._queued_bufs[b.id] = b
+        self._buf = None
+
+    def unqueue_buffers(self, *, max=INT_MAX):
+        cdef al.ALint length
+        self.context.get_source_i(self.id, al.AL_BUFFERS_PROCESSED, &length)
+        length = length if length < max else max
+        if length <= 0:
+            return []
+        cdef al.ALuint[:] ids = array.clone(ids_template, length, zero=False)
+        self.context.source_unqueue_buffers(self.id, ids.size, &ids[0])
+        check_al_error()
+        return [self._queued_bufs.pop(id) for id in ids]
 
     @property
     def buffer(self):

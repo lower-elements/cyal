@@ -51,6 +51,8 @@ cdef class Context:
         self.source_stop_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceStopv")
         self.source_rewind_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceRewindv")
         self.source_pause_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePausev")
+        self.source_queue_buffers = <void (*)(al.ALuint, al.ALsizei, const al.ALuint*)>dev.get_al_proc_address("alSourceQueueBuffers")
+        self.source_unqueue_buffers = <void (*)(al.ALuint, al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceUnqueueBuffers")
 
     def __dealloc__(self):
         if self._ctx:

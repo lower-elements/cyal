@@ -42,6 +42,8 @@ cdef class Context:
     cdef void (*source_stop_v)(al.ALsizei, al.ALuint*)
     cdef void (*source_rewind_v)(al.ALsizei, al.ALuint*)
     cdef void (*source_pause_v)(al.ALsizei, al.ALuint*)
+    cdef void (*source_queue_buffers)(al.ALuint, al.ALsizei, const al.ALuint*)
+    cdef void (*source_unqueue_buffers)(al.ALuint, al.ALsizei, al.ALuint*)
 
 cdef class ContextAttrs:
     cdef alc.ALCint[:] _attrs
