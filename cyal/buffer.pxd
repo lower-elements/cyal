@@ -9,3 +9,9 @@ cdef class Buffer:
 
     @staticmethod
     cdef Buffer from_id(Context ctx, al.ALuint id)
+
+cpdef enum BufferFormat:
+        MONO8 = al.AL_FORMAT_MONO8
+        MONO16 = al.AL_FORMAT_MONO16
+        STEREO8 = al.AL_FORMAT_STEREO8
+        STEREO16 = al.AL_FORMAT_STEREO16

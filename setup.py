@@ -17,6 +17,7 @@ except ImportError:
 ext = ".pyx" if use_cython else ".c"
 ext_modules = [
     Extension("cyal.buffer", ["cyal/buffer" + ext]),
+    Extension("cyal.capture", ["cyal/capture" + ext]),
     Extension("cyal.context", ["cyal/context" + ext]),
     Extension("cyal.device", ["cyal/device" + ext]),
     Extension("cyal.exceptions", ["cyal/exceptions" + ext]),

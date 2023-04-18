@@ -51,9 +51,3 @@ cdef class Buffer:
         cdef al.ALsizei val
         self.context.get_buffer_i(self.id, al.AL_FREQUENCY, &val)
         return val
-
-cpdef enum BufferFormat:
-        MONO8 = al.AL_FORMAT_MONO8
-        MONO16 = al.AL_FORMAT_MONO16
-        STEREO8 = al.AL_FORMAT_STEREO8
-        STEREO16 = al.AL_FORMAT_STEREO16

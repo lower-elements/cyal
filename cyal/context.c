@@ -1107,6 +1107,26 @@ struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
 
+/* "buffer.pxd":13
+ *     cdef Buffer from_id(Context ctx, al.ALuint id)
+ * 
+ * cpdef enum BufferFormat:             # <<<<<<<<<<<<<<
+ *         MONO8 = al.AL_FORMAT_MONO8
+ *         MONO16 = al.AL_FORMAT_MONO16
+ */
+enum __pyx_t_4cyal_6buffer_BufferFormat {
+
+  /* "buffer.pxd":17
+ *         MONO16 = al.AL_FORMAT_MONO16
+ *         STEREO8 = al.AL_FORMAT_STEREO8
+ *         STEREO16 = al.AL_FORMAT_STEREO16             # <<<<<<<<<<<<<<
+ */
+  __pyx_e_4cyal_6buffer_MONO8 = AL_FORMAT_MONO8,
+  __pyx_e_4cyal_6buffer_MONO16 = AL_FORMAT_MONO16,
+  __pyx_e_4cyal_6buffer_STEREO8 = AL_FORMAT_STEREO8,
+  __pyx_e_4cyal_6buffer_STEREO16 = AL_FORMAT_STEREO16
+};
+
 /* "device.pxd":5
  * from . cimport al, alc
  * 
