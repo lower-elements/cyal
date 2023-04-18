@@ -1128,11 +1128,15 @@ struct __pyx_obj_4cyal_7context_Context {
   void (*source_stop)(ALuint);
   void (*source_rewind)(ALuint);
   void (*source_pause)(ALuint);
+  void (*source_play_v)(ALsizei, ALuint *);
+  void (*source_stop_v)(ALsizei, ALuint *);
+  void (*source_rewind_v)(ALsizei, ALuint *);
+  void (*source_pause_v)(ALsizei, ALuint *);
 };
 
 
-/* "context.pxd":41
- *     cdef void (*source_pause)(al.ALuint)
+/* "context.pxd":46
+ *     cdef void (*source_pause_v)(al.ALsizei, al.ALuint*)
  * 
  * cdef class ContextAttrs:             # <<<<<<<<<<<<<<
  *     cdef alc.ALCint[:] _attrs
@@ -18083,7 +18087,7 @@ static int __Pyx_modinit_type_import_code(void) {
    if (!__pyx_ptype_4cyal_7context_Context) __PYX_ERR(3, 7, __pyx_L1_error)
   __pyx_ptype_4cyal_7context_ContextAttrs = __Pyx_ImportType(__pyx_t_1, "cyal.context", "ContextAttrs", sizeof(struct __pyx_obj_4cyal_7context_ContextAttrs), __PYX_GET_STRUCT_ALIGNMENT(struct __pyx_obj_4cyal_7context_ContextAttrs),
   __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_4cyal_7context_ContextAttrs) __PYX_ERR(3, 41, __pyx_L1_error)
+   if (!__pyx_ptype_4cyal_7context_ContextAttrs) __PYX_ERR(3, 46, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyImport_ImportModule("cyal.util"); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);

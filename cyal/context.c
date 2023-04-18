@@ -1383,11 +1383,15 @@ struct __pyx_obj_4cyal_7context_Context {
   void (*source_stop)(ALuint);
   void (*source_rewind)(ALuint);
   void (*source_pause)(ALuint);
+  void (*source_play_v)(ALsizei, ALuint *);
+  void (*source_stop_v)(ALsizei, ALuint *);
+  void (*source_rewind_v)(ALsizei, ALuint *);
+  void (*source_pause_v)(ALsizei, ALuint *);
 };
 
 
-/* "cyal/context.pxd":41
- *     cdef void (*source_pause)(al.ALuint)
+/* "cyal/context.pxd":46
+ *     cdef void (*source_pause_v)(al.ALsizei, al.ALuint*)
  * 
  * cdef class ContextAttrs:             # <<<<<<<<<<<<<<
  *     cdef alc.ALCint[:] _attrs
@@ -1400,7 +1404,7 @@ struct __pyx_obj_4cyal_7context_ContextAttrs {
 };
 
 
-/* "cyal/context.pyx":68
+/* "cyal/context.pyx":72
  * 
  *     @contextmanager
  *     def as_current(self):             # <<<<<<<<<<<<<<
@@ -1414,7 +1418,7 @@ struct __pyx_obj_4cyal_7context___pyx_scope_struct__as_current {
 };
 
 
-/* "cyal/context.pyx":83
+/* "cyal/context.pyx":87
  * 
  *     @contextmanager
  *     def as_processing(self):             # <<<<<<<<<<<<<<
@@ -1427,7 +1431,7 @@ struct __pyx_obj_4cyal_7context___pyx_scope_struct_1_as_processing {
 };
 
 
-/* "cyal/context.pyx":91
+/* "cyal/context.pyx":95
  * 
  *     @contextmanager
  *     def as_suspended(self):             # <<<<<<<<<<<<<<
@@ -2765,12 +2769,12 @@ int __pyx_module_is_main_cyal__context = 0;
 
 /* Implementation of 'cyal.context' */
 static PyObject *__pyx_builtin_staticmethod;
+static PyObject *__pyx_builtin_enumerate;
 static PyObject *__pyx_builtin_TypeError;
 static PyObject *__pyx_builtin_AttributeError;
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_MemoryError;
 static PyObject *__pyx_builtin_ValueError;
-static PyObject *__pyx_builtin_enumerate;
 static PyObject *__pyx_builtin_Ellipsis;
 static PyObject *__pyx_builtin_id;
 static PyObject *__pyx_builtin_IndexError;
@@ -3040,10 +3044,14 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_21gen_buffer(struct __pyx_obj_
 static PyObject *__pyx_pf_4cyal_7context_7Context_23gen_buffers(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, PyObject *__pyx_v_n); /* proto */
 static PyObject *__pyx_pf_4cyal_7context_7Context_25gen_source(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, PyObject *__pyx_v_kwargs); /* proto */
 static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, PyObject *__pyx_v_n, PyObject *__pyx_v_kwargs); /* proto */
+static PyObject *__pyx_pf_4cyal_7context_7Context_29play_sources(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, PyObject *__pyx_v_srcs); /* proto */
+static PyObject *__pyx_pf_4cyal_7context_7Context_31stop_sources(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, PyObject *__pyx_v_srcs); /* proto */
+static PyObject *__pyx_pf_4cyal_7context_7Context_33rewind_sources(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, PyObject *__pyx_v_srcs); /* proto */
+static PyObject *__pyx_pf_4cyal_7context_7Context_35pause_sources(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, PyObject *__pyx_v_srcs); /* proto */
 static PyObject *__pyx_pf_4cyal_7context_7Context_6device___get__(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4cyal_7context_7Context_8listener___get__(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_7context_7Context_29__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4cyal_7context_7Context_31__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4cyal_7context_7Context_37__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_7context_7Context_39__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_4cyal_7context_12ContextAttrs___cinit__(struct __pyx_obj_4cyal_7context_ContextAttrs *__pyx_v_self, struct __pyx_obj_4cyal_6device_Device *__pyx_v_dev, arrayobject *__pyx_v_attrs); /* proto */
 static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __pyx_obj_4cyal_6device_Device *__pyx_v_dev, PyObject *__pyx_v_kwargs); /* proto */
 static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_4from_device(struct __pyx_obj_4cyal_6device_Device *__pyx_v_dev); /* proto */
@@ -3522,7 +3530,7 @@ static int __pyx_pf_4cyal_7context_7Context___cinit__(struct __pyx_obj_4cyal_7co
  *         self.source_stop = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourceStop")
  *         self.source_rewind = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourceRewind")             # <<<<<<<<<<<<<<
  *         self.source_pause = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourcePause")
- * 
+ *         self.source_play_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePlayv")
  */
   __pyx_v_self->source_rewind = ((void (*)(ALuint))__pyx_v_dev->get_al_proc_address(((ALchar const *)"alSourceRewind")));
 
@@ -3530,10 +3538,46 @@ static int __pyx_pf_4cyal_7context_7Context___cinit__(struct __pyx_obj_4cyal_7co
  *         self.source_stop = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourceStop")
  *         self.source_rewind = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourceRewind")
  *         self.source_pause = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourcePause")             # <<<<<<<<<<<<<<
+ *         self.source_play_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePlayv")
+ *         self.source_stop_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceStopv")
+ */
+  __pyx_v_self->source_pause = ((void (*)(ALuint))__pyx_v_dev->get_al_proc_address(((ALchar const *)"alSourcePause")));
+
+  /* "cyal/context.pyx":50
+ *         self.source_rewind = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourceRewind")
+ *         self.source_pause = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourcePause")
+ *         self.source_play_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePlayv")             # <<<<<<<<<<<<<<
+ *         self.source_stop_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceStopv")
+ *         self.source_rewind_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceRewindv")
+ */
+  __pyx_v_self->source_play_v = ((void (*)(ALsizei, ALuint *))__pyx_v_dev->get_al_proc_address(((ALchar const *)"alSourcePlayv")));
+
+  /* "cyal/context.pyx":51
+ *         self.source_pause = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourcePause")
+ *         self.source_play_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePlayv")
+ *         self.source_stop_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceStopv")             # <<<<<<<<<<<<<<
+ *         self.source_rewind_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceRewindv")
+ *         self.source_pause_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePausev")
+ */
+  __pyx_v_self->source_stop_v = ((void (*)(ALsizei, ALuint *))__pyx_v_dev->get_al_proc_address(((ALchar const *)"alSourceStopv")));
+
+  /* "cyal/context.pyx":52
+ *         self.source_play_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePlayv")
+ *         self.source_stop_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceStopv")
+ *         self.source_rewind_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceRewindv")             # <<<<<<<<<<<<<<
+ *         self.source_pause_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePausev")
+ * 
+ */
+  __pyx_v_self->source_rewind_v = ((void (*)(ALsizei, ALuint *))__pyx_v_dev->get_al_proc_address(((ALchar const *)"alSourceRewindv")));
+
+  /* "cyal/context.pyx":53
+ *         self.source_stop_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceStopv")
+ *         self.source_rewind_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceRewindv")
+ *         self.source_pause_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePausev")             # <<<<<<<<<<<<<<
  * 
  *     def __dealloc__(self):
  */
-  __pyx_v_self->source_pause = ((void (*)(ALuint))__pyx_v_dev->get_al_proc_address(((ALchar const *)"alSourcePause")));
+  __pyx_v_self->source_pause_v = ((void (*)(ALsizei, ALuint *))__pyx_v_dev->get_al_proc_address(((ALchar const *)"alSourcePausev")));
 
   /* "cyal/context.pyx":17
  * 
@@ -3559,8 +3603,8 @@ static int __pyx_pf_4cyal_7context_7Context___cinit__(struct __pyx_obj_4cyal_7co
   return __pyx_r;
 }
 
-/* "cyal/context.pyx":51
- *         self.source_pause = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourcePause")
+/* "cyal/context.pyx":55
+ *         self.source_pause_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePausev")
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         if self._ctx:
@@ -3583,7 +3627,7 @@ static void __pyx_pf_4cyal_7context_7Context_2__dealloc__(struct __pyx_obj_4cyal
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "cyal/context.pyx":52
+  /* "cyal/context.pyx":56
  * 
  *     def __dealloc__(self):
  *         if self._ctx:             # <<<<<<<<<<<<<<
@@ -3593,7 +3637,7 @@ static void __pyx_pf_4cyal_7context_7Context_2__dealloc__(struct __pyx_obj_4cyal
   __pyx_t_1 = (__pyx_v_self->_ctx != 0);
   if (__pyx_t_1) {
 
-    /* "cyal/context.pyx":53
+    /* "cyal/context.pyx":57
  *     def __dealloc__(self):
  *         if self._ctx:
  *             if self._ctx == alc.alcGetCurrentContext():             # <<<<<<<<<<<<<<
@@ -3603,7 +3647,7 @@ static void __pyx_pf_4cyal_7context_7Context_2__dealloc__(struct __pyx_obj_4cyal
     __pyx_t_1 = ((__pyx_v_self->_ctx == alcGetCurrentContext()) != 0);
     if (__pyx_t_1) {
 
-      /* "cyal/context.pyx":54
+      /* "cyal/context.pyx":58
  *         if self._ctx:
  *             if self._ctx == alc.alcGetCurrentContext():
  *                 alc.alcMakeContextCurrent(NULL)             # <<<<<<<<<<<<<<
@@ -3612,7 +3656,7 @@ static void __pyx_pf_4cyal_7context_7Context_2__dealloc__(struct __pyx_obj_4cyal
  */
       (void)(alcMakeContextCurrent(NULL));
 
-      /* "cyal/context.pyx":53
+      /* "cyal/context.pyx":57
  *     def __dealloc__(self):
  *         if self._ctx:
  *             if self._ctx == alc.alcGetCurrentContext():             # <<<<<<<<<<<<<<
@@ -3621,7 +3665,7 @@ static void __pyx_pf_4cyal_7context_7Context_2__dealloc__(struct __pyx_obj_4cyal
  */
     }
 
-    /* "cyal/context.pyx":55
+    /* "cyal/context.pyx":59
  *             if self._ctx == alc.alcGetCurrentContext():
  *                 alc.alcMakeContextCurrent(NULL)
  *             alc.alcDestroyContext(self._ctx)             # <<<<<<<<<<<<<<
@@ -3630,7 +3674,7 @@ static void __pyx_pf_4cyal_7context_7Context_2__dealloc__(struct __pyx_obj_4cyal
  */
     alcDestroyContext(__pyx_v_self->_ctx);
 
-    /* "cyal/context.pyx":52
+    /* "cyal/context.pyx":56
  * 
  *     def __dealloc__(self):
  *         if self._ctx:             # <<<<<<<<<<<<<<
@@ -3639,8 +3683,8 @@ static void __pyx_pf_4cyal_7context_7Context_2__dealloc__(struct __pyx_obj_4cyal
  */
   }
 
-  /* "cyal/context.pyx":51
- *         self.source_pause = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourcePause")
+  /* "cyal/context.pyx":55
+ *         self.source_pause_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePausev")
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         if self._ctx:
@@ -3651,7 +3695,7 @@ static void __pyx_pf_4cyal_7context_7Context_2__dealloc__(struct __pyx_obj_4cyal
   __Pyx_RefNannyFinishContext();
 }
 
-/* "cyal/context.pyx":57
+/* "cyal/context.pyx":61
  *             alc.alcDestroyContext(self._ctx)
  * 
  *     def get_attrs(self):             # <<<<<<<<<<<<<<
@@ -3683,7 +3727,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_4get_attrs(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_attrs", 0);
 
-  /* "cyal/context.pyx":58
+  /* "cyal/context.pyx":62
  * 
  *     def get_attrs(self):
  *         return ContextAttrs.from_device(self.device)             # <<<<<<<<<<<<<<
@@ -3691,7 +3735,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_4get_attrs(struct __pyx_obj_4c
  *     def make_current(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs), __pyx_n_s_from_device); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs), __pyx_n_s_from_device); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3705,14 +3749,14 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_4get_attrs(struct __pyx_obj_4c
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, ((PyObject *)__pyx_v_self->device)) : __Pyx_PyObject_CallOneArg(__pyx_t_2, ((PyObject *)__pyx_v_self->device));
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cyal/context.pyx":57
+  /* "cyal/context.pyx":61
  *             alc.alcDestroyContext(self._ctx)
  * 
  *     def get_attrs(self):             # <<<<<<<<<<<<<<
@@ -3733,7 +3777,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_4get_attrs(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "cyal/context.pyx":60
+/* "cyal/context.pyx":64
  *         return ContextAttrs.from_device(self.device)
  * 
  *     def make_current(self):             # <<<<<<<<<<<<<<
@@ -3759,7 +3803,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_6make_current(struct __pyx_obj
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("make_current", 0);
 
-  /* "cyal/context.pyx":61
+  /* "cyal/context.pyx":65
  * 
  *     def make_current(self):
  *         alc.alcMakeContextCurrent(self._ctx)             # <<<<<<<<<<<<<<
@@ -3768,7 +3812,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_6make_current(struct __pyx_obj
  */
   (void)(alcMakeContextCurrent(__pyx_v_self->_ctx));
 
-  /* "cyal/context.pyx":60
+  /* "cyal/context.pyx":64
  *         return ContextAttrs.from_device(self.device)
  * 
  *     def make_current(self):             # <<<<<<<<<<<<<<
@@ -3783,7 +3827,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_6make_current(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "cyal/context.pyx":64
+/* "cyal/context.pyx":68
  * 
  *     @property
  *     def is_current(self):             # <<<<<<<<<<<<<<
@@ -3813,7 +3857,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_10is_current___get__(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "cyal/context.pyx":65
+  /* "cyal/context.pyx":69
  *     @property
  *     def is_current(self):
  *         return self._ctx == alc.alcGetCurrentContext()             # <<<<<<<<<<<<<<
@@ -3821,13 +3865,13 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_10is_current___get__(struct __
  *     @contextmanager
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong((__pyx_v_self->_ctx == alcGetCurrentContext())); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong((__pyx_v_self->_ctx == alcGetCurrentContext())); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cyal/context.pyx":64
+  /* "cyal/context.pyx":68
  * 
  *     @property
  *     def is_current(self):             # <<<<<<<<<<<<<<
@@ -3847,7 +3891,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_10is_current___get__(struct __
 }
 static PyObject *__pyx_gb_4cyal_7context_7Context_10generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "cyal/context.pyx":68
+/* "cyal/context.pyx":72
  * 
  *     @contextmanager
  *     def as_current(self):             # <<<<<<<<<<<<<<
@@ -3880,7 +3924,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_8as_current(struct __pyx_obj_4
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_4cyal_7context___pyx_scope_struct__as_current *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 68, __pyx_L1_error)
+    __PYX_ERR(0, 72, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -3888,7 +3932,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_8as_current(struct __pyx_obj_4
   __Pyx_INCREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_4cyal_7context_7Context_10generator, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_as_current, __pyx_n_s_Context_as_current, __pyx_n_s_cyal_context); if (unlikely(!gen)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_4cyal_7context_7Context_10generator, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_as_current, __pyx_n_s_Context_as_current, __pyx_n_s_cyal_context); if (unlikely(!gen)) __PYX_ERR(0, 72, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -3930,9 +3974,9 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_10generator(__pyx_CoroutineObj
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 72, __pyx_L1_error)
 
-  /* "cyal/context.pyx":69
+  /* "cyal/context.pyx":73
  *     @contextmanager
  *     def as_current(self):
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()             # <<<<<<<<<<<<<<
@@ -3941,7 +3985,7 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_10generator(__pyx_CoroutineObj
  */
   __pyx_cur_scope->__pyx_v_prev_ctx = alcGetCurrentContext();
 
-  /* "cyal/context.pyx":70
+  /* "cyal/context.pyx":74
  *     def as_current(self):
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
  *         alc.alcMakeContextCurrent(self._ctx)             # <<<<<<<<<<<<<<
@@ -3950,7 +3994,7 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_10generator(__pyx_CoroutineObj
  */
   (void)(alcMakeContextCurrent(__pyx_cur_scope->__pyx_v_self->_ctx));
 
-  /* "cyal/context.pyx":71
+  /* "cyal/context.pyx":75
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
  *         alc.alcMakeContextCurrent(self._ctx)
  *         try:             # <<<<<<<<<<<<<<
@@ -3959,7 +4003,7 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_10generator(__pyx_CoroutineObj
  */
   /*try:*/ {
 
-    /* "cyal/context.pyx":72
+    /* "cyal/context.pyx":76
  *         alc.alcMakeContextCurrent(self._ctx)
  *         try:
  *             yield self             # <<<<<<<<<<<<<<
@@ -3975,10 +4019,10 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_10generator(__pyx_CoroutineObj
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L7_resume_from_yield:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 72, __pyx_L5_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 76, __pyx_L5_error)
   }
 
-  /* "cyal/context.pyx":74
+  /* "cyal/context.pyx":78
  *             yield self
  *         finally:
  *             alc.alcMakeContextCurrent(prev_ctx)             # <<<<<<<<<<<<<<
@@ -4024,7 +4068,7 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_10generator(__pyx_CoroutineObj
   }
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "cyal/context.pyx":68
+  /* "cyal/context.pyx":72
  * 
  *     @contextmanager
  *     def as_current(self):             # <<<<<<<<<<<<<<
@@ -4048,7 +4092,7 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_10generator(__pyx_CoroutineObj
   return __pyx_r;
 }
 
-/* "cyal/context.pyx":76
+/* "cyal/context.pyx":80
  *             alc.alcMakeContextCurrent(prev_ctx)
  * 
  *     def process(self):             # <<<<<<<<<<<<<<
@@ -4074,7 +4118,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_11process(struct __pyx_obj_4cy
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("process", 0);
 
-  /* "cyal/context.pyx":77
+  /* "cyal/context.pyx":81
  * 
  *     def process(self):
  *         alc.alcProcessContext(self._ctx)             # <<<<<<<<<<<<<<
@@ -4083,7 +4127,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_11process(struct __pyx_obj_4cy
  */
   alcProcessContext(__pyx_v_self->_ctx);
 
-  /* "cyal/context.pyx":76
+  /* "cyal/context.pyx":80
  *             alc.alcMakeContextCurrent(prev_ctx)
  * 
  *     def process(self):             # <<<<<<<<<<<<<<
@@ -4098,7 +4142,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_11process(struct __pyx_obj_4cy
   return __pyx_r;
 }
 
-/* "cyal/context.pyx":79
+/* "cyal/context.pyx":83
  *         alc.alcProcessContext(self._ctx)
  * 
  *     def suspend(self):             # <<<<<<<<<<<<<<
@@ -4124,7 +4168,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_13suspend(struct __pyx_obj_4cy
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("suspend", 0);
 
-  /* "cyal/context.pyx":80
+  /* "cyal/context.pyx":84
  * 
  *     def suspend(self):
  *         alc.alcSuspendContext(self._ctx)             # <<<<<<<<<<<<<<
@@ -4133,7 +4177,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_13suspend(struct __pyx_obj_4cy
  */
   alcSuspendContext(__pyx_v_self->_ctx);
 
-  /* "cyal/context.pyx":79
+  /* "cyal/context.pyx":83
  *         alc.alcProcessContext(self._ctx)
  * 
  *     def suspend(self):             # <<<<<<<<<<<<<<
@@ -4149,7 +4193,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_13suspend(struct __pyx_obj_4cy
 }
 static PyObject *__pyx_gb_4cyal_7context_7Context_17generator1(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "cyal/context.pyx":83
+/* "cyal/context.pyx":87
  * 
  *     @contextmanager
  *     def as_processing(self):             # <<<<<<<<<<<<<<
@@ -4182,7 +4226,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_15as_processing(struct __pyx_o
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_4cyal_7context___pyx_scope_struct_1_as_processing *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 83, __pyx_L1_error)
+    __PYX_ERR(0, 87, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -4190,7 +4234,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_15as_processing(struct __pyx_o
   __Pyx_INCREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_4cyal_7context_7Context_17generator1, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_as_processing, __pyx_n_s_Context_as_processing, __pyx_n_s_cyal_context); if (unlikely(!gen)) __PYX_ERR(0, 83, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_4cyal_7context_7Context_17generator1, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_as_processing, __pyx_n_s_Context_as_processing, __pyx_n_s_cyal_context); if (unlikely(!gen)) __PYX_ERR(0, 87, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4232,9 +4276,9 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_17generator1(__pyx_CoroutineOb
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 83, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 87, __pyx_L1_error)
 
-  /* "cyal/context.pyx":84
+  /* "cyal/context.pyx":88
  *     @contextmanager
  *     def as_processing(self):
  *         alc.alcProcessContext(self._ctx)             # <<<<<<<<<<<<<<
@@ -4243,7 +4287,7 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_17generator1(__pyx_CoroutineOb
  */
   alcProcessContext(__pyx_cur_scope->__pyx_v_self->_ctx);
 
-  /* "cyal/context.pyx":85
+  /* "cyal/context.pyx":89
  *     def as_processing(self):
  *         alc.alcProcessContext(self._ctx)
  *         try:             # <<<<<<<<<<<<<<
@@ -4252,7 +4296,7 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_17generator1(__pyx_CoroutineOb
  */
   /*try:*/ {
 
-    /* "cyal/context.pyx":86
+    /* "cyal/context.pyx":90
  *         alc.alcProcessContext(self._ctx)
  *         try:
  *             yield self             # <<<<<<<<<<<<<<
@@ -4268,10 +4312,10 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_17generator1(__pyx_CoroutineOb
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L7_resume_from_yield:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 86, __pyx_L5_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 90, __pyx_L5_error)
   }
 
-  /* "cyal/context.pyx":88
+  /* "cyal/context.pyx":92
  *             yield self
  *         finally:
  *             alc.alcSuspendContext(self._ctx)             # <<<<<<<<<<<<<<
@@ -4317,7 +4361,7 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_17generator1(__pyx_CoroutineOb
   }
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "cyal/context.pyx":83
+  /* "cyal/context.pyx":87
  * 
  *     @contextmanager
  *     def as_processing(self):             # <<<<<<<<<<<<<<
@@ -4342,7 +4386,7 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_17generator1(__pyx_CoroutineOb
 }
 static PyObject *__pyx_gb_4cyal_7context_7Context_20generator2(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "cyal/context.pyx":91
+/* "cyal/context.pyx":95
  * 
  *     @contextmanager
  *     def as_suspended(self):             # <<<<<<<<<<<<<<
@@ -4375,7 +4419,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_18as_suspended(struct __pyx_ob
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_4cyal_7context___pyx_scope_struct_2_as_suspended *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 91, __pyx_L1_error)
+    __PYX_ERR(0, 95, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -4383,7 +4427,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_18as_suspended(struct __pyx_ob
   __Pyx_INCREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_4cyal_7context_7Context_20generator2, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_as_suspended, __pyx_n_s_Context_as_suspended, __pyx_n_s_cyal_context); if (unlikely(!gen)) __PYX_ERR(0, 91, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_4cyal_7context_7Context_20generator2, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_as_suspended, __pyx_n_s_Context_as_suspended, __pyx_n_s_cyal_context); if (unlikely(!gen)) __PYX_ERR(0, 95, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4425,9 +4469,9 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_20generator2(__pyx_CoroutineOb
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 95, __pyx_L1_error)
 
-  /* "cyal/context.pyx":92
+  /* "cyal/context.pyx":96
  *     @contextmanager
  *     def as_suspended(self):
  *         alc.alcSuspendContext(self._ctx)             # <<<<<<<<<<<<<<
@@ -4436,7 +4480,7 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_20generator2(__pyx_CoroutineOb
  */
   alcSuspendContext(__pyx_cur_scope->__pyx_v_self->_ctx);
 
-  /* "cyal/context.pyx":93
+  /* "cyal/context.pyx":97
  *     def as_suspended(self):
  *         alc.alcSuspendContext(self._ctx)
  *         try:             # <<<<<<<<<<<<<<
@@ -4445,7 +4489,7 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_20generator2(__pyx_CoroutineOb
  */
   /*try:*/ {
 
-    /* "cyal/context.pyx":94
+    /* "cyal/context.pyx":98
  *         alc.alcSuspendContext(self._ctx)
  *         try:
  *             yield self             # <<<<<<<<<<<<<<
@@ -4461,10 +4505,10 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_20generator2(__pyx_CoroutineOb
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L7_resume_from_yield:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 94, __pyx_L5_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 98, __pyx_L5_error)
   }
 
-  /* "cyal/context.pyx":96
+  /* "cyal/context.pyx":100
  *             yield self
  *         finally:
  *             alc.alcProcessContext(self._ctx)             # <<<<<<<<<<<<<<
@@ -4510,7 +4554,7 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_20generator2(__pyx_CoroutineOb
   }
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "cyal/context.pyx":91
+  /* "cyal/context.pyx":95
  * 
  *     @contextmanager
  *     def as_suspended(self):             # <<<<<<<<<<<<<<
@@ -4534,7 +4578,7 @@ static PyObject *__pyx_gb_4cyal_7context_7Context_20generator2(__pyx_CoroutineOb
   return __pyx_r;
 }
 
-/* "cyal/context.pyx":98
+/* "cyal/context.pyx":102
  *             alc.alcProcessContext(self._ctx)
  * 
  *     def gen_buffer(self):             # <<<<<<<<<<<<<<
@@ -4565,7 +4609,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_21gen_buffer(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gen_buffer", 0);
 
-  /* "cyal/context.pyx":100
+  /* "cyal/context.pyx":104
  *     def gen_buffer(self):
  *         cdef al.ALuint id
  *         self.al_gen_buffers(1, &id)             # <<<<<<<<<<<<<<
@@ -4574,18 +4618,18 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_21gen_buffer(struct __pyx_obj_
  */
   __pyx_v_self->al_gen_buffers(1, (&__pyx_v_id));
 
-  /* "cyal/context.pyx":101
+  /* "cyal/context.pyx":105
  *         cdef al.ALuint id
  *         self.al_gen_buffers(1, &id)
  *         check_al_error()             # <<<<<<<<<<<<<<
  *         return Buffer.from_id(self, id)
  * 
  */
-  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cyal/context.pyx":102
+  /* "cyal/context.pyx":106
  *         self.al_gen_buffers(1, &id)
  *         check_al_error()
  *         return Buffer.from_id(self, id)             # <<<<<<<<<<<<<<
@@ -4593,13 +4637,13 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_21gen_buffer(struct __pyx_obj_
  *     def gen_buffers(self, n):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_vtabptr_4cyal_6buffer_Buffer->from_id(__pyx_v_self, __pyx_v_id)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_vtabptr_4cyal_6buffer_Buffer->from_id(__pyx_v_self, __pyx_v_id)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cyal/context.pyx":98
+  /* "cyal/context.pyx":102
  *             alc.alcProcessContext(self._ctx)
  * 
  *     def gen_buffer(self):             # <<<<<<<<<<<<<<
@@ -4618,7 +4662,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_21gen_buffer(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "cyal/context.pyx":104
+/* "cyal/context.pyx":108
  *         return Buffer.from_id(self, id)
  * 
  *     def gen_buffers(self, n):             # <<<<<<<<<<<<<<
@@ -4659,7 +4703,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_23gen_buffers(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gen_buffers", 0);
 
-  /* "cyal/context.pyx":105
+  /* "cyal/context.pyx":109
  * 
  *     def gen_buffers(self, n):
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)             # <<<<<<<<<<<<<<
@@ -4668,24 +4712,24 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_23gen_buffers(struct __pyx_obj
  */
   __pyx_t_1 = ((PyObject *)__pyx_v_4cyal_7context_ids_template);
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyIndex_AsSsize_t(__pyx_v_n); if (unlikely((__pyx_t_2 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L1_error)
-  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyIndex_AsSsize_t(__pyx_v_n); if (unlikely((__pyx_t_2 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_ids = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "cyal/context.pyx":106
+  /* "cyal/context.pyx":110
  *     def gen_buffers(self, n):
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
  *         self.al_gen_buffers(n, &ids[0])             # <<<<<<<<<<<<<<
  *         check_al_error()
  *         return [Buffer.from_id(self, id) for id in ids]
  */
-  __pyx_t_5 = __Pyx_PyInt_As_ALsizei(__pyx_v_n); if (unlikely((__pyx_t_5 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_As_ALsizei(__pyx_v_n); if (unlikely((__pyx_t_5 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 110, __pyx_L1_error)
   __pyx_t_6 = 0;
   __pyx_t_7 = -1;
   if (__pyx_t_6 < 0) {
@@ -4694,22 +4738,22 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_23gen_buffers(struct __pyx_obj
   } else if (unlikely(__pyx_t_6 >= __pyx_v_ids.shape[0])) __pyx_t_7 = 0;
   if (unlikely(__pyx_t_7 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_7);
-    __PYX_ERR(0, 106, __pyx_L1_error)
+    __PYX_ERR(0, 110, __pyx_L1_error)
   }
   __pyx_v_self->al_gen_buffers(__pyx_t_5, (&(*((ALuint *) ( /* dim=0 */ (__pyx_v_ids.data + __pyx_t_6 * __pyx_v_ids.strides[0]) )))));
 
-  /* "cyal/context.pyx":107
+  /* "cyal/context.pyx":111
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
  *         self.al_gen_buffers(n, &ids[0])
  *         check_al_error()             # <<<<<<<<<<<<<<
  *         return [Buffer.from_id(self, id) for id in ids]
  * 
  */
-  __pyx_t_3 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_3 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cyal/context.pyx":108
+  /* "cyal/context.pyx":112
  *         self.al_gen_buffers(n, &ids[0])
  *         check_al_error()
  *         return [Buffer.from_id(self, id) for id in ids]             # <<<<<<<<<<<<<<
@@ -4718,17 +4762,17 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_23gen_buffers(struct __pyx_obj
  */
   __Pyx_XDECREF(__pyx_r);
   { /* enter inner scope */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 108, __pyx_L5_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 112, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L5_error)
+    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
       __pyx_t_8 = __pyx_t_1; __Pyx_INCREF(__pyx_t_8); __pyx_t_2 = 0;
       __pyx_t_9 = NULL;
     } else {
-      __pyx_t_2 = -1; __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 108, __pyx_L5_error)
+      __pyx_t_2 = -1; __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 112, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 108, __pyx_L5_error)
+      __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 112, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (;;) {
@@ -4736,17 +4780,17 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_23gen_buffers(struct __pyx_obj
         if (likely(PyList_CheckExact(__pyx_t_8))) {
           if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_8)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 108, __pyx_L5_error)
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 112, __pyx_L5_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L5_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         } else {
           if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_8)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 108, __pyx_L5_error)
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 112, __pyx_L5_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L5_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         }
@@ -4756,7 +4800,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_23gen_buffers(struct __pyx_obj
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 108, __pyx_L5_error)
+            else __PYX_ERR(0, 112, __pyx_L5_error)
           }
           break;
         }
@@ -4764,10 +4808,10 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_23gen_buffers(struct __pyx_obj
       }
       __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v_id, __pyx_t_1);
       __pyx_t_1 = 0;
-      __pyx_t_10 = __Pyx_PyInt_As_ALuint(__pyx_7genexpr__pyx_v_id); if (unlikely((__pyx_t_10 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 108, __pyx_L5_error)
-      __pyx_t_1 = ((PyObject *)__pyx_vtabptr_4cyal_6buffer_Buffer->from_id(__pyx_v_self, __pyx_t_10)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L5_error)
+      __pyx_t_10 = __Pyx_PyInt_As_ALuint(__pyx_7genexpr__pyx_v_id); if (unlikely((__pyx_t_10 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 112, __pyx_L5_error)
+      __pyx_t_1 = ((PyObject *)__pyx_vtabptr_4cyal_6buffer_Buffer->from_id(__pyx_v_self, __pyx_t_10)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_1))) __PYX_ERR(0, 108, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_1))) __PYX_ERR(0, 112, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -4782,7 +4826,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_23gen_buffers(struct __pyx_obj
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "cyal/context.pyx":104
+  /* "cyal/context.pyx":108
  *         return Buffer.from_id(self, id)
  * 
  *     def gen_buffers(self, n):             # <<<<<<<<<<<<<<
@@ -4806,7 +4850,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_23gen_buffers(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "cyal/context.pyx":110
+/* "cyal/context.pyx":114
  *         return [Buffer.from_id(self, id) for id in ids]
  * 
  *     def gen_source(self, **kwargs):             # <<<<<<<<<<<<<<
@@ -4854,7 +4898,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_25gen_source(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gen_source", 0);
 
-  /* "cyal/context.pyx":112
+  /* "cyal/context.pyx":116
  *     def gen_source(self, **kwargs):
  *         cdef al.ALuint id
  *         self.al_gen_sources(1, &id)             # <<<<<<<<<<<<<<
@@ -4863,30 +4907,30 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_25gen_source(struct __pyx_obj_
  */
   __pyx_v_self->al_gen_sources(1, (&__pyx_v_id));
 
-  /* "cyal/context.pyx":113
+  /* "cyal/context.pyx":117
  *         cdef al.ALuint id
  *         self.al_gen_sources(1, &id)
  *         check_al_error()             # <<<<<<<<<<<<<<
  *         cdef Source src = Source.from_id(self, id)
  *         for k, v in kwargs.items(): setattr(src, k, v)
  */
-  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cyal/context.pyx":114
+  /* "cyal/context.pyx":118
  *         self.al_gen_sources(1, &id)
  *         check_al_error()
  *         cdef Source src = Source.from_id(self, id)             # <<<<<<<<<<<<<<
  *         for k, v in kwargs.items(): setattr(src, k, v)
  *         return src
  */
-  __pyx_t_1 = ((PyObject *)__pyx_vtabptr_4cyal_6source_Source->from_id(__pyx_v_self, __pyx_v_id)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_vtabptr_4cyal_6source_Source->from_id(__pyx_v_self, __pyx_v_id)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_src = ((struct __pyx_obj_4cyal_6source_Source *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cyal/context.pyx":115
+  /* "cyal/context.pyx":119
  *         check_al_error()
  *         cdef Source src = Source.from_id(self, id)
  *         for k, v in kwargs.items(): setattr(src, k, v)             # <<<<<<<<<<<<<<
@@ -4894,7 +4938,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_25gen_source(struct __pyx_obj_
  * 
  */
   __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_1);
   __pyx_t_1 = __pyx_t_5;
@@ -4902,18 +4946,18 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_25gen_source(struct __pyx_obj_
   while (1) {
     __pyx_t_7 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_3, &__pyx_t_2, &__pyx_t_5, &__pyx_t_6, NULL, __pyx_t_4);
     if (unlikely(__pyx_t_7 == 0)) break;
-    if (unlikely(__pyx_t_7 == -1)) __PYX_ERR(0, 115, __pyx_L1_error)
+    if (unlikely(__pyx_t_7 == -1)) __PYX_ERR(0, 119, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_5);
     __pyx_t_5 = 0;
     __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_6);
     __pyx_t_6 = 0;
-    __pyx_t_8 = PyObject_SetAttr(((PyObject *)__pyx_v_src), __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 115, __pyx_L1_error)
+    __pyx_t_8 = PyObject_SetAttr(((PyObject *)__pyx_v_src), __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 119, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cyal/context.pyx":116
+  /* "cyal/context.pyx":120
  *         cdef Source src = Source.from_id(self, id)
  *         for k, v in kwargs.items(): setattr(src, k, v)
  *         return src             # <<<<<<<<<<<<<<
@@ -4925,7 +4969,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_25gen_source(struct __pyx_obj_
   __pyx_r = ((PyObject *)__pyx_v_src);
   goto __pyx_L0;
 
-  /* "cyal/context.pyx":110
+  /* "cyal/context.pyx":114
  *         return [Buffer.from_id(self, id) for id in ids]
  * 
  *     def gen_source(self, **kwargs):             # <<<<<<<<<<<<<<
@@ -4949,7 +4993,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_25gen_source(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "cyal/context.pyx":118
+/* "cyal/context.pyx":122
  *         return src
  * 
  *     def gen_sources(self, n, **kwargs):             # <<<<<<<<<<<<<<
@@ -4989,7 +5033,7 @@ static PyObject *__pyx_pw_4cyal_7context_7Context_28gen_sources(PyObject *__pyx_
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "gen_sources") < 0)) __PYX_ERR(0, 118, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "gen_sources") < 0)) __PYX_ERR(0, 122, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -5000,7 +5044,7 @@ static PyObject *__pyx_pw_4cyal_7context_7Context_28gen_sources(PyObject *__pyx_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("gen_sources", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 118, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("gen_sources", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 122, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
   __Pyx_AddTraceback("cyal.context.Context.gen_sources", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -5044,7 +5088,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gen_sources", 0);
 
-  /* "cyal/context.pyx":119
+  /* "cyal/context.pyx":123
  * 
  *     def gen_sources(self, n, **kwargs):
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)             # <<<<<<<<<<<<<<
@@ -5053,24 +5097,24 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj
  */
   __pyx_t_1 = ((PyObject *)__pyx_v_4cyal_7context_ids_template);
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyIndex_AsSsize_t(__pyx_v_n); if (unlikely((__pyx_t_2 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 119, __pyx_L1_error)
-  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyIndex_AsSsize_t(__pyx_v_n); if (unlikely((__pyx_t_2 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_ids = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "cyal/context.pyx":120
+  /* "cyal/context.pyx":124
  *     def gen_sources(self, n, **kwargs):
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
  *         self.al_gen_sources(n, &ids[0])             # <<<<<<<<<<<<<<
  *         check_al_error()
  *         cdef list srcs = [Source.from_id(self, id) for id in ids]
  */
-  __pyx_t_5 = __Pyx_PyInt_As_ALsizei(__pyx_v_n); if (unlikely((__pyx_t_5 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 120, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_As_ALsizei(__pyx_v_n); if (unlikely((__pyx_t_5 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 124, __pyx_L1_error)
   __pyx_t_6 = 0;
   __pyx_t_7 = -1;
   if (__pyx_t_6 < 0) {
@@ -5079,22 +5123,22 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj
   } else if (unlikely(__pyx_t_6 >= __pyx_v_ids.shape[0])) __pyx_t_7 = 0;
   if (unlikely(__pyx_t_7 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_7);
-    __PYX_ERR(0, 120, __pyx_L1_error)
+    __PYX_ERR(0, 124, __pyx_L1_error)
   }
   __pyx_v_self->al_gen_sources(__pyx_t_5, (&(*((ALuint *) ( /* dim=0 */ (__pyx_v_ids.data + __pyx_t_6 * __pyx_v_ids.strides[0]) )))));
 
-  /* "cyal/context.pyx":121
+  /* "cyal/context.pyx":125
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
  *         self.al_gen_sources(n, &ids[0])
  *         check_al_error()             # <<<<<<<<<<<<<<
  *         cdef list srcs = [Source.from_id(self, id) for id in ids]
  *         for src in srcs:
  */
-  __pyx_t_3 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_3 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cyal/context.pyx":122
+  /* "cyal/context.pyx":126
  *         self.al_gen_sources(n, &ids[0])
  *         check_al_error()
  *         cdef list srcs = [Source.from_id(self, id) for id in ids]             # <<<<<<<<<<<<<<
@@ -5102,17 +5146,17 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj
  *             for k, v in kwargs.items(): setattr(src, k, v)
  */
   { /* enter inner scope */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 122, __pyx_L5_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L5_error)
+    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
       __pyx_t_8 = __pyx_t_1; __Pyx_INCREF(__pyx_t_8); __pyx_t_2 = 0;
       __pyx_t_9 = NULL;
     } else {
-      __pyx_t_2 = -1; __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 122, __pyx_L5_error)
+      __pyx_t_2 = -1; __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 126, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 122, __pyx_L5_error)
+      __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 126, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (;;) {
@@ -5120,17 +5164,17 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj
         if (likely(PyList_CheckExact(__pyx_t_8))) {
           if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_8)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 122, __pyx_L5_error)
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 126, __pyx_L5_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L5_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         } else {
           if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_8)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 122, __pyx_L5_error)
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 126, __pyx_L5_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L5_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         }
@@ -5140,7 +5184,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 122, __pyx_L5_error)
+            else __PYX_ERR(0, 126, __pyx_L5_error)
           }
           break;
         }
@@ -5148,10 +5192,10 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj
       }
       __Pyx_XDECREF_SET(__pyx_8genexpr1__pyx_v_id, __pyx_t_1);
       __pyx_t_1 = 0;
-      __pyx_t_10 = __Pyx_PyInt_As_ALuint(__pyx_8genexpr1__pyx_v_id); if (unlikely((__pyx_t_10 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 122, __pyx_L5_error)
-      __pyx_t_1 = ((PyObject *)__pyx_vtabptr_4cyal_6source_Source->from_id(__pyx_v_self, __pyx_t_10)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L5_error)
+      __pyx_t_10 = __Pyx_PyInt_As_ALuint(__pyx_8genexpr1__pyx_v_id); if (unlikely((__pyx_t_10 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 126, __pyx_L5_error)
+      __pyx_t_1 = ((PyObject *)__pyx_vtabptr_4cyal_6source_Source->from_id(__pyx_v_self, __pyx_t_10)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_1))) __PYX_ERR(0, 122, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_1))) __PYX_ERR(0, 126, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -5165,7 +5209,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj
   __pyx_v_srcs = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "cyal/context.pyx":123
+  /* "cyal/context.pyx":127
  *         check_al_error()
  *         cdef list srcs = [Source.from_id(self, id) for id in ids]
  *         for src in srcs:             # <<<<<<<<<<<<<<
@@ -5176,15 +5220,15 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj
   for (;;) {
     if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_3)) break;
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_8 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_2); __Pyx_INCREF(__pyx_t_8); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 123, __pyx_L1_error)
+    __pyx_t_8 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_2); __Pyx_INCREF(__pyx_t_8); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 127, __pyx_L1_error)
     #else
-    __pyx_t_8 = PySequence_ITEM(__pyx_t_3, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 123, __pyx_L1_error)
+    __pyx_t_8 = PySequence_ITEM(__pyx_t_3, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_src, __pyx_t_8);
     __pyx_t_8 = 0;
 
-    /* "cyal/context.pyx":124
+    /* "cyal/context.pyx":128
  *         cdef list srcs = [Source.from_id(self, id) for id in ids]
  *         for src in srcs:
  *             for k, v in kwargs.items(): setattr(src, k, v)             # <<<<<<<<<<<<<<
@@ -5192,7 +5236,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj
  * 
  */
     __pyx_t_11 = 0;
-    __pyx_t_1 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_12), (&__pyx_t_7)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_12), (&__pyx_t_7)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_XDECREF(__pyx_t_8);
     __pyx_t_8 = __pyx_t_1;
@@ -5200,18 +5244,18 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj
     while (1) {
       __pyx_t_14 = __Pyx_dict_iter_next(__pyx_t_8, __pyx_t_12, &__pyx_t_11, &__pyx_t_1, &__pyx_t_13, NULL, __pyx_t_7);
       if (unlikely(__pyx_t_14 == 0)) break;
-      if (unlikely(__pyx_t_14 == -1)) __PYX_ERR(0, 124, __pyx_L1_error)
+      if (unlikely(__pyx_t_14 == -1)) __PYX_ERR(0, 128, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GOTREF(__pyx_t_13);
       __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_1);
       __pyx_t_1 = 0;
       __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_13);
       __pyx_t_13 = 0;
-      __pyx_t_15 = PyObject_SetAttr(__pyx_v_src, __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 124, __pyx_L1_error)
+      __pyx_t_15 = PyObject_SetAttr(__pyx_v_src, __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 128, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "cyal/context.pyx":123
+    /* "cyal/context.pyx":127
  *         check_al_error()
  *         cdef list srcs = [Source.from_id(self, id) for id in ids]
  *         for src in srcs:             # <<<<<<<<<<<<<<
@@ -5221,19 +5265,19 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cyal/context.pyx":125
+  /* "cyal/context.pyx":129
  *         for src in srcs:
  *             for k, v in kwargs.items(): setattr(src, k, v)
  *         return srcs             # <<<<<<<<<<<<<<
  * 
- * cdef array.array attrs_template = array.array('i')
+ *     def play_sources(self, *srcs):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_srcs);
   __pyx_r = __pyx_v_srcs;
   goto __pyx_L0;
 
-  /* "cyal/context.pyx":118
+  /* "cyal/context.pyx":122
  *         return src
  * 
  *     def gen_sources(self, n, **kwargs):             # <<<<<<<<<<<<<<
@@ -5257,6 +5301,670 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_27gen_sources(struct __pyx_obj
   __Pyx_XDECREF(__pyx_v_k);
   __Pyx_XDECREF(__pyx_v_v);
   __Pyx_XDECREF(__pyx_8genexpr1__pyx_v_id);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/context.pyx":131
+ *         return srcs
+ * 
+ *     def play_sources(self, *srcs):             # <<<<<<<<<<<<<<
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+ *         cdef Py_ssize_t i
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_7context_7Context_30play_sources(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_4cyal_7context_7Context_30play_sources(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_srcs = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("play_sources (wrapper)", 0);
+  if (unlikely(__pyx_kwds) && unlikely(PyDict_Size(__pyx_kwds) > 0) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "play_sources", 0))) return NULL;
+  __Pyx_INCREF(__pyx_args);
+  __pyx_v_srcs = __pyx_args;
+  __pyx_r = __pyx_pf_4cyal_7context_7Context_29play_sources(((struct __pyx_obj_4cyal_7context_Context *)__pyx_v_self), __pyx_v_srcs);
+
+  /* function exit code */
+  __Pyx_XDECREF(__pyx_v_srcs);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_7context_7Context_29play_sources(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, PyObject *__pyx_v_srcs) {
+  __Pyx_memviewslice __pyx_v_ids = { 0, 0, { 0 }, { 0 }, { 0 } };
+  Py_ssize_t __pyx_v_i;
+  PyObject *__pyx_v_s = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  Py_ssize_t __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  __Pyx_memviewslice __pyx_t_4 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  Py_ssize_t __pyx_t_5;
+  ALuint __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  int __pyx_t_8;
+  ALsizei __pyx_t_9;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("play_sources", 0);
+
+  /* "cyal/context.pyx":132
+ * 
+ *     def play_sources(self, *srcs):
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)             # <<<<<<<<<<<<<<
+ *         cdef Py_ssize_t i
+ *         for i, s in enumerate(srcs): ids[i] = s.id
+ */
+  __pyx_t_1 = ((PyObject *)__pyx_v_4cyal_7context_ids_template);
+  __Pyx_INCREF(__pyx_t_1);
+  __pyx_t_2 = PyTuple_GET_SIZE(__pyx_v_srcs); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_ids = __pyx_t_4;
+  __pyx_t_4.memview = NULL;
+  __pyx_t_4.data = NULL;
+
+  /* "cyal/context.pyx":134
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+ *         cdef Py_ssize_t i
+ *         for i, s in enumerate(srcs): ids[i] = s.id             # <<<<<<<<<<<<<<
+ *         self.source_play_v(ids.size, &ids[0])
+ *         check_al_error()
+ */
+  __pyx_t_2 = 0;
+  __pyx_t_3 = __pyx_v_srcs; __Pyx_INCREF(__pyx_t_3); __pyx_t_5 = 0;
+  for (;;) {
+    if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
+    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 134, __pyx_L1_error)
+    #else
+    __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    #endif
+    __Pyx_XDECREF_SET(__pyx_v_s, __pyx_t_1);
+    __pyx_t_1 = 0;
+    __pyx_v_i = __pyx_t_2;
+    __pyx_t_2 = (__pyx_t_2 + 1);
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_s, __pyx_n_s_id); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_6 = __Pyx_PyInt_As_ALuint(__pyx_t_1); if (unlikely((__pyx_t_6 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 134, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_7 = __pyx_v_i;
+    __pyx_t_8 = -1;
+    if (__pyx_t_7 < 0) {
+      __pyx_t_7 += __pyx_v_ids.shape[0];
+      if (unlikely(__pyx_t_7 < 0)) __pyx_t_8 = 0;
+    } else if (unlikely(__pyx_t_7 >= __pyx_v_ids.shape[0])) __pyx_t_8 = 0;
+    if (unlikely(__pyx_t_8 != -1)) {
+      __Pyx_RaiseBufferIndexError(__pyx_t_8);
+      __PYX_ERR(0, 134, __pyx_L1_error)
+    }
+    *((ALuint *) ( /* dim=0 */ (__pyx_v_ids.data + __pyx_t_7 * __pyx_v_ids.strides[0]) )) = __pyx_t_6;
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "cyal/context.pyx":135
+ *         cdef Py_ssize_t i
+ *         for i, s in enumerate(srcs): ids[i] = s.id
+ *         self.source_play_v(ids.size, &ids[0])             # <<<<<<<<<<<<<<
+ *         check_al_error()
+ * 
+ */
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_9 = __Pyx_PyInt_As_ALsizei(__pyx_t_1); if (unlikely((__pyx_t_9 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_7 = 0;
+  __pyx_t_8 = -1;
+  if (__pyx_t_7 < 0) {
+    __pyx_t_7 += __pyx_v_ids.shape[0];
+    if (unlikely(__pyx_t_7 < 0)) __pyx_t_8 = 0;
+  } else if (unlikely(__pyx_t_7 >= __pyx_v_ids.shape[0])) __pyx_t_8 = 0;
+  if (unlikely(__pyx_t_8 != -1)) {
+    __Pyx_RaiseBufferIndexError(__pyx_t_8);
+    __PYX_ERR(0, 135, __pyx_L1_error)
+  }
+  __pyx_v_self->source_play_v(__pyx_t_9, (&(*((ALuint *) ( /* dim=0 */ (__pyx_v_ids.data + __pyx_t_7 * __pyx_v_ids.strides[0]) )))));
+
+  /* "cyal/context.pyx":136
+ *         for i, s in enumerate(srcs): ids[i] = s.id
+ *         self.source_play_v(ids.size, &ids[0])
+ *         check_al_error()             # <<<<<<<<<<<<<<
+ * 
+ *     def stop_sources(self, *srcs):
+ */
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "cyal/context.pyx":131
+ *         return srcs
+ * 
+ *     def play_sources(self, *srcs):             # <<<<<<<<<<<<<<
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+ *         cdef Py_ssize_t i
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_3);
+  __PYX_XDEC_MEMVIEW(&__pyx_t_4, 1);
+  __Pyx_AddTraceback("cyal.context.Context.play_sources", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_ids, 1);
+  __Pyx_XDECREF(__pyx_v_s);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/context.pyx":138
+ *         check_al_error()
+ * 
+ *     def stop_sources(self, *srcs):             # <<<<<<<<<<<<<<
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+ *         cdef Py_ssize_t i
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_7context_7Context_32stop_sources(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_4cyal_7context_7Context_32stop_sources(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_srcs = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("stop_sources (wrapper)", 0);
+  if (unlikely(__pyx_kwds) && unlikely(PyDict_Size(__pyx_kwds) > 0) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "stop_sources", 0))) return NULL;
+  __Pyx_INCREF(__pyx_args);
+  __pyx_v_srcs = __pyx_args;
+  __pyx_r = __pyx_pf_4cyal_7context_7Context_31stop_sources(((struct __pyx_obj_4cyal_7context_Context *)__pyx_v_self), __pyx_v_srcs);
+
+  /* function exit code */
+  __Pyx_XDECREF(__pyx_v_srcs);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_7context_7Context_31stop_sources(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, PyObject *__pyx_v_srcs) {
+  __Pyx_memviewslice __pyx_v_ids = { 0, 0, { 0 }, { 0 }, { 0 } };
+  Py_ssize_t __pyx_v_i;
+  PyObject *__pyx_v_s = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  Py_ssize_t __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  __Pyx_memviewslice __pyx_t_4 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  Py_ssize_t __pyx_t_5;
+  ALuint __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  int __pyx_t_8;
+  ALsizei __pyx_t_9;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("stop_sources", 0);
+
+  /* "cyal/context.pyx":139
+ * 
+ *     def stop_sources(self, *srcs):
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)             # <<<<<<<<<<<<<<
+ *         cdef Py_ssize_t i
+ *         for i, s in enumerate(srcs): ids[i] = s.id
+ */
+  __pyx_t_1 = ((PyObject *)__pyx_v_4cyal_7context_ids_template);
+  __Pyx_INCREF(__pyx_t_1);
+  __pyx_t_2 = PyTuple_GET_SIZE(__pyx_v_srcs); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 139, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_ids = __pyx_t_4;
+  __pyx_t_4.memview = NULL;
+  __pyx_t_4.data = NULL;
+
+  /* "cyal/context.pyx":141
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+ *         cdef Py_ssize_t i
+ *         for i, s in enumerate(srcs): ids[i] = s.id             # <<<<<<<<<<<<<<
+ *         self.source_stop_v(ids.size, &ids[0])
+ *         check_al_error()
+ */
+  __pyx_t_2 = 0;
+  __pyx_t_3 = __pyx_v_srcs; __Pyx_INCREF(__pyx_t_3); __pyx_t_5 = 0;
+  for (;;) {
+    if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
+    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 141, __pyx_L1_error)
+    #else
+    __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    #endif
+    __Pyx_XDECREF_SET(__pyx_v_s, __pyx_t_1);
+    __pyx_t_1 = 0;
+    __pyx_v_i = __pyx_t_2;
+    __pyx_t_2 = (__pyx_t_2 + 1);
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_s, __pyx_n_s_id); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_6 = __Pyx_PyInt_As_ALuint(__pyx_t_1); if (unlikely((__pyx_t_6 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_7 = __pyx_v_i;
+    __pyx_t_8 = -1;
+    if (__pyx_t_7 < 0) {
+      __pyx_t_7 += __pyx_v_ids.shape[0];
+      if (unlikely(__pyx_t_7 < 0)) __pyx_t_8 = 0;
+    } else if (unlikely(__pyx_t_7 >= __pyx_v_ids.shape[0])) __pyx_t_8 = 0;
+    if (unlikely(__pyx_t_8 != -1)) {
+      __Pyx_RaiseBufferIndexError(__pyx_t_8);
+      __PYX_ERR(0, 141, __pyx_L1_error)
+    }
+    *((ALuint *) ( /* dim=0 */ (__pyx_v_ids.data + __pyx_t_7 * __pyx_v_ids.strides[0]) )) = __pyx_t_6;
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "cyal/context.pyx":142
+ *         cdef Py_ssize_t i
+ *         for i, s in enumerate(srcs): ids[i] = s.id
+ *         self.source_stop_v(ids.size, &ids[0])             # <<<<<<<<<<<<<<
+ *         check_al_error()
+ * 
+ */
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_9 = __Pyx_PyInt_As_ALsizei(__pyx_t_1); if (unlikely((__pyx_t_9 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 142, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_7 = 0;
+  __pyx_t_8 = -1;
+  if (__pyx_t_7 < 0) {
+    __pyx_t_7 += __pyx_v_ids.shape[0];
+    if (unlikely(__pyx_t_7 < 0)) __pyx_t_8 = 0;
+  } else if (unlikely(__pyx_t_7 >= __pyx_v_ids.shape[0])) __pyx_t_8 = 0;
+  if (unlikely(__pyx_t_8 != -1)) {
+    __Pyx_RaiseBufferIndexError(__pyx_t_8);
+    __PYX_ERR(0, 142, __pyx_L1_error)
+  }
+  __pyx_v_self->source_stop_v(__pyx_t_9, (&(*((ALuint *) ( /* dim=0 */ (__pyx_v_ids.data + __pyx_t_7 * __pyx_v_ids.strides[0]) )))));
+
+  /* "cyal/context.pyx":143
+ *         for i, s in enumerate(srcs): ids[i] = s.id
+ *         self.source_stop_v(ids.size, &ids[0])
+ *         check_al_error()             # <<<<<<<<<<<<<<
+ * 
+ *     def rewind_sources(self, *srcs):
+ */
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "cyal/context.pyx":138
+ *         check_al_error()
+ * 
+ *     def stop_sources(self, *srcs):             # <<<<<<<<<<<<<<
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+ *         cdef Py_ssize_t i
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_3);
+  __PYX_XDEC_MEMVIEW(&__pyx_t_4, 1);
+  __Pyx_AddTraceback("cyal.context.Context.stop_sources", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_ids, 1);
+  __Pyx_XDECREF(__pyx_v_s);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/context.pyx":145
+ *         check_al_error()
+ * 
+ *     def rewind_sources(self, *srcs):             # <<<<<<<<<<<<<<
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+ *         cdef Py_ssize_t i
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_7context_7Context_34rewind_sources(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_4cyal_7context_7Context_34rewind_sources(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_srcs = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("rewind_sources (wrapper)", 0);
+  if (unlikely(__pyx_kwds) && unlikely(PyDict_Size(__pyx_kwds) > 0) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "rewind_sources", 0))) return NULL;
+  __Pyx_INCREF(__pyx_args);
+  __pyx_v_srcs = __pyx_args;
+  __pyx_r = __pyx_pf_4cyal_7context_7Context_33rewind_sources(((struct __pyx_obj_4cyal_7context_Context *)__pyx_v_self), __pyx_v_srcs);
+
+  /* function exit code */
+  __Pyx_XDECREF(__pyx_v_srcs);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_7context_7Context_33rewind_sources(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, PyObject *__pyx_v_srcs) {
+  __Pyx_memviewslice __pyx_v_ids = { 0, 0, { 0 }, { 0 }, { 0 } };
+  Py_ssize_t __pyx_v_i;
+  PyObject *__pyx_v_s = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  Py_ssize_t __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  __Pyx_memviewslice __pyx_t_4 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  Py_ssize_t __pyx_t_5;
+  ALuint __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  int __pyx_t_8;
+  ALsizei __pyx_t_9;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("rewind_sources", 0);
+
+  /* "cyal/context.pyx":146
+ * 
+ *     def rewind_sources(self, *srcs):
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)             # <<<<<<<<<<<<<<
+ *         cdef Py_ssize_t i
+ *         for i, s in enumerate(srcs): ids[i] = s.id
+ */
+  __pyx_t_1 = ((PyObject *)__pyx_v_4cyal_7context_ids_template);
+  __Pyx_INCREF(__pyx_t_1);
+  __pyx_t_2 = PyTuple_GET_SIZE(__pyx_v_srcs); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_ids = __pyx_t_4;
+  __pyx_t_4.memview = NULL;
+  __pyx_t_4.data = NULL;
+
+  /* "cyal/context.pyx":148
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+ *         cdef Py_ssize_t i
+ *         for i, s in enumerate(srcs): ids[i] = s.id             # <<<<<<<<<<<<<<
+ *         self.source_rewind_v(ids.size, &ids[0])
+ *         check_al_error()
+ */
+  __pyx_t_2 = 0;
+  __pyx_t_3 = __pyx_v_srcs; __Pyx_INCREF(__pyx_t_3); __pyx_t_5 = 0;
+  for (;;) {
+    if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
+    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 148, __pyx_L1_error)
+    #else
+    __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    #endif
+    __Pyx_XDECREF_SET(__pyx_v_s, __pyx_t_1);
+    __pyx_t_1 = 0;
+    __pyx_v_i = __pyx_t_2;
+    __pyx_t_2 = (__pyx_t_2 + 1);
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_s, __pyx_n_s_id); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_6 = __Pyx_PyInt_As_ALuint(__pyx_t_1); if (unlikely((__pyx_t_6 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 148, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_7 = __pyx_v_i;
+    __pyx_t_8 = -1;
+    if (__pyx_t_7 < 0) {
+      __pyx_t_7 += __pyx_v_ids.shape[0];
+      if (unlikely(__pyx_t_7 < 0)) __pyx_t_8 = 0;
+    } else if (unlikely(__pyx_t_7 >= __pyx_v_ids.shape[0])) __pyx_t_8 = 0;
+    if (unlikely(__pyx_t_8 != -1)) {
+      __Pyx_RaiseBufferIndexError(__pyx_t_8);
+      __PYX_ERR(0, 148, __pyx_L1_error)
+    }
+    *((ALuint *) ( /* dim=0 */ (__pyx_v_ids.data + __pyx_t_7 * __pyx_v_ids.strides[0]) )) = __pyx_t_6;
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "cyal/context.pyx":149
+ *         cdef Py_ssize_t i
+ *         for i, s in enumerate(srcs): ids[i] = s.id
+ *         self.source_rewind_v(ids.size, &ids[0])             # <<<<<<<<<<<<<<
+ *         check_al_error()
+ * 
+ */
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_9 = __Pyx_PyInt_As_ALsizei(__pyx_t_1); if (unlikely((__pyx_t_9 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 149, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_7 = 0;
+  __pyx_t_8 = -1;
+  if (__pyx_t_7 < 0) {
+    __pyx_t_7 += __pyx_v_ids.shape[0];
+    if (unlikely(__pyx_t_7 < 0)) __pyx_t_8 = 0;
+  } else if (unlikely(__pyx_t_7 >= __pyx_v_ids.shape[0])) __pyx_t_8 = 0;
+  if (unlikely(__pyx_t_8 != -1)) {
+    __Pyx_RaiseBufferIndexError(__pyx_t_8);
+    __PYX_ERR(0, 149, __pyx_L1_error)
+  }
+  __pyx_v_self->source_rewind_v(__pyx_t_9, (&(*((ALuint *) ( /* dim=0 */ (__pyx_v_ids.data + __pyx_t_7 * __pyx_v_ids.strides[0]) )))));
+
+  /* "cyal/context.pyx":150
+ *         for i, s in enumerate(srcs): ids[i] = s.id
+ *         self.source_rewind_v(ids.size, &ids[0])
+ *         check_al_error()             # <<<<<<<<<<<<<<
+ * 
+ *     def pause_sources(self, *srcs):
+ */
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "cyal/context.pyx":145
+ *         check_al_error()
+ * 
+ *     def rewind_sources(self, *srcs):             # <<<<<<<<<<<<<<
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+ *         cdef Py_ssize_t i
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_3);
+  __PYX_XDEC_MEMVIEW(&__pyx_t_4, 1);
+  __Pyx_AddTraceback("cyal.context.Context.rewind_sources", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_ids, 1);
+  __Pyx_XDECREF(__pyx_v_s);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/context.pyx":152
+ *         check_al_error()
+ * 
+ *     def pause_sources(self, *srcs):             # <<<<<<<<<<<<<<
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+ *         cdef Py_ssize_t i
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_7context_7Context_36pause_sources(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_4cyal_7context_7Context_36pause_sources(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_srcs = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("pause_sources (wrapper)", 0);
+  if (unlikely(__pyx_kwds) && unlikely(PyDict_Size(__pyx_kwds) > 0) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "pause_sources", 0))) return NULL;
+  __Pyx_INCREF(__pyx_args);
+  __pyx_v_srcs = __pyx_args;
+  __pyx_r = __pyx_pf_4cyal_7context_7Context_35pause_sources(((struct __pyx_obj_4cyal_7context_Context *)__pyx_v_self), __pyx_v_srcs);
+
+  /* function exit code */
+  __Pyx_XDECREF(__pyx_v_srcs);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_7context_7Context_35pause_sources(struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, PyObject *__pyx_v_srcs) {
+  __Pyx_memviewslice __pyx_v_ids = { 0, 0, { 0 }, { 0 }, { 0 } };
+  Py_ssize_t __pyx_v_i;
+  PyObject *__pyx_v_s = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  Py_ssize_t __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  __Pyx_memviewslice __pyx_t_4 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  Py_ssize_t __pyx_t_5;
+  ALuint __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  int __pyx_t_8;
+  ALsizei __pyx_t_9;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("pause_sources", 0);
+
+  /* "cyal/context.pyx":153
+ * 
+ *     def pause_sources(self, *srcs):
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)             # <<<<<<<<<<<<<<
+ *         cdef Py_ssize_t i
+ *         for i, s in enumerate(srcs): ids[i] = s.id
+ */
+  __pyx_t_1 = ((PyObject *)__pyx_v_4cyal_7context_ids_template);
+  __Pyx_INCREF(__pyx_t_1);
+  __pyx_t_2 = PyTuple_GET_SIZE(__pyx_v_srcs); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 153, __pyx_L1_error)
+  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_ids = __pyx_t_4;
+  __pyx_t_4.memview = NULL;
+  __pyx_t_4.data = NULL;
+
+  /* "cyal/context.pyx":155
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+ *         cdef Py_ssize_t i
+ *         for i, s in enumerate(srcs): ids[i] = s.id             # <<<<<<<<<<<<<<
+ *         self.source_pause_v(ids.size, &ids[0])
+ *         check_al_error()
+ */
+  __pyx_t_2 = 0;
+  __pyx_t_3 = __pyx_v_srcs; __Pyx_INCREF(__pyx_t_3); __pyx_t_5 = 0;
+  for (;;) {
+    if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
+    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 155, __pyx_L1_error)
+    #else
+    __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    #endif
+    __Pyx_XDECREF_SET(__pyx_v_s, __pyx_t_1);
+    __pyx_t_1 = 0;
+    __pyx_v_i = __pyx_t_2;
+    __pyx_t_2 = (__pyx_t_2 + 1);
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_s, __pyx_n_s_id); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_6 = __Pyx_PyInt_As_ALuint(__pyx_t_1); if (unlikely((__pyx_t_6 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 155, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_7 = __pyx_v_i;
+    __pyx_t_8 = -1;
+    if (__pyx_t_7 < 0) {
+      __pyx_t_7 += __pyx_v_ids.shape[0];
+      if (unlikely(__pyx_t_7 < 0)) __pyx_t_8 = 0;
+    } else if (unlikely(__pyx_t_7 >= __pyx_v_ids.shape[0])) __pyx_t_8 = 0;
+    if (unlikely(__pyx_t_8 != -1)) {
+      __Pyx_RaiseBufferIndexError(__pyx_t_8);
+      __PYX_ERR(0, 155, __pyx_L1_error)
+    }
+    *((ALuint *) ( /* dim=0 */ (__pyx_v_ids.data + __pyx_t_7 * __pyx_v_ids.strides[0]) )) = __pyx_t_6;
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "cyal/context.pyx":156
+ *         cdef Py_ssize_t i
+ *         for i, s in enumerate(srcs): ids[i] = s.id
+ *         self.source_pause_v(ids.size, &ids[0])             # <<<<<<<<<<<<<<
+ *         check_al_error()
+ * 
+ */
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_9 = __Pyx_PyInt_As_ALsizei(__pyx_t_1); if (unlikely((__pyx_t_9 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 156, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_7 = 0;
+  __pyx_t_8 = -1;
+  if (__pyx_t_7 < 0) {
+    __pyx_t_7 += __pyx_v_ids.shape[0];
+    if (unlikely(__pyx_t_7 < 0)) __pyx_t_8 = 0;
+  } else if (unlikely(__pyx_t_7 >= __pyx_v_ids.shape[0])) __pyx_t_8 = 0;
+  if (unlikely(__pyx_t_8 != -1)) {
+    __Pyx_RaiseBufferIndexError(__pyx_t_8);
+    __PYX_ERR(0, 156, __pyx_L1_error)
+  }
+  __pyx_v_self->source_pause_v(__pyx_t_9, (&(*((ALuint *) ( /* dim=0 */ (__pyx_v_ids.data + __pyx_t_7 * __pyx_v_ids.strides[0]) )))));
+
+  /* "cyal/context.pyx":157
+ *         for i, s in enumerate(srcs): ids[i] = s.id
+ *         self.source_pause_v(ids.size, &ids[0])
+ *         check_al_error()             # <<<<<<<<<<<<<<
+ * 
+ * cdef array.array attrs_template = array.array('i')
+ */
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "cyal/context.pyx":152
+ *         check_al_error()
+ * 
+ *     def pause_sources(self, *srcs):             # <<<<<<<<<<<<<<
+ *         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+ *         cdef Py_ssize_t i
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_3);
+  __PYX_XDEC_MEMVIEW(&__pyx_t_4, 1);
+  __Pyx_AddTraceback("cyal.context.Context.pause_sources", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_ids, 1);
+  __Pyx_XDECREF(__pyx_v_s);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -5343,19 +6051,19 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_8listener___get__(struct __pyx
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_7context_7Context_30__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4cyal_7context_7Context_30__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4cyal_7context_7Context_38__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4cyal_7context_7Context_38__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_7context_7Context_29__reduce_cython__(((struct __pyx_obj_4cyal_7context_Context *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4cyal_7context_7Context_37__reduce_cython__(((struct __pyx_obj_4cyal_7context_Context *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_7context_7Context_29__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self) {
+static PyObject *__pyx_pf_4cyal_7context_7Context_37__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -5400,19 +6108,19 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_29__reduce_cython__(CYTHON_UNU
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cyal_7context_7Context_32__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_4cyal_7context_7Context_32__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_4cyal_7context_7Context_40__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4cyal_7context_7Context_40__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cyal_7context_7Context_31__setstate_cython__(((struct __pyx_obj_4cyal_7context_Context *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_4cyal_7context_7Context_39__setstate_cython__(((struct __pyx_obj_4cyal_7context_Context *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cyal_7context_7Context_31__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_4cyal_7context_7Context_39__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_7context_Context *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -5449,7 +6157,7 @@ static PyObject *__pyx_pf_4cyal_7context_7Context_31__setstate_cython__(CYTHON_U
   return __pyx_r;
 }
 
-/* "cyal/context.pyx":130
+/* "cyal/context.pyx":162
  * 
  * cdef class ContextAttrs:
  *     def __cinit__(self, Device dev, array.array attrs):             # <<<<<<<<<<<<<<
@@ -5491,11 +6199,11 @@ static int __pyx_pw_4cyal_7context_12ContextAttrs_1__cinit__(PyObject *__pyx_v_s
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_attrs)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, 1); __PYX_ERR(0, 130, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, 1); __PYX_ERR(0, 162, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 130, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 162, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -5508,14 +6216,14 @@ static int __pyx_pw_4cyal_7context_12ContextAttrs_1__cinit__(PyObject *__pyx_v_s
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 130, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 162, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("cyal.context.ContextAttrs.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dev), __pyx_ptype_4cyal_6device_Device, 1, "dev", 0))) __PYX_ERR(0, 130, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_attrs), __pyx_ptype_7cpython_5array_array, 1, "attrs", 0))) __PYX_ERR(0, 130, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dev), __pyx_ptype_4cyal_6device_Device, 1, "dev", 0))) __PYX_ERR(0, 162, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_attrs), __pyx_ptype_7cpython_5array_array, 1, "attrs", 0))) __PYX_ERR(0, 162, __pyx_L1_error)
   __pyx_r = __pyx_pf_4cyal_7context_12ContextAttrs___cinit__(((struct __pyx_obj_4cyal_7context_ContextAttrs *)__pyx_v_self), __pyx_v_dev, __pyx_v_attrs);
 
   /* function exit code */
@@ -5536,20 +6244,20 @@ static int __pyx_pf_4cyal_7context_12ContextAttrs___cinit__(struct __pyx_obj_4cy
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "cyal/context.pyx":131
+  /* "cyal/context.pyx":163
  * cdef class ContextAttrs:
  *     def __cinit__(self, Device dev, array.array attrs):
  *         self._attrs = attrs             # <<<<<<<<<<<<<<
  *         self._dev = dev
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALCint(((PyObject *)__pyx_v_attrs), PyBUF_WRITABLE); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALCint(((PyObject *)__pyx_v_attrs), PyBUF_WRITABLE); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 163, __pyx_L1_error)
   __PYX_XDEC_MEMVIEW(&__pyx_v_self->_attrs, 0);
   __pyx_v_self->_attrs = __pyx_t_1;
   __pyx_t_1.memview = NULL;
   __pyx_t_1.data = NULL;
 
-  /* "cyal/context.pyx":132
+  /* "cyal/context.pyx":164
  *     def __cinit__(self, Device dev, array.array attrs):
  *         self._attrs = attrs
  *         self._dev = dev             # <<<<<<<<<<<<<<
@@ -5562,7 +6270,7 @@ static int __pyx_pf_4cyal_7context_12ContextAttrs___cinit__(struct __pyx_obj_4cy
   __Pyx_DECREF(((PyObject *)__pyx_v_self->_dev));
   __pyx_v_self->_dev = __pyx_v_dev;
 
-  /* "cyal/context.pyx":130
+  /* "cyal/context.pyx":162
  * 
  * cdef class ContextAttrs:
  *     def __cinit__(self, Device dev, array.array attrs):             # <<<<<<<<<<<<<<
@@ -5582,7 +6290,7 @@ static int __pyx_pf_4cyal_7context_12ContextAttrs___cinit__(struct __pyx_obj_4cy
   return __pyx_r;
 }
 
-/* "cyal/context.pyx":135
+/* "cyal/context.pyx":167
  * 
  *     @staticmethod
  *     def from_kwargs(Device dev, **kwargs):             # <<<<<<<<<<<<<<
@@ -5623,7 +6331,7 @@ static PyObject *__pyx_pw_4cyal_7context_12ContextAttrs_3from_kwargs(CYTHON_UNUS
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "from_kwargs") < 0)) __PYX_ERR(0, 135, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "from_kwargs") < 0)) __PYX_ERR(0, 167, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -5634,14 +6342,14 @@ static PyObject *__pyx_pw_4cyal_7context_12ContextAttrs_3from_kwargs(CYTHON_UNUS
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("from_kwargs", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 135, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("from_kwargs", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 167, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
   __Pyx_AddTraceback("cyal.context.ContextAttrs.from_kwargs", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dev), __pyx_ptype_4cyal_6device_Device, 1, "dev", 0))) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dev), __pyx_ptype_4cyal_6device_Device, 1, "dev", 0))) __PYX_ERR(0, 167, __pyx_L1_error)
   __pyx_r = __pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(__pyx_v_dev, __pyx_v_kwargs);
 
   /* function exit code */
@@ -5686,17 +6394,17 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("from_kwargs", 0);
 
-  /* "cyal/context.pyx":137
+  /* "cyal/context.pyx":169
  *     def from_kwargs(Device dev, **kwargs):
  *         cdef:
  *             Py_ssize_t length = len(kwargs) * 2 + 1             # <<<<<<<<<<<<<<
  *             array.array attrs_array = array.clone(attrs_template, length, zero=False)
  *             alc.ALCint[:] attrs = attrs_array
  */
-  __pyx_t_1 = PyDict_Size(__pyx_v_kwargs); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_1 = PyDict_Size(__pyx_v_kwargs); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 169, __pyx_L1_error)
   __pyx_v_length = ((__pyx_t_1 * 2) + 1);
 
-  /* "cyal/context.pyx":138
+  /* "cyal/context.pyx":170
  *         cdef:
  *             Py_ssize_t length = len(kwargs) * 2 + 1
  *             array.array attrs_array = array.clone(attrs_template, length, zero=False)             # <<<<<<<<<<<<<<
@@ -5705,25 +6413,25 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
  */
   __pyx_t_2 = ((PyObject *)__pyx_v_4cyal_7context_attrs_template);
   __Pyx_INCREF(__pyx_t_2);
-  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_2), __pyx_v_length, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_2), __pyx_v_length, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_attrs_array = ((arrayobject *)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "cyal/context.pyx":139
+  /* "cyal/context.pyx":171
  *             Py_ssize_t length = len(kwargs) * 2 + 1
  *             array.array attrs_array = array.clone(attrs_template, length, zero=False)
  *             alc.ALCint[:] attrs = attrs_array             # <<<<<<<<<<<<<<
  *             bytes enum_name
  *             alc.ALCenum enum_val
  */
-  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALCint(((PyObject *)__pyx_v_attrs_array), PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALCint(((PyObject *)__pyx_v_attrs_array), PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 171, __pyx_L1_error)
   __pyx_v_attrs = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "cyal/context.pyx":142
+  /* "cyal/context.pyx":174
  *             bytes enum_name
  *             alc.ALCenum enum_val
  *             Py_ssize_t idx = 0             # <<<<<<<<<<<<<<
@@ -5732,7 +6440,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
  */
   __pyx_v_idx = 0;
 
-  /* "cyal/context.pyx":143
+  /* "cyal/context.pyx":175
  *             alc.ALCenum enum_val
  *             Py_ssize_t idx = 0
  *         for k, v in kwargs.items():             # <<<<<<<<<<<<<<
@@ -5740,7 +6448,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
  *             enum_val = alc.alcGetEnumValue(dev._device, <const alc.ALCchar *>enum_name)
  */
   __pyx_t_1 = 0;
-  __pyx_t_2 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_5), (&__pyx_t_6)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_5), (&__pyx_t_6)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __pyx_t_3 = __pyx_t_2;
@@ -5748,7 +6456,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
   while (1) {
     __pyx_t_8 = __Pyx_dict_iter_next(__pyx_t_3, __pyx_t_5, &__pyx_t_1, &__pyx_t_2, &__pyx_t_7, NULL, __pyx_t_6);
     if (unlikely(__pyx_t_8 == 0)) break;
-    if (unlikely(__pyx_t_8 == -1)) __PYX_ERR(0, 143, __pyx_L1_error)
+    if (unlikely(__pyx_t_8 == -1)) __PYX_ERR(0, 175, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_2);
@@ -5756,14 +6464,14 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
     __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_7);
     __pyx_t_7 = 0;
 
-    /* "cyal/context.pyx":144
+    /* "cyal/context.pyx":176
  *             Py_ssize_t idx = 0
  *         for k, v in kwargs.items():
  *             enum_name = b"ALC_" + k.upper().encode("utf-8")             # <<<<<<<<<<<<<<
  *             enum_val = alc.alcGetEnumValue(dev._device, <const alc.ALCchar *>enum_name)
  *             if enum_val == al.AL_NONE:
  */
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_k, __pyx_n_s_upper); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_k, __pyx_n_s_upper); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 176, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __pyx_t_10 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_9))) {
@@ -5777,10 +6485,10 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
     }
     __pyx_t_2 = (__pyx_t_10) ? __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_10) : __Pyx_PyObject_CallNoArg(__pyx_t_9);
     __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 144, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_encode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_encode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 176, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -5795,17 +6503,17 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
     }
     __pyx_t_7 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_9, __pyx_t_2, __pyx_kp_u_utf_8) : __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_kp_u_utf_8);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 144, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 176, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = PyNumber_Add(__pyx_n_b_ALC, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Add(__pyx_n_b_ALC, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 176, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (!(likely(PyBytes_CheckExact(__pyx_t_9))||((__pyx_t_9) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_9)->tp_name), 0))) __PYX_ERR(0, 144, __pyx_L1_error)
+    if (!(likely(PyBytes_CheckExact(__pyx_t_9))||((__pyx_t_9) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_9)->tp_name), 0))) __PYX_ERR(0, 176, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_enum_name, ((PyObject*)__pyx_t_9));
     __pyx_t_9 = 0;
 
-    /* "cyal/context.pyx":145
+    /* "cyal/context.pyx":177
  *         for k, v in kwargs.items():
  *             enum_name = b"ALC_" + k.upper().encode("utf-8")
  *             enum_val = alc.alcGetEnumValue(dev._device, <const alc.ALCchar *>enum_name)             # <<<<<<<<<<<<<<
@@ -5814,12 +6522,12 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
  */
     if (unlikely(__pyx_v_enum_name == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-      __PYX_ERR(0, 145, __pyx_L1_error)
+      __PYX_ERR(0, 177, __pyx_L1_error)
     }
-    __pyx_t_11 = __Pyx_PyBytes_AsString(__pyx_v_enum_name); if (unlikely((!__pyx_t_11) && PyErr_Occurred())) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyBytes_AsString(__pyx_v_enum_name); if (unlikely((!__pyx_t_11) && PyErr_Occurred())) __PYX_ERR(0, 177, __pyx_L1_error)
     __pyx_v_enum_val = alcGetEnumValue(__pyx_v_dev->_device, ((ALCchar const *)__pyx_t_11));
 
-    /* "cyal/context.pyx":146
+    /* "cyal/context.pyx":178
  *             enum_name = b"ALC_" + k.upper().encode("utf-8")
  *             enum_val = alc.alcGetEnumValue(dev._device, <const alc.ALCchar *>enum_name)
  *             if enum_val == al.AL_NONE:             # <<<<<<<<<<<<<<
@@ -5829,14 +6537,14 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
     __pyx_t_12 = ((__pyx_v_enum_val == AL_NONE) != 0);
     if (unlikely(__pyx_t_12)) {
 
-      /* "cyal/context.pyx":147
+      /* "cyal/context.pyx":179
  *             enum_val = alc.alcGetEnumValue(dev._device, <const alc.ALCchar *>enum_name)
  *             if enum_val == al.AL_NONE:
  *                 raise TypeError(f"'{k} is an invalid keyword argument for ContextAttrs")             # <<<<<<<<<<<<<<
  *             attrs[idx] = enum_val
  *             attrs[idx+1] = <alc.ALCint>v
  */
-      __pyx_t_9 = PyTuple_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 147, __pyx_L1_error)
+      __pyx_t_9 = PyTuple_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 179, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __pyx_t_13 = 0;
       __pyx_t_14 = 127;
@@ -5844,7 +6552,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
       __pyx_t_13 += 1;
       __Pyx_GIVEREF(__pyx_kp_u__3);
       PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_kp_u__3);
-      __pyx_t_7 = __Pyx_PyObject_FormatSimple(__pyx_v_k, __pyx_empty_unicode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 147, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_FormatSimple(__pyx_v_k, __pyx_empty_unicode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 179, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __pyx_t_14 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) > __pyx_t_14) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) : __pyx_t_14;
       __pyx_t_13 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_7);
@@ -5855,17 +6563,17 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
       __pyx_t_13 += 48;
       __Pyx_GIVEREF(__pyx_kp_u_is_an_invalid_keyword_argument);
       PyTuple_SET_ITEM(__pyx_t_9, 2, __pyx_kp_u_is_an_invalid_keyword_argument);
-      __pyx_t_7 = __Pyx_PyUnicode_Join(__pyx_t_9, 3, __pyx_t_13, __pyx_t_14); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 147, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyUnicode_Join(__pyx_t_9, 3, __pyx_t_13, __pyx_t_14); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 179, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 147, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_builtin_TypeError, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 179, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_Raise(__pyx_t_9, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __PYX_ERR(0, 147, __pyx_L1_error)
+      __PYX_ERR(0, 179, __pyx_L1_error)
 
-      /* "cyal/context.pyx":146
+      /* "cyal/context.pyx":178
  *             enum_name = b"ALC_" + k.upper().encode("utf-8")
  *             enum_val = alc.alcGetEnumValue(dev._device, <const alc.ALCchar *>enum_name)
  *             if enum_val == al.AL_NONE:             # <<<<<<<<<<<<<<
@@ -5874,7 +6582,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
  */
     }
 
-    /* "cyal/context.pyx":148
+    /* "cyal/context.pyx":180
  *             if enum_val == al.AL_NONE:
  *                 raise TypeError(f"'{k} is an invalid keyword argument for ContextAttrs")
  *             attrs[idx] = enum_val             # <<<<<<<<<<<<<<
@@ -5889,18 +6597,18 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
     } else if (unlikely(__pyx_t_15 >= __pyx_v_attrs.shape[0])) __pyx_t_8 = 0;
     if (unlikely(__pyx_t_8 != -1)) {
       __Pyx_RaiseBufferIndexError(__pyx_t_8);
-      __PYX_ERR(0, 148, __pyx_L1_error)
+      __PYX_ERR(0, 180, __pyx_L1_error)
     }
     *((ALCint *) ( /* dim=0 */ (__pyx_v_attrs.data + __pyx_t_15 * __pyx_v_attrs.strides[0]) )) = __pyx_v_enum_val;
 
-    /* "cyal/context.pyx":149
+    /* "cyal/context.pyx":181
  *                 raise TypeError(f"'{k} is an invalid keyword argument for ContextAttrs")
  *             attrs[idx] = enum_val
  *             attrs[idx+1] = <alc.ALCint>v             # <<<<<<<<<<<<<<
  *             idx += 2
  *         attrs[idx] = 0
  */
-    __pyx_t_16 = __Pyx_PyInt_As_ALCint(__pyx_v_v); if (unlikely((__pyx_t_16 == ((ALCint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_16 = __Pyx_PyInt_As_ALCint(__pyx_v_v); if (unlikely((__pyx_t_16 == ((ALCint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 181, __pyx_L1_error)
     __pyx_t_15 = (__pyx_v_idx + 1);
     __pyx_t_8 = -1;
     if (__pyx_t_15 < 0) {
@@ -5909,11 +6617,11 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
     } else if (unlikely(__pyx_t_15 >= __pyx_v_attrs.shape[0])) __pyx_t_8 = 0;
     if (unlikely(__pyx_t_8 != -1)) {
       __Pyx_RaiseBufferIndexError(__pyx_t_8);
-      __PYX_ERR(0, 149, __pyx_L1_error)
+      __PYX_ERR(0, 181, __pyx_L1_error)
     }
     *((ALCint *) ( /* dim=0 */ (__pyx_v_attrs.data + __pyx_t_15 * __pyx_v_attrs.strides[0]) )) = ((ALCint)__pyx_t_16);
 
-    /* "cyal/context.pyx":150
+    /* "cyal/context.pyx":182
  *             attrs[idx] = enum_val
  *             attrs[idx+1] = <alc.ALCint>v
  *             idx += 2             # <<<<<<<<<<<<<<
@@ -5924,7 +6632,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cyal/context.pyx":151
+  /* "cyal/context.pyx":183
  *             attrs[idx+1] = <alc.ALCint>v
  *             idx += 2
  *         attrs[idx] = 0             # <<<<<<<<<<<<<<
@@ -5939,11 +6647,11 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
   } else if (unlikely(__pyx_t_15 >= __pyx_v_attrs.shape[0])) __pyx_t_6 = 0;
   if (unlikely(__pyx_t_6 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_6);
-    __PYX_ERR(0, 151, __pyx_L1_error)
+    __PYX_ERR(0, 183, __pyx_L1_error)
   }
   *((ALCint *) ( /* dim=0 */ (__pyx_v_attrs.data + __pyx_t_15 * __pyx_v_attrs.strides[0]) )) = 0;
 
-  /* "cyal/context.pyx":152
+  /* "cyal/context.pyx":184
  *             idx += 2
  *         attrs[idx] = 0
  *         return ContextAttrs(dev, attrs_array)             # <<<<<<<<<<<<<<
@@ -5951,7 +6659,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
  *     @staticmethod
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 184, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(((PyObject *)__pyx_v_dev));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_dev));
@@ -5959,14 +6667,14 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
   __Pyx_INCREF(((PyObject *)__pyx_v_attrs_array));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_attrs_array));
   PyTuple_SET_ITEM(__pyx_t_3, 1, ((PyObject *)__pyx_v_attrs_array));
-  __pyx_t_9 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs), __pyx_t_3, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs), __pyx_t_3, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 184, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_9;
   __pyx_t_9 = 0;
   goto __pyx_L0;
 
-  /* "cyal/context.pyx":135
+  /* "cyal/context.pyx":167
  * 
  *     @staticmethod
  *     def from_kwargs(Device dev, **kwargs):             # <<<<<<<<<<<<<<
@@ -5995,7 +6703,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_2from_kwargs(struct __py
   return __pyx_r;
 }
 
-/* "cyal/context.pyx":155
+/* "cyal/context.pyx":187
  * 
  *     @staticmethod
  *     def from_device(Device dev):             # <<<<<<<<<<<<<<
@@ -6033,7 +6741,7 @@ static PyObject *__pyx_pw_4cyal_7context_12ContextAttrs_5from_device(CYTHON_UNUS
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "from_device") < 0)) __PYX_ERR(0, 155, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "from_device") < 0)) __PYX_ERR(0, 187, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -6044,13 +6752,13 @@ static PyObject *__pyx_pw_4cyal_7context_12ContextAttrs_5from_device(CYTHON_UNUS
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("from_device", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 155, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("from_device", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 187, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("cyal.context.ContextAttrs.from_device", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dev), __pyx_ptype_4cyal_6device_Device, 1, "dev", 0))) __PYX_ERR(0, 155, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dev), __pyx_ptype_4cyal_6device_Device, 1, "dev", 0))) __PYX_ERR(0, 187, __pyx_L1_error)
   __pyx_r = __pyx_pf_4cyal_7context_12ContextAttrs_4from_device(__pyx_v_dev);
 
   /* function exit code */
@@ -6074,7 +6782,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_4from_device(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("from_device", 0);
 
-  /* "cyal/context.pyx":157
+  /* "cyal/context.pyx":189
  *     def from_device(Device dev):
  *         cdef alc.ALCint length
  *         alc.alcGetIntegerv(dev._device, alc.ALC_ATTRIBUTES_SIZE, 1, &length)             # <<<<<<<<<<<<<<
@@ -6083,7 +6791,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_4from_device(struct __py
  */
   alcGetIntegerv(__pyx_v_dev->_device, ALC_ATTRIBUTES_SIZE, 1, (&__pyx_v_length));
 
-  /* "cyal/context.pyx":158
+  /* "cyal/context.pyx":190
  *         cdef alc.ALCint length
  *         alc.alcGetIntegerv(dev._device, alc.ALC_ATTRIBUTES_SIZE, 1, &length)
  *         cdef array.array attrs = array.clone(attrs_template, length + 1, zero=False)             # <<<<<<<<<<<<<<
@@ -6092,13 +6800,13 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_4from_device(struct __py
  */
   __pyx_t_1 = ((PyObject *)__pyx_v_4cyal_7context_attrs_template);
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), (__pyx_v_length + 1), 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), (__pyx_v_length + 1), 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_attrs = ((arrayobject *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "cyal/context.pyx":159
+  /* "cyal/context.pyx":191
  *         alc.alcGetIntegerv(dev._device, alc.ALC_ATTRIBUTES_SIZE, 1, &length)
  *         cdef array.array attrs = array.clone(attrs_template, length + 1, zero=False)
  *         alc.alcGetIntegerv(dev._device, alc.ALC_ALL_ATTRIBUTES, length, <alc.ALCint *>attrs.data.as_voidptr)             # <<<<<<<<<<<<<<
@@ -6107,16 +6815,16 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_4from_device(struct __py
  */
   alcGetIntegerv(__pyx_v_dev->_device, ALC_ALL_ATTRIBUTES, __pyx_v_length, ((ALCint *)__pyx_v_attrs->data.as_voidptr));
 
-  /* "cyal/context.pyx":160
+  /* "cyal/context.pyx":192
  *         cdef array.array attrs = array.clone(attrs_template, length + 1, zero=False)
  *         alc.alcGetIntegerv(dev._device, alc.ALC_ALL_ATTRIBUTES, length, <alc.ALCint *>attrs.data.as_voidptr)
  *         attrs[length] = 0             # <<<<<<<<<<<<<<
  *         return ContextAttrs(dev, attrs)
  * 
  */
-  if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_attrs), __pyx_v_length, __pyx_int_0, ALCint, 1, __Pyx_PyInt_From_ALCint, 0, 1, 1) < 0)) __PYX_ERR(0, 160, __pyx_L1_error)
+  if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_attrs), __pyx_v_length, __pyx_int_0, ALCint, 1, __Pyx_PyInt_From_ALCint, 0, 1, 1) < 0)) __PYX_ERR(0, 192, __pyx_L1_error)
 
-  /* "cyal/context.pyx":161
+  /* "cyal/context.pyx":193
  *         alc.alcGetIntegerv(dev._device, alc.ALC_ALL_ATTRIBUTES, length, <alc.ALCint *>attrs.data.as_voidptr)
  *         attrs[length] = 0
  *         return ContextAttrs(dev, attrs)             # <<<<<<<<<<<<<<
@@ -6124,7 +6832,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_4from_device(struct __py
  *     def __getattr__(self, attr):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(((PyObject *)__pyx_v_dev));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_dev));
@@ -6132,14 +6840,14 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_4from_device(struct __py
   __Pyx_INCREF(((PyObject *)__pyx_v_attrs));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_attrs));
   PyTuple_SET_ITEM(__pyx_t_2, 1, ((PyObject *)__pyx_v_attrs));
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs), __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs), __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cyal/context.pyx":155
+  /* "cyal/context.pyx":187
  * 
  *     @staticmethod
  *     def from_device(Device dev):             # <<<<<<<<<<<<<<
@@ -6160,7 +6868,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_4from_device(struct __py
   return __pyx_r;
 }
 
-/* "cyal/context.pyx":163
+/* "cyal/context.pyx":195
  *         return ContextAttrs(dev, attrs)
  * 
  *     def __getattr__(self, attr):             # <<<<<<<<<<<<<<
@@ -6204,14 +6912,14 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__getattr__", 0);
 
-  /* "cyal/context.pyx":165
+  /* "cyal/context.pyx":197
  *     def __getattr__(self, attr):
  *         cdef:
  *             bytes enum_name = b"ALC_" + attr.upper().encode("utf-8")             # <<<<<<<<<<<<<<
  *             alc.ALCenum enum_val = alc.alcGetEnumValue(self._dev._device, <const alc.ALCchar *>enum_name)
  *         if enum_val == al.AL_NONE:
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_attr, __pyx_n_s_upper); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_attr, __pyx_n_s_upper); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -6225,10 +6933,10 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
   }
   __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_encode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_encode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -6243,17 +6951,17 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_kp_u_utf_8) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_kp_u_utf_8);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Add(__pyx_n_b_ALC, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Add(__pyx_n_b_ALC, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(PyBytes_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 165, __pyx_L1_error)
+  if (!(likely(PyBytes_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 197, __pyx_L1_error)
   __pyx_v_enum_name = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "cyal/context.pyx":166
+  /* "cyal/context.pyx":198
  *         cdef:
  *             bytes enum_name = b"ALC_" + attr.upper().encode("utf-8")
  *             alc.ALCenum enum_val = alc.alcGetEnumValue(self._dev._device, <const alc.ALCchar *>enum_name)             # <<<<<<<<<<<<<<
@@ -6262,12 +6970,12 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
  */
   if (unlikely(__pyx_v_enum_name == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-    __PYX_ERR(0, 166, __pyx_L1_error)
+    __PYX_ERR(0, 198, __pyx_L1_error)
   }
-  __pyx_t_5 = __Pyx_PyBytes_AsString(__pyx_v_enum_name); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyBytes_AsString(__pyx_v_enum_name); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 198, __pyx_L1_error)
   __pyx_v_enum_val = alcGetEnumValue(__pyx_v_self->_dev->_device, ((ALCchar const *)__pyx_t_5));
 
-  /* "cyal/context.pyx":167
+  /* "cyal/context.pyx":199
  *             bytes enum_name = b"ALC_" + attr.upper().encode("utf-8")
  *             alc.ALCenum enum_val = alc.alcGetEnumValue(self._dev._device, <const alc.ALCchar *>enum_name)
  *         if enum_val == al.AL_NONE:             # <<<<<<<<<<<<<<
@@ -6277,14 +6985,14 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
   __pyx_t_6 = ((__pyx_v_enum_val == AL_NONE) != 0);
   if (unlikely(__pyx_t_6)) {
 
-    /* "cyal/context.pyx":168
+    /* "cyal/context.pyx":200
  *             alc.ALCenum enum_val = alc.alcGetEnumValue(self._dev._device, <const alc.ALCchar *>enum_name)
  *         if enum_val == al.AL_NONE:
  *             raise AttributeError(f"ContextAttrs object has no attribute '{attr}'")             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t i
  *         for i in range(0, self._attrs.size, 2):
  */
-    __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 168, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 200, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_7 = 0;
     __pyx_t_8 = 127;
@@ -6292,7 +7000,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
     __pyx_t_7 += 38;
     __Pyx_GIVEREF(__pyx_kp_u_ContextAttrs_object_has_no_attri);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_kp_u_ContextAttrs_object_has_no_attri);
-    __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_attr, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_attr, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 200, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_8 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) > __pyx_t_8) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) : __pyx_t_8;
     __pyx_t_7 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_1);
@@ -6303,17 +7011,17 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
     __pyx_t_7 += 1;
     __Pyx_GIVEREF(__pyx_kp_u__3);
     PyTuple_SET_ITEM(__pyx_t_3, 2, __pyx_kp_u__3);
-    __pyx_t_1 = __Pyx_PyUnicode_Join(__pyx_t_3, 3, __pyx_t_7, __pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyUnicode_Join(__pyx_t_3, 3, __pyx_t_7, __pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 200, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_AttributeError, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 168, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_AttributeError, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 200, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 168, __pyx_L1_error)
+    __PYX_ERR(0, 200, __pyx_L1_error)
 
-    /* "cyal/context.pyx":167
+    /* "cyal/context.pyx":199
  *             bytes enum_name = b"ALC_" + attr.upper().encode("utf-8")
  *             alc.ALCenum enum_val = alc.alcGetEnumValue(self._dev._device, <const alc.ALCchar *>enum_name)
  *         if enum_val == al.AL_NONE:             # <<<<<<<<<<<<<<
@@ -6322,33 +7030,33 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
  */
   }
 
-  /* "cyal/context.pyx":170
+  /* "cyal/context.pyx":202
  *             raise AttributeError(f"ContextAttrs object has no attribute '{attr}'")
  *         cdef Py_ssize_t i
  *         for i in range(0, self._attrs.size, 2):             # <<<<<<<<<<<<<<
  *             if self._attrs[i] == enum_val:
  *                 return self._attrs[i+1]
  */
-  if (unlikely(!__pyx_v_self->_attrs.memview)) {PyErr_SetString(PyExc_AttributeError,"Memoryview is not initialized");__PYX_ERR(0, 170, __pyx_L1_error)}
-  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_self->_attrs, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALCint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALCint, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 170, __pyx_L1_error)
+  if (unlikely(!__pyx_v_self->_attrs.memview)) {PyErr_SetString(PyExc_AttributeError,"Memoryview is not initialized");__PYX_ERR(0, 202, __pyx_L1_error)}
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_self->_attrs, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALCint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALCint, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 170, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_10 = __pyx_t_9;
   for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_10; __pyx_t_7+=2) {
     __pyx_v_i = __pyx_t_7;
 
-    /* "cyal/context.pyx":171
+    /* "cyal/context.pyx":203
  *         cdef Py_ssize_t i
  *         for i in range(0, self._attrs.size, 2):
  *             if self._attrs[i] == enum_val:             # <<<<<<<<<<<<<<
  *                 return self._attrs[i+1]
  *         # Not found
  */
-    if (unlikely(!__pyx_v_self->_attrs.memview)) {PyErr_SetString(PyExc_AttributeError,"Memoryview is not initialized");__PYX_ERR(0, 171, __pyx_L1_error)}
+    if (unlikely(!__pyx_v_self->_attrs.memview)) {PyErr_SetString(PyExc_AttributeError,"Memoryview is not initialized");__PYX_ERR(0, 203, __pyx_L1_error)}
     __pyx_t_11 = __pyx_v_i;
     __pyx_t_12 = -1;
     if (__pyx_t_11 < 0) {
@@ -6357,12 +7065,12 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
     } else if (unlikely(__pyx_t_11 >= __pyx_v_self->_attrs.shape[0])) __pyx_t_12 = 0;
     if (unlikely(__pyx_t_12 != -1)) {
       __Pyx_RaiseBufferIndexError(__pyx_t_12);
-      __PYX_ERR(0, 171, __pyx_L1_error)
+      __PYX_ERR(0, 203, __pyx_L1_error)
     }
     __pyx_t_6 = (((*((ALCint *) ( /* dim=0 */ (__pyx_v_self->_attrs.data + __pyx_t_11 * __pyx_v_self->_attrs.strides[0]) ))) == __pyx_v_enum_val) != 0);
     if (__pyx_t_6) {
 
-      /* "cyal/context.pyx":172
+      /* "cyal/context.pyx":204
  *         for i in range(0, self._attrs.size, 2):
  *             if self._attrs[i] == enum_val:
  *                 return self._attrs[i+1]             # <<<<<<<<<<<<<<
@@ -6370,7 +7078,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
  *         raise AttributeError(f"ContextAttrs object has no attribute '{attr}'")
  */
       __Pyx_XDECREF(__pyx_r);
-      if (unlikely(!__pyx_v_self->_attrs.memview)) {PyErr_SetString(PyExc_AttributeError,"Memoryview is not initialized");__PYX_ERR(0, 172, __pyx_L1_error)}
+      if (unlikely(!__pyx_v_self->_attrs.memview)) {PyErr_SetString(PyExc_AttributeError,"Memoryview is not initialized");__PYX_ERR(0, 204, __pyx_L1_error)}
       __pyx_t_11 = (__pyx_v_i + 1);
       __pyx_t_12 = -1;
       if (__pyx_t_11 < 0) {
@@ -6379,15 +7087,15 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
       } else if (unlikely(__pyx_t_11 >= __pyx_v_self->_attrs.shape[0])) __pyx_t_12 = 0;
       if (unlikely(__pyx_t_12 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_12);
-        __PYX_ERR(0, 172, __pyx_L1_error)
+        __PYX_ERR(0, 204, __pyx_L1_error)
       }
-      __pyx_t_1 = __Pyx_PyInt_From_ALCint((*((ALCint *) ( /* dim=0 */ (__pyx_v_self->_attrs.data + __pyx_t_11 * __pyx_v_self->_attrs.strides[0]) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyInt_From_ALCint((*((ALCint *) ( /* dim=0 */ (__pyx_v_self->_attrs.data + __pyx_t_11 * __pyx_v_self->_attrs.strides[0]) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cyal/context.pyx":171
+      /* "cyal/context.pyx":203
  *         cdef Py_ssize_t i
  *         for i in range(0, self._attrs.size, 2):
  *             if self._attrs[i] == enum_val:             # <<<<<<<<<<<<<<
@@ -6397,12 +7105,12 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
     }
   }
 
-  /* "cyal/context.pyx":174
+  /* "cyal/context.pyx":206
  *                 return self._attrs[i+1]
  *         # Not found
  *         raise AttributeError(f"ContextAttrs object has no attribute '{attr}'")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_7 = 0;
   __pyx_t_8 = 127;
@@ -6410,7 +7118,7 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
   __pyx_t_7 += 38;
   __Pyx_GIVEREF(__pyx_kp_u_ContextAttrs_object_has_no_attri);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u_ContextAttrs_object_has_no_attri);
-  __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_attr, __pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_attr, __pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_8 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_3) > __pyx_t_8) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_3) : __pyx_t_8;
   __pyx_t_7 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_3);
@@ -6421,17 +7129,17 @@ static PyObject *__pyx_pf_4cyal_7context_12ContextAttrs_6__getattr__(struct __py
   __pyx_t_7 += 1;
   __Pyx_GIVEREF(__pyx_kp_u__3);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u__3);
-  __pyx_t_3 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_7, __pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_7, __pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_AttributeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_AttributeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 174, __pyx_L1_error)
+  __PYX_ERR(0, 206, __pyx_L1_error)
 
-  /* "cyal/context.pyx":163
+  /* "cyal/context.pyx":195
  *         return ContextAttrs(dev, attrs)
  * 
  *     def __getattr__(self, attr):             # <<<<<<<<<<<<<<
@@ -20385,8 +21093,12 @@ static PyMethodDef __pyx_methods_4cyal_7context_Context[] = {
   {"gen_buffers", (PyCFunction)__pyx_pw_4cyal_7context_7Context_24gen_buffers, METH_O, 0},
   {"gen_source", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_7context_7Context_26gen_source, METH_VARARGS|METH_KEYWORDS, 0},
   {"gen_sources", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_7context_7Context_28gen_sources, METH_VARARGS|METH_KEYWORDS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_7context_7Context_30__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_7context_7Context_32__setstate_cython__, METH_O, 0},
+  {"play_sources", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_7context_7Context_30play_sources, METH_VARARGS|METH_KEYWORDS, 0},
+  {"stop_sources", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_7context_7Context_32stop_sources, METH_VARARGS|METH_KEYWORDS, 0},
+  {"rewind_sources", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_7context_7Context_34rewind_sources, METH_VARARGS|METH_KEYWORDS, 0},
+  {"pause_sources", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cyal_7context_7Context_36pause_sources, METH_VARARGS|METH_KEYWORDS, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4cyal_7context_7Context_38__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4cyal_7context_7Context_40__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -21840,13 +22552,13 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(0, 134, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
-  __pyx_builtin_AttributeError = __Pyx_GetBuiltinName(__pyx_n_s_AttributeError); if (!__pyx_builtin_AttributeError) __PYX_ERR(0, 168, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 170, __pyx_L1_error)
+  __pyx_builtin_AttributeError = __Pyx_GetBuiltinName(__pyx_n_s_AttributeError); if (!__pyx_builtin_AttributeError) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 202, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(2, 109, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 134, __pyx_L1_error)
-  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 152, __pyx_L1_error)
   __pyx_builtin_Ellipsis = __Pyx_GetBuiltinName(__pyx_n_s_Ellipsis); if (!__pyx_builtin_Ellipsis) __PYX_ERR(1, 406, __pyx_L1_error)
   __pyx_builtin_id = __Pyx_GetBuiltinName(__pyx_n_s_id); if (!__pyx_builtin_id) __PYX_ERR(1, 615, __pyx_L1_error)
   __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) __PYX_ERR(1, 834, __pyx_L1_error)
@@ -22103,40 +22815,40 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
 
-  /* "cyal/context.pyx":127
- *         return srcs
+  /* "cyal/context.pyx":159
+ *         check_al_error()
  * 
  * cdef array.array attrs_template = array.array('i')             # <<<<<<<<<<<<<<
  * 
  * cdef class ContextAttrs:
  */
-  __pyx_tuple__26 = PyTuple_Pack(1, __pyx_n_u_i); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __pyx_tuple__26 = PyTuple_Pack(1, __pyx_n_u_i); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__26);
   __Pyx_GIVEREF(__pyx_tuple__26);
 
-  /* "cyal/context.pyx":135
+  /* "cyal/context.pyx":167
  * 
  *     @staticmethod
  *     def from_kwargs(Device dev, **kwargs):             # <<<<<<<<<<<<<<
  *         cdef:
  *             Py_ssize_t length = len(kwargs) * 2 + 1
  */
-  __pyx_tuple__27 = PyTuple_Pack(10, __pyx_n_s_dev, __pyx_n_s_kwargs, __pyx_n_s_length, __pyx_n_s_attrs_array, __pyx_n_s_attrs, __pyx_n_s_enum_name, __pyx_n_s_enum_val, __pyx_n_s_idx, __pyx_n_s_k, __pyx_n_s_v); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_tuple__27 = PyTuple_Pack(10, __pyx_n_s_dev, __pyx_n_s_kwargs, __pyx_n_s_length, __pyx_n_s_attrs_array, __pyx_n_s_attrs, __pyx_n_s_enum_name, __pyx_n_s_enum_val, __pyx_n_s_idx, __pyx_n_s_k, __pyx_n_s_v); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 167, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(1, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cyal_context_pyx, __pyx_n_s_from_kwargs, 135, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(1, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cyal_context_pyx, __pyx_n_s_from_kwargs, 167, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 167, __pyx_L1_error)
 
-  /* "cyal/context.pyx":155
+  /* "cyal/context.pyx":187
  * 
  *     @staticmethod
  *     def from_device(Device dev):             # <<<<<<<<<<<<<<
  *         cdef alc.ALCint length
  *         alc.alcGetIntegerv(dev._device, alc.ALC_ATTRIBUTES_SIZE, 1, &length)
  */
-  __pyx_tuple__29 = PyTuple_Pack(3, __pyx_n_s_dev, __pyx_n_s_length, __pyx_n_s_attrs); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_tuple__29 = PyTuple_Pack(3, __pyx_n_s_dev, __pyx_n_s_length, __pyx_n_s_attrs); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 187, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__29);
   __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cyal_context_pyx, __pyx_n_s_from_device, 155, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cyal_context_pyx, __pyx_n_s_from_device, 187, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 187, __pyx_L1_error)
 
   /* "View.MemoryView":287
  *         return self.name
@@ -22278,14 +22990,14 @@ static int __Pyx_modinit_type_init_code(void) {
   if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Context, (PyObject *)&__pyx_type_4cyal_7context_Context) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
   if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_7context_Context) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
   __pyx_ptype_4cyal_7context_Context = &__pyx_type_4cyal_7context_Context;
-  if (PyType_Ready(&__pyx_type_4cyal_7context_ContextAttrs) < 0) __PYX_ERR(0, 129, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4cyal_7context_ContextAttrs) < 0) __PYX_ERR(0, 161, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4cyal_7context_ContextAttrs.tp_print = 0;
   #endif
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_ContextAttrs, (PyObject *)&__pyx_type_4cyal_7context_ContextAttrs) < 0) __PYX_ERR(0, 129, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_7context_ContextAttrs) < 0) __PYX_ERR(0, 129, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_ContextAttrs, (PyObject *)&__pyx_type_4cyal_7context_ContextAttrs) < 0) __PYX_ERR(0, 161, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_7context_ContextAttrs) < 0) __PYX_ERR(0, 161, __pyx_L1_error)
   __pyx_ptype_4cyal_7context_ContextAttrs = &__pyx_type_4cyal_7context_ContextAttrs;
-  if (PyType_Ready(&__pyx_type_4cyal_7context___pyx_scope_struct__as_current) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4cyal_7context___pyx_scope_struct__as_current) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4cyal_7context___pyx_scope_struct__as_current.tp_print = 0;
   #endif
@@ -22293,7 +23005,7 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_type_4cyal_7context___pyx_scope_struct__as_current.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_4cyal_7context___pyx_scope_struct__as_current = &__pyx_type_4cyal_7context___pyx_scope_struct__as_current;
-  if (PyType_Ready(&__pyx_type_4cyal_7context___pyx_scope_struct_1_as_processing) < 0) __PYX_ERR(0, 83, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4cyal_7context___pyx_scope_struct_1_as_processing) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4cyal_7context___pyx_scope_struct_1_as_processing.tp_print = 0;
   #endif
@@ -22301,7 +23013,7 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_type_4cyal_7context___pyx_scope_struct_1_as_processing.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_4cyal_7context___pyx_scope_struct_1_as_processing = &__pyx_type_4cyal_7context___pyx_scope_struct_1_as_processing;
-  if (PyType_Ready(&__pyx_type_4cyal_7context___pyx_scope_struct_2_as_suspended) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4cyal_7context___pyx_scope_struct_2_as_suspended) < 0) __PYX_ERR(0, 95, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4cyal_7context___pyx_scope_struct_2_as_suspended.tp_print = 0;
   #endif
@@ -22764,24 +23476,24 @@ if (!__Pyx_RefNanny) {
   __Pyx_GIVEREF(__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "cyal/context.pyx":67
+  /* "cyal/context.pyx":71
  *         return self._ctx == alc.alcGetCurrentContext()
  * 
  *     @contextmanager             # <<<<<<<<<<<<<<
  *     def as_current(self):
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_contextmanager); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_contextmanager); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "cyal/context.pyx":68
+  /* "cyal/context.pyx":72
  * 
  *     @contextmanager
  *     def as_current(self):             # <<<<<<<<<<<<<<
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
  *         alc.alcMakeContextCurrent(self._ctx)
  */
-  __Pyx_GetNameInClass(__pyx_t_3, (PyObject *)__pyx_ptype_4cyal_7context_Context, __pyx_n_s_as_current); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GetNameInClass(__pyx_t_3, (PyObject *)__pyx_ptype_4cyal_7context_Context, __pyx_n_s_as_current); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
@@ -22796,31 +23508,31 @@ if (!__Pyx_RefNanny) {
   __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_4, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_Context->tp_dict, __pyx_n_s_as_current, __pyx_t_2) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_Context->tp_dict, __pyx_n_s_as_current, __pyx_t_2) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_4cyal_7context_Context);
 
-  /* "cyal/context.pyx":82
+  /* "cyal/context.pyx":86
  *         alc.alcSuspendContext(self._ctx)
  * 
  *     @contextmanager             # <<<<<<<<<<<<<<
  *     def as_processing(self):
  *         alc.alcProcessContext(self._ctx)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_contextmanager); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_contextmanager); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "cyal/context.pyx":83
+  /* "cyal/context.pyx":87
  * 
  *     @contextmanager
  *     def as_processing(self):             # <<<<<<<<<<<<<<
  *         alc.alcProcessContext(self._ctx)
  *         try:
  */
-  __Pyx_GetNameInClass(__pyx_t_3, (PyObject *)__pyx_ptype_4cyal_7context_Context, __pyx_n_s_as_processing); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __Pyx_GetNameInClass(__pyx_t_3, (PyObject *)__pyx_ptype_4cyal_7context_Context, __pyx_n_s_as_processing); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
@@ -22835,31 +23547,31 @@ if (!__Pyx_RefNanny) {
   __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_4, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_Context->tp_dict, __pyx_n_s_as_processing, __pyx_t_2) < 0) __PYX_ERR(0, 83, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_Context->tp_dict, __pyx_n_s_as_processing, __pyx_t_2) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_4cyal_7context_Context);
 
-  /* "cyal/context.pyx":90
+  /* "cyal/context.pyx":94
  *             alc.alcSuspendContext(self._ctx)
  * 
  *     @contextmanager             # <<<<<<<<<<<<<<
  *     def as_suspended(self):
  *         alc.alcSuspendContext(self._ctx)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_contextmanager); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_contextmanager); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "cyal/context.pyx":91
+  /* "cyal/context.pyx":95
  * 
  *     @contextmanager
  *     def as_suspended(self):             # <<<<<<<<<<<<<<
  *         alc.alcSuspendContext(self._ctx)
  *         try:
  */
-  __Pyx_GetNameInClass(__pyx_t_3, (PyObject *)__pyx_ptype_4cyal_7context_Context, __pyx_n_s_as_suspended); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __Pyx_GetNameInClass(__pyx_t_3, (PyObject *)__pyx_ptype_4cyal_7context_Context, __pyx_n_s_as_suspended); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
@@ -22874,82 +23586,82 @@ if (!__Pyx_RefNanny) {
   __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_4, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 90, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_Context->tp_dict, __pyx_n_s_as_suspended, __pyx_t_2) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_Context->tp_dict, __pyx_n_s_as_suspended, __pyx_t_2) < 0) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_4cyal_7context_Context);
 
-  /* "cyal/context.pyx":127
- *         return srcs
+  /* "cyal/context.pyx":159
+ *         check_al_error()
  * 
  * cdef array.array attrs_template = array.array('i')             # <<<<<<<<<<<<<<
  * 
  * cdef class ContextAttrs:
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_7cpython_5array_array), __pyx_tuple__26, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_7cpython_5array_array), __pyx_tuple__26, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_XGOTREF(((PyObject *)__pyx_v_4cyal_7context_attrs_template));
   __Pyx_DECREF_SET(__pyx_v_4cyal_7context_attrs_template, ((arrayobject *)__pyx_t_2));
   __Pyx_GIVEREF(__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "cyal/context.pyx":135
+  /* "cyal/context.pyx":167
  * 
  *     @staticmethod
  *     def from_kwargs(Device dev, **kwargs):             # <<<<<<<<<<<<<<
  *         cdef:
  *             Py_ssize_t length = len(kwargs) * 2 + 1
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_4cyal_7context_12ContextAttrs_3from_kwargs, NULL, __pyx_n_s_cyal_context); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_4cyal_7context_12ContextAttrs_3from_kwargs, NULL, __pyx_n_s_cyal_context); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 167, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs->tp_dict, __pyx_n_s_from_kwargs, __pyx_t_2) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs->tp_dict, __pyx_n_s_from_kwargs, __pyx_t_2) < 0) __PYX_ERR(0, 167, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_4cyal_7context_ContextAttrs);
 
-  /* "cyal/context.pyx":134
+  /* "cyal/context.pyx":166
  *         self._dev = dev
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def from_kwargs(Device dev, **kwargs):
  *         cdef:
  */
-  __Pyx_GetNameInClass(__pyx_t_2, (PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs, __pyx_n_s_from_kwargs); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_GetNameInClass(__pyx_t_2, (PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs, __pyx_n_s_from_kwargs); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 167, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs->tp_dict, __pyx_n_s_from_kwargs, __pyx_t_1) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs->tp_dict, __pyx_n_s_from_kwargs, __pyx_t_1) < 0) __PYX_ERR(0, 167, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_4cyal_7context_ContextAttrs);
 
-  /* "cyal/context.pyx":155
+  /* "cyal/context.pyx":187
  * 
  *     @staticmethod
  *     def from_device(Device dev):             # <<<<<<<<<<<<<<
  *         cdef alc.ALCint length
  *         alc.alcGetIntegerv(dev._device, alc.ALC_ATTRIBUTES_SIZE, 1, &length)
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cyal_7context_12ContextAttrs_5from_device, NULL, __pyx_n_s_cyal_context); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cyal_7context_12ContextAttrs_5from_device, NULL, __pyx_n_s_cyal_context); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 187, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs->tp_dict, __pyx_n_s_from_device, __pyx_t_1) < 0) __PYX_ERR(0, 155, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs->tp_dict, __pyx_n_s_from_device, __pyx_t_1) < 0) __PYX_ERR(0, 187, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_4cyal_7context_ContextAttrs);
 
-  /* "cyal/context.pyx":154
+  /* "cyal/context.pyx":186
  *         return ContextAttrs(dev, attrs_array)
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def from_device(Device dev):
  *         cdef alc.ALCint length
  */
-  __Pyx_GetNameInClass(__pyx_t_1, (PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs, __pyx_n_s_from_device); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __Pyx_GetNameInClass(__pyx_t_1, (PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs, __pyx_n_s_from_device); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 187, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 186, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs->tp_dict, __pyx_n_s_from_device, __pyx_t_2) < 0) __PYX_ERR(0, 155, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_4cyal_7context_ContextAttrs->tp_dict, __pyx_n_s_from_device, __pyx_t_2) < 0) __PYX_ERR(0, 187, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_4cyal_7context_ContextAttrs);
 

@@ -47,6 +47,10 @@ cdef class Context:
         self.source_stop = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourceStop")
         self.source_rewind = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourceRewind")
         self.source_pause = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourcePause")
+        self.source_play_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePlayv")
+        self.source_stop_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceStopv")
+        self.source_rewind_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceRewindv")
+        self.source_pause_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePausev")
 
     def __dealloc__(self):
         if self._ctx:
@@ -123,6 +127,34 @@ cdef class Context:
         for src in srcs:
             for k, v in kwargs.items(): setattr(src, k, v)
         return srcs
+
+    def play_sources(self, *srcs):
+        cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+        cdef Py_ssize_t i
+        for i, s in enumerate(srcs): ids[i] = s.id
+        self.source_play_v(ids.size, &ids[0])
+        check_al_error()
+
+    def stop_sources(self, *srcs):
+        cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+        cdef Py_ssize_t i
+        for i, s in enumerate(srcs): ids[i] = s.id
+        self.source_stop_v(ids.size, &ids[0])
+        check_al_error()
+
+    def rewind_sources(self, *srcs):
+        cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+        cdef Py_ssize_t i
+        for i, s in enumerate(srcs): ids[i] = s.id
+        self.source_rewind_v(ids.size, &ids[0])
+        check_al_error()
+
+    def pause_sources(self, *srcs):
+        cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
+        cdef Py_ssize_t i
+        for i, s in enumerate(srcs): ids[i] = s.id
+        self.source_pause_v(ids.size, &ids[0])
+        check_al_error()
 
 cdef array.array attrs_template = array.array('i')
 

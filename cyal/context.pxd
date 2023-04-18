@@ -37,6 +37,11 @@ cdef class Context:
     cdef void (*source_stop)(al.ALuint)
     cdef void (*source_rewind)(al.ALuint)
     cdef void (*source_pause)(al.ALuint)
+    # Atomic source operations
+    cdef void (*source_play_v)(al.ALsizei, al.ALuint*)
+    cdef void (*source_stop_v)(al.ALsizei, al.ALuint*)
+    cdef void (*source_rewind_v)(al.ALsizei, al.ALuint*)
+    cdef void (*source_pause_v)(al.ALsizei, al.ALuint*)
 
 cdef class ContextAttrs:
     cdef alc.ALCint[:] _attrs
