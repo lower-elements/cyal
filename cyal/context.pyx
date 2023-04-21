@@ -14,13 +14,17 @@ from . cimport al, alc
 cdef array.array ids_template = array.array('I')
 
 cdef class Context:
-    def __cinit__(self, Device dev not None, emulate_deferred_updates=True, **kwargs):
+    def __cinit__(self, Device dev not None, *, make_current=False, emulate_deferred_updates=True, **kwargs):
         self.device = dev
         cdef ContextAttrs attrs = ContextAttrs.from_kwargs(dev, **kwargs)
         self._ctx  =alc.alcCreateContext(dev._device, &attrs._attrs[0])
         if self._ctx is NULL:
             check_alc_error(dev._device)
         self.listener = Listener(self)
+
+        # Make the context current here, as checking for extensions requires it, and alGetProcAddress() may return context-specific functions
+        cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
+        alc.alcMakeContextCurrent(self._ctx)
 
         # Buffer functions
         self.al_gen_buffers = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alGenBuffers")
@@ -57,10 +61,6 @@ cdef class Context:
         # Extensions
         self.is_al_extension_present = <al.ALboolean (*)(const al.ALchar*)>dev.get_al_proc_address("alIsExtensionPresent")
 
-        # Make the context current here, as checking for extensions requires that
-        cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
-        alc.alcMakeContextCurrent(self._ctx)
-
         # AL_SOFT_deferred_updates extension functions
         if self.is_al_extension_present("AL_SOFT_DEFERRED_UPDATES") == al.AL_TRUE:
             print("Enabling AL_SOFT_deferred_updates")
@@ -75,8 +75,9 @@ cdef class Context:
             self.al_defer_updates_soft = no_defer_updates
             self.al_process_updates_soft = no_process_updates
 
-        # Restore the previous context
-        alc.alcMakeContextCurrent(prev_ctx)
+        if not make_current:
+            # Restore the previous context
+            alc.alcMakeContextCurrent(prev_ctx)
 
     def __dealloc__(self):
         if self._ctx:
