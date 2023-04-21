@@ -45,6 +45,13 @@ cdef class Context:
     cdef void (*source_queue_buffers)(al.ALuint, al.ALsizei, const al.ALuint*)
     cdef void (*source_unqueue_buffers)(al.ALuint, al.ALsizei, al.ALuint*)
 
+# Extensions
+    cdef al.ALboolean (*is_al_extension_present)(const al.ALchar *extname)
+
+    # AL_SOFT_deferred_updates extension
+    cdef void (*al_defer_updates_soft)()
+    cdef void (*al_process_updates_soft)()
+
 cdef class ContextAttrs:
     cdef alc.ALCint[:] _attrs
     cdef Device _dev

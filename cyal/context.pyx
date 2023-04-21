@@ -14,7 +14,7 @@ from . cimport al, alc
 cdef array.array ids_template = array.array('I')
 
 cdef class Context:
-    def __cinit__(self, Device dev not None, **kwargs):
+    def __cinit__(self, Device dev not None, emulate_deferred_updates=True, **kwargs):
         self.device = dev
         cdef ContextAttrs attrs = ContextAttrs.from_kwargs(dev, **kwargs)
         self._ctx  =alc.alcCreateContext(dev._device, &attrs._attrs[0])
@@ -53,6 +53,30 @@ cdef class Context:
         self.source_pause_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePausev")
         self.source_queue_buffers = <void (*)(al.ALuint, al.ALsizei, const al.ALuint*)>dev.get_al_proc_address("alSourceQueueBuffers")
         self.source_unqueue_buffers = <void (*)(al.ALuint, al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceUnqueueBuffers")
+
+        # Extensions
+        self.is_al_extension_present = <al.ALboolean (*)(const al.ALchar*)>dev.get_al_proc_address("alIsExtensionPresent")
+
+        # Make the context current here, as checking for extensions requires that
+        cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
+        alc.alcMakeContextCurrent(self._ctx)
+
+        # AL_SOFT_deferred_updates extension functions
+        if self.is_al_extension_present("AL_SOFT_DEFERRED_UPDATES") == al.AL_TRUE:
+            print("Enabling AL_SOFT_deferred_updates")
+            self.al_defer_updates_soft = <void (*)()>dev.get_al_proc_address("alDeferUpdatesSOFT")
+            self.al_process_updates_soft = <void (*)()>dev.get_al_proc_address("alProcessUpdatesSOFT")
+        elif emulate_deferred_updates:
+            print("Wrapping AL_SOFT_deferred_updates")
+            self.al_defer_updates_soft = wrap_defer_updates
+            self.al_process_updates_soft = wrap_process_updates
+        else:
+            print("Disabling AL_SOFT_deferred_updates")
+            self.al_defer_updates_soft = no_defer_updates
+            self.al_process_updates_soft = no_process_updates
+
+        # Restore the previous context
+        alc.alcMakeContextCurrent(prev_ctx)
 
     def __dealloc__(self):
         if self._ctx:
@@ -100,6 +124,20 @@ cdef class Context:
             yield self
         finally:
             alc.alcProcessContext(self._ctx)
+
+    def defer_updates(self):
+        self.al_defer_updates_soft()
+
+    def process_updates(self):
+        self.al_process_updates_soft()
+
+    @contextmanager
+    def batch(self):
+        self.al_defer_updates_soft()
+        try:
+            yield self
+        finally:
+            self.al_process_updates_soft()
 
     def gen_buffer(self):
         cdef al.ALuint id
@@ -206,3 +244,12 @@ cdef class ContextAttrs:
                 return self._attrs[i+1]
         # Not found
         raise AttributeError(f"ContextAttrs object has no attribute '{attr}'")
+
+cdef void wrap_defer_updates():
+    alc.alcSuspendContext(alc.alcGetCurrentContext())
+
+cdef void wrap_process_updates():
+    alc.alcProcessContext(alc.alcGetCurrentContext())
+
+cdef void no_defer_updates(): pass
+cdef void no_process_updates(): pass
