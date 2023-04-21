@@ -63,15 +63,12 @@ cdef class Context:
 
         # AL_SOFT_deferred_updates extension functions
         if self.is_al_extension_present("AL_SOFT_DEFERRED_UPDATES") == al.AL_TRUE:
-            print("Enabling AL_SOFT_deferred_updates")
             self.al_defer_updates_soft = <void (*)()>dev.get_al_proc_address("alDeferUpdatesSOFT")
             self.al_process_updates_soft = <void (*)()>dev.get_al_proc_address("alProcessUpdatesSOFT")
         elif emulate_deferred_updates:
-            print("Wrapping AL_SOFT_deferred_updates")
             self.al_defer_updates_soft = wrap_defer_updates
             self.al_process_updates_soft = wrap_process_updates
         else:
-            print("Disabling AL_SOFT_deferred_updates")
             self.al_defer_updates_soft = no_defer_updates
             self.al_process_updates_soft = no_process_updates
 

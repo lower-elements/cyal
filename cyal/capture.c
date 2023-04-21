@@ -1132,6 +1132,8 @@ struct __pyx_obj_4cyal_6device_Device {
   struct __pyx_vtabstruct_4cyal_6device_Device *__pyx_vtab;
   ALCdevice *_device;
   ALvoid *(*get_al_proc_address)(ALchar const *);
+  void (*pause_soft)(ALCdevice *);
+  void (*resume_soft)(ALCdevice *);
 };
 
 
@@ -4648,8 +4650,8 @@ static ALCenum __pyx_f_4cyal_7capture_get_enum_value(ALCchar const *__pyx_v_name
   return __pyx_r;
 }
 
-/* "device.pxd":9
- *     cdef al.ALvoid* (*get_al_proc_address)(const al.ALchar*)
+/* "device.pxd":11
+ *     cdef void (*resume_soft)(alc.ALCdevice*)
  * 
  *     cdef inline alc.ALCvoid* get_alc_proc_address(self, const alc.ALCchar *funcname):             # <<<<<<<<<<<<<<
  *         return alc.alcGetProcAddress(self._device, funcname)
@@ -4661,7 +4663,7 @@ static CYTHON_INLINE ALCvoid *__pyx_f_4cyal_6device_6Device_get_alc_proc_address
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_alc_proc_address", 0);
 
-  /* "device.pxd":10
+  /* "device.pxd":12
  * 
  *     cdef inline alc.ALCvoid* get_alc_proc_address(self, const alc.ALCchar *funcname):
  *         return alc.alcGetProcAddress(self._device, funcname)             # <<<<<<<<<<<<<<
@@ -4671,8 +4673,8 @@ static CYTHON_INLINE ALCvoid *__pyx_f_4cyal_6device_6Device_get_alc_proc_address
   __pyx_r = alcGetProcAddress(__pyx_v_self->_device, __pyx_v_funcname);
   goto __pyx_L0;
 
-  /* "device.pxd":9
- *     cdef al.ALvoid* (*get_al_proc_address)(const al.ALchar*)
+  /* "device.pxd":11
+ *     cdef void (*resume_soft)(alc.ALCdevice*)
  * 
  *     cdef inline alc.ALCvoid* get_alc_proc_address(self, const alc.ALCchar *funcname):             # <<<<<<<<<<<<<<
  *         return alc.alcGetProcAddress(self._device, funcname)

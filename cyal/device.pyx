@@ -1,7 +1,8 @@
 # cython: language_level=3
 
-from .exceptions import DeviceNotFoundError
+from contextlib import contextmanager
 
+from .exceptions import DeviceNotFoundError
 from . cimport al, alc
 
 cdef class Device:
@@ -10,10 +11,38 @@ cdef class Device:
         if self._device is NULL:
             raise DeviceNotFoundError(device_name=name)
         self.get_al_proc_address = <al.ALvoid*(*)(const al.ALchar*)>self.get_alc_proc_address("alGetProcAddress")
+        if alc.alcIsExtensionPresent(self._device, "ALC_SOFT_PAUSE_DEVICE") == al.AL_TRUE:
+            self.pause_soft = <void (*)(alc.ALCdevice*)>self.get_alc_proc_address("alcDevicePauseSOFT")
+            self.resume_soft = <void (*)(alc.ALCdevice*)>self.get_alc_proc_address("alcDeviceResumeSOFT")
+        else:
+            self.pause_soft = no_pause_device_ext
+            self.resume_soft = no_pause_device_ext
     
     def __dealloc__(self):
         if self._device is not NULL:
             alc.alcCloseDevice(self._device)
+
+    def pause(self):
+        self.pause_soft(self._device)
+
+    def resume(self):
+        self.resume_soft(self._device)
+
+    @contextmanager
+    def paused(self):
+        self.pause_soft(self._device)
+        try:
+            yield self
+        finally:
+            self.resume_soft(self._device)
+
+    @contextmanager
+    def playing(self):
+        self.resume_soft(self._device)
+        try:
+            yield self
+        finally:
+            self.pause_soft(self._device)
 
     @property
     def name(self):
@@ -31,3 +60,6 @@ cdef class Device:
 
     def is_extension_present(self, ext):
         return alc.alcIsExtensionPresent(self._device, <const alc.ALCchar *>ext) == al.AL_TRUE
+
+cdef void no_pause_device_ext(alc.ALCdevice* dev):
+    raise RuntimeError("`ALC_SOFT_PAUSE_DEVICE` extension not implemented")
