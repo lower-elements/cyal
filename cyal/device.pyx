@@ -6,7 +6,7 @@ from .exceptions import DeviceNotFoundError
 from . cimport al, alc
 
 cdef class Device:
-    def __cinit__(self, name = None):
+    def __cinit__(self, name=None, *, pause_noop=False):
         self._device = alc.alcOpenDevice(<const alc.ALCchar *>name if name is not None else NULL)
         if self._device is NULL:
             raise DeviceNotFoundError(device_name=name)
@@ -14,6 +14,9 @@ cdef class Device:
         if alc.alcIsExtensionPresent(self._device, "ALC_SOFT_PAUSE_DEVICE") == al.AL_TRUE:
             self.pause_soft = <void (*)(alc.ALCdevice*)>self.get_alc_proc_address("alcDevicePauseSOFT")
             self.resume_soft = <void (*)(alc.ALCdevice*)>self.get_alc_proc_address("alcDeviceResumeSOFT")
+        elif pause_noop:
+            self.pause_soft = do_nothing_with_device
+            self.resume_soft = do_nothing_with_device
         else:
             self.pause_soft = no_pause_device_ext
             self.resume_soft = no_pause_device_ext
@@ -63,3 +66,5 @@ cdef class Device:
 
 cdef void no_pause_device_ext(alc.ALCdevice* dev):
     raise RuntimeError("`ALC_SOFT_PAUSE_DEVICE` extension not implemented")
+
+cdef void do_nothing_with_device(alc.ALCdevice* dev): pass
