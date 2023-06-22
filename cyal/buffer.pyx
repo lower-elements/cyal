@@ -21,33 +21,33 @@ cdef class Buffer:
     def __dealloc__(self):
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
         alc.alcMakeContextCurrent(self.context._ctx)
-        self.context.al_delete_buffers(1, &self.id)
+        al.alDeleteBuffers(1, &self.id)
         alc.alcMakeContextCurrent(prev_ctx)
 
     def set_data(self, data, *, sample_rate, format):
         cdef const al.ALubyte[:] view = data
-        self.context.al_buffer_data(self.id, format, &view[0], view.size, sample_rate)
+        al.alBufferData(self.id, format, &view[0], view.size, sample_rate)
         check_al_error()
 
     def __len__(self):
         cdef al.ALsizei length
-        self.context.get_buffer_i(self.id, al.AL_SIZE, &length)
+        al.alGetBufferi(self.id, al.AL_SIZE, &length)
         return length
 
     @property
     def bits(self):
         cdef al.ALint val
-        self.context.get_buffer_i(self.id, al.AL_BITS, &val)
+        al.alGetBufferi(self.id, al.AL_BITS, &val)
         return val
 
     @property
     def channels(self):
         cdef al.ALint val
-        self.context.get_buffer_i(self.id, al.AL_CHANNELS, &val)
+        al.alGetBufferi(self.id, al.AL_CHANNELS, &val)
         return val
 
     @property
     def sample_rate(self):
         cdef al.ALsizei val
-        self.context.get_buffer_i(self.id, al.AL_FREQUENCY, &val)
+        al.alGetBufferi(self.id, al.AL_FREQUENCY, &val)
         return val

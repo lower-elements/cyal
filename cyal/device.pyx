@@ -64,6 +64,12 @@ cdef class Device:
     def is_extension_present(self, ext):
         return alc.alcIsExtensionPresent(self._device, <const alc.ALCchar *>ext) == al.AL_TRUE
 
+    cdef alc.ALCenum get_enum_value(self, const alc.ALCchar* name):
+        cdef alc.ALCenum val = alc.alcGetEnumValue(self._device, name)
+        if val == al.AL_NONE:
+            raise RuntimeError(f"Could not get enum value for {name}")
+        return val
+
 cdef void no_pause_device_ext(alc.ALCdevice* dev):
     raise RuntimeError("`ALC_SOFT_PAUSE_DEVICE` extension not implemented")
 

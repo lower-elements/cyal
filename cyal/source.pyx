@@ -28,42 +28,42 @@ cdef class Source:
     def __dealloc__(self):
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
         alc.alcMakeContextCurrent(self.context._ctx)
-        self.context.al_delete_sources(1, &self.id)
+        al.alDeleteSources(1, &self.id)
         alc.alcMakeContextCurrent(prev_ctx)
 
     def play(self):
-        self.context.source_play(self.id)
+        al.alSourcePlay(self.id)
         check_al_error()
 
     def stop(self):
-        self.context.source_stop(self.id)
+        al.alSourceStop(self.id)
         check_al_error()
 
     def rewind(self):
-        self.context.source_rewind(self.id)
+        al.alSourceRewind(self.id)
         check_al_error()
 
     def pause(self):
-        self.context.source_pause(self.id)
+        al.alSourcePause(self.id)
         check_al_error()
 
     def queue_buffers(self, *bufs):
         cdef al.ALuint[:] ids = array.clone(ids_template, len(bufs), zero=False)
         cdef Py_ssize_t i
         for i, b in enumerate(bufs): ids[i] = b.id
-        self.context.source_queue_buffers(self.id, ids.size, &ids[0])
+        al.alSourceQueueBuffers(self.id, ids.size, &ids[0])
         check_al_error()
         for b in bufs: self._queued_bufs[b.id] = b
         self._buf = None
 
     def unqueue_buffers(self, *, max=INT_MAX):
         cdef al.ALint length
-        self.context.get_source_i(self.id, al.AL_BUFFERS_PROCESSED, &length)
+        al.alGetSourcei(self.id, al.AL_BUFFERS_PROCESSED, &length)
         length = length if length < max else max
         if length <= 0:
             return []
         cdef al.ALuint[:] ids = array.clone(ids_template, length, zero=False)
-        self.context.source_unqueue_buffers(self.id, ids.size, &ids[0])
+        al.alSourceUnqueueBuffers(self.id, ids.size, &ids[0])
         check_al_error()
         return [self._queued_bufs.pop(id) for id in ids]
 
@@ -73,188 +73,188 @@ cdef class Source:
 
     @buffer.setter
     def buffer(self, buf):
-        self.context.set_source_i(self.id, al.AL_BUFFER, <al.ALint>buf.id)
+        al.alSourcei(self.id, al.AL_BUFFER, <al.ALint>buf.id)
         check_al_error()
         self._buf = buf
 
 
     @buffer.deleter
     def buffer(self):
-        self.context.set_source_i(self.id, al.AL_BUFFER, al.AL_NONE)
+        al.alSourcei(self.id, al.AL_BUFFER, al.AL_NONE)
         self._buf = None
 
     @property
     def relative(self):
         cdef al.ALint flag
-        self.context.get_source_i(self.id, al.AL_SOURCE_RELATIVE, &flag)
+        al.alGetSourcei(self.id, al.AL_SOURCE_RELATIVE, &flag)
         return flag == al.AL_TRUE
 
     @relative.setter
     def relative(self, val):
-        self.context.set_source_i(self.id, al.AL_SOURCE_RELATIVE, al.AL_TRUE if val else al.AL_FALSE)
+        al.alSourcei(self.id, al.AL_SOURCE_RELATIVE, al.AL_TRUE if val else al.AL_FALSE)
 
     @property
     def cone_inner_angle(self):
         cdef float val
-        self.context.get_source_f(self.id, al.AL_CONE_INNER_ANGLE, &val)
+        al.alGetSourcef(self.id, al.AL_CONE_INNER_ANGLE, &val)
         return val
 
     @cone_inner_angle.setter
     def cone_inner_angle(self, val):
-        self.context.set_source_f(self.id, al.AL_CONE_INNER_ANGLE, val)
+        al.alSourcef(self.id, al.AL_CONE_INNER_ANGLE, val)
 
     @property
     def cone_outer_angle(self):
         cdef float val
-        self.context.get_source_f(self.id, al.AL_CONE_OUTER_ANGLE, &val)
+        al.alGetSourcef(self.id, al.AL_CONE_OUTER_ANGLE, &val)
         return val
 
     @cone_outer_angle.setter
     def cone_outer_angle(self, val):
-        self.context.set_source_f(self.id, al.AL_CONE_OUTER_ANGLE, val)
+        al.alSourcef(self.id, al.AL_CONE_OUTER_ANGLE, val)
 
     @property
     def pitch(self):
         cdef float val
-        self.context.get_source_f(self.id, al.AL_PITCH, &val)
+        al.alGetSourcef(self.id, al.AL_PITCH, &val)
         return val
 
     @pitch.setter
     def pitch(self, val):
-        self.context.set_source_f(self.id, al.AL_PITCH, val)
+        al.alSourcef(self.id, al.AL_PITCH, val)
 
     @property
     def position(self):
         cdef float x, y, z
-        self.context.get_source_3f(self.id, al.AL_POSITION, &x, &y, &z)
+        al.alGetSource3f(self.id, al.AL_POSITION, &x, &y, &z)
         return V3f(x, y, z)
 
     @position.setter
     def position(self, val):
-        self.context.set_source_3f(self.id, al.AL_POSITION, val[0], val[1], val[2])
+        al.alSource3f(self.id, al.AL_POSITION, val[0], val[1], val[2])
 
     @property
     def direction(self):
         cdef float x, y, z
-        self.context.get_source_3f(self.id, al.AL_DIRECTION, &x, &y, &z)
+        al.alGetSource3f(self.id, al.AL_DIRECTION, &x, &y, &z)
         return V3f(x, y, z)
 
     @direction.setter
     def direction(self, val):
-        self.context.set_source_3f(self.id, al.AL_DIRECTION, val[0], val[1], val[2])
+        al.alSource3f(self.id, al.AL_DIRECTION, val[0], val[1], val[2])
 
     @property
     def velocity(self):
         cdef float x, y, z
-        self.context.get_source_3f(self.id, al.AL_VELOCITY, &x, &y, &z)
+        al.alGetSource3f(self.id, al.AL_VELOCITY, &x, &y, &z)
         return V3f(x, y, z)
 
     @velocity.setter
     def velocity(self, val):
-        self.context.set_source_3f(self.id, al.AL_VELOCITY, val[0], val[1], val[2])
+        al.alSource3f(self.id, al.AL_VELOCITY, val[0], val[1], val[2])
 
     @property
     def looping(self):
         cdef al.ALint flag
-        self.context.get_source_i(self.id, al.AL_LOOPING, &flag)
+        al.alGetSourcei(self.id, al.AL_LOOPING, &flag)
         return flag == al.AL_TRUE
 
     @looping.setter
     def looping(self, val):
-        self.context.set_source_i(self.id, al.AL_LOOPING, al.AL_TRUE if val else al.AL_FALSE)
+        al.alSourcei(self.id, al.AL_LOOPING, al.AL_TRUE if val else al.AL_FALSE)
 
     @property
     def gain(self):
         cdef float val
-        self.context.get_source_f(self.id, al.AL_GAIN, &val)
+        al.alGetSourcef(self.id, al.AL_GAIN, &val)
         return val
 
     @gain.setter
     def gain(self, val):
-        self.context.set_source_f(self.id, al.AL_GAIN, val)
+        al.alSourcef(self.id, al.AL_GAIN, val)
 
     @property
     def min_gain(self):
         cdef float val
-        self.context.get_source_f(self.id, al.AL_MIN_GAIN, &val)
+        al.alGetSourcef(self.id, al.AL_MIN_GAIN, &val)
         return val
 
     @min_gain.setter
     def min_gain(self, val):
-        self.context.set_source_f(self.id, al.AL_MIN_GAIN, val)
+        al.alSourcef(self.id, al.AL_MIN_GAIN, val)
 
     @property
     def max_gain(self):
         cdef float val
-        self.context.get_source_f(self.id, al.AL_MAX_GAIN, &val)
+        al.alGetSourcef(self.id, al.AL_MAX_GAIN, &val)
         return val
 
     @max_gain.setter
     def max_gain(self, val):
-        self.context.set_source_f(self.id, al.AL_MAX_GAIN, val)
+        al.alSourcef(self.id, al.AL_MAX_GAIN, val)
 
     @property
     def state(self):
         cdef al.ALenum val
-        self.context.get_source_i(self.id, al.AL_SOURCE_STATE, &val)
+        al.alGetSourcei(self.id, al.AL_SOURCE_STATE, &val)
         return SourceState(val)
 
     @property
     def buffers_queued(self):
         cdef al.ALint val
-        self.context.get_source_i(self.id, al.AL_BUFFERS_QUEUED, &val)
+        al.alGetSourcei(self.id, al.AL_BUFFERS_QUEUED, &val)
         return val
 
     @property
     def buffers_processed(self):
         cdef al.ALint val
-        self.context.get_source_i(self.id, al.AL_BUFFERS_PROCESSED, &val)
+        al.alGetSourcei(self.id, al.AL_BUFFERS_PROCESSED, &val)
         return val
 
     @property
     def reference_distance(self):
         cdef float val
-        self.context.get_source_f(self.id, al.AL_REFERENCE_DISTANCE, &val)
+        al.alGetSourcef(self.id, al.AL_REFERENCE_DISTANCE, &val)
         return val
 
     @reference_distance.setter
     def reference_distance(self, val):
-        self.context.set_source_f(self.id, al.AL_REFERENCE_DISTANCE, val)
+        al.alSourcef(self.id, al.AL_REFERENCE_DISTANCE, val)
 
     @property
     def rolloff_factor(self):
         cdef float val
-        self.context.get_source_f(self.id, al.AL_ROLLOFF_FACTOR, &val)
+        al.alGetSourcef(self.id, al.AL_ROLLOFF_FACTOR, &val)
         return val
 
     @rolloff_factor.setter
     def rolloff_factor(self, val):
-        self.context.set_source_f(self.id, al.AL_ROLLOFF_FACTOR, val)
+        al.alSourcef(self.id, al.AL_ROLLOFF_FACTOR, val)
 
     @property
     def cone_outer_gain(self):
         cdef float val
-        self.context.get_source_f(self.id, al.AL_CONE_OUTER_GAIN, &val)
+        al.alGetSourcef(self.id, al.AL_CONE_OUTER_GAIN, &val)
         return val
 
     @cone_outer_gain.setter
     def cone_outer_gain(self, val):
-        self.context.set_source_f(self.id, al.AL_CONE_OUTER_GAIN, val)
+        al.alSourcef(self.id, al.AL_CONE_OUTER_GAIN, val)
 
     @property
     def max_distance(self):
         cdef float val
-        self.context.get_source_f(self.id, al.AL_MAX_DISTANCE, &val)
+        al.alGetSourcef(self.id, al.AL_MAX_DISTANCE, &val)
         return val
 
     @max_distance.setter
     def max_distance(self, val):
-        self.context.set_source_f(self.id, al.AL_MAX_DISTANCE, val)
+        al.alSourcef(self.id, al.AL_MAX_DISTANCE, val)
 
     @property
     def type(self):
         cdef al.ALenum val
-        self.context.get_source_i(self.id, al.AL_SOURCE_TYPE, &val)
+        al.alGetSourcei(self.id, al.AL_SOURCE_TYPE, &val)
         return SourceType(val)
 
 cpdef enum SourceState:

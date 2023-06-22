@@ -26,43 +26,8 @@ cdef class Context:
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
         alc.alcMakeContextCurrent(self._ctx)
 
-        # Buffer functions
-        self.al_gen_buffers = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alGenBuffers")
-        self.al_delete_buffers = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alDeleteBuffers")
-        self.al_buffer_data = <void (*)(al.ALuint, al.ALenum, al.ALvoid*, al.ALsizei, al.ALsizei)>dev.get_al_proc_address("alBufferData")
-        self.get_buffer_i = <void (*)(al.ALuint, al.ALenum, al.ALint*)>dev.get_al_proc_address("alGetBufferi")
-
-        # Source functions
-        self.al_gen_sources = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alGenSources")
-        self.al_delete_sources = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alDeleteSources")
-        self.set_source_f = <void (*)(al.ALuint, al.ALenum, al.ALfloat)>dev.get_al_proc_address("alSourcef")
-        self.set_source_3f = <void (*)(al.ALuint, al.ALenum, al.ALfloat, al.ALfloat, al.ALfloat)>dev.get_al_proc_address("alSource3f")
-        self.set_source_fv = <void (*)(al.ALuint, al.ALenum, const al.ALfloat*)>dev.get_al_proc_address("alSourcefv")
-        self.set_source_i = <void (*)(al.ALuint, al.ALenum, al.ALint)>dev.get_al_proc_address("alSourcei")
-        self.set_source_3i = <void (*)(al.ALuint, al.ALenum, al.ALint, al.ALint, al.ALint)>dev.get_al_proc_address("alSource3i")
-        self.set_source_iv = <void (*)(al.ALuint, al.ALenum, const al.ALint*)>dev.get_al_proc_address("alSourceiv")
-        self.get_source_f = <void (*)(al.ALuint, al.ALenum, al.ALfloat*)>dev.get_al_proc_address("alGetSourcef")
-        self.get_source_3f = <void (*)(al.ALuint, al.ALenum, al.ALfloat*, al.ALfloat*, al.ALfloat*)>dev.get_al_proc_address("alGetSource3f")
-        self.get_source_fv = <void (*)(al.ALuint, al.ALenum, al.ALfloat*)>dev.get_al_proc_address("alGetSourcefv")
-        self.get_source_i = <void (*)(al.ALuint, al.ALenum, al.ALint*)>dev.get_al_proc_address("alGetSourcei")
-        self.get_source_3i = <void (*)(al.ALuint, al.ALenum, al.ALint*, al.ALint*, al.ALint*)>dev.get_al_proc_address("alGetSource3i")
-        self.get_source_iv = <void (*)(al.ALuint, al.ALenum, al.ALint*)>dev.get_al_proc_address("alGetSourceiv")
-        self.source_play = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourcePlay")
-        self.source_stop = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourceStop")
-        self.source_rewind = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourceRewind")
-        self.source_pause = <void (*)(al.ALuint)>dev.get_al_proc_address("alSourcePause")
-        self.source_play_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePlayv")
-        self.source_stop_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceStopv")
-        self.source_rewind_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceRewindv")
-        self.source_pause_v = <void (*)(al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourcePausev")
-        self.source_queue_buffers = <void (*)(al.ALuint, al.ALsizei, const al.ALuint*)>dev.get_al_proc_address("alSourceQueueBuffers")
-        self.source_unqueue_buffers = <void (*)(al.ALuint, al.ALsizei, al.ALuint*)>dev.get_al_proc_address("alSourceUnqueueBuffers")
-
-        # Extensions
-        self.is_al_extension_present = <al.ALboolean (*)(const al.ALchar*)>dev.get_al_proc_address("alIsExtensionPresent")
-
         # AL_SOFT_deferred_updates extension functions
-        if self.is_al_extension_present("AL_SOFT_DEFERRED_UPDATES") == al.AL_TRUE:
+        if al.alIsExtensionPresent("AL_SOFT_DEFERRED_UPDATES") == al.AL_TRUE:
             self.al_defer_updates_soft = <void (*)()>dev.get_al_proc_address("alDeferUpdatesSOFT")
             self.al_process_updates_soft = <void (*)()>dev.get_al_proc_address("alProcessUpdatesSOFT")
         elif emulate_deferred_updates:
@@ -139,19 +104,19 @@ cdef class Context:
 
     def gen_buffer(self):
         cdef al.ALuint id
-        self.al_gen_buffers(1, &id)
+        al.alGenBuffers(1, &id)
         check_al_error()
         return Buffer.from_id(self, id)
 
     def gen_buffers(self, n):
         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
-        self.al_gen_buffers(n, &ids[0])
+        al.alGenBuffers(n, &ids[0])
         check_al_error()
         return [Buffer.from_id(self, id) for id in ids]
 
     def gen_source(self, **kwargs):
         cdef al.ALuint id
-        self.al_gen_sources(1, &id)
+        al.alGenSources(1, &id)
         check_al_error()
         cdef Source src = Source.from_id(self, id)
         for k, v in kwargs.items(): setattr(src, k, v)
@@ -159,7 +124,7 @@ cdef class Context:
 
     def gen_sources(self, n, **kwargs):
         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
-        self.al_gen_sources(n, &ids[0])
+        al.alGenSources(n, &ids[0])
         check_al_error()
         cdef list srcs = [Source.from_id(self, id) for id in ids]
         for src in srcs:
@@ -170,28 +135,28 @@ cdef class Context:
         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
         cdef Py_ssize_t i
         for i, s in enumerate(srcs): ids[i] = s.id
-        self.source_play_v(ids.size, &ids[0])
+        al.alSourcePlayv(ids.size, &ids[0])
         check_al_error()
 
     def stop_sources(self, *srcs):
         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
         cdef Py_ssize_t i
         for i, s in enumerate(srcs): ids[i] = s.id
-        self.source_stop_v(ids.size, &ids[0])
+        al.alSourceStopv(ids.size, &ids[0])
         check_al_error()
 
     def rewind_sources(self, *srcs):
         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
         cdef Py_ssize_t i
         for i, s in enumerate(srcs): ids[i] = s.id
-        self.source_rewind_v(ids.size, &ids[0])
+        al.alSourceRewindv(ids.size, &ids[0])
         check_al_error()
 
     def pause_sources(self, *srcs):
         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
         cdef Py_ssize_t i
         for i, s in enumerate(srcs): ids[i] = s.id
-        self.source_pause_v(ids.size, &ids[0])
+        al.alSourcePausev(ids.size, &ids[0])
         check_al_error()
 
 cdef array.array attrs_template = array.array('i')
