@@ -42,9 +42,6 @@ cdef class EfxExtension:
 cdef class AuxiliaryEffectSlot:
     pass
 
-cdef class EffectType:
-    pass
-
 cdef class Effect:
     pass
 
