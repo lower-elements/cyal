@@ -40,10 +40,22 @@ cdef class EfxExtension:
     cdef void (*alGetAuxiliaryEffectSlotfv)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValues)
 
 cdef class AuxiliaryEffectSlot:
-    pass
+    cdef readonly EfxExtension efx
+    cdef readonly al.ALuint id
+
+    @staticmethod
+    cdef AuxiliaryEffectSlot from_id(EfxExtension efx, al.ALuint id)
 
 cdef class Effect:
-    pass
+    cdef readonly EfxExtension efx
+    cdef readonly al.ALuint id
+
+    @staticmethod
+    cdef Effect from_id(EfxExtension efx, al.ALuint id)
 
 cdef class Filter:
-    pass
+    cdef readonly EfxExtension efx
+    cdef readonly al.ALuint id
+
+    @staticmethod
+    cdef Filter from_id(EfxExtension efx, al.ALuint id)
