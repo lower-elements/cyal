@@ -121,6 +121,12 @@ cdef class AuxiliaryEffectSlot:
         slot.id = id
         return slot
 
+    def __dealloc__(self):
+        cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
+        alc.alcMakeContextCurrent(self.efx.context._ctx)
+        self.efx.alDeleteAuxiliaryEffectSlots(1, &self.id)
+        alc.alcMakeContextCurrent(prev_ctx)
+
 cdef class Effect:
     def __cinit__(self):
         pass
@@ -135,6 +141,12 @@ cdef class Effect:
         effect.id = id
         return effect
 
+    def __dealloc__(self):
+        cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
+        alc.alcMakeContextCurrent(self.efx.context._ctx)
+        self.efx.alDeleteEffects(1, &self.id)
+        alc.alcMakeContextCurrent(prev_ctx)
+
 cdef class Filter:
     def __cinit__(self):
         pass
@@ -148,3 +160,9 @@ cdef class Filter:
         filter.efx = efx
         filter.id = id
         return filter
+
+    def __dealloc__(self):
+        cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
+        alc.alcMakeContextCurrent(self.efx.context._ctx)
+        self.efx.alDeleteFilters(1, &self.id)
+        alc.alcMakeContextCurrent(prev_ctx)
