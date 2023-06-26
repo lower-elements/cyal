@@ -20,6 +20,7 @@ ext_modules = [
     Extension("cyal.capture", ["cyal/capture" + ext]),
     Extension("cyal.context", ["cyal/context" + ext]),
     Extension("cyal.device", ["cyal/device" + ext]),
+    Extension("cyal.efx", ["cyal/efx" + ext]),
     Extension("cyal.exceptions", ["cyal/exceptions" + ext]),
     Extension("cyal.listener", ["cyal/listener" + ext]),
     Extension("cyal.source", ["cyal/source" + ext]),
