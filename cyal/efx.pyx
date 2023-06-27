@@ -54,6 +54,7 @@ cdef class EfxExtension:
         self.alGetAuxiliaryEffectSlotfv = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValues)>al.alGetProcAddress("alGetAuxiliaryEffectSlotfv")
 
         self.AL_METERS_PER_UNIT = alc.alcGetEnumValue(ctx.device._device, "AL_METERS_PER_UNIT")
+        self.AL_EFFECT_TYPE = alc.alcGetEnumValue(ctx.device._device, "AL_EFFECT_TYPE")
 
         # Restore the old context (if any)
         alc.alcMakeContextCurrent(prev_ctx)
@@ -152,7 +153,7 @@ cdef class AuxiliaryEffectSlot:
 
 cdef class Effect:
     def __cinit__(self):
-        pass
+        self._type = "null"
 
     def __init__(self):
         raise TypeError("This class cannot be instantiated directly.")
@@ -169,6 +170,20 @@ cdef class Effect:
         alc.alcMakeContextCurrent(self.efx.context._ctx)
         self.efx.alDeleteEffects(1, &self.id)
         alc.alcMakeContextCurrent(prev_ctx)
+
+    @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, val):
+        cdef str val_upper = val.upper()
+        cdef enum_val = al.alGetEnumValue(b"AL_EFFECT_" + val_upper.encode("utf8"))
+        if enum_val == al.AL_NONE:
+            raise RuntimeError(f"Could not get enum value for AL_EFFECT_{val_upper}")
+        self.efx.alEffecti(self.id, self.efx.AL_EFFECT_TYPE, enum_val)
+        check_al_error()
+        self._type = val
 
 cdef class Filter:
     def __cinit__(self):

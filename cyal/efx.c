@@ -1382,11 +1382,12 @@ struct __pyx_obj_4cyal_3efx_EfxExtension {
   void (*alGetAuxiliaryEffectSlotf)(ALuint, ALenum, ALfloat *);
   void (*alGetAuxiliaryEffectSlotfv)(ALuint, ALenum, ALfloat *);
   ALenum AL_METERS_PER_UNIT;
+  ALenum AL_EFFECT_TYPE;
 };
 
 
-/* "cyal/efx.pxd":46
- *     cdef al.ALenum AL_METERS_PER_UNIT
+/* "cyal/efx.pxd":47
+ *     cdef al.ALenum AL_EFFECT_TYPE
  * 
  * cdef class AuxiliaryEffectSlot:             # <<<<<<<<<<<<<<
  *     cdef readonly EfxExtension efx
@@ -1400,7 +1401,7 @@ struct __pyx_obj_4cyal_3efx_AuxiliaryEffectSlot {
 };
 
 
-/* "cyal/efx.pxd":53
+/* "cyal/efx.pxd":54
  *     cdef AuxiliaryEffectSlot from_id(EfxExtension efx, al.ALuint id)
  * 
  * cdef class Effect:             # <<<<<<<<<<<<<<
@@ -1412,10 +1413,11 @@ struct __pyx_obj_4cyal_3efx_Effect {
   struct __pyx_vtabstruct_4cyal_3efx_Effect *__pyx_vtab;
   struct __pyx_obj_4cyal_3efx_EfxExtension *efx;
   ALuint id;
+  PyObject *_type;
 };
 
 
-/* "cyal/efx.pxd":60
+/* "cyal/efx.pxd":62
  *     cdef Effect from_id(EfxExtension efx, al.ALuint id)
  * 
  * cdef class Filter:             # <<<<<<<<<<<<<<
@@ -1525,7 +1527,7 @@ static struct __pyx_vtabstruct_4cyal_6device_Device *__pyx_vtabptr_4cyal_6device
 static CYTHON_INLINE ALCvoid *__pyx_f_4cyal_6device_6Device_get_alc_proc_address(struct __pyx_obj_4cyal_6device_Device *, ALCchar const *);
 
 
-/* "cyal/efx.pyx":133
+/* "cyal/efx.pyx":134
  *         return filters
  * 
  * cdef class AuxiliaryEffectSlot:             # <<<<<<<<<<<<<<
@@ -1539,12 +1541,12 @@ struct __pyx_vtabstruct_4cyal_3efx_AuxiliaryEffectSlot {
 static struct __pyx_vtabstruct_4cyal_3efx_AuxiliaryEffectSlot *__pyx_vtabptr_4cyal_3efx_AuxiliaryEffectSlot;
 
 
-/* "cyal/efx.pyx":153
+/* "cyal/efx.pyx":154
  *         alc.alcMakeContextCurrent(prev_ctx)
  * 
  * cdef class Effect:             # <<<<<<<<<<<<<<
  *     def __cinit__(self):
- *         pass
+ *         self._type = "null"
  */
 
 struct __pyx_vtabstruct_4cyal_3efx_Effect {
@@ -1553,8 +1555,8 @@ struct __pyx_vtabstruct_4cyal_3efx_Effect {
 static struct __pyx_vtabstruct_4cyal_3efx_Effect *__pyx_vtabptr_4cyal_3efx_Effect;
 
 
-/* "cyal/efx.pyx":173
- *         alc.alcMakeContextCurrent(prev_ctx)
+/* "cyal/efx.pyx":188
+ *         self._type = val
  * 
  * cdef class Filter:             # <<<<<<<<<<<<<<
  *     def __cinit__(self):
@@ -1895,6 +1897,9 @@ static CYTHON_INLINE int __pyx_sub_acquisition_count_locked(
 #define __PYX_XDEC_MEMVIEW(slice, have_gil) __Pyx_XDEC_MEMVIEW(slice, have_gil, __LINE__)
 static CYTHON_INLINE void __Pyx_INC_MEMVIEW(__Pyx_memviewslice *, int, int);
 static CYTHON_INLINE void __Pyx_XDEC_MEMVIEW(__Pyx_memviewslice *, int, int);
+
+/* PyUnicode_Unicode.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyUnicode_Unicode(PyObject *obj);
 
 /* PyObjectCall2Args.proto */
 static CYTHON_UNUSED PyObject* __Pyx_PyObject_Call2Args(PyObject* function, PyObject* arg1, PyObject* arg2);
@@ -2416,14 +2421,20 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_ALuint(ALuint value);
 /* CIntFromPy.proto */
 static CYTHON_INLINE ALuint __Pyx_PyInt_As_ALuint(PyObject *);
 
+/* CIntToPy.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_ALenum(ALenum value);
+
+/* CIntToPy.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
+
+/* CIntFromPy.proto */
+static CYTHON_INLINE ALint __Pyx_PyInt_As_ALint(PyObject *);
+
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
-
-/* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
@@ -2652,12 +2663,14 @@ static const char __pyx_k_id[] = "id";
 static const char __pyx_k_ctx[] = "ctx";
 static const char __pyx_k_new[] = "__new__";
 static const char __pyx_k_obj[] = "obj";
+static const char __pyx_k_None[] = "None";
 static const char __pyx_k_base[] = "base";
 static const char __pyx_k_dict[] = "__dict__";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_mode[] = "mode";
 static const char __pyx_k_name[] = "name";
 static const char __pyx_k_ndim[] = "ndim";
+static const char __pyx_k_null[] = "null";
 static const char __pyx_k_pack[] = "pack";
 static const char __pyx_k_size[] = "size";
 static const char __pyx_k_step[] = "step";
@@ -2672,6 +2685,7 @@ static const char __pyx_k_items[] = "items";
 static const char __pyx_k_range[] = "range";
 static const char __pyx_k_shape[] = "shape";
 static const char __pyx_k_start[] = "start";
+static const char __pyx_k_upper[] = "upper";
 static const char __pyx_k_Effect[] = "Effect";
 static const char __pyx_k_Filter[] = "Filter";
 static const char __pyx_k_encode[] = "encode";
@@ -2690,6 +2704,7 @@ static const char __pyx_k_getstate[] = "__getstate__";
 static const char __pyx_k_itemsize[] = "itemsize";
 static const char __pyx_k_pyx_type[] = "__pyx_type";
 static const char __pyx_k_setstate[] = "__setstate__";
+static const char __pyx_k_AL_EFFECT[] = "AL_EFFECT_";
 static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_enumerate[] = "enumerate";
 static const char __pyx_k_pyx_state[] = "__pyx_state";
@@ -2725,6 +2740,7 @@ static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
 static const char __pyx_k_unable_to_allocate_array_data[] = "unable to allocate array data.";
 static const char __pyx_k_strided_and_direct_or_indirect[] = "<strided and direct or indirect>";
+static const char __pyx_k_Could_not_get_enum_value_for_AL[] = "Could not get enum value for AL_EFFECT_";
 static const char __pyx_k_Buffer_view_does_not_expose_stri[] = "Buffer view does not expose strides";
 static const char __pyx_k_Can_only_create_a_buffer_that_is[] = "Can only create a buffer that is contiguous in memory.";
 static const char __pyx_k_Cannot_assign_to_read_only_memor[] = "Cannot assign to read-only memoryview";
@@ -2740,6 +2756,7 @@ static const char __pyx_k_Unsupported_extension_ALC_EXT_EF[] = "Unsupported exte
 static const char __pyx_k_got_differing_extents_in_dimensi[] = "got differing extents in dimension %d (got %d and %d)";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
 static const char __pyx_k_unable_to_allocate_shape_and_str[] = "unable to allocate shape and strides.";
+static PyObject *__pyx_n_b_AL_EFFECT;
 static PyObject *__pyx_n_s_ASCII;
 static PyObject *__pyx_n_s_AuxiliaryEffectSlot;
 static PyObject *__pyx_kp_s_Buffer_view_does_not_expose_stri;
@@ -2747,6 +2764,7 @@ static PyObject *__pyx_kp_s_Can_only_create_a_buffer_that_is;
 static PyObject *__pyx_kp_s_Cannot_assign_to_read_only_memor;
 static PyObject *__pyx_kp_s_Cannot_create_writable_memory_vi;
 static PyObject *__pyx_kp_s_Cannot_index_with_type_s;
+static PyObject *__pyx_kp_u_Could_not_get_enum_value_for_AL;
 static PyObject *__pyx_n_s_Effect;
 static PyObject *__pyx_n_s_EfxExtension;
 static PyObject *__pyx_n_s_Ellipsis;
@@ -2761,6 +2779,7 @@ static PyObject *__pyx_kp_s_Invalid_shape_in_axis_d_d;
 static PyObject *__pyx_n_s_MemoryError;
 static PyObject *__pyx_kp_s_MemoryView_of_r_at_0x_x;
 static PyObject *__pyx_kp_s_MemoryView_of_r_object;
+static PyObject *__pyx_kp_u_None;
 static PyObject *__pyx_n_b_O;
 static PyObject *__pyx_kp_s_Out_of_bounds_on_buffer_access_a;
 static PyObject *__pyx_n_s_PickleError;
@@ -2806,6 +2825,7 @@ static PyObject *__pyx_n_s_name_2;
 static PyObject *__pyx_n_s_ndim;
 static PyObject *__pyx_n_s_new;
 static PyObject *__pyx_kp_s_no_default___reduce___due_to_non;
+static PyObject *__pyx_n_u_null;
 static PyObject *__pyx_n_s_obj;
 static PyObject *__pyx_n_s_pack;
 static PyObject *__pyx_n_s_pickle;
@@ -2838,6 +2858,7 @@ static PyObject *__pyx_kp_s_unable_to_allocate_array_data;
 static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
 static PyObject *__pyx_n_s_unpack;
 static PyObject *__pyx_n_s_update;
+static PyObject *__pyx_n_s_upper;
 static int __pyx_pf_4cyal_3efx_12EfxExtension___cinit__(struct __pyx_obj_4cyal_3efx_EfxExtension *__pyx_v_self, struct __pyx_obj_4cyal_7context_Context *__pyx_v_ctx); /* proto */
 static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_7version___get__(struct __pyx_obj_4cyal_3efx_EfxExtension *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_15meters_per_unit___get__(struct __pyx_obj_4cyal_3efx_EfxExtension *__pyx_v_self); /* proto */
@@ -2858,9 +2879,11 @@ static PyObject *__pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_3efx___get__(struct _
 static PyObject *__pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_2id___get__(struct __pyx_obj_4cyal_3efx_AuxiliaryEffectSlot *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_3efx_AuxiliaryEffectSlot *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_3efx_AuxiliaryEffectSlot *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
-static int __pyx_pf_4cyal_3efx_6Effect___cinit__(CYTHON_UNUSED struct __pyx_obj_4cyal_3efx_Effect *__pyx_v_self); /* proto */
+static int __pyx_pf_4cyal_3efx_6Effect___cinit__(struct __pyx_obj_4cyal_3efx_Effect *__pyx_v_self); /* proto */
 static int __pyx_pf_4cyal_3efx_6Effect_2__init__(CYTHON_UNUSED struct __pyx_obj_4cyal_3efx_Effect *__pyx_v_self); /* proto */
 static void __pyx_pf_4cyal_3efx_6Effect_4__dealloc__(struct __pyx_obj_4cyal_3efx_Effect *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4cyal_3efx_6Effect_4type___get__(struct __pyx_obj_4cyal_3efx_Effect *__pyx_v_self); /* proto */
+static int __pyx_pf_4cyal_3efx_6Effect_4type_2__set__(struct __pyx_obj_4cyal_3efx_Effect *__pyx_v_self, PyObject *__pyx_v_val); /* proto */
 static PyObject *__pyx_pf_4cyal_3efx_6Effect_3efx___get__(struct __pyx_obj_4cyal_3efx_Effect *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4cyal_3efx_6Effect_2id___get__(struct __pyx_obj_4cyal_3efx_Effect *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4cyal_3efx_6Effect_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4cyal_3efx_Effect *__pyx_v_self); /* proto */
@@ -3383,12 +3406,21 @@ static int __pyx_pf_4cyal_3efx_12EfxExtension___cinit__(struct __pyx_obj_4cyal_3
  *         self.alGetAuxiliaryEffectSlotfv = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValues)>al.alGetProcAddress("alGetAuxiliaryEffectSlotfv")
  * 
  *         self.AL_METERS_PER_UNIT = alc.alcGetEnumValue(ctx.device._device, "AL_METERS_PER_UNIT")             # <<<<<<<<<<<<<<
+ *         self.AL_EFFECT_TYPE = alc.alcGetEnumValue(ctx.device._device, "AL_EFFECT_TYPE")
  * 
- *         # Restore the old context (if any)
  */
   __pyx_v_self->AL_METERS_PER_UNIT = alcGetEnumValue(__pyx_v_ctx->device->_device, ((ALCchar const *)"AL_METERS_PER_UNIT"));
 
-  /* "cyal/efx.pyx":59
+  /* "cyal/efx.pyx":57
+ * 
+ *         self.AL_METERS_PER_UNIT = alc.alcGetEnumValue(ctx.device._device, "AL_METERS_PER_UNIT")
+ *         self.AL_EFFECT_TYPE = alc.alcGetEnumValue(ctx.device._device, "AL_EFFECT_TYPE")             # <<<<<<<<<<<<<<
+ * 
+ *         # Restore the old context (if any)
+ */
+  __pyx_v_self->AL_EFFECT_TYPE = alcGetEnumValue(__pyx_v_ctx->device->_device, ((ALCchar const *)"AL_EFFECT_TYPE"));
+
+  /* "cyal/efx.pyx":60
  * 
  *         # Restore the old context (if any)
  *         alc.alcMakeContextCurrent(prev_ctx)             # <<<<<<<<<<<<<<
@@ -3417,7 +3449,7 @@ static int __pyx_pf_4cyal_3efx_12EfxExtension___cinit__(struct __pyx_obj_4cyal_3
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":62
+/* "cyal/efx.pyx":63
  * 
  *     @property
  *     def version(self):             # <<<<<<<<<<<<<<
@@ -3453,7 +3485,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_7version___get__(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "cyal/efx.pyx":63
+  /* "cyal/efx.pyx":64
  *     @property
  *     def version(self):
  *         cdef alc.ALCenum ver_maj = self.context.device.get_enum_value("ALC_EFX_MAJOR_VERSION")             # <<<<<<<<<<<<<<
@@ -3462,7 +3494,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_7version___get__(struct __py
  */
   __pyx_v_ver_maj = ((struct __pyx_vtabstruct_4cyal_6device_Device *)__pyx_v_self->context->device->__pyx_vtab)->get_enum_value(__pyx_v_self->context->device, ((ALCchar const *)"ALC_EFX_MAJOR_VERSION"));
 
-  /* "cyal/efx.pyx":64
+  /* "cyal/efx.pyx":65
  *     def version(self):
  *         cdef alc.ALCenum ver_maj = self.context.device.get_enum_value("ALC_EFX_MAJOR_VERSION")
  *         cdef alc.ALCenum ver_min = self.context.device.get_enum_value("ALC_EFX_MINOR_VERSION")             # <<<<<<<<<<<<<<
@@ -3471,7 +3503,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_7version___get__(struct __py
  */
   __pyx_v_ver_min = ((struct __pyx_vtabstruct_4cyal_6device_Device *)__pyx_v_self->context->device->__pyx_vtab)->get_enum_value(__pyx_v_self->context->device, ((ALCchar const *)"ALC_EFX_MINOR_VERSION"));
 
-  /* "cyal/efx.pyx":66
+  /* "cyal/efx.pyx":67
  *         cdef alc.ALCenum ver_min = self.context.device.get_enum_value("ALC_EFX_MINOR_VERSION")
  *         cdef alc.ALCint maj, min
  *         alc.alcGetIntegerv(self.context.device._device, ver_maj, 1, &maj)             # <<<<<<<<<<<<<<
@@ -3480,7 +3512,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_7version___get__(struct __py
  */
   alcGetIntegerv(__pyx_v_self->context->device->_device, __pyx_v_ver_maj, 1, (&__pyx_v_maj));
 
-  /* "cyal/efx.pyx":67
+  /* "cyal/efx.pyx":68
  *         cdef alc.ALCint maj, min
  *         alc.alcGetIntegerv(self.context.device._device, ver_maj, 1, &maj)
  *         alc.alcGetIntegerv(self.context.device._device, ver_min, 1, &min)             # <<<<<<<<<<<<<<
@@ -3489,18 +3521,18 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_7version___get__(struct __py
  */
   alcGetIntegerv(__pyx_v_self->context->device->_device, __pyx_v_ver_min, 1, (&__pyx_v_min));
 
-  /* "cyal/efx.pyx":68
+  /* "cyal/efx.pyx":69
  *         alc.alcGetIntegerv(self.context.device._device, ver_maj, 1, &maj)
  *         alc.alcGetIntegerv(self.context.device._device, ver_min, 1, &min)
  *         check_alc_error(self.context.device._device)             # <<<<<<<<<<<<<<
  *         return (maj, min)
  * 
  */
-  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_alc_error(__pyx_v_self->context->device->_device); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_alc_error(__pyx_v_self->context->device->_device); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cyal/efx.pyx":69
+  /* "cyal/efx.pyx":70
  *         alc.alcGetIntegerv(self.context.device._device, ver_min, 1, &min)
  *         check_alc_error(self.context.device._device)
  *         return (maj, min)             # <<<<<<<<<<<<<<
@@ -3508,11 +3540,11 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_7version___get__(struct __py
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ALCint(__pyx_v_maj); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ALCint(__pyx_v_maj); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_ALCint(__pyx_v_min); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_ALCint(__pyx_v_min); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -3524,7 +3556,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_7version___get__(struct __py
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "cyal/efx.pyx":62
+  /* "cyal/efx.pyx":63
  * 
  *     @property
  *     def version(self):             # <<<<<<<<<<<<<<
@@ -3545,7 +3577,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_7version___get__(struct __py
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":72
+/* "cyal/efx.pyx":73
  * 
  *     @property
  *     def meters_per_unit(self):             # <<<<<<<<<<<<<<
@@ -3576,7 +3608,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_15meters_per_unit___get__(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "cyal/efx.pyx":74
+  /* "cyal/efx.pyx":75
  *     def meters_per_unit(self):
  *         cdef al.ALfloat mpu
  *         al.alGetListenerf(self.AL_METERS_PER_UNIT, &mpu)             # <<<<<<<<<<<<<<
@@ -3585,7 +3617,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_15meters_per_unit___get__(st
  */
   alGetListenerf(__pyx_v_self->AL_METERS_PER_UNIT, (&__pyx_v_mpu));
 
-  /* "cyal/efx.pyx":75
+  /* "cyal/efx.pyx":76
  *         cdef al.ALfloat mpu
  *         al.alGetListenerf(self.AL_METERS_PER_UNIT, &mpu)
  *         return mpu             # <<<<<<<<<<<<<<
@@ -3593,13 +3625,13 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_15meters_per_unit___get__(st
  *     @meters_per_unit.setter
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_mpu); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_mpu); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cyal/efx.pyx":72
+  /* "cyal/efx.pyx":73
  * 
  *     @property
  *     def meters_per_unit(self):             # <<<<<<<<<<<<<<
@@ -3618,7 +3650,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_15meters_per_unit___get__(st
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":78
+/* "cyal/efx.pyx":79
  * 
  *     @meters_per_unit.setter
  *     def meters_per_unit(self, val):             # <<<<<<<<<<<<<<
@@ -3649,28 +3681,28 @@ static int __pyx_pf_4cyal_3efx_12EfxExtension_15meters_per_unit_2__set__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "cyal/efx.pyx":79
+  /* "cyal/efx.pyx":80
  *     @meters_per_unit.setter
  *     def meters_per_unit(self, val):
  *         al.alListenerf(self.AL_METERS_PER_UNIT, val)             # <<<<<<<<<<<<<<
  *         check_al_error()
  * 
  */
-  __pyx_t_1 = __pyx_PyFloat_AsFloat(__pyx_v_val); if (unlikely((__pyx_t_1 == ((ALfloat)-1)) && PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_t_1 = __pyx_PyFloat_AsFloat(__pyx_v_val); if (unlikely((__pyx_t_1 == ((ALfloat)-1)) && PyErr_Occurred())) __PYX_ERR(0, 80, __pyx_L1_error)
   alListenerf(__pyx_v_self->AL_METERS_PER_UNIT, __pyx_t_1);
 
-  /* "cyal/efx.pyx":80
+  /* "cyal/efx.pyx":81
  *     def meters_per_unit(self, val):
  *         al.alListenerf(self.AL_METERS_PER_UNIT, val)
  *         check_al_error()             # <<<<<<<<<<<<<<
  * 
  *     def gen_auxiliary_effect_slot(self, **kwargs):
  */
-  __pyx_t_2 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_2 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cyal/efx.pyx":78
+  /* "cyal/efx.pyx":79
  * 
  *     @meters_per_unit.setter
  *     def meters_per_unit(self, val):             # <<<<<<<<<<<<<<
@@ -3690,7 +3722,7 @@ static int __pyx_pf_4cyal_3efx_12EfxExtension_15meters_per_unit_2__set__(struct 
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":82
+/* "cyal/efx.pyx":83
  *         check_al_error()
  * 
  *     def gen_auxiliary_effect_slot(self, **kwargs):             # <<<<<<<<<<<<<<
@@ -3738,7 +3770,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_2gen_auxiliary_effect_slot(s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gen_auxiliary_effect_slot", 0);
 
-  /* "cyal/efx.pyx":84
+  /* "cyal/efx.pyx":85
  *     def gen_auxiliary_effect_slot(self, **kwargs):
  *         cdef al.ALuint id
  *         self.alGenAuxiliaryEffectSlots(1, &id)             # <<<<<<<<<<<<<<
@@ -3747,30 +3779,30 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_2gen_auxiliary_effect_slot(s
  */
   __pyx_v_self->alGenAuxiliaryEffectSlots(1, (&__pyx_v_id));
 
-  /* "cyal/efx.pyx":85
+  /* "cyal/efx.pyx":86
  *         cdef al.ALuint id
  *         self.alGenAuxiliaryEffectSlots(1, &id)
  *         check_al_error()             # <<<<<<<<<<<<<<
  *         cdef AuxiliaryEffectSlot slot = AuxiliaryEffectSlot.from_id(self, id)
  *         for k, v in kwargs.items(): setattr(slot, k, v)
  */
-  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cyal/efx.pyx":86
+  /* "cyal/efx.pyx":87
  *         self.alGenAuxiliaryEffectSlots(1, &id)
  *         check_al_error()
  *         cdef AuxiliaryEffectSlot slot = AuxiliaryEffectSlot.from_id(self, id)             # <<<<<<<<<<<<<<
  *         for k, v in kwargs.items(): setattr(slot, k, v)
  *         return slot
  */
-  __pyx_t_1 = ((PyObject *)__pyx_f_4cyal_3efx_19AuxiliaryEffectSlot_from_id(__pyx_v_self, __pyx_v_id)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4cyal_3efx_19AuxiliaryEffectSlot_from_id(__pyx_v_self, __pyx_v_id)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_slot = ((struct __pyx_obj_4cyal_3efx_AuxiliaryEffectSlot *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cyal/efx.pyx":87
+  /* "cyal/efx.pyx":88
  *         check_al_error()
  *         cdef AuxiliaryEffectSlot slot = AuxiliaryEffectSlot.from_id(self, id)
  *         for k, v in kwargs.items(): setattr(slot, k, v)             # <<<<<<<<<<<<<<
@@ -3778,7 +3810,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_2gen_auxiliary_effect_slot(s
  * 
  */
   __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 88, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_1);
   __pyx_t_1 = __pyx_t_5;
@@ -3786,18 +3818,18 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_2gen_auxiliary_effect_slot(s
   while (1) {
     __pyx_t_7 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_3, &__pyx_t_2, &__pyx_t_5, &__pyx_t_6, NULL, __pyx_t_4);
     if (unlikely(__pyx_t_7 == 0)) break;
-    if (unlikely(__pyx_t_7 == -1)) __PYX_ERR(0, 87, __pyx_L1_error)
+    if (unlikely(__pyx_t_7 == -1)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_5);
     __pyx_t_5 = 0;
     __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_6);
     __pyx_t_6 = 0;
-    __pyx_t_8 = PyObject_SetAttr(((PyObject *)__pyx_v_slot), __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_8 = PyObject_SetAttr(((PyObject *)__pyx_v_slot), __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 88, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cyal/efx.pyx":88
+  /* "cyal/efx.pyx":89
  *         cdef AuxiliaryEffectSlot slot = AuxiliaryEffectSlot.from_id(self, id)
  *         for k, v in kwargs.items(): setattr(slot, k, v)
  *         return slot             # <<<<<<<<<<<<<<
@@ -3809,7 +3841,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_2gen_auxiliary_effect_slot(s
   __pyx_r = ((PyObject *)__pyx_v_slot);
   goto __pyx_L0;
 
-  /* "cyal/efx.pyx":82
+  /* "cyal/efx.pyx":83
  *         check_al_error()
  * 
  *     def gen_auxiliary_effect_slot(self, **kwargs):             # <<<<<<<<<<<<<<
@@ -3833,7 +3865,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_2gen_auxiliary_effect_slot(s
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":90
+/* "cyal/efx.pyx":91
  *         return slot
  * 
  *     def gen_auxiliary_effect_slots(self, n, **kwargs):             # <<<<<<<<<<<<<<
@@ -3873,7 +3905,7 @@ static PyObject *__pyx_pw_4cyal_3efx_12EfxExtension_5gen_auxiliary_effect_slots(
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "gen_auxiliary_effect_slots") < 0)) __PYX_ERR(0, 90, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "gen_auxiliary_effect_slots") < 0)) __PYX_ERR(0, 91, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -3884,7 +3916,7 @@ static PyObject *__pyx_pw_4cyal_3efx_12EfxExtension_5gen_auxiliary_effect_slots(
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("gen_auxiliary_effect_slots", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 90, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("gen_auxiliary_effect_slots", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 91, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
   __Pyx_AddTraceback("cyal.efx.EfxExtension.gen_auxiliary_effect_slots", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -3928,7 +3960,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gen_auxiliary_effect_slots", 0);
 
-  /* "cyal/efx.pyx":91
+  /* "cyal/efx.pyx":92
  * 
  *     def gen_auxiliary_effect_slots(self, n, **kwargs):
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)             # <<<<<<<<<<<<<<
@@ -3937,24 +3969,24 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
  */
   __pyx_t_1 = ((PyObject *)__pyx_v_4cyal_3efx_ids_template);
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyIndex_AsSsize_t(__pyx_v_n); if (unlikely((__pyx_t_2 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 91, __pyx_L1_error)
-  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyIndex_AsSsize_t(__pyx_v_n); if (unlikely((__pyx_t_2 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_ids = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "cyal/efx.pyx":92
+  /* "cyal/efx.pyx":93
  *     def gen_auxiliary_effect_slots(self, n, **kwargs):
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
  *         self.alGenAuxiliaryEffectSlots(n, &ids[0])             # <<<<<<<<<<<<<<
  *         check_al_error()
  *         cdef list slots = [AuxiliaryEffectSlot.from_id(self, id) for id in ids]
  */
-  __pyx_t_5 = __Pyx_PyInt_As_ALsizei(__pyx_v_n); if (unlikely((__pyx_t_5 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_As_ALsizei(__pyx_v_n); if (unlikely((__pyx_t_5 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 93, __pyx_L1_error)
   __pyx_t_6 = 0;
   __pyx_t_7 = -1;
   if (__pyx_t_6 < 0) {
@@ -3963,22 +3995,22 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
   } else if (unlikely(__pyx_t_6 >= __pyx_v_ids.shape[0])) __pyx_t_7 = 0;
   if (unlikely(__pyx_t_7 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_7);
-    __PYX_ERR(0, 92, __pyx_L1_error)
+    __PYX_ERR(0, 93, __pyx_L1_error)
   }
   __pyx_v_self->alGenAuxiliaryEffectSlots(__pyx_t_5, (&(*((ALuint *) ( /* dim=0 */ (__pyx_v_ids.data + __pyx_t_6 * __pyx_v_ids.strides[0]) )))));
 
-  /* "cyal/efx.pyx":93
+  /* "cyal/efx.pyx":94
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
  *         self.alGenAuxiliaryEffectSlots(n, &ids[0])
  *         check_al_error()             # <<<<<<<<<<<<<<
  *         cdef list slots = [AuxiliaryEffectSlot.from_id(self, id) for id in ids]
  *         for slot in slots:
  */
-  __pyx_t_3 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_3 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cyal/efx.pyx":94
+  /* "cyal/efx.pyx":95
  *         self.alGenAuxiliaryEffectSlots(n, &ids[0])
  *         check_al_error()
  *         cdef list slots = [AuxiliaryEffectSlot.from_id(self, id) for id in ids]             # <<<<<<<<<<<<<<
@@ -3986,17 +4018,17 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
  *             for k, v in kwargs.items(): setattr(slot, k, v)
  */
   { /* enter inner scope */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L5_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L5_error)
+    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
       __pyx_t_8 = __pyx_t_1; __Pyx_INCREF(__pyx_t_8); __pyx_t_2 = 0;
       __pyx_t_9 = NULL;
     } else {
-      __pyx_t_2 = -1; __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 94, __pyx_L5_error)
+      __pyx_t_2 = -1; __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 95, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 94, __pyx_L5_error)
+      __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 95, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (;;) {
@@ -4004,17 +4036,17 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
         if (likely(PyList_CheckExact(__pyx_t_8))) {
           if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_8)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 94, __pyx_L5_error)
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 95, __pyx_L5_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L5_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         } else {
           if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_8)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 94, __pyx_L5_error)
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 95, __pyx_L5_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L5_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         }
@@ -4024,7 +4056,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 94, __pyx_L5_error)
+            else __PYX_ERR(0, 95, __pyx_L5_error)
           }
           break;
         }
@@ -4032,10 +4064,10 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
       }
       __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v_id, __pyx_t_1);
       __pyx_t_1 = 0;
-      __pyx_t_10 = __Pyx_PyInt_As_ALuint(__pyx_7genexpr__pyx_v_id); if (unlikely((__pyx_t_10 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L5_error)
-      __pyx_t_1 = ((PyObject *)__pyx_f_4cyal_3efx_19AuxiliaryEffectSlot_from_id(__pyx_v_self, __pyx_t_10)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L5_error)
+      __pyx_t_10 = __Pyx_PyInt_As_ALuint(__pyx_7genexpr__pyx_v_id); if (unlikely((__pyx_t_10 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 95, __pyx_L5_error)
+      __pyx_t_1 = ((PyObject *)__pyx_f_4cyal_3efx_19AuxiliaryEffectSlot_from_id(__pyx_v_self, __pyx_t_10)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_1))) __PYX_ERR(0, 94, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_1))) __PYX_ERR(0, 95, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -4049,7 +4081,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
   __pyx_v_slots = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "cyal/efx.pyx":95
+  /* "cyal/efx.pyx":96
  *         check_al_error()
  *         cdef list slots = [AuxiliaryEffectSlot.from_id(self, id) for id in ids]
  *         for slot in slots:             # <<<<<<<<<<<<<<
@@ -4060,15 +4092,15 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
   for (;;) {
     if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_3)) break;
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_8 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_2); __Pyx_INCREF(__pyx_t_8); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 95, __pyx_L1_error)
+    __pyx_t_8 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_2); __Pyx_INCREF(__pyx_t_8); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 96, __pyx_L1_error)
     #else
-    __pyx_t_8 = PySequence_ITEM(__pyx_t_3, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 95, __pyx_L1_error)
+    __pyx_t_8 = PySequence_ITEM(__pyx_t_3, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 96, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_slot, __pyx_t_8);
     __pyx_t_8 = 0;
 
-    /* "cyal/efx.pyx":96
+    /* "cyal/efx.pyx":97
  *         cdef list slots = [AuxiliaryEffectSlot.from_id(self, id) for id in ids]
  *         for slot in slots:
  *             for k, v in kwargs.items(): setattr(slot, k, v)             # <<<<<<<<<<<<<<
@@ -4076,7 +4108,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
  * 
  */
     __pyx_t_11 = 0;
-    __pyx_t_1 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_12), (&__pyx_t_7)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 96, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_12), (&__pyx_t_7)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 97, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_XDECREF(__pyx_t_8);
     __pyx_t_8 = __pyx_t_1;
@@ -4084,18 +4116,18 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
     while (1) {
       __pyx_t_14 = __Pyx_dict_iter_next(__pyx_t_8, __pyx_t_12, &__pyx_t_11, &__pyx_t_1, &__pyx_t_13, NULL, __pyx_t_7);
       if (unlikely(__pyx_t_14 == 0)) break;
-      if (unlikely(__pyx_t_14 == -1)) __PYX_ERR(0, 96, __pyx_L1_error)
+      if (unlikely(__pyx_t_14 == -1)) __PYX_ERR(0, 97, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GOTREF(__pyx_t_13);
       __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_1);
       __pyx_t_1 = 0;
       __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_13);
       __pyx_t_13 = 0;
-      __pyx_t_15 = PyObject_SetAttr(__pyx_v_slot, __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 96, __pyx_L1_error)
+      __pyx_t_15 = PyObject_SetAttr(__pyx_v_slot, __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 97, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "cyal/efx.pyx":95
+    /* "cyal/efx.pyx":96
  *         check_al_error()
  *         cdef list slots = [AuxiliaryEffectSlot.from_id(self, id) for id in ids]
  *         for slot in slots:             # <<<<<<<<<<<<<<
@@ -4105,7 +4137,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cyal/efx.pyx":97
+  /* "cyal/efx.pyx":98
  *         for slot in slots:
  *             for k, v in kwargs.items(): setattr(slot, k, v)
  *         return slots             # <<<<<<<<<<<<<<
@@ -4117,7 +4149,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
   __pyx_r = __pyx_v_slots;
   goto __pyx_L0;
 
-  /* "cyal/efx.pyx":90
+  /* "cyal/efx.pyx":91
  *         return slot
  * 
  *     def gen_auxiliary_effect_slots(self, n, **kwargs):             # <<<<<<<<<<<<<<
@@ -4146,7 +4178,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_4gen_auxiliary_effect_slots(
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":99
+/* "cyal/efx.pyx":100
  *         return slots
  * 
  *     def gen_effect(self, **kwargs):             # <<<<<<<<<<<<<<
@@ -4194,7 +4226,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_6gen_effect(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gen_effect", 0);
 
-  /* "cyal/efx.pyx":101
+  /* "cyal/efx.pyx":102
  *     def gen_effect(self, **kwargs):
  *         cdef al.ALuint id
  *         self.alGenEffects(1, &id)             # <<<<<<<<<<<<<<
@@ -4203,30 +4235,30 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_6gen_effect(struct __pyx_obj
  */
   __pyx_v_self->alGenEffects(1, (&__pyx_v_id));
 
-  /* "cyal/efx.pyx":102
+  /* "cyal/efx.pyx":103
  *         cdef al.ALuint id
  *         self.alGenEffects(1, &id)
  *         check_al_error()             # <<<<<<<<<<<<<<
  *         cdef Effect effect = Effect.from_id(self, id)
  *         for k, v in kwargs.items(): setattr(effect, k, v)
  */
-  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cyal/efx.pyx":103
+  /* "cyal/efx.pyx":104
  *         self.alGenEffects(1, &id)
  *         check_al_error()
  *         cdef Effect effect = Effect.from_id(self, id)             # <<<<<<<<<<<<<<
  *         for k, v in kwargs.items(): setattr(effect, k, v)
  *         return effect
  */
-  __pyx_t_1 = ((PyObject *)__pyx_f_4cyal_3efx_6Effect_from_id(__pyx_v_self, __pyx_v_id)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4cyal_3efx_6Effect_from_id(__pyx_v_self, __pyx_v_id)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_effect = ((struct __pyx_obj_4cyal_3efx_Effect *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cyal/efx.pyx":104
+  /* "cyal/efx.pyx":105
  *         check_al_error()
  *         cdef Effect effect = Effect.from_id(self, id)
  *         for k, v in kwargs.items(): setattr(effect, k, v)             # <<<<<<<<<<<<<<
@@ -4234,7 +4266,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_6gen_effect(struct __pyx_obj
  * 
  */
   __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_1);
   __pyx_t_1 = __pyx_t_5;
@@ -4242,18 +4274,18 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_6gen_effect(struct __pyx_obj
   while (1) {
     __pyx_t_7 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_3, &__pyx_t_2, &__pyx_t_5, &__pyx_t_6, NULL, __pyx_t_4);
     if (unlikely(__pyx_t_7 == 0)) break;
-    if (unlikely(__pyx_t_7 == -1)) __PYX_ERR(0, 104, __pyx_L1_error)
+    if (unlikely(__pyx_t_7 == -1)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_5);
     __pyx_t_5 = 0;
     __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_6);
     __pyx_t_6 = 0;
-    __pyx_t_8 = PyObject_SetAttr(((PyObject *)__pyx_v_effect), __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_8 = PyObject_SetAttr(((PyObject *)__pyx_v_effect), __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 105, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cyal/efx.pyx":105
+  /* "cyal/efx.pyx":106
  *         cdef Effect effect = Effect.from_id(self, id)
  *         for k, v in kwargs.items(): setattr(effect, k, v)
  *         return effect             # <<<<<<<<<<<<<<
@@ -4265,7 +4297,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_6gen_effect(struct __pyx_obj
   __pyx_r = ((PyObject *)__pyx_v_effect);
   goto __pyx_L0;
 
-  /* "cyal/efx.pyx":99
+  /* "cyal/efx.pyx":100
  *         return slots
  * 
  *     def gen_effect(self, **kwargs):             # <<<<<<<<<<<<<<
@@ -4289,7 +4321,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_6gen_effect(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":107
+/* "cyal/efx.pyx":108
  *         return effect
  * 
  *     def gen_effects(self, n, **kwargs):             # <<<<<<<<<<<<<<
@@ -4329,7 +4361,7 @@ static PyObject *__pyx_pw_4cyal_3efx_12EfxExtension_9gen_effects(PyObject *__pyx
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "gen_effects") < 0)) __PYX_ERR(0, 107, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "gen_effects") < 0)) __PYX_ERR(0, 108, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -4340,7 +4372,7 @@ static PyObject *__pyx_pw_4cyal_3efx_12EfxExtension_9gen_effects(PyObject *__pyx
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("gen_effects", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 107, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("gen_effects", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 108, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
   __Pyx_AddTraceback("cyal.efx.EfxExtension.gen_effects", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -4384,7 +4416,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gen_effects", 0);
 
-  /* "cyal/efx.pyx":108
+  /* "cyal/efx.pyx":109
  * 
  *     def gen_effects(self, n, **kwargs):
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)             # <<<<<<<<<<<<<<
@@ -4393,24 +4425,24 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
  */
   __pyx_t_1 = ((PyObject *)__pyx_v_4cyal_3efx_ids_template);
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyIndex_AsSsize_t(__pyx_v_n); if (unlikely((__pyx_t_2 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 108, __pyx_L1_error)
-  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyIndex_AsSsize_t(__pyx_v_n); if (unlikely((__pyx_t_2 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_ids = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "cyal/efx.pyx":109
+  /* "cyal/efx.pyx":110
  *     def gen_effects(self, n, **kwargs):
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
  *         self.alGenEffects(n, &ids[0])             # <<<<<<<<<<<<<<
  *         check_al_error()
  *         cdef list effects = [Effect.from_id(self, id) for id in ids]
  */
-  __pyx_t_5 = __Pyx_PyInt_As_ALsizei(__pyx_v_n); if (unlikely((__pyx_t_5 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_As_ALsizei(__pyx_v_n); if (unlikely((__pyx_t_5 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 110, __pyx_L1_error)
   __pyx_t_6 = 0;
   __pyx_t_7 = -1;
   if (__pyx_t_6 < 0) {
@@ -4419,22 +4451,22 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
   } else if (unlikely(__pyx_t_6 >= __pyx_v_ids.shape[0])) __pyx_t_7 = 0;
   if (unlikely(__pyx_t_7 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_7);
-    __PYX_ERR(0, 109, __pyx_L1_error)
+    __PYX_ERR(0, 110, __pyx_L1_error)
   }
   __pyx_v_self->alGenEffects(__pyx_t_5, (&(*((ALuint *) ( /* dim=0 */ (__pyx_v_ids.data + __pyx_t_6 * __pyx_v_ids.strides[0]) )))));
 
-  /* "cyal/efx.pyx":110
+  /* "cyal/efx.pyx":111
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
  *         self.alGenEffects(n, &ids[0])
  *         check_al_error()             # <<<<<<<<<<<<<<
  *         cdef list effects = [Effect.from_id(self, id) for id in ids]
  *         for effect in effects:
  */
-  __pyx_t_3 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_3 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cyal/efx.pyx":111
+  /* "cyal/efx.pyx":112
  *         self.alGenEffects(n, &ids[0])
  *         check_al_error()
  *         cdef list effects = [Effect.from_id(self, id) for id in ids]             # <<<<<<<<<<<<<<
@@ -4442,17 +4474,17 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
  *             for k, v in kwargs.items(): setattr(effect, k, v)
  */
   { /* enter inner scope */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 111, __pyx_L5_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 112, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L5_error)
+    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
       __pyx_t_8 = __pyx_t_1; __Pyx_INCREF(__pyx_t_8); __pyx_t_2 = 0;
       __pyx_t_9 = NULL;
     } else {
-      __pyx_t_2 = -1; __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 111, __pyx_L5_error)
+      __pyx_t_2 = -1; __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 112, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 111, __pyx_L5_error)
+      __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 112, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (;;) {
@@ -4460,17 +4492,17 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
         if (likely(PyList_CheckExact(__pyx_t_8))) {
           if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_8)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 111, __pyx_L5_error)
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 112, __pyx_L5_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L5_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         } else {
           if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_8)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 111, __pyx_L5_error)
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 112, __pyx_L5_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L5_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         }
@@ -4480,7 +4512,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 111, __pyx_L5_error)
+            else __PYX_ERR(0, 112, __pyx_L5_error)
           }
           break;
         }
@@ -4488,10 +4520,10 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
       }
       __Pyx_XDECREF_SET(__pyx_8genexpr1__pyx_v_id, __pyx_t_1);
       __pyx_t_1 = 0;
-      __pyx_t_10 = __Pyx_PyInt_As_ALuint(__pyx_8genexpr1__pyx_v_id); if (unlikely((__pyx_t_10 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 111, __pyx_L5_error)
-      __pyx_t_1 = ((PyObject *)__pyx_f_4cyal_3efx_6Effect_from_id(__pyx_v_self, __pyx_t_10)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L5_error)
+      __pyx_t_10 = __Pyx_PyInt_As_ALuint(__pyx_8genexpr1__pyx_v_id); if (unlikely((__pyx_t_10 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 112, __pyx_L5_error)
+      __pyx_t_1 = ((PyObject *)__pyx_f_4cyal_3efx_6Effect_from_id(__pyx_v_self, __pyx_t_10)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_1))) __PYX_ERR(0, 111, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_1))) __PYX_ERR(0, 112, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -4505,7 +4537,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
   __pyx_v_effects = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "cyal/efx.pyx":112
+  /* "cyal/efx.pyx":113
  *         check_al_error()
  *         cdef list effects = [Effect.from_id(self, id) for id in ids]
  *         for effect in effects:             # <<<<<<<<<<<<<<
@@ -4516,15 +4548,15 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
   for (;;) {
     if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_3)) break;
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_8 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_2); __Pyx_INCREF(__pyx_t_8); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 112, __pyx_L1_error)
+    __pyx_t_8 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_2); __Pyx_INCREF(__pyx_t_8); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 113, __pyx_L1_error)
     #else
-    __pyx_t_8 = PySequence_ITEM(__pyx_t_3, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 112, __pyx_L1_error)
+    __pyx_t_8 = PySequence_ITEM(__pyx_t_3, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 113, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_effect, __pyx_t_8);
     __pyx_t_8 = 0;
 
-    /* "cyal/efx.pyx":113
+    /* "cyal/efx.pyx":114
  *         cdef list effects = [Effect.from_id(self, id) for id in ids]
  *         for effect in effects:
  *             for k, v in kwargs.items(): setattr(effect, k, v)             # <<<<<<<<<<<<<<
@@ -4532,7 +4564,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
  * 
  */
     __pyx_t_11 = 0;
-    __pyx_t_1 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_12), (&__pyx_t_7)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_12), (&__pyx_t_7)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_XDECREF(__pyx_t_8);
     __pyx_t_8 = __pyx_t_1;
@@ -4540,18 +4572,18 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
     while (1) {
       __pyx_t_14 = __Pyx_dict_iter_next(__pyx_t_8, __pyx_t_12, &__pyx_t_11, &__pyx_t_1, &__pyx_t_13, NULL, __pyx_t_7);
       if (unlikely(__pyx_t_14 == 0)) break;
-      if (unlikely(__pyx_t_14 == -1)) __PYX_ERR(0, 113, __pyx_L1_error)
+      if (unlikely(__pyx_t_14 == -1)) __PYX_ERR(0, 114, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GOTREF(__pyx_t_13);
       __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_1);
       __pyx_t_1 = 0;
       __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_13);
       __pyx_t_13 = 0;
-      __pyx_t_15 = PyObject_SetAttr(__pyx_v_effect, __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 113, __pyx_L1_error)
+      __pyx_t_15 = PyObject_SetAttr(__pyx_v_effect, __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 114, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "cyal/efx.pyx":112
+    /* "cyal/efx.pyx":113
  *         check_al_error()
  *         cdef list effects = [Effect.from_id(self, id) for id in ids]
  *         for effect in effects:             # <<<<<<<<<<<<<<
@@ -4561,7 +4593,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cyal/efx.pyx":114
+  /* "cyal/efx.pyx":115
  *         for effect in effects:
  *             for k, v in kwargs.items(): setattr(effect, k, v)
  *         return effects             # <<<<<<<<<<<<<<
@@ -4573,7 +4605,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
   __pyx_r = __pyx_v_effects;
   goto __pyx_L0;
 
-  /* "cyal/efx.pyx":107
+  /* "cyal/efx.pyx":108
  *         return effect
  * 
  *     def gen_effects(self, n, **kwargs):             # <<<<<<<<<<<<<<
@@ -4602,7 +4634,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_8gen_effects(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":116
+/* "cyal/efx.pyx":117
  *         return effects
  * 
  *     def gen_filter(self, **kwargs):             # <<<<<<<<<<<<<<
@@ -4650,7 +4682,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_10gen_filter(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gen_filter", 0);
 
-  /* "cyal/efx.pyx":118
+  /* "cyal/efx.pyx":119
  *     def gen_filter(self, **kwargs):
  *         cdef al.ALuint id
  *         self.alGenFilters(1, &id)             # <<<<<<<<<<<<<<
@@ -4659,30 +4691,30 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_10gen_filter(struct __pyx_ob
  */
   __pyx_v_self->alGenFilters(1, (&__pyx_v_id));
 
-  /* "cyal/efx.pyx":119
+  /* "cyal/efx.pyx":120
  *         cdef al.ALuint id
  *         self.alGenFilters(1, &id)
  *         check_al_error()             # <<<<<<<<<<<<<<
  *         cdef Filter filter = Filter.from_id(self, id)
  *         for k, v in kwargs.items(): setattr(filter, k, v)
  */
-  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cyal/efx.pyx":120
+  /* "cyal/efx.pyx":121
  *         self.alGenFilters(1, &id)
  *         check_al_error()
  *         cdef Filter filter = Filter.from_id(self, id)             # <<<<<<<<<<<<<<
  *         for k, v in kwargs.items(): setattr(filter, k, v)
  *         return filter
  */
-  __pyx_t_1 = ((PyObject *)__pyx_f_4cyal_3efx_6Filter_from_id(__pyx_v_self, __pyx_v_id)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4cyal_3efx_6Filter_from_id(__pyx_v_self, __pyx_v_id)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_filter = ((struct __pyx_obj_4cyal_3efx_Filter *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cyal/efx.pyx":121
+  /* "cyal/efx.pyx":122
  *         check_al_error()
  *         cdef Filter filter = Filter.from_id(self, id)
  *         for k, v in kwargs.items(): setattr(filter, k, v)             # <<<<<<<<<<<<<<
@@ -4690,7 +4722,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_10gen_filter(struct __pyx_ob
  * 
  */
   __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_1);
   __pyx_t_1 = __pyx_t_5;
@@ -4698,18 +4730,18 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_10gen_filter(struct __pyx_ob
   while (1) {
     __pyx_t_7 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_3, &__pyx_t_2, &__pyx_t_5, &__pyx_t_6, NULL, __pyx_t_4);
     if (unlikely(__pyx_t_7 == 0)) break;
-    if (unlikely(__pyx_t_7 == -1)) __PYX_ERR(0, 121, __pyx_L1_error)
+    if (unlikely(__pyx_t_7 == -1)) __PYX_ERR(0, 122, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_5);
     __pyx_t_5 = 0;
     __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_6);
     __pyx_t_6 = 0;
-    __pyx_t_8 = PyObject_SetAttr(((PyObject *)__pyx_v_filter), __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 121, __pyx_L1_error)
+    __pyx_t_8 = PyObject_SetAttr(((PyObject *)__pyx_v_filter), __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 122, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cyal/efx.pyx":122
+  /* "cyal/efx.pyx":123
  *         cdef Filter filter = Filter.from_id(self, id)
  *         for k, v in kwargs.items(): setattr(filter, k, v)
  *         return filter             # <<<<<<<<<<<<<<
@@ -4721,7 +4753,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_10gen_filter(struct __pyx_ob
   __pyx_r = ((PyObject *)__pyx_v_filter);
   goto __pyx_L0;
 
-  /* "cyal/efx.pyx":116
+  /* "cyal/efx.pyx":117
  *         return effects
  * 
  *     def gen_filter(self, **kwargs):             # <<<<<<<<<<<<<<
@@ -4745,7 +4777,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_10gen_filter(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":124
+/* "cyal/efx.pyx":125
  *         return filter
  * 
  *     def gen_filters(self, n, **kwargs):             # <<<<<<<<<<<<<<
@@ -4785,7 +4817,7 @@ static PyObject *__pyx_pw_4cyal_3efx_12EfxExtension_13gen_filters(PyObject *__py
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "gen_filters") < 0)) __PYX_ERR(0, 124, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "gen_filters") < 0)) __PYX_ERR(0, 125, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -4796,7 +4828,7 @@ static PyObject *__pyx_pw_4cyal_3efx_12EfxExtension_13gen_filters(PyObject *__py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("gen_filters", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 124, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("gen_filters", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 125, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
   __Pyx_AddTraceback("cyal.efx.EfxExtension.gen_filters", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -4840,7 +4872,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_12gen_filters(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gen_filters", 0);
 
-  /* "cyal/efx.pyx":125
+  /* "cyal/efx.pyx":126
  * 
  *     def gen_filters(self, n, **kwargs):
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)             # <<<<<<<<<<<<<<
@@ -4849,24 +4881,24 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_12gen_filters(struct __pyx_o
  */
   __pyx_t_1 = ((PyObject *)__pyx_v_4cyal_3efx_ids_template);
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyIndex_AsSsize_t(__pyx_v_n); if (unlikely((__pyx_t_2 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 125, __pyx_L1_error)
-  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyIndex_AsSsize_t(__pyx_v_n); if (unlikely((__pyx_t_2 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_3 = ((PyObject *)__pyx_f_7cpython_5array_clone(((arrayobject *)__pyx_t_1), __pyx_t_2, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn_ALuint(__pyx_t_3, PyBUF_WRITABLE); if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_ids = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "cyal/efx.pyx":126
+  /* "cyal/efx.pyx":127
  *     def gen_filters(self, n, **kwargs):
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
  *         self.alGenFilters(n, &ids[0])             # <<<<<<<<<<<<<<
  *         check_al_error()
  *         cdef list filters = [Filter.from_id(self, id) for id in ids]
  */
-  __pyx_t_5 = __Pyx_PyInt_As_ALsizei(__pyx_v_n); if (unlikely((__pyx_t_5 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_As_ALsizei(__pyx_v_n); if (unlikely((__pyx_t_5 == ((ALsizei)-1)) && PyErr_Occurred())) __PYX_ERR(0, 127, __pyx_L1_error)
   __pyx_t_6 = 0;
   __pyx_t_7 = -1;
   if (__pyx_t_6 < 0) {
@@ -4875,22 +4907,22 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_12gen_filters(struct __pyx_o
   } else if (unlikely(__pyx_t_6 >= __pyx_v_ids.shape[0])) __pyx_t_7 = 0;
   if (unlikely(__pyx_t_7 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_7);
-    __PYX_ERR(0, 126, __pyx_L1_error)
+    __PYX_ERR(0, 127, __pyx_L1_error)
   }
   __pyx_v_self->alGenFilters(__pyx_t_5, (&(*((ALuint *) ( /* dim=0 */ (__pyx_v_ids.data + __pyx_t_6 * __pyx_v_ids.strides[0]) )))));
 
-  /* "cyal/efx.pyx":127
+  /* "cyal/efx.pyx":128
  *         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
  *         self.alGenFilters(n, &ids[0])
  *         check_al_error()             # <<<<<<<<<<<<<<
  *         cdef list filters = [Filter.from_id(self, id) for id in ids]
  *         for filter in filters:
  */
-  __pyx_t_3 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __pyx_t_3 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cyal/efx.pyx":128
+  /* "cyal/efx.pyx":129
  *         self.alGenFilters(n, &ids[0])
  *         check_al_error()
  *         cdef list filters = [Filter.from_id(self, id) for id in ids]             # <<<<<<<<<<<<<<
@@ -4898,17 +4930,17 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_12gen_filters(struct __pyx_o
  *             for k, v in kwargs.items(): setattr(filter, k, v)
  */
   { /* enter inner scope */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L5_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 129, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L5_error)
+    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_ids, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_ALuint, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_ALuint, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
       __pyx_t_8 = __pyx_t_1; __Pyx_INCREF(__pyx_t_8); __pyx_t_2 = 0;
       __pyx_t_9 = NULL;
     } else {
-      __pyx_t_2 = -1; __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 128, __pyx_L5_error)
+      __pyx_t_2 = -1; __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 129, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 128, __pyx_L5_error)
+      __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 129, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (;;) {
@@ -4916,17 +4948,17 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_12gen_filters(struct __pyx_o
         if (likely(PyList_CheckExact(__pyx_t_8))) {
           if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_8)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 128, __pyx_L5_error)
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 129, __pyx_L5_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L5_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         } else {
           if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_8)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 128, __pyx_L5_error)
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_8, __pyx_t_2); __Pyx_INCREF(__pyx_t_1); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 129, __pyx_L5_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L5_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_8, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         }
@@ -4936,7 +4968,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_12gen_filters(struct __pyx_o
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 128, __pyx_L5_error)
+            else __PYX_ERR(0, 129, __pyx_L5_error)
           }
           break;
         }
@@ -4944,10 +4976,10 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_12gen_filters(struct __pyx_o
       }
       __Pyx_XDECREF_SET(__pyx_8genexpr2__pyx_v_id, __pyx_t_1);
       __pyx_t_1 = 0;
-      __pyx_t_10 = __Pyx_PyInt_As_ALuint(__pyx_8genexpr2__pyx_v_id); if (unlikely((__pyx_t_10 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 128, __pyx_L5_error)
-      __pyx_t_1 = ((PyObject *)__pyx_f_4cyal_3efx_6Filter_from_id(__pyx_v_self, __pyx_t_10)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L5_error)
+      __pyx_t_10 = __Pyx_PyInt_As_ALuint(__pyx_8genexpr2__pyx_v_id); if (unlikely((__pyx_t_10 == ((ALuint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 129, __pyx_L5_error)
+      __pyx_t_1 = ((PyObject *)__pyx_f_4cyal_3efx_6Filter_from_id(__pyx_v_self, __pyx_t_10)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_1))) __PYX_ERR(0, 128, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_1))) __PYX_ERR(0, 129, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -4961,7 +4993,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_12gen_filters(struct __pyx_o
   __pyx_v_filters = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "cyal/efx.pyx":129
+  /* "cyal/efx.pyx":130
  *         check_al_error()
  *         cdef list filters = [Filter.from_id(self, id) for id in ids]
  *         for filter in filters:             # <<<<<<<<<<<<<<
@@ -4972,15 +5004,15 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_12gen_filters(struct __pyx_o
   for (;;) {
     if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_3)) break;
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_8 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_2); __Pyx_INCREF(__pyx_t_8); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_8 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_2); __Pyx_INCREF(__pyx_t_8); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 130, __pyx_L1_error)
     #else
-    __pyx_t_8 = PySequence_ITEM(__pyx_t_3, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_8 = PySequence_ITEM(__pyx_t_3, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_filter, __pyx_t_8);
     __pyx_t_8 = 0;
 
-    /* "cyal/efx.pyx":130
+    /* "cyal/efx.pyx":131
  *         cdef list filters = [Filter.from_id(self, id) for id in ids]
  *         for filter in filters:
  *             for k, v in kwargs.items(): setattr(filter, k, v)             # <<<<<<<<<<<<<<
@@ -4988,7 +5020,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_12gen_filters(struct __pyx_o
  * 
  */
     __pyx_t_11 = 0;
-    __pyx_t_1 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_12), (&__pyx_t_7)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_n_s_items, (&__pyx_t_12), (&__pyx_t_7)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_XDECREF(__pyx_t_8);
     __pyx_t_8 = __pyx_t_1;
@@ -4996,18 +5028,18 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_12gen_filters(struct __pyx_o
     while (1) {
       __pyx_t_14 = __Pyx_dict_iter_next(__pyx_t_8, __pyx_t_12, &__pyx_t_11, &__pyx_t_1, &__pyx_t_13, NULL, __pyx_t_7);
       if (unlikely(__pyx_t_14 == 0)) break;
-      if (unlikely(__pyx_t_14 == -1)) __PYX_ERR(0, 130, __pyx_L1_error)
+      if (unlikely(__pyx_t_14 == -1)) __PYX_ERR(0, 131, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GOTREF(__pyx_t_13);
       __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_1);
       __pyx_t_1 = 0;
       __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_13);
       __pyx_t_13 = 0;
-      __pyx_t_15 = PyObject_SetAttr(__pyx_v_filter, __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 130, __pyx_L1_error)
+      __pyx_t_15 = PyObject_SetAttr(__pyx_v_filter, __pyx_v_k, __pyx_v_v); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 131, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "cyal/efx.pyx":129
+    /* "cyal/efx.pyx":130
  *         check_al_error()
  *         cdef list filters = [Filter.from_id(self, id) for id in ids]
  *         for filter in filters:             # <<<<<<<<<<<<<<
@@ -5017,7 +5049,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_12gen_filters(struct __pyx_o
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cyal/efx.pyx":131
+  /* "cyal/efx.pyx":132
  *         for filter in filters:
  *             for k, v in kwargs.items(): setattr(filter, k, v)
  *         return filters             # <<<<<<<<<<<<<<
@@ -5029,7 +5061,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_12gen_filters(struct __pyx_o
   __pyx_r = __pyx_v_filters;
   goto __pyx_L0;
 
-  /* "cyal/efx.pyx":124
+  /* "cyal/efx.pyx":125
  *         return filter
  * 
  *     def gen_filters(self, n, **kwargs):             # <<<<<<<<<<<<<<
@@ -5208,7 +5240,7 @@ static PyObject *__pyx_pf_4cyal_3efx_12EfxExtension_16__setstate_cython__(CYTHON
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":134
+/* "cyal/efx.pyx":135
  * 
  * cdef class AuxiliaryEffectSlot:
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -5243,7 +5275,7 @@ static int __pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot___cinit__(CYTHON_UNUSED str
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":137
+/* "cyal/efx.pyx":138
  *         pass
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -5276,20 +5308,20 @@ static int __pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_2__init__(CYTHON_UNUSED str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "cyal/efx.pyx":138
+  /* "cyal/efx.pyx":139
  * 
  *     def __init__(self):
  *         raise TypeError("This class cannot be instantiated directly.")             # <<<<<<<<<<<<<<
  * 
  *     @staticmethod
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 138, __pyx_L1_error)
+  __PYX_ERR(0, 139, __pyx_L1_error)
 
-  /* "cyal/efx.pyx":137
+  /* "cyal/efx.pyx":138
  *         pass
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -5306,7 +5338,7 @@ static int __pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_2__init__(CYTHON_UNUSED str
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":141
+/* "cyal/efx.pyx":142
  * 
  *     @staticmethod
  *     cdef AuxiliaryEffectSlot from_id(EfxExtension efx, al.ALuint id):             # <<<<<<<<<<<<<<
@@ -5324,19 +5356,19 @@ static struct __pyx_obj_4cyal_3efx_AuxiliaryEffectSlot *__pyx_f_4cyal_3efx_19Aux
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("from_id", 0);
 
-  /* "cyal/efx.pyx":142
+  /* "cyal/efx.pyx":143
  *     @staticmethod
  *     cdef AuxiliaryEffectSlot from_id(EfxExtension efx, al.ALuint id):
  *         cdef AuxiliaryEffectSlot slot = AuxiliaryEffectSlot.__new__(AuxiliaryEffectSlot)             # <<<<<<<<<<<<<<
  *         slot.efx = efx
  *         slot.id = id
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_4cyal_3efx_AuxiliaryEffectSlot(((PyTypeObject *)__pyx_ptype_4cyal_3efx_AuxiliaryEffectSlot), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_4cyal_3efx_AuxiliaryEffectSlot(((PyTypeObject *)__pyx_ptype_4cyal_3efx_AuxiliaryEffectSlot), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_slot = ((struct __pyx_obj_4cyal_3efx_AuxiliaryEffectSlot *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cyal/efx.pyx":143
+  /* "cyal/efx.pyx":144
  *     cdef AuxiliaryEffectSlot from_id(EfxExtension efx, al.ALuint id):
  *         cdef AuxiliaryEffectSlot slot = AuxiliaryEffectSlot.__new__(AuxiliaryEffectSlot)
  *         slot.efx = efx             # <<<<<<<<<<<<<<
@@ -5349,7 +5381,7 @@ static struct __pyx_obj_4cyal_3efx_AuxiliaryEffectSlot *__pyx_f_4cyal_3efx_19Aux
   __Pyx_DECREF(((PyObject *)__pyx_v_slot->efx));
   __pyx_v_slot->efx = __pyx_v_efx;
 
-  /* "cyal/efx.pyx":144
+  /* "cyal/efx.pyx":145
  *         cdef AuxiliaryEffectSlot slot = AuxiliaryEffectSlot.__new__(AuxiliaryEffectSlot)
  *         slot.efx = efx
  *         slot.id = id             # <<<<<<<<<<<<<<
@@ -5358,7 +5390,7 @@ static struct __pyx_obj_4cyal_3efx_AuxiliaryEffectSlot *__pyx_f_4cyal_3efx_19Aux
  */
   __pyx_v_slot->id = __pyx_v_id;
 
-  /* "cyal/efx.pyx":145
+  /* "cyal/efx.pyx":146
  *         slot.efx = efx
  *         slot.id = id
  *         return slot             # <<<<<<<<<<<<<<
@@ -5370,7 +5402,7 @@ static struct __pyx_obj_4cyal_3efx_AuxiliaryEffectSlot *__pyx_f_4cyal_3efx_19Aux
   __pyx_r = __pyx_v_slot;
   goto __pyx_L0;
 
-  /* "cyal/efx.pyx":141
+  /* "cyal/efx.pyx":142
  * 
  *     @staticmethod
  *     cdef AuxiliaryEffectSlot from_id(EfxExtension efx, al.ALuint id):             # <<<<<<<<<<<<<<
@@ -5390,7 +5422,7 @@ static struct __pyx_obj_4cyal_3efx_AuxiliaryEffectSlot *__pyx_f_4cyal_3efx_19Aux
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":147
+/* "cyal/efx.pyx":148
  *         return slot
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -5414,7 +5446,7 @@ static void __pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_4__dealloc__(struct __pyx_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "cyal/efx.pyx":148
+  /* "cyal/efx.pyx":149
  * 
  *     def __dealloc__(self):
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()             # <<<<<<<<<<<<<<
@@ -5423,7 +5455,7 @@ static void __pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_4__dealloc__(struct __pyx_
  */
   __pyx_v_prev_ctx = alcGetCurrentContext();
 
-  /* "cyal/efx.pyx":149
+  /* "cyal/efx.pyx":150
  *     def __dealloc__(self):
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
  *         alc.alcMakeContextCurrent(self.efx.context._ctx)             # <<<<<<<<<<<<<<
@@ -5432,7 +5464,7 @@ static void __pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_4__dealloc__(struct __pyx_
  */
   (void)(alcMakeContextCurrent(__pyx_v_self->efx->context->_ctx));
 
-  /* "cyal/efx.pyx":150
+  /* "cyal/efx.pyx":151
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
  *         alc.alcMakeContextCurrent(self.efx.context._ctx)
  *         self.efx.alDeleteAuxiliaryEffectSlots(1, &self.id)             # <<<<<<<<<<<<<<
@@ -5441,7 +5473,7 @@ static void __pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_4__dealloc__(struct __pyx_
  */
   __pyx_v_self->efx->alDeleteAuxiliaryEffectSlots(1, (&__pyx_v_self->id));
 
-  /* "cyal/efx.pyx":151
+  /* "cyal/efx.pyx":152
  *         alc.alcMakeContextCurrent(self.efx.context._ctx)
  *         self.efx.alDeleteAuxiliaryEffectSlots(1, &self.id)
  *         alc.alcMakeContextCurrent(prev_ctx)             # <<<<<<<<<<<<<<
@@ -5450,7 +5482,7 @@ static void __pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_4__dealloc__(struct __pyx_
  */
   (void)(alcMakeContextCurrent(__pyx_v_prev_ctx));
 
-  /* "cyal/efx.pyx":147
+  /* "cyal/efx.pyx":148
  *         return slot
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -5462,7 +5494,7 @@ static void __pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_4__dealloc__(struct __pyx_
   __Pyx_RefNannyFinishContext();
 }
 
-/* "cyal/efx.pxd":47
+/* "cyal/efx.pxd":48
  * 
  * cdef class AuxiliaryEffectSlot:
  *     cdef readonly EfxExtension efx             # <<<<<<<<<<<<<<
@@ -5499,7 +5531,7 @@ static PyObject *__pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_3efx___get__(struct _
   return __pyx_r;
 }
 
-/* "cyal/efx.pxd":48
+/* "cyal/efx.pxd":49
  * cdef class AuxiliaryEffectSlot:
  *     cdef readonly EfxExtension efx
  *     cdef readonly al.ALuint id             # <<<<<<<<<<<<<<
@@ -5529,7 +5561,7 @@ static PyObject *__pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_2id___get__(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ALuint(__pyx_v_self->id); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 48, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ALuint(__pyx_v_self->id); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5659,11 +5691,11 @@ static PyObject *__pyx_pf_4cyal_3efx_19AuxiliaryEffectSlot_8__setstate_cython__(
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":154
+/* "cyal/efx.pyx":155
  * 
  * cdef class Effect:
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
- *         pass
+ *         self._type = "null"
  * 
  */
 
@@ -5683,10 +5715,31 @@ static int __pyx_pw_4cyal_3efx_6Effect_1__cinit__(PyObject *__pyx_v_self, PyObje
   return __pyx_r;
 }
 
-static int __pyx_pf_4cyal_3efx_6Effect___cinit__(CYTHON_UNUSED struct __pyx_obj_4cyal_3efx_Effect *__pyx_v_self) {
+static int __pyx_pf_4cyal_3efx_6Effect___cinit__(struct __pyx_obj_4cyal_3efx_Effect *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
+
+  /* "cyal/efx.pyx":156
+ * cdef class Effect:
+ *     def __cinit__(self):
+ *         self._type = "null"             # <<<<<<<<<<<<<<
+ * 
+ *     def __init__(self):
+ */
+  __Pyx_INCREF(__pyx_n_u_null);
+  __Pyx_GIVEREF(__pyx_n_u_null);
+  __Pyx_GOTREF(__pyx_v_self->_type);
+  __Pyx_DECREF(__pyx_v_self->_type);
+  __pyx_v_self->_type = __pyx_n_u_null;
+
+  /* "cyal/efx.pyx":155
+ * 
+ * cdef class Effect:
+ *     def __cinit__(self):             # <<<<<<<<<<<<<<
+ *         self._type = "null"
+ * 
+ */
 
   /* function exit code */
   __pyx_r = 0;
@@ -5694,8 +5747,8 @@ static int __pyx_pf_4cyal_3efx_6Effect___cinit__(CYTHON_UNUSED struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":157
- *         pass
+/* "cyal/efx.pyx":158
+ *         self._type = "null"
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
  *         raise TypeError("This class cannot be instantiated directly.")
@@ -5727,21 +5780,21 @@ static int __pyx_pf_4cyal_3efx_6Effect_2__init__(CYTHON_UNUSED struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "cyal/efx.pyx":158
+  /* "cyal/efx.pyx":159
  * 
  *     def __init__(self):
  *         raise TypeError("This class cannot be instantiated directly.")             # <<<<<<<<<<<<<<
  * 
  *     @staticmethod
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 158, __pyx_L1_error)
+  __PYX_ERR(0, 159, __pyx_L1_error)
 
-  /* "cyal/efx.pyx":157
- *         pass
+  /* "cyal/efx.pyx":158
+ *         self._type = "null"
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
  *         raise TypeError("This class cannot be instantiated directly.")
@@ -5757,7 +5810,7 @@ static int __pyx_pf_4cyal_3efx_6Effect_2__init__(CYTHON_UNUSED struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":161
+/* "cyal/efx.pyx":162
  * 
  *     @staticmethod
  *     cdef Effect from_id(EfxExtension efx, al.ALuint id):             # <<<<<<<<<<<<<<
@@ -5775,19 +5828,19 @@ static struct __pyx_obj_4cyal_3efx_Effect *__pyx_f_4cyal_3efx_6Effect_from_id(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("from_id", 0);
 
-  /* "cyal/efx.pyx":162
+  /* "cyal/efx.pyx":163
  *     @staticmethod
  *     cdef Effect from_id(EfxExtension efx, al.ALuint id):
  *         cdef Effect effect = Effect.__new__(Effect)             # <<<<<<<<<<<<<<
  *         effect.efx = efx
  *         effect.id = id
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_4cyal_3efx_Effect(((PyTypeObject *)__pyx_ptype_4cyal_3efx_Effect), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_4cyal_3efx_Effect(((PyTypeObject *)__pyx_ptype_4cyal_3efx_Effect), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_effect = ((struct __pyx_obj_4cyal_3efx_Effect *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cyal/efx.pyx":163
+  /* "cyal/efx.pyx":164
  *     cdef Effect from_id(EfxExtension efx, al.ALuint id):
  *         cdef Effect effect = Effect.__new__(Effect)
  *         effect.efx = efx             # <<<<<<<<<<<<<<
@@ -5800,7 +5853,7 @@ static struct __pyx_obj_4cyal_3efx_Effect *__pyx_f_4cyal_3efx_6Effect_from_id(st
   __Pyx_DECREF(((PyObject *)__pyx_v_effect->efx));
   __pyx_v_effect->efx = __pyx_v_efx;
 
-  /* "cyal/efx.pyx":164
+  /* "cyal/efx.pyx":165
  *         cdef Effect effect = Effect.__new__(Effect)
  *         effect.efx = efx
  *         effect.id = id             # <<<<<<<<<<<<<<
@@ -5809,7 +5862,7 @@ static struct __pyx_obj_4cyal_3efx_Effect *__pyx_f_4cyal_3efx_6Effect_from_id(st
  */
   __pyx_v_effect->id = __pyx_v_id;
 
-  /* "cyal/efx.pyx":165
+  /* "cyal/efx.pyx":166
  *         effect.efx = efx
  *         effect.id = id
  *         return effect             # <<<<<<<<<<<<<<
@@ -5821,7 +5874,7 @@ static struct __pyx_obj_4cyal_3efx_Effect *__pyx_f_4cyal_3efx_6Effect_from_id(st
   __pyx_r = __pyx_v_effect;
   goto __pyx_L0;
 
-  /* "cyal/efx.pyx":161
+  /* "cyal/efx.pyx":162
  * 
  *     @staticmethod
  *     cdef Effect from_id(EfxExtension efx, al.ALuint id):             # <<<<<<<<<<<<<<
@@ -5841,7 +5894,7 @@ static struct __pyx_obj_4cyal_3efx_Effect *__pyx_f_4cyal_3efx_6Effect_from_id(st
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":167
+/* "cyal/efx.pyx":168
  *         return effect
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -5865,7 +5918,7 @@ static void __pyx_pf_4cyal_3efx_6Effect_4__dealloc__(struct __pyx_obj_4cyal_3efx
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "cyal/efx.pyx":168
+  /* "cyal/efx.pyx":169
  * 
  *     def __dealloc__(self):
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()             # <<<<<<<<<<<<<<
@@ -5874,7 +5927,7 @@ static void __pyx_pf_4cyal_3efx_6Effect_4__dealloc__(struct __pyx_obj_4cyal_3efx
  */
   __pyx_v_prev_ctx = alcGetCurrentContext();
 
-  /* "cyal/efx.pyx":169
+  /* "cyal/efx.pyx":170
  *     def __dealloc__(self):
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
  *         alc.alcMakeContextCurrent(self.efx.context._ctx)             # <<<<<<<<<<<<<<
@@ -5883,7 +5936,7 @@ static void __pyx_pf_4cyal_3efx_6Effect_4__dealloc__(struct __pyx_obj_4cyal_3efx
  */
   (void)(alcMakeContextCurrent(__pyx_v_self->efx->context->_ctx));
 
-  /* "cyal/efx.pyx":170
+  /* "cyal/efx.pyx":171
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
  *         alc.alcMakeContextCurrent(self.efx.context._ctx)
  *         self.efx.alDeleteEffects(1, &self.id)             # <<<<<<<<<<<<<<
@@ -5892,16 +5945,16 @@ static void __pyx_pf_4cyal_3efx_6Effect_4__dealloc__(struct __pyx_obj_4cyal_3efx
  */
   __pyx_v_self->efx->alDeleteEffects(1, (&__pyx_v_self->id));
 
-  /* "cyal/efx.pyx":171
+  /* "cyal/efx.pyx":172
  *         alc.alcMakeContextCurrent(self.efx.context._ctx)
  *         self.efx.alDeleteEffects(1, &self.id)
  *         alc.alcMakeContextCurrent(prev_ctx)             # <<<<<<<<<<<<<<
  * 
- * cdef class Filter:
+ *     @property
  */
   (void)(alcMakeContextCurrent(__pyx_v_prev_ctx));
 
-  /* "cyal/efx.pyx":167
+  /* "cyal/efx.pyx":168
  *         return effect
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -5913,12 +5966,257 @@ static void __pyx_pf_4cyal_3efx_6Effect_4__dealloc__(struct __pyx_obj_4cyal_3efx
   __Pyx_RefNannyFinishContext();
 }
 
-/* "cyal/efx.pxd":54
+/* "cyal/efx.pyx":175
+ * 
+ *     @property
+ *     def type(self):             # <<<<<<<<<<<<<<
+ *         return self._type
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4cyal_3efx_6Effect_4type_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4cyal_3efx_6Effect_4type_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_3efx_6Effect_4type___get__(((struct __pyx_obj_4cyal_3efx_Effect *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4cyal_3efx_6Effect_4type___get__(struct __pyx_obj_4cyal_3efx_Effect *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "cyal/efx.pyx":176
+ *     @property
+ *     def type(self):
+ *         return self._type             # <<<<<<<<<<<<<<
+ * 
+ *     @type.setter
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v_self->_type);
+  __pyx_r = __pyx_v_self->_type;
+  goto __pyx_L0;
+
+  /* "cyal/efx.pyx":175
+ * 
+ *     @property
+ *     def type(self):             # <<<<<<<<<<<<<<
+ *         return self._type
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/efx.pyx":179
+ * 
+ *     @type.setter
+ *     def type(self, val):             # <<<<<<<<<<<<<<
+ *         cdef str val_upper = val.upper()
+ *         cdef enum_val = al.alGetEnumValue(b"AL_EFFECT_" + val_upper.encode("utf8"))
+ */
+
+/* Python wrapper */
+static int __pyx_pw_4cyal_3efx_6Effect_4type_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_val); /*proto*/
+static int __pyx_pw_4cyal_3efx_6Effect_4type_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_val) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4cyal_3efx_6Effect_4type_2__set__(((struct __pyx_obj_4cyal_3efx_Effect *)__pyx_v_self), ((PyObject *)__pyx_v_val));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_4cyal_3efx_6Effect_4type_2__set__(struct __pyx_obj_4cyal_3efx_Effect *__pyx_v_self, PyObject *__pyx_v_val) {
+  PyObject *__pyx_v_val_upper = 0;
+  PyObject *__pyx_v_enum_val = 0;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  ALchar const *__pyx_t_4;
+  int __pyx_t_5;
+  ALint __pyx_t_6;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__set__", 0);
+
+  /* "cyal/efx.pyx":180
+ *     @type.setter
+ *     def type(self, val):
+ *         cdef str val_upper = val.upper()             # <<<<<<<<<<<<<<
+ *         cdef enum_val = al.alGetEnumValue(b"AL_EFFECT_" + val_upper.encode("utf8"))
+ *         if enum_val == al.AL_NONE:
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_val, __pyx_n_s_upper); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (!(likely(PyUnicode_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "unicode", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_v_val_upper = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "cyal/efx.pyx":181
+ *     def type(self, val):
+ *         cdef str val_upper = val.upper()
+ *         cdef enum_val = al.alGetEnumValue(b"AL_EFFECT_" + val_upper.encode("utf8"))             # <<<<<<<<<<<<<<
+ *         if enum_val == al.AL_NONE:
+ *             raise RuntimeError(f"Could not get enum value for AL_EFFECT_{val_upper}")
+ */
+  if (unlikely(__pyx_v_val_upper == Py_None)) {
+    PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "encode");
+    __PYX_ERR(0, 181, __pyx_L1_error)
+  }
+  __pyx_t_1 = PyUnicode_AsUTF8String(__pyx_v_val_upper); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 181, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyNumber_Add(__pyx_n_b_AL_EFFECT, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 181, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_4 = __Pyx_PyObject_AsString(__pyx_t_2); if (unlikely((!__pyx_t_4) && PyErr_Occurred())) __PYX_ERR(0, 181, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ALenum(alGetEnumValue(__pyx_t_4)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 181, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_enum_val = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "cyal/efx.pyx":182
+ *         cdef str val_upper = val.upper()
+ *         cdef enum_val = al.alGetEnumValue(b"AL_EFFECT_" + val_upper.encode("utf8"))
+ *         if enum_val == al.AL_NONE:             # <<<<<<<<<<<<<<
+ *             raise RuntimeError(f"Could not get enum value for AL_EFFECT_{val_upper}")
+ *         self.efx.alEffecti(self.id, self.efx.AL_EFFECT_TYPE, enum_val)
+ */
+  __pyx_t_1 = __Pyx_PyInt_From_int(AL_NONE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_enum_val, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (unlikely(__pyx_t_5)) {
+
+    /* "cyal/efx.pyx":183
+ *         cdef enum_val = al.alGetEnumValue(b"AL_EFFECT_" + val_upper.encode("utf8"))
+ *         if enum_val == al.AL_NONE:
+ *             raise RuntimeError(f"Could not get enum value for AL_EFFECT_{val_upper}")             # <<<<<<<<<<<<<<
+ *         self.efx.alEffecti(self.id, self.efx.AL_EFFECT_TYPE, enum_val)
+ *         check_al_error()
+ */
+    __pyx_t_2 = __Pyx_PyUnicode_Unicode(__pyx_v_val_upper); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __Pyx_PyUnicode_Concat(__pyx_kp_u_Could_not_get_enum_value_for_AL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __PYX_ERR(0, 183, __pyx_L1_error)
+
+    /* "cyal/efx.pyx":182
+ *         cdef str val_upper = val.upper()
+ *         cdef enum_val = al.alGetEnumValue(b"AL_EFFECT_" + val_upper.encode("utf8"))
+ *         if enum_val == al.AL_NONE:             # <<<<<<<<<<<<<<
+ *             raise RuntimeError(f"Could not get enum value for AL_EFFECT_{val_upper}")
+ *         self.efx.alEffecti(self.id, self.efx.AL_EFFECT_TYPE, enum_val)
+ */
+  }
+
+  /* "cyal/efx.pyx":184
+ *         if enum_val == al.AL_NONE:
+ *             raise RuntimeError(f"Could not get enum value for AL_EFFECT_{val_upper}")
+ *         self.efx.alEffecti(self.id, self.efx.AL_EFFECT_TYPE, enum_val)             # <<<<<<<<<<<<<<
+ *         check_al_error()
+ *         self._type = val
+ */
+  __pyx_t_6 = __Pyx_PyInt_As_ALint(__pyx_v_enum_val); if (unlikely((__pyx_t_6 == ((ALint)-1)) && PyErr_Occurred())) __PYX_ERR(0, 184, __pyx_L1_error)
+  __pyx_v_self->efx->alEffecti(__pyx_v_self->id, __pyx_v_self->efx->AL_EFFECT_TYPE, __pyx_t_6);
+
+  /* "cyal/efx.pyx":185
+ *             raise RuntimeError(f"Could not get enum value for AL_EFFECT_{val_upper}")
+ *         self.efx.alEffecti(self.id, self.efx.AL_EFFECT_TYPE, enum_val)
+ *         check_al_error()             # <<<<<<<<<<<<<<
+ *         self._type = val
+ * 
+ */
+  __pyx_t_2 = __pyx_f_4cyal_10exceptions_check_al_error(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "cyal/efx.pyx":186
+ *         self.efx.alEffecti(self.id, self.efx.AL_EFFECT_TYPE, enum_val)
+ *         check_al_error()
+ *         self._type = val             # <<<<<<<<<<<<<<
+ * 
+ * cdef class Filter:
+ */
+  if (!(likely(PyUnicode_CheckExact(__pyx_v_val))||((__pyx_v_val) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "unicode", Py_TYPE(__pyx_v_val)->tp_name), 0))) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_2 = __pyx_v_val;
+  __Pyx_INCREF(__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __Pyx_GOTREF(__pyx_v_self->_type);
+  __Pyx_DECREF(__pyx_v_self->_type);
+  __pyx_v_self->_type = ((PyObject*)__pyx_t_2);
+  __pyx_t_2 = 0;
+
+  /* "cyal/efx.pyx":179
+ * 
+ *     @type.setter
+ *     def type(self, val):             # <<<<<<<<<<<<<<
+ *         cdef str val_upper = val.upper()
+ *         cdef enum_val = al.alGetEnumValue(b"AL_EFFECT_" + val_upper.encode("utf8"))
+ */
+
+  /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("cyal.efx.Effect.type.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_val_upper);
+  __Pyx_XDECREF(__pyx_v_enum_val);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cyal/efx.pxd":55
  * 
  * cdef class Effect:
  *     cdef readonly EfxExtension efx             # <<<<<<<<<<<<<<
  *     cdef readonly al.ALuint id
- * 
+ *     cdef str _type
  */
 
 /* Python wrapper */
@@ -5950,12 +6248,12 @@ static PyObject *__pyx_pf_4cyal_3efx_6Effect_3efx___get__(struct __pyx_obj_4cyal
   return __pyx_r;
 }
 
-/* "cyal/efx.pxd":55
+/* "cyal/efx.pxd":56
  * cdef class Effect:
  *     cdef readonly EfxExtension efx
  *     cdef readonly al.ALuint id             # <<<<<<<<<<<<<<
+ *     cdef str _type
  * 
- *     @staticmethod
  */
 
 /* Python wrapper */
@@ -5980,7 +6278,7 @@ static PyObject *__pyx_pf_4cyal_3efx_6Effect_2id___get__(struct __pyx_obj_4cyal_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ALuint(__pyx_v_self->id); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 55, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ALuint(__pyx_v_self->id); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6110,7 +6408,7 @@ static PyObject *__pyx_pf_4cyal_3efx_6Effect_8__setstate_cython__(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":174
+/* "cyal/efx.pyx":189
  * 
  * cdef class Filter:
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -6145,7 +6443,7 @@ static int __pyx_pf_4cyal_3efx_6Filter___cinit__(CYTHON_UNUSED struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":177
+/* "cyal/efx.pyx":192
  *         pass
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -6178,20 +6476,20 @@ static int __pyx_pf_4cyal_3efx_6Filter_2__init__(CYTHON_UNUSED struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "cyal/efx.pyx":178
+  /* "cyal/efx.pyx":193
  * 
  *     def __init__(self):
  *         raise TypeError("This class cannot be instantiated directly.")             # <<<<<<<<<<<<<<
  * 
  *     @staticmethod
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 178, __pyx_L1_error)
+  __PYX_ERR(0, 193, __pyx_L1_error)
 
-  /* "cyal/efx.pyx":177
+  /* "cyal/efx.pyx":192
  *         pass
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -6208,7 +6506,7 @@ static int __pyx_pf_4cyal_3efx_6Filter_2__init__(CYTHON_UNUSED struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":181
+/* "cyal/efx.pyx":196
  * 
  *     @staticmethod
  *     cdef Filter from_id(EfxExtension efx, al.ALuint id):             # <<<<<<<<<<<<<<
@@ -6226,19 +6524,19 @@ static struct __pyx_obj_4cyal_3efx_Filter *__pyx_f_4cyal_3efx_6Filter_from_id(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("from_id", 0);
 
-  /* "cyal/efx.pyx":182
+  /* "cyal/efx.pyx":197
  *     @staticmethod
  *     cdef Filter from_id(EfxExtension efx, al.ALuint id):
  *         cdef Filter filter = Filter.__new__(Filter)             # <<<<<<<<<<<<<<
  *         filter.efx = efx
  *         filter.id = id
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_4cyal_3efx_Filter(((PyTypeObject *)__pyx_ptype_4cyal_3efx_Filter), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_4cyal_3efx_Filter(((PyTypeObject *)__pyx_ptype_4cyal_3efx_Filter), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_filter = ((struct __pyx_obj_4cyal_3efx_Filter *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cyal/efx.pyx":183
+  /* "cyal/efx.pyx":198
  *     cdef Filter from_id(EfxExtension efx, al.ALuint id):
  *         cdef Filter filter = Filter.__new__(Filter)
  *         filter.efx = efx             # <<<<<<<<<<<<<<
@@ -6251,7 +6549,7 @@ static struct __pyx_obj_4cyal_3efx_Filter *__pyx_f_4cyal_3efx_6Filter_from_id(st
   __Pyx_DECREF(((PyObject *)__pyx_v_filter->efx));
   __pyx_v_filter->efx = __pyx_v_efx;
 
-  /* "cyal/efx.pyx":184
+  /* "cyal/efx.pyx":199
  *         cdef Filter filter = Filter.__new__(Filter)
  *         filter.efx = efx
  *         filter.id = id             # <<<<<<<<<<<<<<
@@ -6260,7 +6558,7 @@ static struct __pyx_obj_4cyal_3efx_Filter *__pyx_f_4cyal_3efx_6Filter_from_id(st
  */
   __pyx_v_filter->id = __pyx_v_id;
 
-  /* "cyal/efx.pyx":185
+  /* "cyal/efx.pyx":200
  *         filter.efx = efx
  *         filter.id = id
  *         return filter             # <<<<<<<<<<<<<<
@@ -6272,7 +6570,7 @@ static struct __pyx_obj_4cyal_3efx_Filter *__pyx_f_4cyal_3efx_6Filter_from_id(st
   __pyx_r = __pyx_v_filter;
   goto __pyx_L0;
 
-  /* "cyal/efx.pyx":181
+  /* "cyal/efx.pyx":196
  * 
  *     @staticmethod
  *     cdef Filter from_id(EfxExtension efx, al.ALuint id):             # <<<<<<<<<<<<<<
@@ -6292,7 +6590,7 @@ static struct __pyx_obj_4cyal_3efx_Filter *__pyx_f_4cyal_3efx_6Filter_from_id(st
   return __pyx_r;
 }
 
-/* "cyal/efx.pyx":187
+/* "cyal/efx.pyx":202
  *         return filter
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -6316,7 +6614,7 @@ static void __pyx_pf_4cyal_3efx_6Filter_4__dealloc__(struct __pyx_obj_4cyal_3efx
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "cyal/efx.pyx":188
+  /* "cyal/efx.pyx":203
  * 
  *     def __dealloc__(self):
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()             # <<<<<<<<<<<<<<
@@ -6325,7 +6623,7 @@ static void __pyx_pf_4cyal_3efx_6Filter_4__dealloc__(struct __pyx_obj_4cyal_3efx
  */
   __pyx_v_prev_ctx = alcGetCurrentContext();
 
-  /* "cyal/efx.pyx":189
+  /* "cyal/efx.pyx":204
  *     def __dealloc__(self):
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
  *         alc.alcMakeContextCurrent(self.efx.context._ctx)             # <<<<<<<<<<<<<<
@@ -6334,7 +6632,7 @@ static void __pyx_pf_4cyal_3efx_6Filter_4__dealloc__(struct __pyx_obj_4cyal_3efx
  */
   (void)(alcMakeContextCurrent(__pyx_v_self->efx->context->_ctx));
 
-  /* "cyal/efx.pyx":190
+  /* "cyal/efx.pyx":205
  *         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
  *         alc.alcMakeContextCurrent(self.efx.context._ctx)
  *         self.efx.alDeleteFilters(1, &self.id)             # <<<<<<<<<<<<<<
@@ -6342,14 +6640,14 @@ static void __pyx_pf_4cyal_3efx_6Filter_4__dealloc__(struct __pyx_obj_4cyal_3efx
  */
   __pyx_v_self->efx->alDeleteFilters(1, (&__pyx_v_self->id));
 
-  /* "cyal/efx.pyx":191
+  /* "cyal/efx.pyx":206
  *         alc.alcMakeContextCurrent(self.efx.context._ctx)
  *         self.efx.alDeleteFilters(1, &self.id)
  *         alc.alcMakeContextCurrent(prev_ctx)             # <<<<<<<<<<<<<<
  */
   (void)(alcMakeContextCurrent(__pyx_v_prev_ctx));
 
-  /* "cyal/efx.pyx":187
+  /* "cyal/efx.pyx":202
  *         return filter
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -6361,7 +6659,7 @@ static void __pyx_pf_4cyal_3efx_6Filter_4__dealloc__(struct __pyx_obj_4cyal_3efx
   __Pyx_RefNannyFinishContext();
 }
 
-/* "cyal/efx.pxd":61
+/* "cyal/efx.pxd":63
  * 
  * cdef class Filter:
  *     cdef readonly EfxExtension efx             # <<<<<<<<<<<<<<
@@ -6398,7 +6696,7 @@ static PyObject *__pyx_pf_4cyal_3efx_6Filter_3efx___get__(struct __pyx_obj_4cyal
   return __pyx_r;
 }
 
-/* "cyal/efx.pxd":62
+/* "cyal/efx.pxd":64
  * cdef class Filter:
  *     cdef readonly EfxExtension efx
  *     cdef readonly al.ALuint id             # <<<<<<<<<<<<<<
@@ -6428,7 +6726,7 @@ static PyObject *__pyx_pf_4cyal_3efx_6Filter_2id___get__(struct __pyx_obj_4cyal_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ALuint(__pyx_v_self->id); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 62, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ALuint(__pyx_v_self->id); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -20612,6 +20910,7 @@ static PyObject *__pyx_tp_new_4cyal_3efx_Effect(PyTypeObject *t, CYTHON_UNUSED P
   p = ((struct __pyx_obj_4cyal_3efx_Effect *)o);
   p->__pyx_vtab = __pyx_vtabptr_4cyal_3efx_Effect;
   p->efx = ((struct __pyx_obj_4cyal_3efx_EfxExtension *)Py_None); Py_INCREF(Py_None);
+  p->_type = ((PyObject*)Py_None); Py_INCREF(Py_None);
   if (unlikely(__pyx_pw_4cyal_3efx_6Effect_1__cinit__(o, __pyx_empty_tuple, NULL) < 0)) goto bad;
   return o;
   bad:
@@ -20636,6 +20935,7 @@ static void __pyx_tp_dealloc_4cyal_3efx_Effect(PyObject *o) {
     PyErr_Restore(etype, eval, etb);
   }
   Py_CLEAR(p->efx);
+  Py_CLEAR(p->_type);
   (*Py_TYPE(o)->tp_free)(o);
 }
 
@@ -20657,6 +20957,20 @@ static int __pyx_tp_clear_4cyal_3efx_Effect(PyObject *o) {
   return 0;
 }
 
+static PyObject *__pyx_getprop_4cyal_3efx_6Effect_type(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_4cyal_3efx_6Effect_4type_1__get__(o);
+}
+
+static int __pyx_setprop_4cyal_3efx_6Effect_type(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+  if (v) {
+    return __pyx_pw_4cyal_3efx_6Effect_4type_3__set__(o, v);
+  }
+  else {
+    PyErr_SetString(PyExc_NotImplementedError, "__del__");
+    return -1;
+  }
+}
+
 static PyObject *__pyx_getprop_4cyal_3efx_6Effect_efx(PyObject *o, CYTHON_UNUSED void *x) {
   return __pyx_pw_4cyal_3efx_6Effect_3efx_1__get__(o);
 }
@@ -20672,6 +20986,7 @@ static PyMethodDef __pyx_methods_4cyal_3efx_Effect[] = {
 };
 
 static struct PyGetSetDef __pyx_getsets_4cyal_3efx_Effect[] = {
+  {(char *)"type", __pyx_getprop_4cyal_3efx_6Effect_type, __pyx_setprop_4cyal_3efx_6Effect_type, (char *)0, 0},
   {(char *)"efx", __pyx_getprop_4cyal_3efx_6Effect_efx, 0, (char *)0, 0},
   {(char *)"id", __pyx_getprop_4cyal_3efx_6Effect_id, 0, (char *)0, 0},
   {0, 0, 0, 0, 0}
@@ -21672,6 +21987,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_n_b_AL_EFFECT, __pyx_k_AL_EFFECT, sizeof(__pyx_k_AL_EFFECT), 0, 0, 0, 1},
   {&__pyx_n_s_ASCII, __pyx_k_ASCII, sizeof(__pyx_k_ASCII), 0, 0, 1, 1},
   {&__pyx_n_s_AuxiliaryEffectSlot, __pyx_k_AuxiliaryEffectSlot, sizeof(__pyx_k_AuxiliaryEffectSlot), 0, 0, 1, 1},
   {&__pyx_kp_s_Buffer_view_does_not_expose_stri, __pyx_k_Buffer_view_does_not_expose_stri, sizeof(__pyx_k_Buffer_view_does_not_expose_stri), 0, 0, 1, 0},
@@ -21679,6 +21995,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Cannot_assign_to_read_only_memor, __pyx_k_Cannot_assign_to_read_only_memor, sizeof(__pyx_k_Cannot_assign_to_read_only_memor), 0, 0, 1, 0},
   {&__pyx_kp_s_Cannot_create_writable_memory_vi, __pyx_k_Cannot_create_writable_memory_vi, sizeof(__pyx_k_Cannot_create_writable_memory_vi), 0, 0, 1, 0},
   {&__pyx_kp_s_Cannot_index_with_type_s, __pyx_k_Cannot_index_with_type_s, sizeof(__pyx_k_Cannot_index_with_type_s), 0, 0, 1, 0},
+  {&__pyx_kp_u_Could_not_get_enum_value_for_AL, __pyx_k_Could_not_get_enum_value_for_AL, sizeof(__pyx_k_Could_not_get_enum_value_for_AL), 0, 1, 0, 0},
   {&__pyx_n_s_Effect, __pyx_k_Effect, sizeof(__pyx_k_Effect), 0, 0, 1, 1},
   {&__pyx_n_s_EfxExtension, __pyx_k_EfxExtension, sizeof(__pyx_k_EfxExtension), 0, 0, 1, 1},
   {&__pyx_n_s_Ellipsis, __pyx_k_Ellipsis, sizeof(__pyx_k_Ellipsis), 0, 0, 1, 1},
@@ -21693,6 +22010,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
   {&__pyx_kp_s_MemoryView_of_r_at_0x_x, __pyx_k_MemoryView_of_r_at_0x_x, sizeof(__pyx_k_MemoryView_of_r_at_0x_x), 0, 0, 1, 0},
   {&__pyx_kp_s_MemoryView_of_r_object, __pyx_k_MemoryView_of_r_object, sizeof(__pyx_k_MemoryView_of_r_object), 0, 0, 1, 0},
+  {&__pyx_kp_u_None, __pyx_k_None, sizeof(__pyx_k_None), 0, 1, 0, 0},
   {&__pyx_n_b_O, __pyx_k_O, sizeof(__pyx_k_O), 0, 0, 0, 1},
   {&__pyx_kp_s_Out_of_bounds_on_buffer_access_a, __pyx_k_Out_of_bounds_on_buffer_access_a, sizeof(__pyx_k_Out_of_bounds_on_buffer_access_a), 0, 0, 1, 0},
   {&__pyx_n_s_PickleError, __pyx_k_PickleError, sizeof(__pyx_k_PickleError), 0, 0, 1, 1},
@@ -21738,6 +22056,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ndim, __pyx_k_ndim, sizeof(__pyx_k_ndim), 0, 0, 1, 1},
   {&__pyx_n_s_new, __pyx_k_new, sizeof(__pyx_k_new), 0, 0, 1, 1},
   {&__pyx_kp_s_no_default___reduce___due_to_non, __pyx_k_no_default___reduce___due_to_non, sizeof(__pyx_k_no_default___reduce___due_to_non), 0, 0, 1, 0},
+  {&__pyx_n_u_null, __pyx_k_null, sizeof(__pyx_k_null), 0, 1, 0, 1},
   {&__pyx_n_s_obj, __pyx_k_obj, sizeof(__pyx_k_obj), 0, 0, 1, 1},
   {&__pyx_n_s_pack, __pyx_k_pack, sizeof(__pyx_k_pack), 0, 0, 1, 1},
   {&__pyx_n_s_pickle, __pyx_k_pickle, sizeof(__pyx_k_pickle), 0, 0, 1, 1},
@@ -21770,6 +22089,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_unable_to_allocate_shape_and_str, __pyx_k_unable_to_allocate_shape_and_str, sizeof(__pyx_k_unable_to_allocate_shape_and_str), 0, 0, 1, 0},
   {&__pyx_n_s_unpack, __pyx_k_unpack, sizeof(__pyx_k_unpack), 0, 0, 1, 1},
   {&__pyx_n_s_update, __pyx_k_update, sizeof(__pyx_k_update), 0, 0, 1, 1},
+  {&__pyx_n_s_upper, __pyx_k_upper, sizeof(__pyx_k_upper), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
@@ -21821,14 +22141,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "cyal/efx.pyx":138
+  /* "cyal/efx.pyx":139
  * 
  *     def __init__(self):
  *         raise TypeError("This class cannot be instantiated directly.")             # <<<<<<<<<<<<<<
  * 
  *     @staticmethod
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_This_class_cannot_be_instantiate); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_This_class_cannot_be_instantiate); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
@@ -22236,42 +22556,42 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_ptype_4cyal_3efx_EfxExtension = &__pyx_type_4cyal_3efx_EfxExtension;
   __pyx_vtabptr_4cyal_3efx_AuxiliaryEffectSlot = &__pyx_vtable_4cyal_3efx_AuxiliaryEffectSlot;
   __pyx_vtable_4cyal_3efx_AuxiliaryEffectSlot.from_id = (struct __pyx_obj_4cyal_3efx_AuxiliaryEffectSlot *(*)(struct __pyx_obj_4cyal_3efx_EfxExtension *, ALuint))__pyx_f_4cyal_3efx_19AuxiliaryEffectSlot_from_id;
-  if (PyType_Ready(&__pyx_type_4cyal_3efx_AuxiliaryEffectSlot) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4cyal_3efx_AuxiliaryEffectSlot) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4cyal_3efx_AuxiliaryEffectSlot.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_3efx_AuxiliaryEffectSlot.tp_dictoffset && __pyx_type_4cyal_3efx_AuxiliaryEffectSlot.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4cyal_3efx_AuxiliaryEffectSlot.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4cyal_3efx_AuxiliaryEffectSlot.tp_dict, __pyx_vtabptr_4cyal_3efx_AuxiliaryEffectSlot) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_AuxiliaryEffectSlot, (PyObject *)&__pyx_type_4cyal_3efx_AuxiliaryEffectSlot) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_3efx_AuxiliaryEffectSlot) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4cyal_3efx_AuxiliaryEffectSlot.tp_dict, __pyx_vtabptr_4cyal_3efx_AuxiliaryEffectSlot) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_AuxiliaryEffectSlot, (PyObject *)&__pyx_type_4cyal_3efx_AuxiliaryEffectSlot) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_3efx_AuxiliaryEffectSlot) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
   __pyx_ptype_4cyal_3efx_AuxiliaryEffectSlot = &__pyx_type_4cyal_3efx_AuxiliaryEffectSlot;
   __pyx_vtabptr_4cyal_3efx_Effect = &__pyx_vtable_4cyal_3efx_Effect;
   __pyx_vtable_4cyal_3efx_Effect.from_id = (struct __pyx_obj_4cyal_3efx_Effect *(*)(struct __pyx_obj_4cyal_3efx_EfxExtension *, ALuint))__pyx_f_4cyal_3efx_6Effect_from_id;
-  if (PyType_Ready(&__pyx_type_4cyal_3efx_Effect) < 0) __PYX_ERR(0, 153, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4cyal_3efx_Effect) < 0) __PYX_ERR(0, 154, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4cyal_3efx_Effect.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_3efx_Effect.tp_dictoffset && __pyx_type_4cyal_3efx_Effect.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4cyal_3efx_Effect.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4cyal_3efx_Effect.tp_dict, __pyx_vtabptr_4cyal_3efx_Effect) < 0) __PYX_ERR(0, 153, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Effect, (PyObject *)&__pyx_type_4cyal_3efx_Effect) < 0) __PYX_ERR(0, 153, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_3efx_Effect) < 0) __PYX_ERR(0, 153, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4cyal_3efx_Effect.tp_dict, __pyx_vtabptr_4cyal_3efx_Effect) < 0) __PYX_ERR(0, 154, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Effect, (PyObject *)&__pyx_type_4cyal_3efx_Effect) < 0) __PYX_ERR(0, 154, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_3efx_Effect) < 0) __PYX_ERR(0, 154, __pyx_L1_error)
   __pyx_ptype_4cyal_3efx_Effect = &__pyx_type_4cyal_3efx_Effect;
   __pyx_vtabptr_4cyal_3efx_Filter = &__pyx_vtable_4cyal_3efx_Filter;
   __pyx_vtable_4cyal_3efx_Filter.from_id = (struct __pyx_obj_4cyal_3efx_Filter *(*)(struct __pyx_obj_4cyal_3efx_EfxExtension *, ALuint))__pyx_f_4cyal_3efx_6Filter_from_id;
-  if (PyType_Ready(&__pyx_type_4cyal_3efx_Filter) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4cyal_3efx_Filter) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4cyal_3efx_Filter.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4cyal_3efx_Filter.tp_dictoffset && __pyx_type_4cyal_3efx_Filter.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4cyal_3efx_Filter.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4cyal_3efx_Filter.tp_dict, __pyx_vtabptr_4cyal_3efx_Filter) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Filter, (PyObject *)&__pyx_type_4cyal_3efx_Filter) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_3efx_Filter) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4cyal_3efx_Filter.tp_dict, __pyx_vtabptr_4cyal_3efx_Filter) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Filter, (PyObject *)&__pyx_type_4cyal_3efx_Filter) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4cyal_3efx_Filter) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
   __pyx_ptype_4cyal_3efx_Filter = &__pyx_type_4cyal_3efx_Filter;
   __pyx_vtabptr_array = &__pyx_vtable_array;
   __pyx_vtable_array.get_memview = (PyObject *(*)(struct __pyx_array_obj *))__pyx_array_get_memview;
@@ -24006,6 +24326,13 @@ static CYTHON_INLINE void __Pyx_XDEC_MEMVIEW(__Pyx_memviewslice *memslice,
     } else {
         memslice->memview = NULL;
     }
+}
+
+/* PyUnicode_Unicode */
+static CYTHON_INLINE PyObject* __Pyx_PyUnicode_Unicode(PyObject *obj) {
+    if (unlikely(obj == Py_None))
+        obj = __pyx_kp_u_None;
+    return __Pyx_NewRef(obj);
 }
 
 /* PyObjectCall2Args */
@@ -26913,6 +27240,278 @@ raise_neg_overflow:
     return (ALuint) -1;
 }
 
+/* CIntToPy */
+  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_ALenum(ALenum value) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const ALenum neg_one = (ALenum) -1, const_zero = (ALenum) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(ALenum) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(ALenum) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(ALenum) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+#endif
+        }
+    } else {
+        if (sizeof(ALenum) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(ALenum) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+#endif
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(ALenum),
+                                     little, !is_unsigned);
+    }
+}
+
+/* CIntToPy */
+  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const int neg_one = (int) -1, const_zero = (int) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(int) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(int) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+#endif
+        }
+    } else {
+        if (sizeof(int) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(int) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+#endif
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(int),
+                                     little, !is_unsigned);
+    }
+}
+
+/* CIntFromPy */
+  static CYTHON_INLINE ALint __Pyx_PyInt_As_ALint(PyObject *x) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const ALint neg_one = (ALint) -1, const_zero = (ALint) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+#if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_Check(x))) {
+        if (sizeof(ALint) < sizeof(long)) {
+            __PYX_VERIFY_RETURN_INT(ALint, long, PyInt_AS_LONG(x))
+        } else {
+            long val = PyInt_AS_LONG(x);
+            if (is_unsigned && unlikely(val < 0)) {
+                goto raise_neg_overflow;
+            }
+            return (ALint) val;
+        }
+    } else
+#endif
+    if (likely(PyLong_Check(x))) {
+        if (is_unsigned) {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (ALint) 0;
+                case  1: __PYX_VERIFY_RETURN_INT(ALint, digit, digits[0])
+                case 2:
+                    if (8 * sizeof(ALint) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALint, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALint) >= 2 * PyLong_SHIFT) {
+                            return (ALint) (((((ALint)digits[1]) << PyLong_SHIFT) | (ALint)digits[0]));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(ALint) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALint, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALint) >= 3 * PyLong_SHIFT) {
+                            return (ALint) (((((((ALint)digits[2]) << PyLong_SHIFT) | (ALint)digits[1]) << PyLong_SHIFT) | (ALint)digits[0]));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(ALint) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALint, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALint) >= 4 * PyLong_SHIFT) {
+                            return (ALint) (((((((((ALint)digits[3]) << PyLong_SHIFT) | (ALint)digits[2]) << PyLong_SHIFT) | (ALint)digits[1]) << PyLong_SHIFT) | (ALint)digits[0]));
+                        }
+                    }
+                    break;
+            }
+#endif
+#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX < 0x030C00A7
+            if (unlikely(Py_SIZE(x) < 0)) {
+                goto raise_neg_overflow;
+            }
+#else
+            {
+                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
+                if (unlikely(result < 0))
+                    return (ALint) -1;
+                if (unlikely(result == 1))
+                    goto raise_neg_overflow;
+            }
+#endif
+            if (sizeof(ALint) <= sizeof(unsigned long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(ALint, unsigned long, PyLong_AsUnsignedLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(ALint) <= sizeof(unsigned PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(ALint, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
+#endif
+            }
+        } else {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (ALint) 0;
+                case -1: __PYX_VERIFY_RETURN_INT(ALint, sdigit, (sdigit) (-(sdigit)digits[0]))
+                case  1: __PYX_VERIFY_RETURN_INT(ALint,  digit, +digits[0])
+                case -2:
+                    if (8 * sizeof(ALint) - 1 > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALint, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALint) - 1 > 2 * PyLong_SHIFT) {
+                            return (ALint) (((ALint)-1)*(((((ALint)digits[1]) << PyLong_SHIFT) | (ALint)digits[0])));
+                        }
+                    }
+                    break;
+                case 2:
+                    if (8 * sizeof(ALint) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALint, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALint) - 1 > 2 * PyLong_SHIFT) {
+                            return (ALint) ((((((ALint)digits[1]) << PyLong_SHIFT) | (ALint)digits[0])));
+                        }
+                    }
+                    break;
+                case -3:
+                    if (8 * sizeof(ALint) - 1 > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALint, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALint) - 1 > 3 * PyLong_SHIFT) {
+                            return (ALint) (((ALint)-1)*(((((((ALint)digits[2]) << PyLong_SHIFT) | (ALint)digits[1]) << PyLong_SHIFT) | (ALint)digits[0])));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(ALint) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALint, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALint) - 1 > 3 * PyLong_SHIFT) {
+                            return (ALint) ((((((((ALint)digits[2]) << PyLong_SHIFT) | (ALint)digits[1]) << PyLong_SHIFT) | (ALint)digits[0])));
+                        }
+                    }
+                    break;
+                case -4:
+                    if (8 * sizeof(ALint) - 1 > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALint, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALint) - 1 > 4 * PyLong_SHIFT) {
+                            return (ALint) (((ALint)-1)*(((((((((ALint)digits[3]) << PyLong_SHIFT) | (ALint)digits[2]) << PyLong_SHIFT) | (ALint)digits[1]) << PyLong_SHIFT) | (ALint)digits[0])));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(ALint) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(ALint, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(ALint) - 1 > 4 * PyLong_SHIFT) {
+                            return (ALint) ((((((((((ALint)digits[3]) << PyLong_SHIFT) | (ALint)digits[2]) << PyLong_SHIFT) | (ALint)digits[1]) << PyLong_SHIFT) | (ALint)digits[0])));
+                        }
+                    }
+                    break;
+            }
+#endif
+            if (sizeof(ALint) <= sizeof(long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(ALint, long, PyLong_AsLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(ALint) <= sizeof(PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(ALint, PY_LONG_LONG, PyLong_AsLongLong(x))
+#endif
+            }
+        }
+        {
+#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
+            PyErr_SetString(PyExc_RuntimeError,
+                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
+#else
+            ALint val;
+            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
+ #if PY_MAJOR_VERSION < 3
+            if (likely(v) && !PyLong_Check(v)) {
+                PyObject *tmp = v;
+                v = PyNumber_Long(tmp);
+                Py_DECREF(tmp);
+            }
+ #endif
+            if (likely(v)) {
+                int one = 1; int is_little = (int)*(unsigned char *)&one;
+                unsigned char *bytes = (unsigned char *)&val;
+                int ret = _PyLong_AsByteArray((PyLongObject *)v,
+                                              bytes, sizeof(val),
+                                              is_little, !is_unsigned);
+                Py_DECREF(v);
+                if (likely(!ret))
+                    return val;
+            }
+#endif
+            return (ALint) -1;
+        }
+    } else {
+        ALint val;
+        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
+        if (!tmp) return (ALint) -1;
+        val = __Pyx_PyInt_As_ALint(tmp);
+        Py_DECREF(tmp);
+        return val;
+    }
+raise_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "value too large to convert to ALint");
+    return (ALint) -1;
+raise_neg_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "can't convert negative value to ALint");
+    return (ALint) -1;
+}
+
 /* CIntFromPy */
   static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
 #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
@@ -27303,44 +27902,6 @@ raise_neg_overflow:
     PyErr_SetString(PyExc_OverflowError,
         "can't convert negative value to long");
     return (long) -1;
-}
-
-/* CIntToPy */
-  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wconversion"
-#endif
-    const int neg_one = (int) -1, const_zero = (int) 0;
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic pop
-#endif
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(int) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(int) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(int) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-#endif
-        }
-    } else {
-        if (sizeof(int) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(int) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-#endif
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(int),
-                                     little, !is_unsigned);
-    }
 }
 
 /* CIntToPy */

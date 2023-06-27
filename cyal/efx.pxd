@@ -42,6 +42,7 @@ cdef class EfxExtension:
 
     # Enum values
     cdef al.ALenum AL_METERS_PER_UNIT
+    cdef al.ALenum AL_EFFECT_TYPE
 
 cdef class AuxiliaryEffectSlot:
     cdef readonly EfxExtension efx
@@ -53,6 +54,7 @@ cdef class AuxiliaryEffectSlot:
 cdef class Effect:
     cdef readonly EfxExtension efx
     cdef readonly al.ALuint id
+    cdef str _type
 
     @staticmethod
     cdef Effect from_id(EfxExtension efx, al.ALuint id)
