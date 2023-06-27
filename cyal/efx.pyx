@@ -56,6 +56,16 @@ cdef class EfxExtension:
         # Restore the old context (if any)
         alc.alcMakeContextCurrent(prev_ctx)
 
+    @property
+    def version(self):
+        cdef alc.ALCenum ver_maj = self.context.device.get_enum_value("ALC_EFX_MAJOR_VERSION")
+        cdef alc.ALCenum ver_min = self.context.device.get_enum_value("ALC_EFX_MINOR_VERSION")
+        cdef alc.ALCint maj, min
+        alc.alcGetIntegerv(self.context.device._device, ver_maj, 1, &maj)
+        alc.alcGetIntegerv(self.context.device._device, ver_min, 1, &min)
+        check_alc_error(self.context.device._device)
+        return (maj, min)
+
     def gen_auxiliary_effect_slot(self, **kwargs):
         cdef al.ALuint id
         self.alGenAuxiliaryEffectSlots(1, &id)
