@@ -53,6 +53,8 @@ cdef class EfxExtension:
         self.alGetAuxiliaryEffectSlotf = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValue)>al.alGetProcAddress("alGetAuxiliaryEffectSlotf")
         self.alGetAuxiliaryEffectSlotfv = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValues)>al.alGetProcAddress("alGetAuxiliaryEffectSlotfv")
 
+        self.AL_METERS_PER_UNIT = alc.alcGetEnumValue(ctx.device._device, "AL_METERS_PER_UNIT")
+
         # Restore the old context (if any)
         alc.alcMakeContextCurrent(prev_ctx)
 
@@ -65,6 +67,17 @@ cdef class EfxExtension:
         alc.alcGetIntegerv(self.context.device._device, ver_min, 1, &min)
         check_alc_error(self.context.device._device)
         return (maj, min)
+
+    @property
+    def meters_per_unit(self):
+        cdef al.ALfloat mpu
+        al.alGetListenerf(self.AL_METERS_PER_UNIT, &mpu)
+        return mpu
+
+    @meters_per_unit.setter
+    def meters_per_unit(self, val):
+        al.alListenerf(self.AL_METERS_PER_UNIT, val)
+        check_al_error()
 
     def gen_auxiliary_effect_slot(self, **kwargs):
         cdef al.ALuint id

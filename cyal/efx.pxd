@@ -6,6 +6,7 @@ from .context cimport Context
 cdef class EfxExtension:
     cdef readonly Context context
 
+    # Function pointers
     cdef void (*alGenEffects)(al.ALsizei n, al.ALuint *effects)
     cdef void (*alDeleteEffects)(al.ALsizei n, const al.ALuint *effects)
     cdef void (*alEffecti)(al.ALuint effect, al.ALenum param, al.ALint iValue)
@@ -38,6 +39,9 @@ cdef class EfxExtension:
     cdef void (*alGetAuxiliaryEffectSlotiv)(al.ALuint effectslot, al.ALenum param, al.ALint *piValues)
     cdef void (*alGetAuxiliaryEffectSlotf)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValue)
     cdef void (*alGetAuxiliaryEffectSlotfv)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValues)
+
+    # Enum values
+    cdef al.ALenum AL_METERS_PER_UNIT
 
 cdef class AuxiliaryEffectSlot:
     cdef readonly EfxExtension efx
