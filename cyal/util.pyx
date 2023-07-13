@@ -4,7 +4,8 @@ from libc.stddef cimport size_t
 from libc.string cimport strlen
 from libc cimport math
 
-from . cimport alc
+from . cimport al, alc
+from .exceptions cimport InvalidAlEnumError
 
 cdef list alc_string_to_list(const alc.ALCchar* str):
     cdef:
@@ -77,3 +78,10 @@ cdef class V3f:
     @z.setter
     def z(self, val):
         self.data[2] = val
+
+cdef al.ALenum get_al_enum(str name):
+    cdef bytes e_name = b"AL_" + name.upper().encode("utf8")
+    cdef al.ALenum val = al.alGetEnumValue(<const al.ALchar *>e_name)
+    if val == al.AL_NONE:
+        raise InvalidAlEnumError()
+    return val
