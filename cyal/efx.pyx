@@ -2,11 +2,13 @@
 
 from cpython cimport array
 import array
+from collections.abc import Sequence
 
 from . cimport al, alc
 from .context cimport Context
 from .device cimport Device
 from .exceptions cimport check_alc_error, check_al_error
+from .util cimport get_al_enum, V3f
 
 cdef array.array ids_template = array.array('I')
 
@@ -152,8 +154,10 @@ cdef class AuxiliaryEffectSlot:
         alc.alcMakeContextCurrent(prev_ctx)
 
 cdef class Effect:
-    def __cinit__(self):
+    def __cinit__(self, **kwargs):
         self._type = "null"
+        for prop, val in kwargs.items():
+            self.set(prop, val)
 
     def __init__(self):
         raise TypeError("This class cannot be instantiated directly.")
@@ -184,6 +188,41 @@ cdef class Effect:
         self.efx.alEffecti(self.id, self.efx.AL_EFFECT_TYPE, enum_val)
         check_al_error()
         self._type = val
+
+    def get_int(self, prop):
+        cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
+        cdef al.ALint val
+        self.efx.alGetEffecti(self.id, e_val, &val)
+        check_al_error()
+        return val
+
+    def get_float(self, prop):
+        cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
+        cdef al.ALfloat val
+        self.efx.alGetEffectf(self.id, e_val, &val)
+        check_al_error()
+        return val
+
+    def get_v3f(self, prop):
+        cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
+        cdef al.ALfloat[3] val
+        self.efx.alGetEffectfv(self.id, e_val, val)
+        check_al_error()
+        return V3f(val[0], val[1], val[2])
+
+    def set(self, prop, val):
+        cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
+        cdef al.ALfloat[3] data
+        if isinstance(val, int):
+            self.efx.alEffecti(self.id, e_val, val)
+        elif isinstance(val, float):
+            self.efx.alEffectf(self.id, e_val, val)
+        elif (isinstance(val, Sequence) and len(val) == 3) or isinstance(val, V3f):
+            data = [val[0], val[1], val[2]]
+            self.efx.alEffectfv(self.id, e_val, data)
+        else:
+            raise TypeError("Cannot convert to OpenAL type")
+        check_al_error()
 
 cdef class Filter:
     def __cinit__(self):
