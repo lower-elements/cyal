@@ -99,22 +99,21 @@ cdef class EfxExtension:
             for k, v in kwargs.items(): setattr(slot, k, v)
         return slots
 
-    def gen_effect(self, **kwargs):
+    def gen_effect(self, type cls=Effect, **kwargs):
+        if not issubclass(cls, Effect):
+            raise TypeError("cls argument must be a subclass of cyal.efx.Effect")
         cdef al.ALuint id
         self.alGenEffects(1, &id)
         check_al_error()
-        cdef Effect effect = Effect.from_id(self, id)
-        for k, v in kwargs.items(): setattr(effect, k, v)
-        return effect
+        return make_effect(cls, self, id, kwargs)
 
-    def gen_effects(self, n, **kwargs):
+    def gen_effects(self, n, cls=Effect, **kwargs):
+        if not issubclass(cls, Effect):
+            raise TypeError("cls argument must be a subclass of cyal.efx.Effect")
         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
         self.alGenEffects(n, &ids[0])
         check_al_error()
-        cdef list effects = [Effect.from_id(self, id) for id in ids]
-        for effect in effects:
-            for k, v in kwargs.items(): setattr(effect, k, v)
-        return effects
+        return [make_effect(cls, self, id, kwargs) for id in ids]
 
     def gen_filter(self, **kwargs):
         cdef al.ALuint id
@@ -154,20 +153,15 @@ cdef class AuxiliaryEffectSlot:
         alc.alcMakeContextCurrent(prev_ctx)
 
 cdef class Effect:
-    def __cinit__(self, **kwargs):
+    def __cinit__(self):
         self._type = "null"
-        for prop, val in kwargs.items():
-            self.set(prop, val)
 
     def __init__(self):
         raise TypeError("This class cannot be instantiated directly.")
 
-    @staticmethod
-    cdef Effect from_id(EfxExtension efx, al.ALuint id):
-        cdef Effect effect = Effect.__new__(Effect)
-        effect.efx = efx
-        effect.id = id
-        return effect
+    cdef void init_with_id(self, EfxExtension efx, al.ALuint id):
+        self.efx = efx
+        self.id = id
 
     def __dealloc__(self):
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
@@ -243,3 +237,9 @@ cdef class Filter:
         alc.alcMakeContextCurrent(self.efx.context._ctx)
         self.efx.alDeleteFilters(1, &self.id)
         alc.alcMakeContextCurrent(prev_ctx)
+
+cdef object make_effect(type cls, EfxExtension efx, al.ALuint id, dict kwargs):
+    cdef Effect effect = <Effect>cls.__new__(cls)
+    effect.init_with_id(efx, id)
+    for k, v in kwargs.items(): effect.set(k, v)
+    return effect

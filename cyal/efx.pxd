@@ -56,8 +56,7 @@ cdef class Effect:
     cdef readonly al.ALuint id
     cdef str _type
 
-    @staticmethod
-    cdef Effect from_id(EfxExtension efx, al.ALuint id)
+    cdef void init_with_id(self, EfxExtension efx, al.ALuint id)
 
 cdef class Filter:
     cdef readonly EfxExtension efx
