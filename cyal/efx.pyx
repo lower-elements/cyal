@@ -57,6 +57,7 @@ cdef class EfxExtension:
 
         self.AL_METERS_PER_UNIT = alc.alcGetEnumValue(ctx.device._device, "AL_METERS_PER_UNIT")
         self.AL_EFFECT_TYPE = alc.alcGetEnumValue(ctx.device._device, "AL_EFFECT_TYPE")
+        self.AL_FILTER_TYPE = alc.alcGetEnumValue(ctx.device._device, "AL_FILTER_TYPE")
 
         # Restore the old context (if any)
         alc.alcMakeContextCurrent(prev_ctx)
@@ -115,22 +116,21 @@ cdef class EfxExtension:
         check_al_error()
         return [make_effect(cls, self, id, kwargs) for id in ids]
 
-    def gen_filter(self, **kwargs):
+    def gen_filter(self, type cls=Filter, **kwargs):
+        if not issubclass(cls, Filter):
+            raise TypeError("cls argument must be a subclass of cyal.efx.Filter")
         cdef al.ALuint id
         self.alGenFilters(1, &id)
         check_al_error()
-        cdef Filter filter = Filter.from_id(self, id)
-        for k, v in kwargs.items(): setattr(filter, k, v)
-        return filter
+        return make_filter(cls, self, id, kwargs)
 
-    def gen_filters(self, n, **kwargs):
+    def gen_filters(self, n, cls=Filter, **kwargs):
+        if not issubclass(cls, Filter):
+            raise TypeError("cls argument must be a subclass of cyal.efx.Filter")
         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
         self.alGenFilters(n, &ids[0])
         check_al_error()
-        cdef list filters = [Filter.from_id(self, id) for id in ids]
-        for filter in filters:
-            for k, v in kwargs.items(): setattr(filter, k, v)
-        return filters
+        return [make_filter(cls, self, id, kwargs) for id in ids]
 
 cdef class AuxiliaryEffectSlot:
     def __cinit__(self):
@@ -220,17 +220,14 @@ cdef class Effect:
 
 cdef class Filter:
     def __cinit__(self):
-        pass
+        self._type = "null"
 
     def __init__(self):
         raise TypeError("This class cannot be instantiated directly.")
 
-    @staticmethod
-    cdef Filter from_id(EfxExtension efx, al.ALuint id):
-        cdef Filter filter = Filter.__new__(Filter)
-        filter.efx = efx
-        filter.id = id
-        return filter
+    cdef void init_with_id(self, EfxExtension efx, al.ALuint id):
+        self.efx = efx
+        self.id = id
 
     def __dealloc__(self):
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
@@ -238,8 +235,63 @@ cdef class Filter:
         self.efx.alDeleteFilters(1, &self.id)
         alc.alcMakeContextCurrent(prev_ctx)
 
+    @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, val):
+        cdef str val_upper = val.upper()
+        cdef enum_val = al.alGetEnumValue(b"AL_FILTER_" + val_upper.encode("utf8"))
+        if enum_val == al.AL_NONE:
+            raise RuntimeError(f"Could not get enum value for AL_FILTER_{val_upper}")
+        self.efx.alFilteri(self.id, self.efx.AL_FILTER_TYPE, enum_val)
+        check_al_error()
+        self._type = val
+
+    def get_int(self, prop):
+        cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
+        cdef al.ALint val
+        self.efx.alGetFilteri(self.id, e_val, &val)
+        check_al_error()
+        return val
+
+    def get_float(self, prop):
+        cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
+        cdef al.ALfloat val
+        self.efx.alGetFilterf(self.id, e_val, &val)
+        check_al_error()
+        return val
+
+    def get_v3f(self, prop):
+        cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
+        cdef al.ALfloat[3] val
+        self.efx.alGetfilterfv(self.id, e_val, val)
+        check_al_error()
+        return V3f(val[0], val[1], val[2])
+
+    def set(self, prop, val):
+        cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
+        cdef al.ALfloat[3] data
+        if isinstance(val, int):
+            self.efx.alFilteri(self.id, e_val, val)
+        elif isinstance(val, float):
+            self.efx.alFilterf(self.id, e_val, val)
+        elif (isinstance(val, Sequence) and len(val) == 3) or isinstance(val, V3f):
+            data = [val[0], val[1], val[2]]
+            self.efx.alFilterfv(self.id, e_val, data)
+        else:
+            raise TypeError("Cannot convert to OpenAL type")
+        check_al_error()
+
 cdef object make_effect(type cls, EfxExtension efx, al.ALuint id, dict kwargs):
     cdef Effect effect = <Effect>cls.__new__(cls)
     effect.init_with_id(efx, id)
     for k, v in kwargs.items(): effect.set(k, v)
     return effect
+
+cdef object make_filter(type cls, EfxExtension efx, al.ALuint id, dict kwargs):
+    cdef Filter filter = <Filter>cls.__new__(cls)
+    filter.init_with_id(efx, id)
+    for k, v in kwargs.items(): filter.set(k, v)
+    return filter
