@@ -1,0 +1,119 @@
+pyx_prelude: |
+    # This is a PyX prelude comment.
+
+pxd_prelude: |
+    # This is a PyXD prelude comment.
+
+classes:
+  Effects:
+    EaxReverb:
+      al_effect: EAXREVERB
+      doc: |
+        The EAX Reverb effect type is exclusive to selected Creative OpenAL implementations.  The  EAX Reverb parameter set is a superset of the standard OpenAL Effects Extension  environmental reverb effect.  Additional
+        parameters allow for: 
+        
+        - Closer control over the tone of the reverb 
+          - Reverb directivity, using panning vectors 
+            - Reverb granularity, using echo controls 
+        
+        The EAX Reverb is natively supported on any devices that support the EAX 3.0 or above  standard, including: 
+        
+        - SoundBlaster Audigy series soundcards 
+          - SoundBlaster X-Fi series soundcards 
+        
+        The EAX Reverb will be emulated on devices that only support EAX 2.0.  Note: The “Generic  Software” device falls into this category as the software mixer supports the EAX 2.0 Reverb  effect. 
+
+      properties:
+        - name: density
+          type: float
+          doc: Reverb Modal Density controls the coloration of the late reverb.  Lowering the value adds more  coloration to the late reverb. 
+        - name: diffusion
+          type: float
+          doc: |
+            The Reverb Diffusion property controls the echo density in the reverberation decay.  It’s set by  default to 1.0, which provides the highest density.  Reducing diffusion gives the reverberation a  more
+            “grainy” character that is especially noticeable with percussive sound sources.  If you set a  diffusion value of 0.0, the later reverberation sounds like a succession of distinct echoes. 
+
+        - name: gain
+          type: float
+          doc: |
+            The Reverb Gain property is the master volume control for the reflected sound (both early  reflections and reverberation) that the reverb effect adds to all sound sources.  It sets the  maximum amount of reflections
+            and reverberation added to the final sound mix.  The value of the  Reverb Gain property ranges from 1.0 (0db) (the maximum amount) to 0.0 (-100db) (no reflected  sound at all).  Specify using this ID 
+
+        - name: gainhf
+          type: float
+          doc: |
+            The Reverb Gain HF property further tweaks reflected sound by attenuating it at high frequencies.   It controls a low-pass filter that applies globally to the reflected sound of all sound sources  feeding the particular
+            instance of the reverb effect.  The value of the Reverb Gain HF property  ranges from 1.0 (0db) (no filter) to 0.0 (-100db) (virtually no reflected sound).  
+
+        - name: gainlf
+          type: float
+          doc: |
+            The Reverb Gain LF property further tweaks reflected sound by attenuating it at low frequencies.   It controls a high-pass filter that applies globally to the reflected sound of all sound sources  feeding the particular
+            instance of the reverb effect.  The value of the Reverb Gain LF property  ranges from 1.0 (0db) (no filter) to 0.0 (-100db) (virtually no reflected sound).  
+
+        - name: decay_time
+          type: float
+          doc: The Decay Time property sets the reverberation decay time.  It ranges from 0.1 (typically a small  room with very dead surfaces) to 20.0 (typically a large room with very live surfaces).
+        - name: decay_hfratio
+          type: float
+          doc: |
+            The Decay HF Ratio property adjusts the spectral quality of the Decay Time parameter.  It is the  ratio of high-frequency decay time relative to the time set by Decay Time.  The Decay HF Ratio  value 1.0 is neutral:
+            the decay time is equal for all frequencies.  As Decay HF Ratio increases  above 1.0, the high-frequency decay time increases so it’s longer than the decay time at mid  frequencies.  You hear a more brilliant
+            reverberation with a longer decay at high frequencies.  As the Decay HF Ratio value decreases below 1.0, the high-frequency decay time decreases so it’s  shorter than the decay time of the mid frequencies.  You hear a more natural reverberation.
+
+        - name: decay_lfratio
+          type: float
+          doc: |
+            The Decay LF Ratio property adjusts the spectral quality of the Decay Time parameter.  It is the  ratio of low-frequency decay time relative to the time set by Decay Time.  The Decay LF Ratio  value 1.0
+            is neutral: the decay time is equal for all frequencies.  As Decay LF Ratio increases  above 1.0, the low-frequency decay time increases so it’s longer than the decay time at mid  frequencies.  You hear a
+            more booming reverberation with a longer decay at low frequencies.  As  the Decay LF Ratio value decreases below 1.0, the low-frequency decay time decreases so it’s  shorter than the decay time of the mid
+            frequencies.  You hear a more tinny reverberation. 
+
+        - name: reflections_gain
+          type: float
+          doc: |
+            The Reflections Gain property controls the overall amount of initial reflections relative to the Gain  property.  (The Gain property sets the overall amount of reflected sound: both initial reflections 
+            and later reverberation.)  The value of Reflections Gain ranges from a maximum of 3.16 (+10 dB)  to a minimum of 0.0 (-100 dB) (no initial reflections at all), and is corrected by the value of the  Gain
+            property.  The Reflections Gain property does not affect the subsequent reverberation  decay.  You can increase the amount of initial reflections to simulate a more narrow space or closer walls,  especially
+            effective if you associate the initial reflections increase with a reduction in reflections  delays by lowering the value of the Reflection Delay property.  To simulate open or semi-open  environments, you
+            can maintain the amount of early reflections while reducing the value of the  Late Reverb Gain property, which controls later reflections.
+
+        - name: reflections_delay
+          type: float
+          doc: |
+            The Reflections Delay property is the amount of delay between the arrival time of the direct path  from the source to the first reflection from the source.  It ranges from 0 to 300 milliseconds.  You  can
+            reduce or increase Reflections Delay to simulate closer or more distant reflective surfaces— and therefore control the perceived size of the room. 
+
+        - name: reflections_pan
+          type: v3f
+          doc: |
+            The Reflections Pan property is a 3D vector that controls the spatial distribution of the cluster of  early reflections.  The direction of this vector controls the global direction of the reflections, while  its
+            magnitude controls how focused the reflections are towards this direction.  It is important to note that the direction of the vector is interpreted in the coordinate system of the  user, without taking into account
+            the orientation of the virtual listener.  For instance, assuming a  four-point loudspeaker playback system, setting Reflections Pan to (0., 0., 0.7) means that the  reflections are panned to the front speaker pair,
+            whereas as setting of (0., 0.,  − 0.7) pans the  reflections towards the rear speakers.  These vectors follow the a left-handed co-ordinate system,  unlike OpenAL uses a right-handed co-ordinate system.  If the magnitude of Reflections Pan is zero (the default
+            setting), the early reflections come evenly  from all directions.  As the magnitude increases, the reflections become more focused in the  direction pointed to by the vector.  A magnitude of 1.0 would represent
+            the extreme case, where  all reflections come from a single direction. 
+
+        - name: late_reverb_gain
+          type: float
+          doc: |
+            The Late Reverb Gain property controls the overall amount of later reverberation relative to the  Gain property.  (The Gain property sets the overall amount of both initial reflections and later  reverberation.)  The
+            value of Late Reverb Gain ranges from a maximum of 10.0 (+20 dB) to a  minimum of 0.0 (-100 dB) (no late reverberation at all).  Note that Late Reverb Gain and Decay Time are independent properties: If you adjust Decay 
+            Time without changing Late Reverb Gain, the total intensity (the averaged square of the  amplitude) of the late reverberation remains constant. 
+
+        - name: late_reverb_decay
+          type: float
+          doc: |
+            The Late Reverb Delay property defines the begin time of the late reverberation relative to the  time of the initial reflection (the first of the early reflections).  It ranges from 0 to 100 milliseconds.  
+            Reducing or increasing Late Reverb Delay is useful for simulating a smaller or larger room. 
+
+        - name: late_reverb_pan
+          type: v3f
+          doc: |
+            The Late Reverb Pan property is a 3D vector that controls the spatial distribution of the late  reverb.  The direction of this vector controls the global direction of the reverb, while its magnitude  controls
+            how focused the reverb are towards this direction.  The details under  Reflections Pan ,  above, also apply to Late Reverb Pan. 
+
+        - name: echo_time
+          type: float
+        - name: echo_depth
+          type: float
