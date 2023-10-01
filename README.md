@@ -11,21 +11,17 @@ Soft][openal-soft]. It is written in [Cython][cython].
 
 ## Building from source
 
-**Note**: Both the source Cython code (.pyx, .pxd files) and the Cython-generated code (.c files) are included in a
-source distribution of this library, in order to facilitate building the library on systems without [Cython][cython]
-installed. Be aware that if you do not have Cython installed, the generated .c files will instead be compiled).
-
 Manual installation:
 
 ```bash
 # Clone the repository
 git clone https://git.sr.ht/~Thefake-vip/cyal
 cd cyal
-# Build the extension modules
-python setup.py build_ext
-# Create a binary distribution wheel
-python setup.py bdist_wheel
-# Run pip install with the generated .whl file in the dist directory
+# Install a simple wheel build tool
+pip install build
+# Build both the sdist and bdist (see the options to build if you only want to build one)
+python -m build .
+# Install the .whl file in the dist directory
 ```
 
 ## Contributing

@@ -1,3 +1,15 @@
 [build-system]
-requires = ["setuptools>=61.0", "pkgconfig"]
-build-backend = "setuptools.build_meta"
+requires = [
+"scikit-build-core",
+"cython",
+]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "cyal"
+version = "0.2.0"
+
+[tool.scikit-build]
+cmake.minimum-version = "3.24"
+ninja.minimum-version = "1.11"
+cmake.build-type = "Release"
