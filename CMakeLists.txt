@@ -38,6 +38,9 @@ add_custom_command(
   "${CMAKE_CURRENT_BINARY_DIR}/${module}.c")
 python_add_library(${module} MODULE WITH_SOABI "${CMAKE_CURRENT_BINARY_DIR}/${module}.c")
 target_link_libraries(${module} PRIVATE OpenAL OpenAL::OpenAL)
+if(LINUX)
+    set_target_properties(${module} PROPERTIES INSTALL_RPATH "$ORIGIN")
+endif()
 install(TARGETS ${module} LIBRARY DESTINATION ${SKBUILD_PROJECT_NAME})
 endforeach()
 
