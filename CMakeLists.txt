@@ -37,11 +37,13 @@ add_custom_command(
   COMMAND "${CYTHON}" "${CMAKE_CURRENT_SOURCE_DIR}/${SKBUILD_PROJECT_NAME}/${module}.pyx" --output-file
   "${CMAKE_CURRENT_BINARY_DIR}/${module}.c")
 python_add_library(${module} MODULE WITH_SOABI "${CMAKE_CURRENT_BINARY_DIR}/${module}.c")
-target_link_libraries(${module} PRIVATE OpenAL OpenAL::OpenAL)
-if(LINUX)
+target_link_libraries(${module} PRIVATE OpenAL::OpenAL)
+if(LINUX AND TARGET OpenAL)
     set_target_properties(${module} PROPERTIES INSTALL_RPATH "$ORIGIN")
 endif()
 install(TARGETS ${module} LIBRARY DESTINATION ${SKBUILD_PROJECT_NAME})
 endforeach()
 
+if(TARGET OpenAL)
 install(TARGETS OpenAL DESTINATION ${SKBUILD_PROJECT_NAME})
+endif()
