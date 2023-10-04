@@ -90,7 +90,7 @@ cdef class InvalidNameError(AlError):
 
     def __str__(self):
         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_NAME)
-        return string if string is not NULL else "Invalid OpenAL object name"
+        return string.decode() if string is not NULL else "Invalid OpenAL object name"
 
 cdef class InvalidOperationError(AlError):
     @property
@@ -99,7 +99,7 @@ cdef class InvalidOperationError(AlError):
 
     def __str__(self):
         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_OPERATION)
-        return string if string is not NULL else "Invalid OpenAL operation"
+        return string.decode() if string is not NULL else "Invalid OpenAL operation"
 
 cdef class InvalidAlEnumError(AlError):
     @property
@@ -108,7 +108,7 @@ cdef class InvalidAlEnumError(AlError):
 
     def __str__(self):
         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_ENUM)
-        return string if string is not NULL else "Invalid OpenAL enum value"
+        return string.decode() if string is not NULL else "Invalid OpenAL enum value"
 
 cdef class InvalidAlValueError(AlError):
     @property
@@ -117,7 +117,7 @@ cdef class InvalidAlValueError(AlError):
 
     def __str__(self):
         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_VALUE)
-        return string if string is not NULL else "Invalid OpenAL parameter value"
+        return string.decode() if string is not NULL else "Invalid OpenAL parameter value"
 
 cdef class UnknownAlError(AlError):
     def __cinit__(self, *args, al_errcode, **kwargs):
@@ -128,7 +128,7 @@ cdef class UnknownAlError(AlError):
 
     def __str__(self):
         cdef const al.ALchar* string = al.alGetString(self.errcode)
-        return string if string is not NULL else f"Unknown OpenAL error (code {self.errcode:X})"
+        return string.decode() if string is not NULL else f"Unknown OpenAL error (code {self.errcode:X})"
 
 cdef check_al_error():
     cdef al.ALenum errcode = al.alGetError()
