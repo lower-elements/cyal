@@ -9,6 +9,7 @@ cdef class Context:
     cdef readonly Device device
     cdef readonly Listener listener
     cdef bint emulate_direct_channels
+    cdef bint emulate_direct_channels_remix
 
     # AL_SOFT_deferred_updates extension
     cdef void (*al_defer_updates_soft)()

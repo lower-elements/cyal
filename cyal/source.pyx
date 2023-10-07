@@ -260,23 +260,38 @@ cdef class Source:
     @property
     def direct_channels(self):
         cdef al.ALenum direct_channels_soft = al.alGetEnumValue(b"AL_DIRECT_CHANNELS_SOFT")
+        cdef al.ALenum remix_unmatched_soft = al.alGetEnumValue(b"AL_REMIX_UNMATCHED_SOFT")
         cdef al.ALint val
+
         if direct_channels_soft != al.AL_NONE:
             al.alGetSourcei(self.id, direct_channels_soft, &val)
             check_al_error()
-            return val == al.AL_TRUE
+
+            if val == al.AL_FALSE: return False
+            elif val == al.AL_TRUE: return True
+            else:
+                if remix_unmatched_soft != al.AL_NONE:
+                    if val == remix_unmatched_soft: return "remix_unmatched"
+                    else: raise ValueError(f"Invalid value for Source.direct_channels, got {val}")
+                elif self.context.emulate_direct_channels_remix: return True
+                else: raise ValueError(f"Invalid value for Source.direct_channels, got {val}")
+
         else:
-            if not self.context.emulate_direct_channels:
-                raise UnsupportedExtensionError("AL_SOFT_DIRECT_CHANNELS")
-            else: return False
+            if self.context.emulate_direct_channels: return False
+            else: raise UnsupportedExtensionError("AL_SOFT_DIRECT_CHANNELS")
 
     @direct_channels.setter
     def direct_channels(self, val):
         cdef al.ALenum direct_channels_soft = al.alGetEnumValue(b"AL_DIRECT_CHANNELS_SOFT")
+        cdef al.ALenum remix_unmatched_soft = al.alGetEnumValue(b"AL_REMIX_UNMATCHED_SOFT")
         cdef al.ALint enum_val
         if direct_channels_soft != al.AL_NONE:
             if val == True: enum_val = al.AL_TRUE
             elif val == False: enum_val = al.AL_FALSE
+            elif val == "remix_unmatched":
+                if remix_unmatched_soft != al.AL_NONE: enum_val = remix_unmatched_soft
+                elif self.context.emulate_direct_channels_remix: enum_value = al.AL_TRUE
+                else: raise UnsupportedExtensionError("AL_SOFT_DIRECT_CHANNELS_REMIX")
             else: raise ValueError(f"Invalid value for Source.direct_channels, got {val}")
             al.alSourcei(self.id, direct_channels_soft, enum_val)
             check_al_error()
