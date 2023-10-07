@@ -8,6 +8,7 @@ cdef class Context:
     cdef alc.ALCcontext* _ctx
     cdef readonly Device device
     cdef readonly Listener listener
+    cdef bint emulate_direct_channels
 
     # AL_SOFT_deferred_updates extension
     cdef void (*al_defer_updates_soft)()

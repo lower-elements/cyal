@@ -4,7 +4,7 @@ from libc.limits cimport INT_MAX
 from cpython cimport array
 import array
 from .context cimport Context
-from .exceptions cimport check_al_error
+from .exceptions cimport check_al_error, UnsupportedExtensionError
 from .util cimport V3f
 from . cimport al, alc
 
@@ -256,6 +256,32 @@ cdef class Source:
         cdef al.ALenum val
         al.alGetSourcei(self.id, al.AL_SOURCE_TYPE, &val)
         return SourceType(val)
+
+    @property
+    def direct_channels(self):
+        cdef al.ALenum direct_channels_soft = al.alGetEnumValue(b"AL_DIRECT_CHANNELS_SOFT")
+        cdef al.ALint val
+        if direct_channels_soft != al.AL_NONE:
+            al.alGetSourcei(self.id, direct_channels_soft, &val)
+            check_al_error()
+            return val == al.AL_TRUE
+        else:
+            if not self.context.emulate_direct_channels:
+                raise UnsupportedExtensionError("AL_SOFT_DIRECT_CHANNELS")
+            else: return False
+
+    @direct_channels.setter
+    def direct_channels(self, val):
+        cdef al.ALenum direct_channels_soft = al.alGetEnumValue(b"AL_DIRECT_CHANNELS_SOFT")
+        cdef al.ALint enum_val
+        if direct_channels_soft != al.AL_NONE:
+            if val == True: enum_val = al.AL_TRUE
+            elif val == False: enum_val = al.AL_FALSE
+            else: raise ValueError(f"Invalid value for Source.direct_channels, got {val}")
+            al.alSourcei(self.id, direct_channels_soft, enum_val)
+            check_al_error()
+        elif not self.context.emulate_direct_channels:
+            raise UnsupportedExtensionError("AL_SOFT_DIRECT_CHANNELS")
 
 cpdef enum SourceState:
     INITIAL = al.AL_INITIAL

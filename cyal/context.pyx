@@ -14,13 +14,18 @@ from . cimport al, alc
 cdef array.array ids_template = array.array('I')
 
 cdef class Context:
-    def __cinit__(self, Device dev not None, *, make_current=False, emulate_deferred_updates=True, **kwargs):
+    def __cinit__(self, Device dev not None, *,
+            make_current=False,
+            emulate_deferred_updates=True,
+            emulate_direct_channels=True,
+            **kwargs):
         self.device = dev
         cdef ContextAttrs attrs = ContextAttrs.from_kwargs(dev, **kwargs)
         self._ctx  =alc.alcCreateContext(dev._device, &attrs._attrs[0])
         if self._ctx is NULL:
             check_alc_error(dev._device)
         self.listener = Listener(self)
+        self.emulate_direct_channels = emulate_direct_channels
 
         # Make the context current here, as checking for extensions requires it, and alGetProcAddress() may return context-specific functions
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
