@@ -298,6 +298,35 @@ cdef class Source:
         elif not self.context.emulate_direct_channels:
             raise UnsupportedExtensionError("AL_SOFT_DIRECT_CHANNELS")
 
+    @property
+    def spatialize(self):
+        cdef al.ALenum source_spatialize_soft = al.alGetEnumValue(b"AL_SOURCE_SPATIALIZE_SOFT")
+        cdef al.ALint val
+        if source_spatialize_soft != 0:
+            al.alGetSourcei(self.id, source_spatialize_soft, &val)
+            check_al_error()
+            if val == al.AL_FALSE: return False
+            elif val == al.AL_TRUE: return True
+            elif val == al.alGetEnumValue(b"AL_AUTO_SOFT"): return "auto"
+            else: raise ValueError(f"Invalid value for Source.spatialize, got {val}")
+        else:
+            if self.context.emulate_source_spatialize: return "auto" 
+            else: raise UnsupportedExtensionError("AL_SOFT_SOURCE_SPATIALIZE")
+
+    @spatialize.setter
+    def spatialize(self, val):
+        cdef al.ALenum source_spatialize_soft = al.alGetEnumValue(b"AL_SOURCE_SPATIALIZE_SOFT")
+        cdef al.ALint enum_val
+        if source_spatialize_soft != 0:
+            if val == False: enum_val = al.AL_FALSE
+            elif val == True: enum_val = al.AL_TRUE
+            elif val == "auto": enum_val = al.alGetEnumValue(b"AL_AUTO_SOFT")
+            else: raise ValueError(f"Invalid value for Source.spatialize, got {val}")
+            al.alSourcei(self.id, source_spatialize_soft, enum_val)
+            check_al_error()
+        elif not self.context.emulate_source_spatialize:
+            raise UnsupportedExtensionError("AL_SOFT_SOURCE_SPATIALIZE")
+
 cpdef enum SourceState:
     INITIAL = al.AL_INITIAL
     PLAYING = al.AL_PLAYING

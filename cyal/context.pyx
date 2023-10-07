@@ -19,6 +19,7 @@ cdef class Context:
             emulate_deferred_updates=True,
             emulate_direct_channels=True,
             emulate_direct_channels_remix=True,
+            emulate_source_spatialize=True,
             **kwargs):
         self.device = dev
         cdef ContextAttrs attrs = ContextAttrs.from_kwargs(dev, **kwargs)
@@ -26,8 +27,11 @@ cdef class Context:
         if self._ctx is NULL:
             check_alc_error(dev._device)
         self.listener = Listener(self)
+
+    # Flags for extension emulation
         self.emulate_direct_channels = emulate_direct_channels
         self.emulate_direct_channels_remix = emulate_direct_channels_remix
+        self.emulate_source_spatialize = emulate_source_spatialize
 
         # Make the context current here, as checking for extensions requires it, and alGetProcAddress() may return context-specific functions
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()

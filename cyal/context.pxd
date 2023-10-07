@@ -8,8 +8,11 @@ cdef class Context:
     cdef alc.ALCcontext* _ctx
     cdef readonly Device device
     cdef readonly Listener listener
+
+    # Flags for extension emulation
     cdef bint emulate_direct_channels
     cdef bint emulate_direct_channels_remix
+    cdef bint emulate_source_spatialize
 
     # AL_SOFT_deferred_updates extension
     cdef void (*al_defer_updates_soft)()
