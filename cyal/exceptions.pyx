@@ -146,3 +146,10 @@ cdef check_al_error():
         raise MemoryError()
     else:
         raise UnknownAlError(al_errcode=errcode)
+
+cdef class UnsupportedExtensionError(CyalError):
+    def __cinit__(self, ext_name):
+        self.extension_name = ext_name
+
+    def __str__(self):
+        return f"Unsupported OpenAL extension: {self.extension_name}"

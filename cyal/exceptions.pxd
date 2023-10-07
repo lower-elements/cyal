@@ -51,3 +51,8 @@ cdef class UnknownAlError(AlError):
     cdef readonly al.ALenum errcode
 
 cdef check_al_error()
+
+# Cyal-specific errors
+
+cdef class UnsupportedExtensionError(CyalError):
+    cdef readonly str extension_name
