@@ -31,8 +31,8 @@ python setup.py bdist_wheel
 ## Contributing
 
 [This project][project-page] is hosted on [Sourcehut][srht]. Feel free to [submit a ticket][bug-tracker] if you find a
-bug, or drop by our [mailing list][mailing-list] <~thefake-vip/cyal@lists.sr.ht> to discuss the project, or send
-patches.
+bug, drop by our [mailing list][mailing-list] <~thefake-vip/cyal@lists.sr.ht> to discuss the project, or send patches,
+or join our IRC channel, [#cyal on libera.chat][irc-channel] for Cyal discussion and support.
 
 Never submitted patches via email before? Check out [Sourcehut's guide to using git send-email][git-send-email]!
 
@@ -40,6 +40,7 @@ Never submitted patches via email before? Check out [Sourcehut's guide to using 
 [srht]: <https://sr.ht>
 [bug-tracker]: <https://todo.sr.ht/~thefake-vip/Cyal>
 [mailing-list]: <https://lists.sr.ht/~thefake-vip/cyal>
+[irc-channel]: <ircs://irc.libera.chat:6697/#cyal>
 [git-send-email]: <https://git-send-email.io>
 
 ## License
