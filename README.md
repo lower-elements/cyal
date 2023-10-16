@@ -1,5 +1,7 @@
 # Cyal - Cython Wrapper for OpenAL
 
+[![PyPI version](https://badge.fury.io/py/cyal.svg)](https://badge.fury.io/py/cyal)
+
 Cyal is a [Python][python] wrapper for [OpenAL][openal], a cross platform, 3D audio API built by Creative Labs. This
 project aims to be compatible with any conforming OpenAL 1.1 implementation, but receives the most testing on [OpenAL
 Soft][openal-soft]. It is written in [Cython][cython].
@@ -9,7 +11,22 @@ Soft][openal-soft]. It is written in [Cython][cython].
 [openal-soft]: <https://openal-soft.org>
 [cython]: <https://cython.org>
 
+## Installation
+
+
+Install with pip, just as you would any Python package.
+
+```sh
+pip install cyal
+```
+
+Binary distributions are available for Windows, macOS and Linux, and include a bundled version of OpenAL Soft.
+
 ## Building from source
+
+When building from source, CMake will try to detect an existing OpenAL implementation on your system, and will use that
+if it finds one. If an OpenAL implementation isn't found, OpenAL Soft will be downloaded, compiled, and bundled with
+Cyal.
 
 Manual installation:
 
