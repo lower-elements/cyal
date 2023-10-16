@@ -30,17 +30,26 @@ FetchContent_MakeAvailable(OpenAL)
 
 
 foreach(module buffer capture context device efx exceptions listener source util)
+    # Transpile Cython to C
 add_custom_command(
 	OUTPUT ${module}.c
 	DEPENDS ${SKBUILD_PROJECT_NAME}/${module}.pyx
   VERBATIM
   COMMAND "${CYTHON}" "${CMAKE_CURRENT_SOURCE_DIR}/${SKBUILD_PROJECT_NAME}/${module}.pyx" --output-file
   "${CMAKE_CURRENT_BINARY_DIR}/${module}.c")
+  # Compile the C to a shared library
 python_add_library(${module} MODULE WITH_SOABI "${CMAKE_CURRENT_BINARY_DIR}/${module}.c")
 target_link_libraries(${module} PRIVATE OpenAL::OpenAL)
-if(LINUX AND TARGET OpenAL)
+
+# If we're building bundled OpenAL Soft, set the rpath correctly
+if(TARGET OpenAL)
+    if(LINUX)
     set_target_properties(${module} PROPERTIES INSTALL_RPATH "$ORIGIN")
+elseif(APPLE)
+    set_target_properties(${module} PROPERTIES INSTALL_RPATH "@loader_path")
 endif()
+endif()
+
 install(TARGETS ${module} LIBRARY DESTINATION ${SKBUILD_PROJECT_NAME})
 endforeach()
 
