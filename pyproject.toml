@@ -1,13 +1,41 @@
-[build-system]
-requires = [
-"scikit-build-core",
-"cython",
-]
-build-backend = "scikit_build_core.build"
-
 [project]
 name = "cyal"
 version = "0.2.0"
+authors = [
+  { name="Michael Connor Buchan", email="mikey@blindcomputing.org" },
+]
+description = "Cython bindings for OpenAL"
+readme = "README.md"
+requires-python = ">=3.9"
+keywords = ["audio", "openal", "cython", "bindings"]
+license = { file = "LICENSE" }
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Cython",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Multimedia",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Topic :: Multimedia :: Sound/Audio :: Capture/Recording",
+    "Topic :: Multimedia :: Sound/Audio :: Players",
+]
+
+[project.urls]
+"Homepage" = "https://sr.ht/~thefake-vip/Cyal"
+"Repository" = "https://git.sr.ht/~thefake-vip/cyal"
+"Bug Tracker" = "https://todo.sr.ht/~thefake-vip/cyal"
+"Mailing List Archive" = "https://lists.sr.ht/~thefake-vip/cyal"
+
+[build-system]
+requires = [
+"scikit-build-core>=0.5.0",
+"cython>=3.0.0",
+]
+build-backend = "scikit_build_core.build"
 
 [tool.scikit-build]
 cmake.minimum-version = "3.24"
