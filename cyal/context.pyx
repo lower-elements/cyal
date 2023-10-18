@@ -61,6 +61,14 @@ cdef class Context:
     def get_attrs(self):
         return ContextAttrs.from_device(self.device)
 
+    @property
+    def supported_extensions(self):
+        cdef const al.ALchar* exts = al.alGetString(al.AL_EXTENSIONS)
+        return (<bytes>exts).split(b' ') if exts is not NULL else []
+
+    def is_extension_present(self, ext_name):
+        return al.alIsExtensionPresent(ext_name.encode("utf8")) == al.AL_TRUE
+
     def make_current(self):
         alc.alcMakeContextCurrent(self._ctx)
 
