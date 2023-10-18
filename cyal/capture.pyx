@@ -3,14 +3,14 @@
 from contextlib import contextmanager
 
 from .buffer cimport BufferFormat
-from .exceptions cimport DeviceNotFoundError, check_alc_error
+from .exceptions cimport DeviceNotFoundError, UnsupportedExtensionError, check_alc_error
 from .util cimport alc_string_to_list
 from . cimport al, alc
 
 cdef class CaptureExtension:
     def __cinit__(self):
-        if alc.alcIsExtensionPresent(NULL, "ALC_EXT_CAPTURE") == al.AL_FALSE:
-            raise RuntimeError("Unsupported extension: ALC_EXT_CAPTURE")
+        if alc.alcIsExtensionPresent(NULL, b"ALC_EXT_CAPTURE") == al.AL_FALSE:
+            raise UnsupportedExtensionError("ALC_EXT_CAPTURE")
         self.DEFAULT_DEVICE_SPECIFIER = get_enum_value("ALC_CAPTURE_DEFAULT_DEVICE_SPECIFIER")
         self.DEVICE_SPECIFIER = get_enum_value("ALC_CAPTURE_DEVICE_SPECIFIER")
         self.SAMPLES = get_enum_value("ALC_CAPTURE_SAMPLES")
