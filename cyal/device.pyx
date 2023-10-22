@@ -2,7 +2,8 @@
 
 from contextlib import contextmanager
 
-from .exceptions import DeviceNotFoundError, UnsupportedExtensionError
+from .context cimport ContextAttrs
+from .exceptions cimport DeviceNotFoundError, UnsupportedExtensionError, check_alc_error
 from . cimport al, alc
 
 cdef class Device:
@@ -21,6 +22,7 @@ cdef class Device:
         else:
             self.pause_soft = no_pause_device_ext
             self.resume_soft = no_pause_device_ext
+        self.alc_reopen_device_soft = <alc.ALCboolean (*)(alc.ALCdevice*, const alc.ALCchar*, alc.ALCint*)>self.get_alc_proc_address(b"alcReopenDeviceSOFT")
 
         # Flags for extension emulation
         self.emulate_enumerate_all = emulate_enumerate_all
@@ -67,13 +69,21 @@ cdef class Device:
         else:
             raise UnsupportedExtensionError("ALC_ENUMERATE_ALL_EXT")
 
-
     @property
     def version(self):
         cdef alc.ALCint major, minor
         alc.alcGetIntegerv(self._device, alc.ALC_MAJOR_VERSION, 1, &major)
         alc.alcGetIntegerv(self._device, alc.ALC_MINOR_VERSION, 1, &minor)
         return (major, minor)
+
+    def reopen(self, name=None, **kwargs):
+        if self.alc_reopen_device_soft is NULL:
+            raise UnsupportedExtensionError("ALC_SOFT_REOPEN_DEVICE")
+        cdef bytes name_bytes = name.encode("utf8") if name is not None else b''
+        cdef ContextAttrs attrs = ContextAttrs.from_kwargs(self, **kwargs)
+        cdef alc.ALCboolean res = self.alc_reopen_device_soft(self._device, <const alc.ALCchar*>name_bytes, &attrs._attrs[0])
+        if res != al.AL_TRUE:
+            check_alc_error(self._device)
 
     cpdef list get_supported_extensions(self):
         return alc.alcGetString(self._device, alc.ALC_EXTENSIONS).decode("utf8").split(' ')
