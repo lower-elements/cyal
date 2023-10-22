@@ -2,7 +2,7 @@
 
 from contextlib import contextmanager
 
-from .exceptions import DeviceNotFoundError
+from .exceptions import DeviceNotFoundError, UnsupportedExtensionError
 from . cimport al, alc
 
 cdef class Device:
@@ -71,6 +71,6 @@ cdef class Device:
         return val
 
 cdef void no_pause_device_ext(alc.ALCdevice* dev):
-    raise RuntimeError("`ALC_SOFT_PAUSE_DEVICE` extension not implemented")
+    raise UnsupportedExtensionError("ALC_SOFT_PAUSE_DEVICE")
 
 cdef void do_nothing_with_device(alc.ALCdevice* dev): pass
