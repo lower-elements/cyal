@@ -6,7 +6,7 @@ from .exceptions import DeviceNotFoundError, UnsupportedExtensionError
 from . cimport al, alc
 
 cdef class Device:
-    def __cinit__(self, name=None, *, pause_noop=False):
+    def __cinit__(self, name=None, *, pause_noop=False, emulate_enumerate_all=True):
         self._device = alc.alcOpenDevice(<const alc.ALCchar *>name if name is not None else NULL)
         if self._device is NULL:
             raise DeviceNotFoundError(device_name=name)
@@ -20,6 +20,9 @@ cdef class Device:
         else:
             self.pause_soft = no_pause_device_ext
             self.resume_soft = no_pause_device_ext
+
+        # Flags for extension emulation
+        self.emulate_enumerate_all = emulate_enumerate_all
     
     def __dealloc__(self):
         if self._device is not NULL:
@@ -50,6 +53,19 @@ cdef class Device:
     @property
     def name(self):
         return <bytes>alc.alcGetString(self._device, alc.ALC_DEVICE_SPECIFIER)
+
+    @property
+    def output_name(self):
+        cdef alc.ALCenum enum_val = alc.alcGetEnumValue(NULL, b"ALC_ALL_DEVICES_SPECIFIER")
+        cdef const alc.ALCchar *spec
+        if enum_val != al.AL_NONE:
+            spec = alc.alcGetString(self._device, enum_val)
+            return <bytes>spec
+        elif self.emulate_enumerate_all:
+            return self.name
+        else:
+            raise UnsupportedExtensionError("ALC_ENUMERATE_ALL_EXT")
+
 
     @property
     def version(self):

@@ -8,6 +8,9 @@ cdef class Device:
     cdef void (*pause_soft)(alc.ALCdevice*)
     cdef void (*resume_soft)(alc.ALCdevice*)
 
+    # Flags for extension emulation
+    cdef bint emulate_enumerate_all
+
     cdef alc.ALCenum get_enum_value(self, const alc.ALCchar* name)
     cdef inline alc.ALCvoid* get_alc_proc_address(self, const alc.ALCchar *funcname):
         return alc.alcGetProcAddress(self._device, funcname)

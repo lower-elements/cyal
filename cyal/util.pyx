@@ -5,7 +5,7 @@ from libc.string cimport strlen
 from libc cimport math
 
 from . cimport al, alc
-from .exceptions cimport InvalidAlEnumError
+from .exceptions cimport InvalidAlEnumError, UnsupportedExtensionError
 
 cdef list alc_string_to_list(const alc.ALCchar* str):
     cdef:
@@ -21,6 +21,32 @@ cdef list alc_string_to_list(const alc.ALCchar* str):
 def get_device_specifiers():
     cdef const alc.ALCchar* specs = alc.alcGetString(NULL, alc.ALC_DEVICE_SPECIFIER)
     return alc_string_to_list(specs) if specs is not NULL else []
+
+def get_default_device_specifier():
+    cdef const alc.ALCchar* spec = alc.alcGetString(NULL, alc.ALC_DEFAULT_DEVICE_SPECIFIER)
+    return <bytes>spec
+
+def get_all_device_specifiers(*, emulate=True):
+    cdef alc.ALCenum enum_val = alc.alcGetEnumValue(NULL, b"ALC_ALL_DEVICES_SPECIFIER")
+    cdef const alc.ALCchar *specs
+    if enum_val != al.AL_NONE:
+        specs = alc.alcGetString(NULL, enum_val)
+        return alc_string_to_list(specs) if specs is not NULL else []
+    elif emulate:
+        return get_device_specifiers()
+    else:
+        raise UnsupportedExtensionError("ALC_ENUMERATE_ALL_EXT")
+
+def get_default_all_device_specifier(*, emulate=True):
+    cdef alc.ALCenum enum_val = alc.alcGetEnumValue(NULL, b"ALC_DEFAULT_ALL_DEVICES_SPECIFIER")
+    cdef const alc.ALCchar *spec
+    if enum_val != al.AL_NONE:
+        spec = alc.alcGetString(NULL, enum_val)
+        return <bytes>spec
+    elif emulate:
+        return get_default_device_specifier()
+    else:
+        raise UnsupportedExtensionError("ALC_ENUMERATE_ALL_EXT")
 
 def get_supported_extensions():
     cdef const alc.ALCchar* exts = alc.alcGetString(NULL, alc.ALC_EXTENSIONS)
