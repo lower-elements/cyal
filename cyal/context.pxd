@@ -13,6 +13,10 @@ cdef class Context:
     cdef bint emulate_direct_channels
     cdef bint emulate_direct_channels_remix
     cdef bint emulate_source_spatialize
+    cdef bint emulate_disconnect
+
+    # Extension enum values
+    cdef al.ALenum alc_connected
 
     # AL_SOFT_deferred_updates extension
     cdef void (*al_defer_updates_soft)()

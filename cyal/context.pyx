@@ -6,7 +6,7 @@ from contextlib import contextmanager
 
 from .buffer cimport Buffer
 from .device cimport Device
-from .exceptions cimport check_al_error, check_alc_error
+from .exceptions cimport UnsupportedExtensionError, check_al_error, check_alc_error
 from .listener cimport Listener
 from .source cimport Source
 from . cimport al, alc
@@ -20,6 +20,7 @@ cdef class Context:
             emulate_direct_channels=True,
             emulate_direct_channels_remix=True,
             emulate_source_spatialize=True,
+            emulate_disconnect=True,
             **kwargs):
         self.device = dev
         cdef ContextAttrs attrs = ContextAttrs.from_kwargs(dev, **kwargs)
@@ -32,10 +33,14 @@ cdef class Context:
         self.emulate_direct_channels = emulate_direct_channels
         self.emulate_direct_channels_remix = emulate_direct_channels_remix
         self.emulate_source_spatialize = emulate_source_spatialize
+        self.emulate_disconnect = emulate_disconnect
 
         # Make the context current here, as checking for extensions requires it, and alGetProcAddress() may return context-specific functions
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
         alc.alcMakeContextCurrent(self._ctx)
+
+        # Extension enum values
+        self.alc_connected = alc.alcGetEnumValue(self.device._device, b"ALC_CONNECTED");
 
         # AL_SOFT_deferred_updates extension functions
         if al.alIsExtensionPresent("AL_SOFT_DEFERRED_UPDATES") == al.AL_TRUE:
@@ -71,6 +76,18 @@ cdef class Context:
 
     def make_current(self):
         alc.alcMakeContextCurrent(self._ctx)
+
+    @property
+    def is_connected(self):
+        cdef al.ALint val
+        if self.alc_connected != al.AL_NONE:
+            alc.alcGetIntegerv(self.device._device, self.alc_connected, 1, &val)
+            check_alc_error(self.device._device)
+            return val != al.AL_FALSE
+        elif self.emulate_disconnect:
+            return True
+        else:
+            raise UnsupportedExtensionError("ALC_EXT_DISCONNECT")
 
     @property
     def is_current(self):
