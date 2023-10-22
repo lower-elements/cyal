@@ -7,7 +7,8 @@ from . cimport al, alc
 
 cdef class Device:
     def __cinit__(self, name=None, *, pause_noop=False, emulate_enumerate_all=True):
-        self._device = alc.alcOpenDevice(<const alc.ALCchar *>name if name is not None else NULL)
+        cdef bytes name_bytes = name.encode("utf8") if name is not None else b''
+        self._device = alc.alcOpenDevice(<const alc.ALCchar*>name_bytes if name is not None else NULL)
         if self._device is NULL:
             raise DeviceNotFoundError(device_name=name)
         self.get_al_proc_address = <al.ALvoid*(*)(const al.ALchar*)>self.get_alc_proc_address("alGetProcAddress")
@@ -52,7 +53,7 @@ cdef class Device:
 
     @property
     def name(self):
-        return <bytes>alc.alcGetString(self._device, alc.ALC_DEVICE_SPECIFIER)
+        return alc.alcGetString(self._device, alc.ALC_DEVICE_SPECIFIER).decode("utf8")
 
     @property
     def output_name(self):
@@ -60,7 +61,7 @@ cdef class Device:
         cdef const alc.ALCchar *spec
         if enum_val != al.AL_NONE:
             spec = alc.alcGetString(self._device, enum_val)
-            return <bytes>spec
+            return spec.decode("utf8")
         elif self.emulate_enumerate_all:
             return self.name
         else:
@@ -75,7 +76,7 @@ cdef class Device:
         return (major, minor)
 
     cpdef list get_supported_extensions(self):
-        return (<bytes>alc.alcGetString(self._device, alc.ALC_EXTENSIONS)).split(b' ')
+        return alc.alcGetString(self._device, alc.ALC_EXTENSIONS).decode("utf8").split(' ')
 
     def is_extension_present(self, ext):
         return alc.alcIsExtensionPresent(self._device, <const alc.ALCchar *>ext) == al.AL_TRUE

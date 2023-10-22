@@ -15,7 +15,7 @@ cdef list alc_string_to_list(const alc.ALCchar* str):
         length = strlen(str)
         if length == 0:
             return specs
-        specs.append(<bytes>str[:length])
+        specs.append(str[:length].decode("utf8"))
         str += length + 1
 
 def get_device_specifiers():
@@ -24,7 +24,7 @@ def get_device_specifiers():
 
 def get_default_device_specifier():
     cdef const alc.ALCchar* spec = alc.alcGetString(NULL, alc.ALC_DEFAULT_DEVICE_SPECIFIER)
-    return <bytes>spec
+    return spec.decode("utf8")
 
 def get_all_device_specifiers(*, emulate=True):
     cdef alc.ALCenum enum_val = alc.alcGetEnumValue(NULL, b"ALC_ALL_DEVICES_SPECIFIER")
@@ -42,7 +42,7 @@ def get_default_all_device_specifier(*, emulate=True):
     cdef const alc.ALCchar *spec
     if enum_val != al.AL_NONE:
         spec = alc.alcGetString(NULL, enum_val)
-        return <bytes>spec
+        return spec.decode("utf8")
     elif emulate:
         return get_default_device_specifier()
     else:
@@ -50,7 +50,7 @@ def get_default_all_device_specifier(*, emulate=True):
 
 def get_supported_extensions():
     cdef const alc.ALCchar* exts = alc.alcGetString(NULL, alc.ALC_EXTENSIONS)
-    return (<bytes>exts).split(b' ') if exts is not NULL else []
+    return exts.decode("utf8").split(' ') if exts is not NULL else []
 
 def get_version():
     cdef alc.ALCint major, minor

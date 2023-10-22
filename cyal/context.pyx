@@ -69,7 +69,7 @@ cdef class Context:
     @property
     def supported_extensions(self):
         cdef const al.ALchar* exts = al.alGetString(al.AL_EXTENSIONS)
-        return (<bytes>exts).split(b' ') if exts is not NULL else []
+        return exts.decode("utf8").split(' ') if exts is not NULL else []
 
     def is_extension_present(self, ext_name):
         return al.alIsExtensionPresent(ext_name.encode("utf8")) == al.AL_TRUE
