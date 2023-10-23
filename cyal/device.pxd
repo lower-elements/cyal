@@ -7,6 +7,7 @@ cdef class Device:
     cdef al.ALvoid* (*get_al_proc_address)(const al.ALchar*)
     cdef void (*pause_soft)(alc.ALCdevice*)
     cdef void (*resume_soft)(alc.ALCdevice*)
+    cdef alc.ALCboolean (*alc_reset_device_soft)(alc.ALCdevice* device, const alc.ALCint* attribs)
     cdef alc.ALCboolean (*alc_reopen_device_soft)(alc.ALCdevice* device, const alc.ALCchar* name, const alc.ALCint* attribs)
 
     # Flags for extension emulation

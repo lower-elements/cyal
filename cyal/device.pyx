@@ -22,6 +22,7 @@ cdef class Device:
         else:
             self.pause_soft = no_pause_device_ext
             self.resume_soft = no_pause_device_ext
+        self.alc_reset_device_soft = <alc.ALCboolean (*)(alc.ALCdevice*, alc.ALCint*)>self.get_alc_proc_address(b"alcResetDeviceSOFT")
         self.alc_reopen_device_soft = <alc.ALCboolean (*)(alc.ALCdevice*, const alc.ALCchar*, alc.ALCint*)>self.get_alc_proc_address(b"alcReopenDeviceSOFT")
 
         # Flags for extension emulation
@@ -75,6 +76,14 @@ cdef class Device:
         alc.alcGetIntegerv(self._device, alc.ALC_MAJOR_VERSION, 1, &major)
         alc.alcGetIntegerv(self._device, alc.ALC_MINOR_VERSION, 1, &minor)
         return (major, minor)
+
+    def reset(self, **kwargs):
+        if self.alc_reopen_device_soft is NULL:
+            raise UnsupportedExtensionError("ALC_SOFT_HRTF or ALC_SOFT_OUTPUT_LIMITER")
+        cdef ContextAttrs attrs = ContextAttrs.from_kwargs(self, **kwargs)
+        cdef alc.ALCboolean res = self.alc_reset_device_soft(self._device, &attrs._attrs[0])
+        if res != al.AL_TRUE:
+            check_alc_error(self._device)
 
     def reopen(self, name=None, **kwargs):
         if self.alc_reopen_device_soft is NULL:
