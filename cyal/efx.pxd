@@ -42,6 +42,7 @@ cdef class EfxExtension:
 
     # Enum values
     cdef al.ALenum AL_METERS_PER_UNIT
+    cdef alc.ALCenum alc_max_auxiliary_sends
     cdef al.ALenum AL_EFFECT_TYPE
     cdef al.ALenum AL_FILTER_TYPE
 

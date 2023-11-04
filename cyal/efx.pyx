@@ -55,9 +55,10 @@ cdef class EfxExtension:
         self.alGetAuxiliaryEffectSlotf = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValue)>al.alGetProcAddress("alGetAuxiliaryEffectSlotf")
         self.alGetAuxiliaryEffectSlotfv = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValues)>al.alGetProcAddress("alGetAuxiliaryEffectSlotfv")
 
-        self.AL_METERS_PER_UNIT = alc.alcGetEnumValue(ctx.device._device, "AL_METERS_PER_UNIT")
-        self.AL_EFFECT_TYPE = alc.alcGetEnumValue(ctx.device._device, "AL_EFFECT_TYPE")
-        self.AL_FILTER_TYPE = alc.alcGetEnumValue(ctx.device._device, "AL_FILTER_TYPE")
+        self.AL_METERS_PER_UNIT = alc.alcGetEnumValue(ctx.device._device, b"AL_METERS_PER_UNIT")
+        self.alc_max_auxiliary_sends = alc.alcGetEnumValue(ctx.device._device, b"ALC_MAX_AUXILIARY_SENDS")
+        self.AL_EFFECT_TYPE = alc.alcGetEnumValue(ctx.device._device, b"AL_EFFECT_TYPE")
+        self.AL_FILTER_TYPE = alc.alcGetEnumValue(ctx.device._device, b"AL_FILTER_TYPE")
 
         # Restore the old context (if any)
         alc.alcMakeContextCurrent(prev_ctx)
@@ -82,6 +83,13 @@ cdef class EfxExtension:
     def meters_per_unit(self, val):
         al.alListenerf(self.AL_METERS_PER_UNIT, val)
         check_al_error()
+
+    @property
+    def max_auxiliary_sends(self):
+        cdef al.ALint val
+        alc.alcGetIntegerv(self.context.device._device, self.alc_max_auxiliary_sends, 1, &val)
+        check_alc_error(self.context.device._device)
+        return val
 
     def gen_auxiliary_effect_slot(self, **kwargs):
         cdef al.ALuint id
