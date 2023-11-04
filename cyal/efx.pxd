@@ -4,6 +4,7 @@ from . cimport al, alc
 from .context cimport Context
 
 cdef class EfxExtension:
+    cdef object __weakref__
     cdef readonly Context context
 
     # Function pointers
@@ -47,6 +48,7 @@ cdef class EfxExtension:
     cdef al.ALenum AL_FILTER_TYPE
 
 cdef class AuxiliaryEffectSlot:
+    cdef object __weakref__
     cdef readonly EfxExtension efx
     cdef readonly al.ALuint id
 
@@ -54,6 +56,7 @@ cdef class AuxiliaryEffectSlot:
     cdef AuxiliaryEffectSlot from_id(EfxExtension efx, al.ALuint id)
 
 cdef class Effect:
+    cdef object __weakref__
     cdef readonly EfxExtension efx
     cdef readonly al.ALuint id
     cdef str _type
@@ -61,6 +64,7 @@ cdef class Effect:
     cdef void init_with_id(self, EfxExtension efx, al.ALuint id)
 
 cdef class Filter:
+    cdef object __weakref__
     cdef readonly EfxExtension efx
     cdef readonly al.ALuint id
     cdef str _type

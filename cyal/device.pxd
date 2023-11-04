@@ -3,6 +3,7 @@
 from . cimport al, alc
 
 cdef class Device:
+    cdef object __weakref__
     cdef alc.ALCdevice* _device
     cdef al.ALvoid* (*get_al_proc_address)(const al.ALchar*)
     cdef void (*pause_soft)(alc.ALCdevice*)

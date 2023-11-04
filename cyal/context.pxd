@@ -5,6 +5,7 @@ from .listener cimport Listener
 from . cimport al, alc
 
 cdef class Context:
+    cdef object __weakref__
     cdef alc.ALCcontext* _ctx
     cdef readonly Device device
     cdef readonly Listener listener
@@ -33,5 +34,6 @@ cdef class Context:
     cdef void (*al_process_updates_soft)()
 
 cdef class ContextAttrs:
+    cdef object __weakref__
     cdef alc.ALCint[:] _attrs
     cdef Device _dev

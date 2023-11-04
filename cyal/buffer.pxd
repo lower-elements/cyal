@@ -4,6 +4,7 @@ from .context cimport Context
 from . cimport al
 
 cdef class Buffer:
+    cdef object __weakref__
     cdef readonly Context context
     cdef readonly al.ALuint id
 

@@ -5,6 +5,7 @@ from .context cimport Context
 from . cimport al
 
 cdef class Source:
+    cdef object __weakref__
     cdef readonly Context context
     cdef Buffer _buf
     cdef dict _queued_bufs
