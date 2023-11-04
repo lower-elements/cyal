@@ -21,6 +21,7 @@ cdef class Context:
             emulate_direct_channels_remix=True,
             emulate_source_spatialize=True,
             emulate_disconnect=True,
+            emulate_buffer_length_query=True,
             **kwargs):
         self.device = dev
         cdef ContextAttrs attrs = ContextAttrs.from_kwargs(dev, **kwargs)
@@ -34,6 +35,7 @@ cdef class Context:
         self.emulate_direct_channels_remix = emulate_direct_channels_remix
         self.emulate_source_spatialize = emulate_source_spatialize
         self.emulate_disconnect = emulate_disconnect
+        self.emulate_buffer_length_query = emulate_buffer_length_query
 
         # Make the context current here, as checking for extensions requires it, and alGetProcAddress() may return context-specific functions
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
@@ -41,6 +43,14 @@ cdef class Context:
 
         # Extension enum values
         self.alc_connected = alc.alcGetEnumValue(self.device._device, b"ALC_CONNECTED");
+        if al.alIsExtensionPresent(b"AL_SOFT_BUFFER_LENGTH_QUERY") == al.AL_TRUE:
+            self.al_byte_length_soft = al.alGetEnumValue(b"AL_BYTE_LENGTH_SOFT")
+            self.al_sample_length_soft = al.alGetEnumValue(b"AL_SAMPLE_LENGTH_SOFT")
+            self.al_sec_length_soft = al.alGetEnumValue(b"AL_SEC_LENGTH_SOFT")
+        else:
+            self.al_byte_length_soft = al.AL_NONE
+            self.al_sample_length_soft = al.AL_NONE
+            self.al_sec_length_soft = al.AL_NONE
 
         # AL_SOFT_deferred_updates extension functions
         if al.alIsExtensionPresent("AL_SOFT_DEFERRED_UPDATES") == al.AL_TRUE:

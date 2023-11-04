@@ -1,8 +1,8 @@
 # cython: language_level=3
 
 from .context cimport Context
-from .exceptions cimport check_al_error
-from . cimport alc
+from .exceptions cimport check_al_error, UnsupportedExtensionError
+from . cimport al, alc
 
 cdef class Buffer:
     def __cinit__(self):
@@ -51,3 +51,37 @@ cdef class Buffer:
         cdef al.ALsizei val
         al.alGetBufferi(self.id, al.AL_FREQUENCY, &val)
         return val
+
+    @property
+    def byte_length(self):
+        cdef al.ALint val
+        if self.context.al_byte_length_soft != al.AL_NONE:
+            al.alGetBufferi(self.id, self.context.al_byte_length_soft, &val)
+            return val
+        elif self.context.emulate_buffer_length_query:
+            return len(self)
+        else:
+            raise UnsupportedExtensionError("AL_SOFT_BUFFER_LENGTH_QUERY")
+
+    @property
+    def sample_length(self):
+        cdef al.ALint val
+        if self.context.al_sample_length_soft != al.AL_NONE:
+            al.alGetBufferi(self.id, self.context.al_sample_length_soft, &val)
+            return val
+        elif self.context.emulate_buffer_length_query:
+            return len(self) // (self.bits // 8) // self.channels
+        else:
+            raise UnsupportedExtensionError("AL_SOFT_BUFFER_LENGTH_QUERY")
+
+    @property
+    def sec_length(self):
+        cdef al.ALfloat val
+        if self.context.al_sec_length_soft != al.AL_NONE:
+            al.alGetBufferf(self.id, self.context.al_sec_length_soft, &val)
+            return val
+        elif self.context.emulate_buffer_length_query:
+            try: return len(self) // (self.bits // 8) // self.channels / self.sample_rate
+            except ZeroDivisionError: return 0
+        else:
+            raise UnsupportedExtensionError("AL_SOFT_BUFFER_LENGTH_QUERY")
