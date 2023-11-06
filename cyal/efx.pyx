@@ -59,6 +59,8 @@ cdef class EfxExtension:
         self.alc_max_auxiliary_sends = alc.alcGetEnumValue(ctx.device._device, b"ALC_MAX_AUXILIARY_SENDS")
         self.al_effect_type = alc.alcGetEnumValue(ctx.device._device, b"AL_EFFECT_TYPE")
         self.al_filter_type = alc.alcGetEnumValue(ctx.device._device, b"AL_FILTER_TYPE")
+        self.al_effectslot_effect = alc.alcGetEnumValue(ctx.device._device, b"AL_EFFECTSLOT_EFFECT")
+        self.al_effect_null = alc.alcGetEnumValue(ctx.device._device, b"AL_EFFECT_NULL")
 
         # Restore the old context (if any)
         alc.alcMakeContextCurrent(prev_ctx)
@@ -159,6 +161,25 @@ cdef class AuxiliaryEffectSlot:
         alc.alcMakeContextCurrent(self.efx.context._ctx)
         self.efx.al_delete_auxiliary_effect_slots(1, &self.id)
         alc.alcMakeContextCurrent(prev_ctx)
+
+    @property
+    def effect(self):
+        return self._effect
+
+    @effect.setter
+    def effect(self, effect):
+        if not isinstance(effect, Effect):
+            raise TypeError("effect argument must be a subclass of cyal.efx.Effect")
+        self.efx.al_auxiliary_effect_slot_i(self.id, self.efx.al_effectslot_effect, effect.id)
+        check_al_error()
+        # Keep a reference, the Effect can't be freed while still in use
+        self._effect = effect
+
+    @effect.deleter
+    def effect(self):
+        self.efx.al_auxiliary_effect_slot_i(self.id, self.efx.al_effectslot_effect, self.efx.al_effect_null)
+        check_al_error()
+        self._effect = None
 
 cdef class Effect:
     def __cinit__(self):

@@ -46,10 +46,13 @@ cdef class EfxExtension:
     cdef alc.ALCenum alc_max_auxiliary_sends
     cdef al.ALenum al_effect_type
     cdef al.ALenum al_filter_type
+    cdef al.ALenum al_effectslot_effect
+    cdef al.ALenum al_effect_null
 
 cdef class AuxiliaryEffectSlot:
     cdef object __weakref__
     cdef readonly EfxExtension efx
+    cdef Effect _effect
     cdef readonly al.ALuint id
 
     @staticmethod
