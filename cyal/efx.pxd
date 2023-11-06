@@ -8,44 +8,44 @@ cdef class EfxExtension:
     cdef readonly Context context
 
     # Function pointers
-    cdef void (*alGenEffects)(al.ALsizei n, al.ALuint *effects)
-    cdef void (*alDeleteEffects)(al.ALsizei n, const al.ALuint *effects)
-    cdef void (*alEffecti)(al.ALuint effect, al.ALenum param, al.ALint iValue)
-    cdef void (*alEffectiv)(al.ALuint effect, al.ALenum param, const al.ALint *piValues)
-    cdef void (*alEffectf)(al.ALuint effect, al.ALenum param, al.ALfloat flValue)
-    cdef void (*alEffectfv)(al.ALuint effect, al.ALenum param, const al.ALfloat *pflValues)
-    cdef void (*alGetEffecti)(al.ALuint effect, al.ALenum param, al.ALint *piValue)
-    cdef void (*alGetEffectiv)(al.ALuint effect, al.ALenum param, al.ALint *piValues)
-    cdef void (*alGetEffectf)(al.ALuint effect, al.ALenum param, al.ALfloat *pflValue)
-    cdef void (*alGetEffectfv)(al.ALuint effect, al.ALenum param, al.ALfloat *pflValues)
+    cdef void (*al_gen_effects)(al.ALsizei n, al.ALuint *effects)
+    cdef void (*al_delete_effects)(al.ALsizei n, const al.ALuint *effects)
+    cdef void (*al_effect_i)(al.ALuint effect, al.ALenum param, al.ALint iValue)
+    cdef void (*al_effect_iv)(al.ALuint effect, al.ALenum param, const al.ALint *piValues)
+    cdef void (*al_effect_f)(al.ALuint effect, al.ALenum param, al.ALfloat flValue)
+    cdef void (*al_effect_fv)(al.ALuint effect, al.ALenum param, const al.ALfloat *pflValues)
+    cdef void (*al_get_effect_i)(al.ALuint effect, al.ALenum param, al.ALint *piValue)
+    cdef void (*al_get_effect_iv)(al.ALuint effect, al.ALenum param, al.ALint *piValues)
+    cdef void (*al_get_effect_f)(al.ALuint effect, al.ALenum param, al.ALfloat *pflValue)
+    cdef void (*al_get_effect_fv)(al.ALuint effect, al.ALenum param, al.ALfloat *pflValues)
 
-    cdef void (*alGenFilters)(al.ALsizei n, al.ALuint *filters)
-    cdef void (*alDeleteFilters)(al.ALsizei n, const al.ALuint *filters)
-    cdef void (*alFilteri)(al.ALuint filter, al.ALenum param, al.ALint iValue)
-    cdef void (*alFilteriv)(al.ALuint filter, al.ALenum param, const al.ALint *piValues)
-    cdef void (*alFilterf)(al.ALuint filter, al.ALenum param, al.ALfloat flValue)
-    cdef void (*alFilterfv)(al.ALuint filter, al.ALenum param, const al.ALfloat *pflValues)
-    cdef void (*alGetFilteri)(al.ALuint filter, al.ALenum param, al.ALint *piValue)
-    cdef void (*alGetFilteriv)(al.ALuint filter, al.ALenum param, al.ALint *piValues)
-    cdef void (*alGetFilterf)(al.ALuint filter, al.ALenum param, al.ALfloat *pflValue)
-    cdef void (*alGetFilterfv)(al.ALuint filter, al.ALenum param, al.ALfloat *pflValues)
+    cdef void (*al_gen_filters)(al.ALsizei n, al.ALuint *filters)
+    cdef void (*al_delete_filters)(al.ALsizei n, const al.ALuint *filters)
+    cdef void (*al_filter_i)(al.ALuint filter, al.ALenum param, al.ALint iValue)
+    cdef void (*al_filter_iv)(al.ALuint filter, al.ALenum param, const al.ALint *piValues)
+    cdef void (*al_filter_f)(al.ALuint filter, al.ALenum param, al.ALfloat flValue)
+    cdef void (*al_filter_fv)(al.ALuint filter, al.ALenum param, const al.ALfloat *pflValues)
+    cdef void (*al_get_filter_i)(al.ALuint filter, al.ALenum param, al.ALint *piValue)
+    cdef void (*al_get_filter_iv)(al.ALuint filter, al.ALenum param, al.ALint *piValues)
+    cdef void (*al_get_filter_f)(al.ALuint filter, al.ALenum param, al.ALfloat *pflValue)
+    cdef void (*al_get_filter_fv)(al.ALuint filter, al.ALenum param, al.ALfloat *pflValues)
 
-    cdef void (*alGenAuxiliaryEffectSlots)(al.ALsizei n, al.ALuint *effectslots)
-    cdef void (*alDeleteAuxiliaryEffectSlots)(al.ALsizei n, const al.ALuint *effectslots)
-    cdef void (*alAuxiliaryEffectSloti)(al.ALuint effectslot, al.ALenum param, al.ALint iValue)
-    cdef void (*alAuxiliaryEffectSlotiv)(al.ALuint effectslot, al.ALenum param, const al.ALint *piValues)
-    cdef void (*alAuxiliaryEffectSlotf)(al.ALuint effectslot, al.ALenum param, al.ALfloat flValue)
-    cdef void (*alAuxiliaryEffectSlotfv)(al.ALuint effectslot, al.ALenum param, const al.ALfloat *pflValues)
-    cdef void (*alGetAuxiliaryEffectSloti)(al.ALuint effectslot, al.ALenum param, al.ALint *piValue)
-    cdef void (*alGetAuxiliaryEffectSlotiv)(al.ALuint effectslot, al.ALenum param, al.ALint *piValues)
-    cdef void (*alGetAuxiliaryEffectSlotf)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValue)
-    cdef void (*alGetAuxiliaryEffectSlotfv)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValues)
+    cdef void (*al_gen_auxiliary_effect_slots)(al.ALsizei n, al.ALuint *effectslots)
+    cdef void (*al_delete_auxiliary_effect_slots)(al.ALsizei n, const al.ALuint *effectslots)
+    cdef void (*al_auxiliary_effect_slot_i)(al.ALuint effectslot, al.ALenum param, al.ALint iValue)
+    cdef void (*al_auxiliary_effect_slot_iv)(al.ALuint effectslot, al.ALenum param, const al.ALint *piValues)
+    cdef void (*al_auxiliary_effect_slot_f)(al.ALuint effectslot, al.ALenum param, al.ALfloat flValue)
+    cdef void (*al_auxiliary_effect_slot_fv)(al.ALuint effectslot, al.ALenum param, const al.ALfloat *pflValues)
+    cdef void (*al_get_auxiliary_effect_slot_i)(al.ALuint effectslot, al.ALenum param, al.ALint *piValue)
+    cdef void (*al_get_auxiliary_effect_slot_iv)(al.ALuint effectslot, al.ALenum param, al.ALint *piValues)
+    cdef void (*al_get_auxiliary_effect_slot_f)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValue)
+    cdef void (*al_get_auxiliary_effect_slot_fv)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValues)
 
     # Enum values
-    cdef al.ALenum AL_METERS_PER_UNIT
+    cdef al.ALenum al_meters_per_unit
     cdef alc.ALCenum alc_max_auxiliary_sends
-    cdef al.ALenum AL_EFFECT_TYPE
-    cdef al.ALenum AL_FILTER_TYPE
+    cdef al.ALenum al_effect_type
+    cdef al.ALenum al_filter_type
 
 cdef class AuxiliaryEffectSlot:
     cdef object __weakref__

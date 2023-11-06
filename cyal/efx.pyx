@@ -22,43 +22,43 @@ cdef class EfxExtension:
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
         alc.alcMakeContextCurrent(ctx._ctx)
 
-        self.alGenEffects = <void (*)(al.ALsizei n, al.ALuint *effects)>al.alGetProcAddress("alGenEffects")
-        self.alDeleteEffects = <void (*)(al.ALsizei n, const al.ALuint *effects)>al.alGetProcAddress("alDeleteEffects")
-        self.alEffecti = <void (*)(al.ALuint effect, al.ALenum param, al.ALint iValue)>al.alGetProcAddress("alEffecti")
-        self.alEffectiv = <void (*)(al.ALuint effect, al.ALenum param, const al.ALint *piValues)>al.alGetProcAddress("alEffectiv")
-        self.alEffectf = <void (*)(al.ALuint effect, al.ALenum param, al.ALfloat flValue)>al.alGetProcAddress("alEffectf")
-        self.alEffectfv = <void (*)(al.ALuint effect, al.ALenum param, const al.ALfloat *pflValues)>al.alGetProcAddress("alEffectfv")
-        self.alGetEffecti = <void (*)(al.ALuint effect, al.ALenum param, al.ALint *piValue)>al.alGetProcAddress("alGetEffecti")
-        self.alGetEffectiv = <void (*)(al.ALuint effect, al.ALenum param, al.ALint *piValues)>al.alGetProcAddress("alGetEffectiv")
-        self.alGetEffectf = <void (*)(al.ALuint effect, al.ALenum param, al.ALfloat *pflValue)>al.alGetProcAddress("alGetEffectf")
-        self.alGetEffectfv = <void (*)(al.ALuint effect, al.ALenum param, al.ALfloat *pflValues)>al.alGetProcAddress("alGetEffectfv")
+        self.al_gen_effects = <void (*)(al.ALsizei n, al.ALuint *effects)>al.alGetProcAddress("alGenEffects")
+        self.al_delete_effects = <void (*)(al.ALsizei n, const al.ALuint *effects)>al.alGetProcAddress("alDeleteEffects")
+        self.al_effect_i = <void (*)(al.ALuint effect, al.ALenum param, al.ALint iValue)>al.alGetProcAddress("alEffecti")
+        self.al_effect_iv = <void (*)(al.ALuint effect, al.ALenum param, const al.ALint *piValues)>al.alGetProcAddress("alEffectiv")
+        self.al_effect_f = <void (*)(al.ALuint effect, al.ALenum param, al.ALfloat flValue)>al.alGetProcAddress("alEffectf")
+        self.al_effect_fv = <void (*)(al.ALuint effect, al.ALenum param, const al.ALfloat *pflValues)>al.alGetProcAddress("alEffectfv")
+        self.al_get_effect_i = <void (*)(al.ALuint effect, al.ALenum param, al.ALint *piValue)>al.alGetProcAddress("alGetEffecti")
+        self.al_get_effect_iv = <void (*)(al.ALuint effect, al.ALenum param, al.ALint *piValues)>al.alGetProcAddress("alGetEffectiv")
+        self.al_get_effect_f = <void (*)(al.ALuint effect, al.ALenum param, al.ALfloat *pflValue)>al.alGetProcAddress("alGetEffectf")
+        self.al_get_effect_fv = <void (*)(al.ALuint effect, al.ALenum param, al.ALfloat *pflValues)>al.alGetProcAddress("alGetEffectfv")
 
-        self.alGenFilters = <void (*)(al.ALsizei n, al.ALuint *filters)>al.alGetProcAddress("alGenFilters")
-        self.alDeleteFilters = <void (*)(al.ALsizei n, const al.ALuint *filters)>al.alGetProcAddress("alDeleteFilters")
-        self.alFilteri = <void (*)(al.ALuint filter, al.ALenum param, al.ALint iValue)>al.alGetProcAddress("alFilteri")
-        self.alFilteriv = <void (*)(al.ALuint filter, al.ALenum param, const al.ALint *piValues)>al.alGetProcAddress("alFilteriv")
-        self.alFilterf = <void (*)(al.ALuint filter, al.ALenum param, al.ALfloat flValue)>al.alGetProcAddress("alFilterf")
-        self.alFilterfv = <void (*)(al.ALuint filter, al.ALenum param, const al.ALfloat *pflValues)>al.alGetProcAddress("alFilterfv")
-        self.alGetFilteri = <void (*)(al.ALuint filter, al.ALenum param, al.ALint *piValue)>al.alGetProcAddress("alGetFilteri")
-        self.alGetFilteriv = <void (*)(al.ALuint filter, al.ALenum param, al.ALint *piValues)>al.alGetProcAddress("alGetFilteriv")
-        self.alGetFilterf = <void (*)(al.ALuint filter, al.ALenum param, al.ALfloat *pflValue)>al.alGetProcAddress("alGetFilterf")
-        self.alGetFilterfv = <void (*)(al.ALuint filter, al.ALenum param, al.ALfloat *pflValues)>al.alGetProcAddress("alGetFilterfv")
+        self.al_gen_filters = <void (*)(al.ALsizei n, al.ALuint *filters)>al.alGetProcAddress("alGenFilters")
+        self.al_delete_filters = <void (*)(al.ALsizei n, const al.ALuint *filters)>al.alGetProcAddress("alDeleteFilters")
+        self.al_filter_i = <void (*)(al.ALuint filter, al.ALenum param, al.ALint iValue)>al.alGetProcAddress("alFilteri")
+        self.al_filter_iv = <void (*)(al.ALuint filter, al.ALenum param, const al.ALint *piValues)>al.alGetProcAddress("alFilteriv")
+        self.al_filter_f = <void (*)(al.ALuint filter, al.ALenum param, al.ALfloat flValue)>al.alGetProcAddress("alFilterf")
+        self.al_filter_fv = <void (*)(al.ALuint filter, al.ALenum param, const al.ALfloat *pflValues)>al.alGetProcAddress("alFilterfv")
+        self.al_get_filter_i = <void (*)(al.ALuint filter, al.ALenum param, al.ALint *piValue)>al.alGetProcAddress("alGetFilteri")
+        self.al_get_filter_iv = <void (*)(al.ALuint filter, al.ALenum param, al.ALint *piValues)>al.alGetProcAddress("alGetFilteriv")
+        self.al_get_filter_f = <void (*)(al.ALuint filter, al.ALenum param, al.ALfloat *pflValue)>al.alGetProcAddress("alGetFilterf")
+        self.al_get_filter_fv = <void (*)(al.ALuint filter, al.ALenum param, al.ALfloat *pflValues)>al.alGetProcAddress("alGetFilterfv")
 
-        self.alGenAuxiliaryEffectSlots = <void (*)(al.ALsizei n, al.ALuint *effectslots)>al.alGetProcAddress("alGenAuxiliaryEffectSlots")
-        self.alDeleteAuxiliaryEffectSlots = <void (*)(al.ALsizei n, const al.ALuint *effectslots)>al.alGetProcAddress("alDeleteAuxiliaryEffectSlots")
-        self.alAuxiliaryEffectSloti = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALint iValue)>al.alGetProcAddress("alAuxiliaryEffectSloti")
-        self.alAuxiliaryEffectSlotiv = <void (*)(al.ALuint effectslot, al.ALenum param, const al.ALint *piValues)>al.alGetProcAddress("alAuxiliaryEffectSlotiv")
-        self.alAuxiliaryEffectSlotf = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat flValue)>al.alGetProcAddress("alAuxiliaryEffectSlotf")
-        self.alAuxiliaryEffectSlotfv = <void (*)(al.ALuint effectslot, al.ALenum param, const al.ALfloat *pflValues)>al.alGetProcAddress("alAuxiliaryEffectSlotfv")
-        self.alGetAuxiliaryEffectSloti = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALint *piValue)>al.alGetProcAddress("alGetAuxiliaryEffectSloti")
-        self.alGetAuxiliaryEffectSlotiv = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALint *piValues)>al.alGetProcAddress("alGetAuxiliaryEffectSlotiv")
-        self.alGetAuxiliaryEffectSlotf = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValue)>al.alGetProcAddress("alGetAuxiliaryEffectSlotf")
-        self.alGetAuxiliaryEffectSlotfv = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValues)>al.alGetProcAddress("alGetAuxiliaryEffectSlotfv")
+        self.al_gen_auxiliary_effect_slots = <void (*)(al.ALsizei n, al.ALuint *effectslots)>al.alGetProcAddress("alGenAuxiliaryEffectSlots")
+        self.al_delete_auxiliary_effect_slots = <void (*)(al.ALsizei n, const al.ALuint *effectslots)>al.alGetProcAddress("alDeleteAuxiliaryEffectSlots")
+        self.al_auxiliary_effect_slot_i = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALint iValue)>al.alGetProcAddress("alAuxiliaryEffectSloti")
+        self.al_auxiliary_effect_slot_iv = <void (*)(al.ALuint effectslot, al.ALenum param, const al.ALint *piValues)>al.alGetProcAddress("alAuxiliaryEffectSlotiv")
+        self.al_auxiliary_effect_slot_f = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat flValue)>al.alGetProcAddress("alAuxiliaryEffectSlotf")
+        self.al_auxiliary_effect_slot_fv = <void (*)(al.ALuint effectslot, al.ALenum param, const al.ALfloat *pflValues)>al.alGetProcAddress("alAuxiliaryEffectSlotfv")
+        self.al_get_auxiliary_effect_slot_i = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALint *piValue)>al.alGetProcAddress("alGetAuxiliaryEffectSloti")
+        self.al_get_auxiliary_effect_slot_iv = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALint *piValues)>al.alGetProcAddress("alGetAuxiliaryEffectSlotiv")
+        self.al_get_auxiliary_effect_slot_f = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValue)>al.alGetProcAddress("alGetAuxiliaryEffectSlotf")
+        self.al_get_auxiliary_effect_slot_fv = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValues)>al.alGetProcAddress("alGetAuxiliaryEffectSlotfv")
 
-        self.AL_METERS_PER_UNIT = alc.alcGetEnumValue(ctx.device._device, b"AL_METERS_PER_UNIT")
+        self.al_meters_per_unit = alc.alcGetEnumValue(ctx.device._device, b"AL_METERS_PER_UNIT")
         self.alc_max_auxiliary_sends = alc.alcGetEnumValue(ctx.device._device, b"ALC_MAX_AUXILIARY_SENDS")
-        self.AL_EFFECT_TYPE = alc.alcGetEnumValue(ctx.device._device, b"AL_EFFECT_TYPE")
-        self.AL_FILTER_TYPE = alc.alcGetEnumValue(ctx.device._device, b"AL_FILTER_TYPE")
+        self.al_effect_type = alc.alcGetEnumValue(ctx.device._device, b"AL_EFFECT_TYPE")
+        self.al_filter_type = alc.alcGetEnumValue(ctx.device._device, b"AL_FILTER_TYPE")
 
         # Restore the old context (if any)
         alc.alcMakeContextCurrent(prev_ctx)
@@ -76,12 +76,12 @@ cdef class EfxExtension:
     @property
     def meters_per_unit(self):
         cdef al.ALfloat mpu
-        al.alGetListenerf(self.AL_METERS_PER_UNIT, &mpu)
+        al.alGetListenerf(self.al_meters_per_unit, &mpu)
         return mpu
 
     @meters_per_unit.setter
     def meters_per_unit(self, val):
-        al.alListenerf(self.AL_METERS_PER_UNIT, val)
+        al.alListenerf(self.al_meters_per_unit, val)
         check_al_error()
 
     @property
@@ -93,7 +93,7 @@ cdef class EfxExtension:
 
     def gen_auxiliary_effect_slot(self, **kwargs):
         cdef al.ALuint id
-        self.alGenAuxiliaryEffectSlots(1, &id)
+        self.al_gen_auxiliary_effect_slots(1, &id)
         check_al_error()
         cdef AuxiliaryEffectSlot slot = AuxiliaryEffectSlot.from_id(self, id)
         for k, v in kwargs.items(): setattr(slot, k, v)
@@ -101,7 +101,7 @@ cdef class EfxExtension:
 
     def gen_auxiliary_effect_slots(self, n, **kwargs):
         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
-        self.alGenAuxiliaryEffectSlots(n, &ids[0])
+        self.al_gen_auxiliary_effect_slots(n, &ids[0])
         check_al_error()
         cdef list slots = [AuxiliaryEffectSlot.from_id(self, id) for id in ids]
         for slot in slots:
@@ -112,15 +112,15 @@ cdef class EfxExtension:
         if not issubclass(cls, Effect):
             raise TypeError("cls argument must be a subclass of cyal.efx.Effect")
         cdef al.ALuint id
-        self.alGenEffects(1, &id)
+        self.al_gen_effects(1, &id)
         check_al_error()
         return make_effect(cls, self, id, kwargs)
 
-    def gen_effects(self, n, cls=Effect, **kwargs):
+    def gen_effects(self, n, type cls=Effect, **kwargs):
         if not issubclass(cls, Effect):
             raise TypeError("cls argument must be a subclass of cyal.efx.Effect")
         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
-        self.alGenEffects(n, &ids[0])
+        self.al_gen_effects(n, &ids[0])
         check_al_error()
         return [make_effect(cls, self, id, kwargs) for id in ids]
 
@@ -128,15 +128,15 @@ cdef class EfxExtension:
         if not issubclass(cls, Filter):
             raise TypeError("cls argument must be a subclass of cyal.efx.Filter")
         cdef al.ALuint id
-        self.alGenFilters(1, &id)
+        self.al_gen_filters(1, &id)
         check_al_error()
         return make_filter(cls, self, id, kwargs)
 
-    def gen_filters(self, n, cls=Filter, **kwargs):
+    def gen_filters(self, n, type cls=Filter, **kwargs):
         if not issubclass(cls, Filter):
             raise TypeError("cls argument must be a subclass of cyal.efx.Filter")
         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
-        self.alGenFilters(n, &ids[0])
+        self.al_gen_filters(n, &ids[0])
         check_al_error()
         return [make_filter(cls, self, id, kwargs) for id in ids]
 
@@ -157,7 +157,7 @@ cdef class AuxiliaryEffectSlot:
     def __dealloc__(self):
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
         alc.alcMakeContextCurrent(self.efx.context._ctx)
-        self.efx.alDeleteAuxiliaryEffectSlots(1, &self.id)
+        self.efx.al_delete_auxiliary_effect_slots(1, &self.id)
         alc.alcMakeContextCurrent(prev_ctx)
 
 cdef class Effect:
@@ -174,7 +174,7 @@ cdef class Effect:
     def __dealloc__(self):
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
         alc.alcMakeContextCurrent(self.efx.context._ctx)
-        self.efx.alDeleteEffects(1, &self.id)
+        self.efx.al_delete_effects(1, &self.id)
         alc.alcMakeContextCurrent(prev_ctx)
 
     @property
@@ -187,28 +187,28 @@ cdef class Effect:
         cdef enum_val = al.alGetEnumValue(b"AL_EFFECT_" + val_upper.encode("utf8"))
         if enum_val == al.AL_NONE:
             raise RuntimeError(f"Could not get enum value for AL_EFFECT_{val_upper}")
-        self.efx.alEffecti(self.id, self.efx.AL_EFFECT_TYPE, enum_val)
+        self.efx.al_effect_i(self.id, self.efx.al_effect_type, enum_val)
         check_al_error()
         self._type = val
 
     def get_int(self, prop):
         cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
         cdef al.ALint val
-        self.efx.alGetEffecti(self.id, e_val, &val)
+        self.efx.al_get_effect_i(self.id, e_val, &val)
         check_al_error()
         return val
 
     def get_float(self, prop):
         cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
         cdef al.ALfloat val
-        self.efx.alGetEffectf(self.id, e_val, &val)
+        self.efx.al_get_effect_f(self.id, e_val, &val)
         check_al_error()
         return val
 
     def get_v3f(self, prop):
         cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
         cdef al.ALfloat[3] val
-        self.efx.alGetEffectfv(self.id, e_val, val)
+        self.efx.al_get_effect_fv(self.id, e_val, val)
         check_al_error()
         return V3f(val[0], val[1], val[2])
 
@@ -216,14 +216,14 @@ cdef class Effect:
         cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
         cdef al.ALfloat[3] data
         if isinstance(val, int):
-            self.efx.alEffecti(self.id, e_val, val)
+            self.efx.al_effect_i(self.id, e_val, val)
         elif isinstance(val, float):
-            self.efx.alEffectf(self.id, e_val, val)
+            self.efx.al_effect_f(self.id, e_val, val)
         elif (isinstance(val, Sequence) and len(val) == 3) or isinstance(val, V3f):
             data = [val[0], val[1], val[2]]
-            self.efx.alEffectfv(self.id, e_val, data)
+            self.efx.al_effect_fv(self.id, e_val, data)
         else:
-            raise TypeError("Cannot convert to OpenAL type")
+            raise TypeError(f"Cannot convert {type(val)} to OpenAL type")
         check_al_error()
 
 cdef class Filter:
@@ -240,7 +240,7 @@ cdef class Filter:
     def __dealloc__(self):
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
         alc.alcMakeContextCurrent(self.efx.context._ctx)
-        self.efx.alDeleteFilters(1, &self.id)
+        self.efx.al_delete_filters(1, &self.id)
         alc.alcMakeContextCurrent(prev_ctx)
 
     @property
@@ -253,28 +253,28 @@ cdef class Filter:
         cdef enum_val = al.alGetEnumValue(b"AL_FILTER_" + val_upper.encode("utf8"))
         if enum_val == al.AL_NONE:
             raise RuntimeError(f"Could not get enum value for AL_FILTER_{val_upper}")
-        self.efx.alFilteri(self.id, self.efx.AL_FILTER_TYPE, enum_val)
+        self.efx.al_filter_i(self.id, self.efx.al_filter_type, enum_val)
         check_al_error()
         self._type = val
 
     def get_int(self, prop):
         cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
         cdef al.ALint val
-        self.efx.alGetFilteri(self.id, e_val, &val)
+        self.efx.al_get_filter_i(self.id, e_val, &val)
         check_al_error()
         return val
 
     def get_float(self, prop):
         cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
         cdef al.ALfloat val
-        self.efx.alGetFilterf(self.id, e_val, &val)
+        self.efx.al_get_filter_f(self.id, e_val, &val)
         check_al_error()
         return val
 
     def get_v3f(self, prop):
         cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
         cdef al.ALfloat[3] val
-        self.efx.alGetfilterfv(self.id, e_val, val)
+        self.efx.al_get_filter_fv(self.id, e_val, val)
         check_al_error()
         return V3f(val[0], val[1], val[2])
 
@@ -282,14 +282,14 @@ cdef class Filter:
         cdef al.ALenum e_val = get_al_enum(self._type + "_" + prop)
         cdef al.ALfloat[3] data
         if isinstance(val, int):
-            self.efx.alFilteri(self.id, e_val, val)
+            self.efx.al_filter_i(self.id, e_val, val)
         elif isinstance(val, float):
-            self.efx.alFilterf(self.id, e_val, val)
+            self.efx.al_filter_f(self.id, e_val, val)
         elif (isinstance(val, Sequence) and len(val) == 3) or isinstance(val, V3f):
             data = [val[0], val[1], val[2]]
-            self.efx.alFilterfv(self.id, e_val, data)
+            self.efx.al_filter_fv(self.id, e_val, data)
         else:
-            raise TypeError("Cannot convert to OpenAL type")
+            raise TypeError(f"Cannot convert {type(val)} to OpenAL type")
         check_al_error()
 
 cdef object make_effect(type cls, EfxExtension efx, al.ALuint id, dict kwargs):
