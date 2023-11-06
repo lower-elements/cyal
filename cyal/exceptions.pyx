@@ -38,12 +38,18 @@ cdef class InvalidContextError(AlcError):
         return "Invalid OpenAL context"
 
 cdef class InvalidAlcEnumError(AlcError):
+    def __cinit__(self, *args, str name=None, **kwargs):
+        self.enum_name = name
+
     @property
     def errcode(self):
         return alc.ALC_INVALID_ENUM
 
     def __str__(self):
-        return "Invalid OpenAL context enum value"
+        s = "Invalid OpenAL context enum value"
+        if self.enum_name is not None:
+            s += f": '{self.enum_name}'"
+        return s
 
 cdef class InvalidAlcValueError(AlcError):
     @property
@@ -102,13 +108,19 @@ cdef class InvalidOperationError(AlError):
         return string.decode() if string is not NULL else "Invalid OpenAL operation"
 
 cdef class InvalidAlEnumError(AlError):
+    def __cinit__(self, *args, str name=None, **kwargs):
+        self.enum_name = name
+
     @property
     def errcode(self):
         return al.AL_INVALID_ENUM
 
     def __str__(self):
         cdef const al.ALchar* string = al.alGetString(al.AL_INVALID_ENUM)
-        return string.decode() if string is not NULL else "Invalid OpenAL enum value"
+        s = string.decode() if string is not NULL else "Invalid OpenAL enum value"
+        if self.enum_name is not None:
+            s += f": '{self.enum_name}'"
+        return s
 
 cdef class InvalidAlValueError(AlError):
     @property

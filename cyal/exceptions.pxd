@@ -20,7 +20,7 @@ cdef class InvalidContextError(AlcError):
     pass
 
 cdef class InvalidAlcEnumError(AlcError):
-    pass
+    cdef readonly str enum_name
 
 cdef class InvalidAlcValueError(AlcError):
     pass
@@ -42,7 +42,7 @@ cdef class InvalidOperationError(AlError):
     pass
 
 cdef class InvalidAlEnumError(AlError):
-    pass
+    cdef readonly str enum_name
 
 cdef class InvalidAlValueError(AlError):
     pass
