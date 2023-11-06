@@ -1,11 +1,13 @@
 # cython: language_level=3
 
+
 from . cimport al, alc
 from .context cimport Context
 
 cdef class EfxExtension:
     cdef object __weakref__
     cdef readonly Context context
+    cdef object source_direct_filters
 
     # Function pointers
     cdef void (*al_gen_effects)(al.ALsizei n, al.ALuint *effects)
@@ -48,6 +50,8 @@ cdef class EfxExtension:
     cdef al.ALenum al_filter_type
     cdef al.ALenum al_effectslot_effect
     cdef al.ALenum al_effect_null
+    cdef al.ALenum al_filter_null
+    cdef al.ALenum al_direct_filter
 
 cdef class AuxiliaryEffectSlot:
     cdef object __weakref__

@@ -3,12 +3,14 @@
 from cpython cimport array
 import array
 from collections.abc import Sequence
+from weakref import WeakKeyDictionary
 
 from . cimport al, alc
 from .context cimport Context
 from .device cimport Device
 from .exceptions cimport check_alc_error, check_al_error, UnsupportedExtensionError
 from .util cimport get_al_enum, V3f
+from .source cimport Source
 
 cdef array.array ids_template = array.array('I')
 
@@ -17,6 +19,7 @@ cdef class EfxExtension:
         if alc.alcIsExtensionPresent(ctx.device._device, "ALC_EXT_EFX") == al.AL_FALSE:
             raise UnsupportedExtensionError("ALC_EXT_EFX")
         self.context = ctx
+        self.source_direct_filters = WeakKeyDictionary()
 
         # Get pointers to all the needed functions
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
@@ -61,6 +64,8 @@ cdef class EfxExtension:
         self.al_filter_type = alc.alcGetEnumValue(ctx.device._device, b"AL_FILTER_TYPE")
         self.al_effectslot_effect = alc.alcGetEnumValue(ctx.device._device, b"AL_EFFECTSLOT_EFFECT")
         self.al_effect_null = alc.alcGetEnumValue(ctx.device._device, b"AL_EFFECT_NULL")
+        self.al_filter_null = alc.alcGetEnumValue(ctx.device._device, b"AL_FILTER_NULL")
+        self.al_direct_filter = alc.alcGetEnumValue(ctx.device._device, b"AL_DIRECT_FILTER")
 
         # Restore the old context (if any)
         alc.alcMakeContextCurrent(prev_ctx)
@@ -141,6 +146,16 @@ cdef class EfxExtension:
         self.al_gen_filters(n, &ids[0])
         check_al_error()
         return [make_filter(cls, self, id, kwargs) for id in ids]
+
+    def set_filter(self, source, filter):
+        if not isinstance(source, Source):
+            raise TypeError("source argument must be a subclass of cyal.source.Source")
+        if not isinstance(filter, Filter):
+            raise TypeError("filter argument must be a subclass of cyal.efx.Filter")
+        al.alSourcei(source.id, self.al_direct_filter, filter.id)
+        check_al_error()
+        # Remember which Filter is attached to this Source
+        self.source_direct_filters[source] = filter
 
 cdef class AuxiliaryEffectSlot:
     def __cinit__(self):
