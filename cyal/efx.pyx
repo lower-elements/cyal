@@ -7,7 +7,7 @@ from collections.abc import Sequence
 from . cimport al, alc
 from .context cimport Context
 from .device cimport Device
-from .exceptions cimport check_alc_error, check_al_error
+from .exceptions cimport check_alc_error, check_al_error, UnsupportedExtensionError
 from .util cimport get_al_enum, V3f
 
 cdef array.array ids_template = array.array('I')
@@ -15,7 +15,7 @@ cdef array.array ids_template = array.array('I')
 cdef class EfxExtension:
     def __cinit__(self, Context ctx not None):
         if alc.alcIsExtensionPresent(ctx.device._device, "ALC_EXT_EFX") == al.AL_FALSE:
-            raise RuntimeError("Unsupported extension: ALC_EXT_EFX")
+            raise UnsupportedExtensionError("ALC_EXT_EFX")
         self.context = ctx
 
         # Get pointers to all the needed functions
