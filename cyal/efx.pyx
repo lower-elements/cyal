@@ -147,6 +147,9 @@ cdef class EfxExtension:
         check_al_error()
         return [make_filter(cls, self, id, kwargs) for id in ids]
 
+    def get_filter(self, source):
+        return self.source_direct_filters[source]
+
     def set_filter(self, source, filter):
         if not isinstance(source, Source):
             raise TypeError("source argument must be a subclass of cyal.source.Source")
@@ -156,6 +159,13 @@ cdef class EfxExtension:
         check_al_error()
         # Remember which Filter is attached to this Source
         self.source_direct_filters[source] = filter
+
+    def del_filter(self, source):
+        if not isinstance(source, Source):
+            raise TypeError("source argument must be a subclass of cyal.source.Source")
+        al.alSourcei(source.id, self.al_direct_filter, self.al_filter_null)
+        check_al_error()
+        del self.source_direct_filters[source]
 
 cdef class AuxiliaryEffectSlot:
     def __cinit__(self):
