@@ -82,7 +82,7 @@ cdef check_alc_error(alc.ALCdevice *dev):
     elif errcode == alc.ALC_INVALID_VALUE:
         raise InvalidAlcValueError()
     elif errcode == alc.ALC_OUT_OF_MEMORY:
-        raise MemoryError()
+        raise MemoryError("OpenAL is out of memory")
     else:
         raise UnknownAlcError(alc_errcode=errcode)
 
