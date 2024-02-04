@@ -1,6 +1,6 @@
 [project]
 name = "cyal"
-version = "0.3.2"
+version = "0.3.3"
 authors = [
   { name="Michael Connor Buchan", email="mikey@blindcomputing.org" },
 ]
@@ -25,10 +25,10 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://sr.ht/~thefake-vip/Cyal"
-"Repository" = "https://git.sr.ht/~thefake-vip/cyal"
-"Bug Tracker" = "https://todo.sr.ht/~thefake-vip/cyal"
-"Mailing List Archive" = "https://lists.sr.ht/~thefake-vip/cyal"
+"Homepage" = "https://github.com/lower-elements/cyal#readme"
+"Repository" = "https://github.com/lower-elements/cyal"
+"Bug Tracker" = "https://github.com/lower-elements/cyal/issues"
+"Contribute" = "https://github.com/lower-elements/cyal/pull/new"
 
 [build-system]
 requires = [

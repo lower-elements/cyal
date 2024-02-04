@@ -32,7 +32,7 @@ Manual installation:
 
 ```bash
 # Clone the repository
-git clone https://git.sr.ht/~Thefake-vip/cyal
+git clone https://github.com/lower-elements/cyal
 cd cyal
 # Install a simple wheel build tool
 pip install build
@@ -43,18 +43,15 @@ python -m build .
 
 ## Contributing
 
-[This project][project-page] is hosted on [Sourcehut][srht]. Feel free to [submit a ticket][bug-tracker] if you find a
-bug, drop by our [mailing list][mailing-list] <~thefake-vip/cyal@lists.sr.ht> to discuss the project, or send patches,
-or join our IRC channel, [#cyal on libera.chat][irc-channel] for Cyal discussion and support.
+[This project][project-page] is hosted on [Github][github]. Feel free to [submit an issue][issues] if you find a bug,
+open a [pull request][pr] to contribute, or join our IRC channel, [#cyal on libera.chat][irc-channel] for Cyal
+discussion and support.
 
-Never submitted patches via email before? Check out [Sourcehut's guide to using git send-email][git-send-email]!
-
-[project-page]: <https://sr.ht/~thefake-vip/Cyal>
-[srht]: <https://sr.ht>
-[bug-tracker]: <https://todo.sr.ht/~thefake-vip/Cyal>
-[mailing-list]: <https://lists.sr.ht/~thefake-vip/cyal>
+[project-page]: <https://github.com/lower-elements/cyal>
+[github]: <https://github.com>
+[issues]: <https://github.com/lower-elements/cyal/issues/new>
+[pr]: <https://github.com/lower-elements/cyal/pull/new>
 [irc-channel]: <ircs://irc.libera.chat:6697/#cyal>
-[git-send-email]: <https://git-send-email.io>
 
 ## License
 
