@@ -41,3 +41,9 @@ build-backend = "scikit_build_core.build"
 cmake.minimum-version = "3.24"
 ninja.minimum-version = "1.11"
 cmake.build-type = "Release"
+
+[tool.cibuildwheel.linux]
+# OpenAL Soft needs the sound system headers at compile time, but dynamically
+# loads the libraries at runtime, so it won't error on systems where these
+# libraries aren't available
+before-all = "yum install pipewire-devel pulseaudio-libs-devel alsa-lib-devel"
