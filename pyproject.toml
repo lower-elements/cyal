@@ -1,6 +1,6 @@
 [project]
 name = "cyal"
-version = "0.3.3"
+version = "0.3.4"
 authors = [
   { name="Michael Connor Buchan", email="mikey@blindcomputing.org" },
 ]
