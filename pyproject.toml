@@ -42,6 +42,12 @@ cmake.minimum-version = "3.24"
 ninja.minimum-version = "1.11"
 cmake.build-type = "Release"
 
+[tool.cibuildwheel]
+# Don't bother with Pypy builds, s390x builds (who runs OpenAL on a
+# mainframe?), and non-universal macosx builds (unnecessary if a universal
+# binary is built)
+skip = ["pp3*-*", "*_s390x", "*-macosx_{x86_64,arm64}"]
+
 [tool.cibuildwheel.linux]
 # OpenAL Soft needs the sound system headers at compile time, but dynamically
 # loads the libraries at runtime, so it won't error on systems where these
