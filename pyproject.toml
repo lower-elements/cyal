@@ -49,7 +49,6 @@ cmake.build-type = "Release"
 skip = ["pp3*-*", "*_s390x", "*-macosx_{x86_64,arm64}"]
 # Use a more up-to-date manylinux image with a pipewire-devel package
 manylinux-x86_64-image = "manylinux_2_28"
-manylinux-i686-image = "manylinux_2_28"
 manylinux-aarch64-image = "manylinux_2_28"
 manylinux-ppc64le-image = "manylinux_2_28"
 # Use a more up-to-date musllinux image
@@ -65,7 +64,7 @@ archs = ["AMD64", "x86", "ARM64"]
 archs = ["universal2"]
 
 [tool.cibuildwheel.linux]
-archs = ["x86_64", "i686", "aarch64", "ppc64le"]
+archs = ["x86_64", "aarch64", "ppc64le"]
 
 # OpenAL Soft needs the sound system headers at compile time, but dynamically
 # loads the libraries at runtime, so it won't error on systems where these
