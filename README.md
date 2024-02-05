@@ -45,14 +45,14 @@ python -m build .
 ## Contributing
 
 [This project][project-page] is hosted on [Github][github]. Feel free to [submit an issue][issues] if you find a bug,
-open a [pull request][pr] to contribute, or join our IRC channel, [#cyal on libera.chat][irc-channel] for Cyal
+open a [pull request][pr] to contribute, or join our Matrix room, [#cyal:lowerelements.club][[matrix-room] for Cyal
 discussion and support.
 
 [project-page]: <https://github.com/lower-elements/cyal>
 [github]: <https://github.com>
 [issues]: <https://github.com/lower-elements/cyal/issues/new>
 [pr]: <https://github.com/lower-elements/cyal/pull/new>
-[irc-channel]: <ircs://irc.libera.chat:6697/#cyal>
+[matrix-room]: <https://matrix.to/#/#cyal:lowerelements.club>
 
 ## License
 
