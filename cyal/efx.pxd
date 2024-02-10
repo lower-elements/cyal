@@ -47,7 +47,11 @@ cdef class EfxExtension:
     cdef al.ALenum al_effect_type
     cdef al.ALenum al_filter_type
     cdef al.ALenum al_effectslot_effect
+    cdef al.ALenum al_direct_filter
+    cdef al.ALenum al_auxiliary_send_filter
     cdef al.ALenum al_effect_null
+    cdef al.ALenum al_effectslot_null
+    cdef al.ALenum al_filter_null
 
 cdef class AuxiliaryEffectSlot:
     cdef object __weakref__

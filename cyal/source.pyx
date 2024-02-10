@@ -3,7 +3,9 @@
 from libc.limits cimport INT_MAX
 from cpython cimport array
 import array
+
 from .context cimport Context
+from .efx cimport EfxExtension, Filter
 from .exceptions cimport check_al_error, UnsupportedExtensionError
 from .util cimport V3f
 from . cimport al, alc
@@ -326,6 +328,27 @@ cdef class Source:
             check_al_error()
         elif not self.context.emulate_source_spatialize:
             raise UnsupportedExtensionError("AL_SOFT_SOURCE_SPATIALIZE")
+
+    @property
+    def direct_filter(self):
+        return self._direct_filter
+
+    @direct_filter.setter
+    def direct_filter(self, filter):
+        if not isinstance(filter, Filter):
+            raise TypeError("Source.direct_filter must be a Filter object")
+        cdef EfxExtension efx = filter.efx
+        al.alSourcei(self.id, efx.al_direct_filter, filter.id)
+        check_al_error()
+        self._direct_filter = filter
+
+    @direct_filter.deleter
+    def direct_filter(self):
+        if self._direct_filter is None: return
+        cdef EfxExtension efx = self._direct_filter.efx
+        al.alSourcei(self.id, efx.al_direct_filter, efx.al_filter_null)
+        check_al_error()
+        self._direct_filter = None
 
 cpdef enum SourceState:
     INITIAL = al.AL_INITIAL
