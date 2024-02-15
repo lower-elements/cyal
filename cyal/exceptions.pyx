@@ -111,6 +111,9 @@ cdef class InvalidAlEnumError(AlError):
     def __cinit__(self, *args, str name=None, **kwargs):
         self.enum_name = name
 
+    def __init__(self, *args, name: str=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
     @property
     def errcode(self):
         return al.AL_INVALID_ENUM

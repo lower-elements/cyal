@@ -110,5 +110,5 @@ cdef al.ALenum get_al_enum(str name):
     cdef bytes e_name_bytes = e_name.encode("utf8")
     cdef al.ALenum val = al.alGetEnumValue(<const al.ALchar *>e_name_bytes)
     if val == al.AL_NONE:
-        raise InvalidAlEnumError(enum_name=e_name)
+        raise InvalidAlEnumError(name=e_name)
     return val
