@@ -211,9 +211,15 @@ cdef class AuxiliaryEffectSlot:
         check_al_error()
         self._effect = None
 
+    def load(self, effect: Effect):
+        self.effect = effect
+
     def reload(self):
         self.efx.al_auxiliary_effect_slot_i(self.id, self.efx.al_effectslot_effect, self._effect.id)
         check_al_error()
+
+    def unload(self):
+        del self.effect
 
 cdef class Effect:
     def __cinit__(self):
