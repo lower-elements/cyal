@@ -4,8 +4,25 @@ from libc.stddef cimport size_t
 from libc.string cimport strlen
 from libc cimport math
 
+from weakref import WeakKeyDictionary
+
 from . cimport al, alc
 from .exceptions cimport InvalidAlEnumError, UnsupportedExtensionError
+
+class DefaultWeakKeyDictionary(WeakKeyDictionary):
+    __slots__ = ["default_factory"]
+
+    def __init__(self, default_factory, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.default_factory = default_factory
+        
+    def __getitem__(self, key):
+        try:
+            return super().__getitem__(key)
+        except KeyError:
+            new_val = self.default_factory()
+            self[key] = new_val
+            return new_val
 
 cdef list alc_string_to_list(const alc.ALCchar* str):
     cdef:

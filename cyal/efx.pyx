@@ -3,12 +3,14 @@
 from cpython cimport array
 import array
 from collections.abc import Sequence
+from typing import Optional
 
 from . cimport al, alc
 from .context cimport Context
 from .device cimport Device
 from .exceptions cimport check_alc_error, check_al_error, UnsupportedExtensionError
 from .util cimport get_al_enum, V3f
+from .util import DefaultWeakKeyDictionary
 
 cdef array.array ids_template = array.array('I')
 
@@ -17,6 +19,9 @@ cdef class EfxExtension:
         if alc.alcIsExtensionPresent(ctx.device._device, "ALC_EXT_EFX") == al.AL_FALSE:
             raise UnsupportedExtensionError("ALC_EXT_EFX")
         self.context = ctx
+
+        self._source_effectslot_sends = DefaultWeakKeyDictionary(dict)
+        self._source_filter_sends = DefaultWeakKeyDictionary(dict)
 
         # Get pointers to all the needed functions
         cdef alc.ALCcontext* prev_ctx = alc.alcGetCurrentContext()
@@ -145,6 +150,27 @@ cdef class EfxExtension:
         self.al_gen_filters(n, &ids[0])
         check_al_error()
         return [make_filter(cls, self, id, kwargs) for id in ids]
+
+    def send(self, source: Source, send_num: int, slot: Optional[AuxiliaryEffectSlot], *, filter: Option[Filter] = None):
+        cdef al.ALuint slot_num = slot.id if slot is not None else self.al_effectslot_null
+        cdef al.ALuint filter_num = filter.id if filter is not None else self.al_filter_null
+        al.alSource3i(source.id, self.al_auxiliary_send_filter, slot_num, send_num, filter_num)
+        check_al_error()
+
+        # Keep the effectslot alive
+        if slot is not None:
+            self._source_effectslot_sends[source][send_num] = slot
+        else:
+            try: del self._source_effectslot_sends[source][send_num]
+            except KeyError: pass
+
+        # Keep the filter alive
+        # If send() is called with slot=None, filter is ignored, so in that case, don't keep it alive
+        if filter is not None and slot is not None:
+            self._source_filter_sends[source][send_num] = filter
+        else:
+            try: del self._source_filter_sends[source][send_num]
+            except KeyError: pass
 
 cdef class AuxiliaryEffectSlot:
     def __cinit__(self):

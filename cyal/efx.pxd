@@ -6,6 +6,8 @@ from .context cimport Context
 cdef class EfxExtension:
     cdef object __weakref__
     cdef readonly Context context
+    cdef object _source_effectslot_sends
+    cdef object _source_filter_sends
 
     # Function pointers
     cdef void (*al_gen_effects)(al.ALsizei n, al.ALuint *effects)
