@@ -119,37 +119,37 @@ cdef class EfxExtension:
             for k, v in kwargs.items(): setattr(slot, k, v)
         return slots
 
-    def gen_effect(self, type cls=Effect, **kwargs):
+    def gen_effect(self, type cls=Effect, *, type: str=None, **kwargs):
         if not issubclass(cls, Effect):
             raise TypeError("cls argument must be a subclass of cyal.efx.Effect")
         cdef al.ALuint id
         self.al_gen_effects(1, &id)
         check_al_error()
-        return make_effect(cls, self, id, kwargs)
+        return make_effect(cls, self, id, type, kwargs)
 
-    def gen_effects(self, n, type cls=Effect, **kwargs):
+    def gen_effects(self, n, type cls=Effect, *, type: str=None, **kwargs):
         if not issubclass(cls, Effect):
             raise TypeError("cls argument must be a subclass of cyal.efx.Effect")
         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
         self.al_gen_effects(n, &ids[0])
         check_al_error()
-        return [make_effect(cls, self, id, kwargs) for id in ids]
+        return [make_effect(cls, self, id, type, kwargs) for id in ids]
 
-    def gen_filter(self, type cls=Filter, **kwargs):
+    def gen_filter(self, type cls=Filter, *, type: str=None, **kwargs):
         if not issubclass(cls, Filter):
             raise TypeError("cls argument must be a subclass of cyal.efx.Filter")
         cdef al.ALuint id
         self.al_gen_filters(1, &id)
         check_al_error()
-        return make_filter(cls, self, id, kwargs)
+        return make_filter(cls, self, id, type, kwargs)
 
-    def gen_filters(self, n, type cls=Filter, **kwargs):
+    def gen_filters(self, n, type cls=Filter, *, type: str=None, **kwargs):
         if not issubclass(cls, Filter):
             raise TypeError("cls argument must be a subclass of cyal.efx.Filter")
         cdef al.ALuint[:] ids = array.clone(ids_template, n, zero=False)
         self.al_gen_filters(n, &ids[0])
         check_al_error()
-        return [make_filter(cls, self, id, kwargs) for id in ids]
+        return [make_filter(cls, self, id, type, kwargs) for id in ids]
 
     def send(self, source: Source, send_num: int, slot: Optional[AuxiliaryEffectSlot], *, filter: Option[Filter] = None):
         cdef al.ALuint slot_num = slot.id if slot is not None else self.al_effectslot_null
@@ -353,14 +353,16 @@ cdef class Filter:
             raise TypeError(f"Cannot convert {type(val)} to OpenAL type")
         check_al_error()
 
-cdef object make_effect(type cls, EfxExtension efx, al.ALuint id, dict kwargs):
+cdef object make_effect(type cls, EfxExtension efx, al.ALuint id, str type, dict kwargs):
     cdef Effect effect = <Effect>cls.__new__(cls)
     effect.init_with_id(efx, id)
+    if type is not None: effect.type = type
     for k, v in kwargs.items(): effect.set(k, v)
     return effect
 
-cdef object make_filter(type cls, EfxExtension efx, al.ALuint id, dict kwargs):
+cdef object make_filter(type cls, EfxExtension efx, al.ALuint id, str type, dict kwargs):
     cdef Filter filter = <Filter>cls.__new__(cls)
     filter.init_with_id(efx, id)
+    if type is not None: filter.type = type
     for k, v in kwargs.items(): filter.set(k, v)
     return filter
