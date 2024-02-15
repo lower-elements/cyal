@@ -3,11 +3,12 @@
 from libc.limits cimport INT_MAX
 from cpython cimport array
 import array
+from collections.abc import Sequence
 
 from .context cimport Context
 from .efx cimport EfxExtension, Filter
 from .exceptions cimport check_al_error, UnsupportedExtensionError
-from .util cimport V3f
+from .util cimport get_al_enum, V3f
 from . cimport al, alc
 
 cdef array.array ids_template = array.array('I')
@@ -349,6 +350,43 @@ cdef class Source:
         al.alSourcei(self.id, efx.al_direct_filter, efx.al_filter_null)
         check_al_error()
         self._direct_filter = None
+
+    # Generic property functions for extension properties
+
+    def get_int(self, prop):
+        cdef al.ALenum e_val = get_al_enum(prop)
+        cdef al.ALint val
+        al.alGetSourcei(self.id, e_val, &val)
+        check_al_error()
+        return val
+
+    def get_float(self, prop):
+        cdef al.ALenum e_val = get_al_enum(prop)
+        cdef al.ALfloat val
+        al.alGetSourcef(self.id, e_val, &val)
+        check_al_error()
+        return val
+
+    def get_v3f(self, prop):
+        cdef al.ALenum e_val = get_al_enum(prop)
+        cdef al.ALfloat[3] val
+        al.alGetSourcefv(self.id, e_val, val)
+        check_al_error()
+        return V3f(val[0], val[1], val[2])
+
+    def set(self, prop, val):
+        cdef al.ALenum e_val = get_al_enum(prop)
+        cdef al.ALfloat[3] data
+        if isinstance(val, int):
+            al.alSourcei(self.id, e_val, val)
+        elif isinstance(val, float):
+            al.alSourcef(self.id, e_val, val)
+        elif (isinstance(val, Sequence) and len(val) == 3) or isinstance(val, V3f):
+            data = [val[0], val[1], val[2]]
+            al.alSourcefv(self.id, e_val, data)
+        else:
+            raise TypeError(f"Cannot convert {type(val)} to OpenAL type")
+        check_al_error()
 
 cpdef enum SourceState:
     INITIAL = al.AL_INITIAL
