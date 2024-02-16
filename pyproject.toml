@@ -1,12 +1,12 @@
 [project]
 name = "cyal"
-version = "0.3.5"
+version = "0.4.0"
 authors = [
   { name="Michael Connor Buchan", email="mikey@blindcomputing.org" },
 ]
 description = "Cython bindings for OpenAL"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 keywords = ["audio", "openal", "cython", "bindings"]
 license = { file = "LICENSE" }
 
