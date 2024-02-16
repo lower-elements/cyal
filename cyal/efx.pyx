@@ -60,16 +60,22 @@ cdef class EfxExtension:
         self.al_get_auxiliary_effect_slot_f = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValue)>al.alGetProcAddress("alGetAuxiliaryEffectSlotf")
         self.al_get_auxiliary_effect_slot_fv = <void (*)(al.ALuint effectslot, al.ALenum param, al.ALfloat *pflValues)>al.alGetProcAddress("alGetAuxiliaryEffectSlotfv")
 
+        # Get enum values
         self.al_meters_per_unit = al.alGetEnumValue(b"AL_METERS_PER_UNIT")
         self.alc_max_auxiliary_sends = alc.alcGetEnumValue(ctx.device._device, b"ALC_MAX_AUXILIARY_SENDS")
+
         self.al_effect_type = al.alGetEnumValue(b"AL_EFFECT_TYPE")
-        self.al_filter_type = al.alGetEnumValue(b"AL_FILTER_TYPE")
-        self.al_effectslot_effect = al.alGetEnumValue(b"AL_EFFECTSLOT_EFFECT")
-        self.al_direct_filter = al.alGetEnumValue(b"AL_DIRECT_FILTER")
-        self.al_auxiliary_send_filter = al.alGetEnumValue(b"AL_AUXILIARY_SEND_FILTER")
         self.al_effect_null = al.alGetEnumValue(b"AL_EFFECT_NULL")
-        self.al_effectslot_null = al.alGetEnumValue(b"AL_EFFECTSLOT_NULL")
+
+        self.al_filter_type = al.alGetEnumValue(b"AL_FILTER_TYPE")
         self.al_filter_null = al.alGetEnumValue(b"AL_filter_NULL")
+        self.al_direct_filter = al.alGetEnumValue(b"AL_DIRECT_FILTER")
+
+        self.al_effectslot_effect = al.alGetEnumValue(b"AL_EFFECTSLOT_EFFECT")
+        self.al_effectslot_null = al.alGetEnumValue(b"AL_EFFECTSLOT_NULL")
+        self.al_auxiliary_send_filter = al.alGetEnumValue(b"AL_AUXILIARY_SEND_FILTER")
+        self.al_effectslot_gain = al.alGetEnumValue(b"AL_EFFECTSLOT_GAIN")
+        self.al_effectslot_auxiliary_send_auto = al.alGetEnumValue(b"AL_EFFECTSLOT_AUXILIARY_SEND_AUTO")
 
         # Restore the old context (if any)
         alc.alcMakeContextCurrent(prev_ctx)
@@ -220,6 +226,30 @@ cdef class AuxiliaryEffectSlot:
 
     def unload(self):
         del self.effect
+
+    @property
+    def gain(self):
+        cdef al.ALfloat val
+        self.efx.al_get_auxiliary_effect_slot_f(self.id, self.efx.al_effectslot_gain, &val)
+        check_al_error()
+        return val
+
+    @gain.setter
+    def gain(self, val: float):
+        self.efx.al_auxiliary_effect_slot_f(self.id, self.efx.al_effectslot_gain, val)
+        check_al_error()
+
+    @property
+    def send_auto(self):
+        cdef al.ALint val
+        self.efx.al_get_auxiliary_effect_slot_i(self.id, self.efx.al_effectslot_auxiliary_send_auto, &val)
+        check_al_error()
+        return val != 0
+
+    @send_auto.setter
+    def send_auto(self, val: bool):
+        self.efx.al_auxiliary_effect_slot_i(self.id, self.efx.al_effectslot_auxiliary_send_auto, val)
+        check_al_error()
 
 cdef class Effect:
     def __cinit__(self):

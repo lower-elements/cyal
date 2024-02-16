@@ -46,14 +46,19 @@ cdef class EfxExtension:
     # Enum values
     cdef al.ALenum al_meters_per_unit
     cdef alc.ALCenum alc_max_auxiliary_sends
+
     cdef al.ALenum al_effect_type
-    cdef al.ALenum al_filter_type
-    cdef al.ALenum al_effectslot_effect
-    cdef al.ALenum al_direct_filter
-    cdef al.ALenum al_auxiliary_send_filter
     cdef al.ALenum al_effect_null
-    cdef al.ALenum al_effectslot_null
+
+    cdef al.ALenum al_filter_type
     cdef al.ALenum al_filter_null
+    cdef al.ALenum al_direct_filter
+
+    cdef al.ALenum al_effectslot_effect
+    cdef al.ALenum al_effectslot_null
+    cdef al.ALenum al_auxiliary_send_filter
+    cdef al.ALenum al_effectslot_gain
+    cdef al.ALenum al_effectslot_auxiliary_send_auto
 
 cdef class AuxiliaryEffectSlot:
     cdef object __weakref__
