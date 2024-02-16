@@ -76,6 +76,7 @@ cdef class EfxExtension:
         self.al_auxiliary_send_filter = al.alGetEnumValue(b"AL_AUXILIARY_SEND_FILTER")
         self.al_effectslot_gain = al.alGetEnumValue(b"AL_EFFECTSLOT_GAIN")
         self.al_effectslot_auxiliary_send_auto = al.alGetEnumValue(b"AL_EFFECTSLOT_AUXILIARY_SEND_AUTO")
+        self.al_effectslot_target_soft = al.alGetEnumValue(b"AL_EFFECTSLOT_TARGET_SOFT")
 
         # Restore the old context (if any)
         alc.alcMakeContextCurrent(prev_ctx)
@@ -250,6 +251,27 @@ cdef class AuxiliaryEffectSlot:
     def send_auto(self, val: bool):
         self.efx.al_auxiliary_effect_slot_i(self.id, self.efx.al_effectslot_auxiliary_send_auto, val)
         check_al_error()
+
+    @property
+    def target(self):
+        return self._target
+
+    @target.setter
+    def target(self, slot: AuxiliaryEffectSlot):
+        if self.efx.al_effectslot_target_soft == al.AL_NONE:
+            raise UnsupportedExtensionError("AL_SOFT_effect_target")
+        self.efx.al_auxiliary_effect_slot_i(self.id, self.efx.al_effectslot_target_soft, slot.id)
+        check_al_error()
+        # Keep the target alive
+        self._target = slot
+
+    @target.deleter
+    def target(self):
+        if self.efx.al_effectslot_target_soft == al.AL_NONE:
+            raise UnsupportedExtensionError("AL_SOFT_effect_target")
+        self.efx.al_auxiliary_effect_slot_i(self.id, self.efx.al_effectslot_target_soft, self.efx.al_effectslot_null)
+        check_al_error()
+        self._target = None
 
 cdef class Effect:
     def __cinit__(self):

@@ -59,11 +59,13 @@ cdef class EfxExtension:
     cdef al.ALenum al_auxiliary_send_filter
     cdef al.ALenum al_effectslot_gain
     cdef al.ALenum al_effectslot_auxiliary_send_auto
+    cdef al.ALenum al_effectslot_target_soft # Provided by AL_SOFT_effect_target
 
 cdef class AuxiliaryEffectSlot:
     cdef object __weakref__
     cdef readonly EfxExtension efx
     cdef Effect _effect
+    cdef AuxiliaryEffectSlot _target
     cdef readonly al.ALuint id
 
     @staticmethod
