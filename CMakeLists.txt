@@ -29,7 +29,7 @@ set(ALSOFT_INSTALL_AMBDEC_PRESETS OFF CACHE INTERNAL "ALSOFT_INSTALL_AMBDEC_PRES
 FetchContent_MakeAvailable(OpenAL)
 
 
-foreach(module buffer capture context device efx exceptions listener source util)
+foreach(module buffer capture context device efx exceptions hrtf listener source util)
     # Transpile Cython to C
 add_custom_command(
 	OUTPUT ${module}.c
