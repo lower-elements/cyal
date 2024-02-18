@@ -351,6 +351,24 @@ cdef class Source:
         check_al_error()
         self._direct_filter = None
 
+    @property
+    def radius(self) -> float:
+        cdef al.ALenum source_radius = al.alGetEnumValue(b"AL_SOURCE_RADIUS")
+        if source_radius == al.AL_NONE:
+            raise UnsupportedExtensionError("AL_EXT_SOURCE_RADIUS")
+        cdef al.ALfloat val
+        al.alGetSourcef(self.id, source_radius, &val)
+        check_al_error()
+        return val
+
+    @radius.setter
+    def radius(self, val: float):
+        cdef al.ALenum source_radius = al.alGetEnumValue(b"AL_SOURCE_RADIUS")
+        if source_radius == al.AL_NONE:
+            raise UnsupportedExtensionError("AL_EXT_SOURCE_RADIUS")
+        al.alSourcef(self.id, source_radius, val)
+        check_al_error()
+
     # Generic property functions for extension properties
 
     def get_int(self, prop):
