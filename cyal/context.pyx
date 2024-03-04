@@ -178,6 +178,7 @@ cdef class Context:
         return srcs
 
     def play_sources(self, *srcs):
+        if len(srcs) == 0: return
         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
         cdef Py_ssize_t i
         for i, s in enumerate(srcs): ids[i] = s.id
@@ -185,6 +186,7 @@ cdef class Context:
         check_al_error()
 
     def stop_sources(self, *srcs):
+        if len(srcs) == 0: return
         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
         cdef Py_ssize_t i
         for i, s in enumerate(srcs): ids[i] = s.id
@@ -192,6 +194,7 @@ cdef class Context:
         check_al_error()
 
     def rewind_sources(self, *srcs):
+        if len(srcs) == 0: return
         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
         cdef Py_ssize_t i
         for i, s in enumerate(srcs): ids[i] = s.id
@@ -199,6 +202,7 @@ cdef class Context:
         check_al_error()
 
     def pause_sources(self, *srcs):
+        if len(srcs) == 0: return
         cdef al.ALuint[:] ids = array.clone(ids_template, len(srcs), zero=False)
         cdef Py_ssize_t i
         for i, s in enumerate(srcs): ids[i] = s.id
