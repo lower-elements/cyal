@@ -1,8 +1,8 @@
 [project]
 name = "cyal"
-version = "0.4.4"
+version = "0.4.5"
 authors = [
-  { name="Michael Connor Buchan", email="mikey@blindcomputing.org" },
+  { name = "Michael Connor Buchan", email = "mikey@blindcomputing.org" },
 ]
 description = "Cython bindings for OpenAL"
 readme = "README.md"
@@ -11,17 +11,17 @@ keywords = ["audio", "openal", "cython", "bindings"]
 license = { file = "LICENSE" }
 
 classifiers = [
-    "Development Status :: 4 - Beta",
-    "Programming Language :: Cython",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Intended Audience :: Developers",
-    "Topic :: Multimedia",
-    "Topic :: Multimedia :: Sound/Audio",
-    "Topic :: Multimedia :: Sound/Audio :: Capture/Recording",
-    "Topic :: Multimedia :: Sound/Audio :: Players",
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Cython",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Developers",
+  "Topic :: Multimedia",
+  "Topic :: Multimedia :: Sound/Audio",
+  "Topic :: Multimedia :: Sound/Audio :: Capture/Recording",
+  "Topic :: Multimedia :: Sound/Audio :: Players",
 ]
 
 [project.urls]
@@ -31,10 +31,7 @@ classifiers = [
 "Contribute" = "https://github.com/lower-elements/cyal/pull/new"
 
 [build-system]
-requires = [
-"scikit-build-core>=0.5.0",
-"cython>=3.0.0",
-]
+requires = ["scikit-build-core>=0.5.0", "cython>=3.0.0"]
 build-backend = "scikit_build_core.build"
 
 [tool.scikit-build]
@@ -74,4 +71,4 @@ select = "*-manylinux*"
 before-all = "yum -y install pipewire-devel pulseaudio-libs-devel alsa-lib-devel"
 [[tool.cibuildwheel.overrides]]
 select = "*-musllinux*"
-    before-all = "apk add pipewire-dev pulseaudio-dev alsa-lib-dev"
+before-all = "apk add pipewire-dev pulseaudio-dev alsa-lib-dev"
