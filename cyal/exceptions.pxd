@@ -11,7 +11,7 @@ cdef class AlcError(CyalError):
     pass
 
 cdef class DeviceNotFoundError(AlcError):
-    cdef readonly bytes device_name
+    cdef readonly str device_name
 
 cdef class InvalidDeviceError(AlcError):
     pass
