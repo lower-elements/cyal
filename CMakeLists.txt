@@ -12,7 +12,7 @@ include(FetchContent)
 
 # Download the OpenAL Soft external project if a system version isn't found
 FetchContent_Declare(OpenAL
-	URL https://openal-soft.org/openal-releases/openal-soft-1.23.1.tar.bz2
+	URL https://openal-soft.org/openal-releases/openal-soft-1.25.1.tar.bz2
 	TLS_VERIFY ON
 	DOWNLOAD_EXTRACT_TIMESTAMP true
 	install_command ""
