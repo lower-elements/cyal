@@ -43,25 +43,22 @@ cmake.build-type = "Release"
 # Don't bother with Pypy builds, s390x builds (who runs OpenAL on a
 # mainframe?), and non-universal macosx builds (unnecessary if a universal
 # binary is built)
-skip = ["pp3*-*", "*_s390x", "*-macosx_{x86_64,arm64}"]
+skip = ["*_s390x", "*-macosx_{x86_64,arm64}", "cp31?t-*"]
 # Use a more up-to-date manylinux image with a pipewire-devel package
 manylinux-x86_64-image = "manylinux_2_28"
 manylinux-aarch64-image = "manylinux_2_28"
-manylinux-ppc64le-image = "manylinux_2_28"
 # Use a more up-to-date musllinux image
 musllinux-x86_64-image = "musllinux_1_2"
-musllinux-i686-image = "musllinux_1_2"
 musllinux-aarch64-image = "musllinux_1_2"
 
 [tool.cibuildwheel.windows]
-archs = ["AMD64", "x86", "ARM64"]
+archs = ["AMD64", "ARM64"]
 
 [tool.cibuildwheel.macos]
 archs = ["universal2"]
 
 [tool.cibuildwheel.linux]
-archs = ["x86_64", "aarch64", "ppc64le"]
-
+]
 # OpenAL Soft needs the sound system headers at compile time, but dynamically
 # loads the libraries at runtime, so it won't error on systems where these
 # libraries aren't available

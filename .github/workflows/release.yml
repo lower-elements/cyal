@@ -28,7 +28,7 @@ jobs:
           platforms: all
 
       - name: Install Workflow Dependencies
-        run: python -m pip install twine build cibuildwheel==2.16.5
+        run: python -m pip install twine build cibuildwheel==3.4.1
 
       - name: Build source
         run: python -m build --sdist
